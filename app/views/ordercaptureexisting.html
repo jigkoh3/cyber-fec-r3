@@ -1,0 +1,214 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div>
+                    <br><p>Sale Approach > Order Capture</p> 
+                </div>
+            </div>
+        </div>
+</nav>
+
+
+
+<div id="wrapper">
+    <!-- <div ng-include="template.landingheader"></div> -->
+    <div class="container" id="changeOwnershipContent">
+        <div class="content-top">
+        </div>
+        <div class="content m_content">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <div class="content-body">
+                    <div ng-include="template.customerprofile" scope="" onload=""></div>
+                    <div class="content-body">
+                        <div ng-include="template.customerprofile" scope="" onload=""></div>
+                        <h4>ผู้จดทะเบียนใหม่</h4>
+                        <form class="well" style="background-color:#ffffff;">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>ประเภทลูกค้า<span style="color:red;">*</span></label>
+                                        <div data-toggle="buttons" class="btn-group btn-group-justified">
+                                            <label class="btn btn-default active" ng-click="changeType('N')">
+                                                <input type="radio" name="type" ng-model="customerType" value="N"> บุคคลธรรมดา
+                                            </label>
+                                            <label class="btn btn-default" ng-click="changeType('B')">
+                                                <input type="radio" name="type" ng-model="customerType" value="B"> นิติบุคคล (B)
+                                            </label>
+                                            <label class="btn btn-default" ng-click="changeType('C')">
+                                                <input type="radio" name="type" ng-model="customerType" value="C"> นิติบุคคล (C)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Show customer company form -->
+                            <div>
+                                <div class="camera-s" style="top:70px;"><a class="btn btn-camera"><i class="fa fa-camera fa-lg"></i> ถ่ายรูปติดบัตร </a></div>
+                                <!--Update-->
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group imp">
+                                            <div class="form-group imp">
+                                                <label>หมายเลขบัตรประชาชน / พาสปอร์ต</label>
+                                                <input type="text" value="xxxxxxxxxxxxx" class="form-control numberic">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group imp">
+                                            <label>ประเภทของบัตร</label>
+                                            <input disabled value="ประเภทของบัตร" type="text" placeholder="" class="form-control numberic">
+                                            <!--<option ng-repeat="(key , value) in cardTypeOptions" value="{{key}}">{{value}}</option>-->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group imp">
+                                            <label>เลขที่ประจำตัวผู้เสียภาษี</label>
+                                            <input type="text" placeholder="" value="xxxxxxxxxxxxx" class="form-control numberic">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group imp">
+                                            <label>สาขาที่</label>
+                                            <input type="text" placeholder="00000" maxlength="5" class="form-control numberic">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group imp">
+                                            <label>ประเภทลูกค้าย่อย</label>
+                                            <input type="text" class="form-control" value="FIN: RF-Individual">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>คำนำหน้า <span style="color:red;">*</span></label>
+                                            <div id="placeholders">
+                                                <select class="form-control" ng-change="onselectPrefix()" id="prefixTH3" style="width:100px;">
+                                                    <option>นาย</option>
+                                                    <option>นาง</option>
+                                                    <option>นางสาว</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>
+                                                <p></p>
+                                            </label>
+                                            <div id="placeholders">
+                                                <select class="form-control" id="titleRegisterd" style="width:100px;">
+                                                    <option>อื่นๆ ระบุ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>ชื่อ <span style="color:red;">*</span></label>
+                                            <input type="text" id="firstNameTH3" ng-change="newOwner2.firstNameTH=newOwner.firstNameTH" ng-model="newOwner.firstNameTH" name="ชื่อ" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>นามสกุล <span style="color:red;">*</span></label>
+                                            <input type="text" id="lastNameTH3" ng-change="newOwner2.lastNameTH=newOwner.lastNameTH" ng-model="newOwner.lastNameTH" name="นามสกุล" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>เพศ <span style="color:red;">*</span></label>
+                                            <div id="placeholders">
+                                                <!--<select class="form-control" id="sex3" ng-model="newOwner.sex" style="width:100px;">
+                                    <option value="1">ชาย</option>
+                                    <option value="2">หญิง</option>
+                                </select>-->
+                                                <select class="form-control" id="sex3" style="width:100px;">
+                                                    <option>ชาย</option>
+                                                    <option>หญิง</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group has-feedback">
+                                            <label>วัน/เดือน/ปีเกิด <span style="color:red;">*</span></label>
+                                            <input type="text" ng-change="newOwner2.birthDay=newOwner.birthDay" ng-model="newOwner.birthDay" readonly class="form-control date-picker" id="birthDay" value="dd/mm/yyyy">
+                                            <span class="form-control-feedback is-bound"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group has-feedback">
+                                            <label>วันหมดอายุบัตร <span style="color:red;">*</span></label>
+                                            <input type="text" ng-model="newOwner.expireDay" readonly placeholder="" class="form-control date-picker" id="expireDay" value="dd/mm/yyyy">
+                                            <span class="form-control-feedback is-bound"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4>ข้อมูลหมายเลข</h4>
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4" style=" text-align: right; top: 5px;">
+                                                <p></p>
+                                                <label>หมายเลขโทรศัพท์ที่ต้องการเปิดเบอร์</label><span style="color:red;">*</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p></p>
+                                                <input type="text" ng-model="pricePlan.name"  class="form-control" value="0891234567">
+                                                <!-- <option ng-repeat="item in data.offer" value="{{item['product-name']}}">
+                                            {{item["product-name"]}} : {{item["product-description"]}}
+                                        </option> -->
+                                            </div>
+                                            <div class="col-md-2">
+                                                
+                                            </div>
+                                            <div class="col-md-3">
+                                               
+                                            </div>
+                                            <div class="col-md-2">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                       
+                                   
+                                </div>
+                                
+     
+                                            <div class="col-md-12 form-buttons">
+                                                <div class="col-md-3">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="submit" value="ถัดไป" class="btn btn-success" onclick="location.href='#payment'">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button class="btn btn-cancel" data-dismiss="modal" ng-click="onCancelPricePlan()">ยกเลิก</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>

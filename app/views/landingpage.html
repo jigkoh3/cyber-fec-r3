@@ -1,0 +1,237 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div class="col-md-6"> <br><p>
+Home > Products </p></div>
+                <div class="col-md-6">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active ng-menu"><a class="page-scroll" href="#promotion">โปรโมชั่นแนะนำ</a></li>
+                        <li class="ng-menu"><a class="page-scroll" page-scroll href="#new">เปิดบริการใหม่</a></li>
+                        <li class="ng-menu"><a class="page-scroll" page-scroll href="#device">เครื่องและอุปกรณ์</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<user-bar-info></user-bar-info>
+<div id="wrapper">
+    <div class="container" id="top">
+        <div class="row top_tll">
+            <div class="col-md-10 col-md-offset-2">
+                <p class="ttl_main">สินค้าและบริการ</p>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-md-10 col-md-offset-2 sale-main">
+                <section id="promotion">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="pull-left ttl_main_sale">โปรโมชั่นแนะนำ</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="" class="pull-right viewall"> ดูทั้งหมด</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="box-sale-main">
+                            <li class="box-sale-4" ng-repeat="itm in truePromotions">
+                                <a href="">
+                                    <div class="sale_ttl">
+                                        <p>{{itm.upload}} </p> <span>/ {{itm.download}} Mbps.</span>
+                                    </div>
+                                    <div class="sale_logo">
+                                        <img src="images/sale/logo_{{itm.promotionCode}}.png" />
+                                    </div>
+                                    <div class="sale_detail">
+                                        <ul>
+                                            <li ng-repeat="itmDtl in itm.promotionDtls">{{itmDtl.desc}}</li>
+                                            <!-- <li>cvb</li>
+                                    <li>fgdf</li>
+                                    <li>fddfg</li>
+                                    <li>cfdfg</li> -->
+                                        </ul>
+                                    </div>
+                                    <div class="sale_price">
+                                        <h3>{{itm.pricePlan}}</h3>
+                                    </div>
+                                    <div class="sale_pomo">
+                                        <a href="#">
+                                            <img src="images/sale/icon_pomo.png" />
+                                        </a>
+                                    </div>
+                                </a>
+                                <p class="docsis">{{itm.description}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section id="new">
+                    <h4 class="pull-left ttl_main_sale">เปิดบริการใหม่</h4>
+                    <div class="row">
+                        <div class="new-open-data">
+                            <div class="box-sale-4">
+                                <div class="logo-open-data">
+                                    <img src="images/commons/truemove_online.png" />
+                                </div>
+                                <a href="#/pricePlan">
+                                    <div class="open-data-detail open-tol">
+                                        <p>เปิดบริการใหม่</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="box-sale-4">
+                                <div class="logo-open-data">
+                                    <img src="images/commons/truemove_visions.png" />
+                                </div>
+                                <a href="#/pricePlan">
+                                    <div class="open-data-detail open-tvs">
+                                        <p>เปิดบริการใหม่</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="box-sale-4">
+                                <div class="logo-open-data">
+                                    <img src="images/commons/truemoveh.png" />
+                                </div>
+                                <a href="#modalopenservice" data-toggle="modal" onclick="return false;">
+                                    <div class="open-data-detail open-tmv">
+                                        <p>เปิดบริการใหม่</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="box-sale-4">
+                                <a href="#/pricePlan">
+                                    <div class="open-data-detail open-all">
+                                        <p>+เปิดบริการทั้งหมด</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="device">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="pull-left ttl_main_sale">เครื่องและอุปกรณ์</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#/products" class="pull-right viewall"> ดูทั้งหมด</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="box-sale-product">
+                            <div class="box-sale-4" ng-repeat="itm in trueDevices">
+                                <a href="#/orderDevice">
+                                    <div class="product_img">
+                                        <img src="images/product/{{itm.imgAS}}.png" />
+                                        <div class="product_img_3g">
+                                            <ul>
+                                                <li> <img src="images/icon/icon_3g.png" /> </li>
+                                                <li> <img src="images/icon/icon_4g.png" /> </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product_name">
+                                        <h3>{{itm.name}}</h3>
+                                    </div>
+                                    <div class="product_price">
+                                        <p class="price_t_main">ราคา {{itm.price}} บาท</p>
+                                        <p class="price_t_id hide">พิเศษ {{itm.price}} บาท</p>
+                                    </div>
+                                </a>
+                                <div class="gami_trigger">
+                                    <button type="button" class="btn_gami_trigger btn">สั่งซื้อ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="modalopenservice" tabindex="-1" class="modal fade modalopenservice" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="blue bigger">
+                   <b>เปิดบริการใหม่</b>
+                </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row ">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6 well ">
+                                <h5><b>บริษัท</b></h5>
+                                <p>
+                                    <center>
+                                        <div class="row ">
+                                            <div class="col-md-6 ">
+                                                <input type="radio" name="radSize" checked="checked" />
+                                                <label for="sizeSmall">RTV</label>
+                                            </div>
+                                            <div class="col-md-6 ">
+                                                <input type="radio" name="radSize" />
+                                                <label for="sizeMed">TUC</label>
+                                            </div>
+                                            <center>
+                                        </div>
+                                </p>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <div data-toggle="buttons" class="btn-group btn-group-justified">
+                                    <label class="btn btn-default active" ng-click="changeType('N')">
+                                        <input type="radio" name="type" ng-model="serviceType" value="N"> รายเดือน
+                                    </label>
+                                    <label class="btn btn-default" ng-click="changeType('B')">
+                                        <input type="radio" name="type" ng-model="serviceType" value="B"> เติมเงิน
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <p></p>
+                            <div class="col-md-12 ">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-3">
+                                    จำนวนเบอร์ที่ขอเปิด
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" placeholder="จำนวน" class="form-control">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-click="gotopricePlan()" data-dismiss="modal" class="btn btn-success">ตกลง</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+    </div>
+    <script>
+    $(document).ready(function() {
+
+        // Page scrolling feature
+        $('a.page-scroll').bind('click', function(event) {
+            var link = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $(link.attr('href')).offset().top - 100
+            }, 500);
+            event.preventDefault();
+        });
+
+    });
+    </script>

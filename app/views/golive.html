@@ -1,0 +1,188 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div><br><p>
+Home > Products > Devices > Go Live</p>
+                </div>
+            </div>
+        </div>
+</nav>
+
+
+
+<div id="wrapper">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <h4>{{trueProduct.productName}}</h4></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4" ><img src="images/product/{{trueProduct.productImg}}.png" /></div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <div data-toggle="buttons" class="btn-group btn-group-justified">
+                                    <label class="btn btn-default active" id="labelAdd" ng-click="selectTab('1')">
+                                        <input type="radio" value="1"> โปรโมชั่น
+                                    </label>
+                                    <label class="btn btn-default" ng-click="selectTab('2')">
+                                        <input type="radio" value="2"> ซื้อเครื่องเปล่า
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-12 "></div>
+                    <div class="col-md-3 text-center">
+                        <h3>Silver </h3></div>
+                    <div class="col-md-3 text-center">
+                        <h3>Gold </h3></div>
+                    <div class="col-md-3 text-center">
+                        <h3>Space Gray </h3></div> -->
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <h3>White</h3>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3>Black</h3>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3>Silver </h3>
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="itm  in trueProduct.productColor">
+                        <!--  <div class="col-md-2" style="margin-top:21px;">
+                            <img src="images/product/{{itm.colorImg}}.png" /></div> -->
+                        <div class="col-md-12">
+                            <div class="row ">
+                                <div class="col-md-3" ng-repeat="itmMem in itm.memSize">
+                                    <!-- <p><center>Avaliable</center></p><br> -->
+                                    <!-- <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h3>{{itm.colorName}} </h3>
+                                        </div>
+                                    </div> -->
+                                    <div class="row ">
+                                        <div class="col-md-12 col-centered text-center">
+                                            <label class="{{itmMem.stock}}">{{itmMem.stock=="red" ? "สินค้าหมด" : "พร้อมขาย"}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-centered text-center">
+                                            <button ng-disabled="itmMem.stock =='red'" class="btn btn-default gray" ng-click="selectedPricePlan()" href="#modalPriceplanOwnership" id="modalnewpriceplan" class="btn" onclick="return false;" data-toggle="modal" data-dismiss="modal">{{itmMem.sizeName}}
+                                                <br>{{itmMem.price | number:2}}</button>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="row top10">
+                                        <div class="col-md-12 col-centered text-center">
+                                            <input type="number" ng-disabled="itmMem.stock =='red'" ng-model="itmMem.piece" ng-change="calculate(itmMem)" onfocus="" style=" width: 60px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row top_tll">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-1">
+                    <h4>{{trueProduct.productTotal}}</h4>
+                </div>
+                <div class="col-md-2">
+                    <h4>  {{calculate() | number:2}}  บาท</h4>
+                </div>
+            </div>
+            <div class="row" style="height:30px;">
+            </div>
+            <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <button class="btn btn-success" ng-click="next()">ถัดไป</button>
+                </div>
+            </div>
+        </div>
+
+<div id="modalPriceplanOwnership" tabindex="-1" class="modal" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+ 
+                        <div class="table-responsive">
+                        <table class="table">
+
+
+                            <tr class="row">
+                                <th class="col-md-3" style="background-color: #FF0000;color:white; "><h4> Go live 3031 White</h4></th>
+                                <th class="col-md-3" style="background-color: #FF0000 ; "></th>
+                                 <th class="col-md-3" style="color:green;text-align:center; background-color: #FF0000 "></th>
+                                <th class="col-md-1" style="text-align:center; background-color: #FF0000 "></th>
+                                <th class="col-md-1" style="background-color: #FF0000 ; "><button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button></th>
+                            </tr>
+                            <tr class="row">
+
+                                <th class="col-md-1" style="background-color: #c8bbbb; "></th>
+                                <th class="col-md-3" style="background-color: #c8bbbb; "></th>
+                                <th class="col-md-3" style="background-color: #c8bbbb; "></th>
+                                 <th class="col-md-3" style="background-color: #c8bbbb; text-align:center">ราคา</th>
+                                <th class="col-md-1" style="background-color: #c8bbbb; ">จำนวน</th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1">3000014090</th>
+                                <th class="col-md-3">H/S,GO LIVE,3031,WHITE</th>
+                                 <th class="col-md-3" style="color:green;text-align:center">Availble</th>
+                                <th class="col-md-3" style="text-align:center">990.00 </th>
+                                <th class="col-md-1"><input type="text" style="width:50px;"></th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1">3000014635</th>
+                                <th class="col-md-3">H/S,GO LIVE,3031,WHITE</th>
+                                <th class="col-md-3" style="color:green;text-align:center">Availble</th>
+                                <th class="col-md-3" style="text-align:center">990.00 </th>
+                                <th class="col-md-1"><input type="text" style="width:50px;"></th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1">3000014360</th>
+                                <th class="col-md-3">H/S,GO LIVE,3031,WHITE</th>
+                                <th class="col-md-3" style="color:yellow;text-align:center">Availble</th>
+                                <th class="col-md-3" style="text-align:center">990.00 </th>
+                                <th class="col-md-1"><input type="text" style="width:50px;"></th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1">3000014241</th>
+                                <th class="col-md-3">H/S,GO LIVE,3031,WHITE</th>
+                                <th class="col-md-3" style="color:red;text-align:center">Not Availble</th>
+                                <th class="col-md-3" style="text-align:center">990.00 </th>
+                                <th class="col-md-1"><input type="text" style="width:50px;"></th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1"></th>
+                                <th class="col-md-3"></th>
+                                <th class="col-md-3"></th>
+                                <th class="col-md-3"></th>
+                                <th class="col-md-1"><button class="btn btn-success" data-dismiss="modal">ตกลง</button></th>
+                            </tr>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer style="border-size:0.5px; border-style:solid;"-->
+        <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+    </div>

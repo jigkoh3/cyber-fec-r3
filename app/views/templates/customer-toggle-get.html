@@ -1,0 +1,37 @@
+<div class="menu-content">
+    <div class="menu-content-read-card">
+        <h4>ตรวจสอบข้อมูลลูกค้า</h4>
+        <p>อ่านข้อมูลจากบัตรประชาชน</p>
+        <a href="#" class="btn btn-readcard"></a>
+        <p>หรือ</p>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-12 control-label">ประเภทข้อมูล<span>*</span></label>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <select class="form-control">
+                        <option ng-repeat="item in cardTypes">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input value="click" placeholder="กรอกหมายเลขบัตร/หมายเลขบริการ" class="form-control" ng-keypress="onCardNoKeydown(inputCardNo)" ng-model="inputCardNo" ng-click="openSSO()" id="inputCardNo" readonly>
+                   
+                    
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <div class="navmenu">
+        <ul class="nav navmenu-nav">
+            <li><a href="#/existingcustomer" class="dropdown-toggle-submenu-v2">บริการหลังการขาย </a></li>
+            <li><a href="#/landingpage" class="dropdown-toggle-submenu-v2">สินค้าและบริการ </a></li>
+            <li><a href="#/ordermonitor" class="dropdown-toggle-submenu-v2">Order Monitor</a></li>
+            <li><a class="disabled">ชำระสินค้าและบริการ</a></li>
+        </ul>
+    </div>
+</div>

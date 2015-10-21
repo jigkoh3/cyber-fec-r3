@@ -1,0 +1,39 @@
+<div class="container" id="migratePostToPreContent">
+    <div class="content-top">
+    </div>
+    <div class="content m_content">
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+            <h4>Select Shop and Counter</h4>
+            <div class="well">
+                <!-- <div class="head-select">
+                <h4>Select Shop and Counter</h4>
+            </div> -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-3" style=" text-align: right; top: 5px;">
+                                <p></p>
+                                <label>Shop : </label>
+                            </div>
+                            <div class="col-md-7">
+                                <p></p>
+                                <select class="form-control" name="select-shop" id="select-shop">
+                                    <option value="./#/" ng-repeat="itm in selectShops">{{itm.branch}}</option>
+                                </select>
+                                <script type="text/javascript">
+                                var urlmenu = document.getElementById('select-shop');
+                                urlmenu.onchange = function() {
+                                    window.open(this.options[this.selectedIndex].value);
+                                };
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+</div>
+

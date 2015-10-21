@@ -1,0 +1,534 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="content m_content">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-9">
+                <h5 class="">การรับชำระ</h5>
+                <br />
+                <div class="content-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr class="row">
+                                
+                                <th class="col-md-1" style="background-color: #c8bbbb"></th>
+                                <th class="col-md-2" style="background-color: #c8bbbb; ">รายการรับชำระ</th>
+                                <th class="col-md-2" style="background-color: #c8bbbb; ">จำนวนเงินที่ต้องชำระ</th>
+                                <th class="col-md-1" style="background-color: #c8bbbb; text-align:center; ">ประเภทการรับชำระ</th>
+                                <th class="col-md-4" style="background-color: #c8bbbb; "></th>
+                            </tr>
+                            <tr class="row">
+                                <td class="col-md-1">1. </td>
+                                <td class="col-md-2">ค่าสินค้า</td>
+                                <td class="col-md-2">24,450.00</td>
+                                <td class="col-md-1">
+                                    <div class="row">
+                                        <div class="col-md-2">เงินสด</div>
+                                        <div class="col-md-3">
+                                            <input class="form-control" type="text" value="5,450.00">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-default" ng-click="selectedPricePlan()" href="#" id="modalnewpriceplan" class="btn" onclick="return false;" data-toggle="modal" data-dismiss="modal" align="right">บัตรเครดิต</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-default" id="modallistpayment" data-dismiss="modal" align="right">Installment</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="row">
+                                <td class="col-md-1">2.</td>
+                                <td class="col-md-1">ค่าบริการล่วงหน้า</td>
+                                <td class="col-md-1">5,320.00</td>
+                              
+                                <td class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-2">เงินสด</div>
+                                        <div class="col-md-3">
+                                            <input class="form-control" type="text" value="0.00">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-default" ng-click="selectedPricePlan()" href="#" id="modalnewpriceplan" class="btn" onclick="return false;" data-toggle="modal" data-dismiss="modal" align="right">บัตรเครดิต</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-default" ng-click="selectedPricePlan()" href="#" id="modalnewpriceplan1" class="btn" onclick="return false;" data-toggle="modal" data-dismiss="modal" align="right">&nbsp;&nbsp;เช็ค&nbsp;&nbsp;</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-default" ng-click="selectedPricePlan()" href="#" id="modalnewpriceplan2" class="btn" onclick="return false;" data-toggle="modal" data-dismiss="modal" align="right">ภาษีหัก ณ ที่จ่าย</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <h4>ยอดรวม</h4></div>
+                            <div class="col-md-2">
+                                <h4>29,770.00</h4></div>
+                        </div>
+                        <br>
+                        <!-- รายการบัตรเครดิต -->
+                        <div class="table-responsive" >
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-2" style="background-color: #c8bbbb"><span>บัตรเครดิต</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb"><span>จำนวนเงิน</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb"><span>เลขที่บัตร</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb"><span>ธนาคาร</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb"><span>ประเภทบัตร</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb"><span>เลขที่อนุมัติ</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb"><span>ประเภท</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb;"><span>จำนวนเดือน</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb;"><span>Code ผ่อน</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
+                                </tr>
+                                <tr class="row" ng-repeat="itm in ordercard">
+                                    <td class="col-md-1">ค่าสินค้า</td>
+                                    <td class="col-md-1">10,000.00</td>
+                                    <td class="col-md-1">
+                                        <input type="text" value="123xxxxxxxxx3456">
+                                    </td>
+                                    <td class="col-md-1">BBL</td>
+                                    <td class="col-md-1">VISA</td>
+                                    <td class="col-md-1">
+                                        <input type="text" value="999123">
+                                    </td>
+                                    <td class="col-md-1">เต็มจำนวน</td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></td>
+                                </tr>
+                                <tr class="row"  ng-repeat="itm in ordercard">
+                                    <td class="col-md-1">ค่าสินค้า</td>
+                                    <td class="col-md-1">9,000.00</td>
+                                    <td class="col-md-1">
+                                        <input type="text" value="445xxxxxxxxx9012">
+                                    </td>
+                                    <td class="col-md-1">KTC</td>
+                                    <td class="col-md-1">MASTER</td>
+                                    <td class="col-md-1">
+                                        <input type="text" value="112345">
+                                    </td>
+                                    <td class="col-md-1">ผ่อนชำระ</td>
+                                    <td class="col-md-1">6</td>
+                                    <td class="col-md-1">26770763</td>
+                                    <td class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        <!-- รายการเช็ค -->
+                        <div class="table-responsive" >
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-3" style="background-color: #c8bbbb"><span>เช็ค</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "><span>บริษัท</span></th>
+                                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>จำนวนเงิน</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "><span>ธนาคาร</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "><span>สาขา</span></th>
+                                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>ลงวันที่</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb;"></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb;"></th>
+                                </tr>
+                                <tr class="row" ng-repeat="itm in ordercard">
+                                    <td class="col-md-3">ค่าบริการล่วงหน้า</td>
+                                    <td class="col-md-1">RMV</td>
+                                    <td class="col-md-2">5,170.84</td>
+                                    <td class="col-md-1">014</td>
+                                    <td class="col-md-1">0049</td>
+                                    <td class="col-md-2">15/9/2015</td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        <!--   รายการภาษี -->
+                        <div class="table-responsive" >
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-3" style="background-color: #c8bbbb"><span>ภาษีหัก ณ ที่จ่าย</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "><span>บริษัท</span></th>
+                                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>จำนวนเงิน</span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
+                                    <th class="col-md-2" style="background-color: #c8bbbb; "><span></span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb;"></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb;"></th>
+                                </tr>
+                                <tr class="row" ng-repeat="itm in ordercard">
+                                    <td class="col-md-3">ค่าบริการล่วงหน้า</td>
+                                    <td class="col-md-1">RMV</td>
+                                    <td class="col-md-2">149.16</td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-2"></td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="table-responsive" ng-repeat="itm in ordercard">
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-3" style="background-color: #c8bbbb">คูปองเงินสด/บัตรของขวัญ/Voucher</th>
+                                    <th class="col-md-3" style="background-color: #c8bbbb; ">Serail</th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; ">จำนวนเงิน</th>
+                                    <th class="col-md-2" style="background-color: #c8bbbb; "></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "></th>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col-md-3">A001-ส่วนลดค่าเครื่อง</td>
+                                    <td class="col-md-3">xxxxxxxxxxxxxxx</td>
+                                    <td class="col-md-1">5,000.00</td>
+                                    <td class="col-md-2"> </td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-1"></td>
+                                    <td class="col-md-1"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="form-control">เงินสดชำระทั้งสิ้น</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="form-control">เงินสดรับ</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="form-control">เงินทอน</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="form-control text-right">5,450.00</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="form-control text-right"> 0.00</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="form-control text-right"> 0</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-buttons">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button class="btn btn-success" onclick="location.href='#/listpayment2'">Order Summary</button>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <!-- <input type="submit" onclick="location.href='#landingpage'" value="เพิ่มรายการสินค้า" class="btn btn-defalt">
+                                <input type="submit" ng-click="newCustomer()" value="ยืนยันการสั่งซื้อ" class="btn btn-success"> -->
+                                    <button class="btn btn-cancel" onclick="location.href='#'">Cancel</button>
+                                    <button class="btn btn-success" class="btn btn-success" onclick="location.href='#/stockissue'">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="modalAdd" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>ส่วนลด / รหัสการจอง</h5>
+                        <br>
+                        <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
+                        <!-- <div class="col-md-12">
+                        <input type="text" placeholder="--ค้นหา--" ng-model="pricePlanFilter" class="form-control">
+                    </div> -->
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-6">ประเภท</div>
+                            <div class="col-md-5">ค้นหา</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="radio"> ส่วนลด
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio"> คูปอง
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="radio"> รหัสการจอง
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-1" style="background-color: #c8bbbb"></th>
+                                    <th class="col-md-7" style="background-color: #c8bbbb; "><span><h5> รหัสคูปอง</h5></span></th>
+                                    <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>จำนวนเงิน</h5></span></th>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col-md-1">
+                                        <i class="fa fa-minus-circle fa-lg fa-2x" style="color:red" />
+                                    </td>
+                                    <td class="col-md-7">-9000008957 SPIGEN + Leather Fit Blue</td>
+                                    <td class="col-md-2">1,290.00</td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col-md-1">
+                                        <i class="fa fa-minus-circle fa-lg fa-2x" style="color:red" />
+                                    </td>
+                                    <td class="col-md-7">-9000008957 SPIGEN + Leather Fit Blue</td>
+                                    <td class="col-md-2">1,290.00</td>
+                                </tr>
+                            </table>
+                            <div class="row top_tll">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-2">รวม</div>
+                                <div class="col-md-2">2,580.00</div>
+                                <div class="col-md-2">บาท</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" data-dismiss="modal">เลือก</button>
+                        <button class="btn btn-cancel" data-dismiss="modal">ยกเลิก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <--บัตรเครดิต-->
+        <div id="modalPriceplanOwnership" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row" style="background-color: #FF0000;color:white; ">
+                            <div class="col-md-4">
+                                <h4>บัตรเครดิต</h4>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+                        <h5>ชำระค่าสินค้า</h5>
+                        <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <input type="radio" checked name="fft" ng-click="showlist=false"> เต็มจำนวน
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" value="19,450.00">
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-default" data-dismiss="modal" ng-click="showcard=true">รับบัตร</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <input type="radio" name="fft" ng-click="showlist=true"> ผ่อนชำระ</div>
+                        </div>
+                        <div class="row" ng-show="showlist">
+                            <p></p>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-2">จำนวนเงินที่ต้องชำระ</div>
+                            <div class="col-md-2" align="center">ธนาคาร</div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2">จำนวนเงินที่ผ่อนชำระ</div>
+                        </div>
+                        <div class="row" ng-show="showlist">
+                            <div class="col-md-3">
+                                <p></p>
+                                <input type="checkbox"> iPhone 6 Plus,16GB,Gold
+                                <br>
+                            </div>
+                            <div class="col-md-2">
+                                <p></p>
+                                <input type="text" class="form-control" value="24,450.00" style="width:100px;">
+                            </div>
+                            <div class="col-md-2">
+                                <p></p>
+                                <select class="form-control" style="width:150px;">
+                                    <option value="0">--เลือกธนาคาร--</option>
+                                    <option value="1">UOB</option>
+                                    <option value="2">KTC</option>
+                                    <option value="3">FIRST CHOICE</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <p></p>
+                                <select class="form-control" style="width:220px;">
+                                    <option value="0">--เลือกจำนวนเดือนที่ผ่อนชำระ--</option>
+                                    <option value="1">0% 6 เดือน</option>
+                                    <option value="2">0% 10 เดือน</option>
+                                    <option value="3">0% 12 เดือน</option>
+                                </select>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <p></p>
+                                <input type="text" class="form-control" value="9,000.00" style="width:100px;">
+                            </div>
+                        </div>
+                        <div class="row" ng-show="showlist">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-2">
+                                <p></p>
+                                <button class="btn btn-default" data-dismiss="modal" ng-click="showcard1=true">Instruction for EDC</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- popUpเช็ค -->
+        <div id="modalPriceplanOwnership1" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row" style="background-color: #FF0000;color:white; ">
+                            <div class="col-md-4">
+                                <h5>เช็ค</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+                        <br>
+                        <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
+                        <div class="row">
+                            <div class="col-md-2" align="left">บริษัท</div>
+                            <div class="col-md-2" align="left">เลขที่เช็ค</div>
+                            <div class="col-md-2" align="center">ธนาคาร</div>
+                            <div class="col-md-2" align="center">สาขา</div>
+                            <div class="col-md-2" align="center">ลงวันที่</div>
+                            <div class="col-md-2" align="center">จำนวนเงิน</div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="text" style="width:70px;" value="RMV">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" style="width:70px;" value="">
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" style="width:120px;">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" style="width:120px;">
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" readonly class="form-control" id="startB3" value="dd/mm/yy" style="width:100px;">
+                                <span class="form-control-feedback is-bound"><i class="fa fa-calendar"></i></span></div>
+                            <div class="col-md-2">
+                                <input type="text" style="width:100px;" value="5,170.84">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="modal-footer">
+                                    <button class="btn btn-cancel" data-dismiss="modal">Clear</button>
+                                    <button class="btn btn-success" data-dismiss="modal" ng-click="showcheck=true">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- popUp ภาษี -->
+        <div id="modalPriceplanOwnership2" tabindex="-1" class="modal" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row" style="background-color: #FF0000;color:white; ">
+                            <div class="col-md-4">
+                                <h4>ภาษีหัก ณ ที่จ่าย</h4>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+                        <br>
+                        <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2" align="center">บริษัท</div>
+                            <div class="col-md-2" align="center">จำนวนเงืนที่ต้องชำระก่อนภาษี</div>
+                            <div class="col-md-2" align="center">อัตราภาษีหัก ณ ที่จ่าย</div>
+                            <div class="col-md-2" align="center">จำนวนเงินภาษีหัก ณ ที่จ่าย</div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-2">
+                                <input type="text" style="width:60px;" readonly class="form-control" value="RMV">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" style="width:100px;" readonly class="form-control" value="4,971.96">
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" style="width:100px;">
+                                    <option>3%</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="startB3" style="width:100px;" value="149.16">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-cancel" data-dismiss="modal">Clear</button>
+                                        <button class="btn btn-success" data-dismiss="modal" ng-click="showvat=true">OK</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

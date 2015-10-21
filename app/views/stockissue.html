@@ -1,0 +1,71 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div>
+                    <br><p>Sale Approach > Order Capture > Payment > Stock Issue</p> 
+                </div>
+            </div>
+        </div>
+</nav>
+
+
+
+<div id="wrapper">
+    <div class="content m_content">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <br>
+                <h5 class="">Stock Issue</h5>
+                <br />
+                <div ng-controller="stockissueCtrl">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2" style="text-align:right;">
+                            <h4>หมายเลขซีเรียล</h4> </div>
+                        <div class="col-md-6">
+                            <!-- Use ng-repeat with ul.li -->
+                            <input class="form-control" type="text" ng-model="query">
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-5" style="background-color: #c8bbbb; "><span><h5> รายการรับชำระ</h5></span></th>
+                                    <th class="col-md-2" style="background-color: #c8bbbb; text-align:center; "><span><h5>จำนวน</h5></span></th>
+                                    <th class="col-md-4" style="background-color: #c8bbbb; text-align:center; "><span><h5>Serial No</h5></span></th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb"></th>
+                                </tr>
+                                <tr class="row" ng-repeat="itm in ordersummary | filter : query">
+                                    <th class="col-md-5">{{itm.promotion}}</th>
+                                    <th class="col-md-2" style="text-align:center;">{{itm.count}} <span> </span></th>
+                                    <th class="col-md-4" style="text-align:center;"><span>{{itm.serial}}</span></th>
+                                    <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-buttons">
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button class="btn btn-success" class="btn btn-success" onclick="location.href='#appleCare'">ตกลง</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</div>

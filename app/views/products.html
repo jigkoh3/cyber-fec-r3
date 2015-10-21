@@ -1,0 +1,122 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <!-- <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ui-sref="dashboard" class="navbar-brand">HOMER</a>
+            <div class="brand-desc">
+                Landing page for Homer app
+            </div>
+        </div> -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div class="col-md-6"><br><p>
+Home > Products > Devices </p></div>
+                <div class="col-md-6">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active ng-menu"><a class="page-scroll" href="#aircard">Air Card</a></li>
+                        <li class="ng-menu"><a class="page-scroll" page-scroll href="#smartphone">Smart Phone</a></li>
+                        <li class="ng-menu"><a class="page-scroll" page-scroll href="#tablet">Tablet</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</nav>
+<div id="wrapper">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-2 sale-main">
+            <div class="row" id="aircard">
+                <!-- <p></p> -->
+                <div class="col-md-12">
+                    <br>
+                    <br>
+                    <h4 class="pull-left ttl_main_sale">Air Card</h4>
+                </div>
+                <div class="box-sale-product">
+                    <!-- ngRepeat: item in categorydevice -->
+                    <div class="box-sale-4" ng-repeat="itm in aircard">
+                        <a href="#/orderDevice">
+                            <div class="product_img">
+                                <img src="images/product/{{itm.productpic}}.png" />
+                            </div>
+                            <div class="product_name">
+                                <h3>{{itm.productname}}</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <section id="smartphone">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="pull-left ttl_main_sale">Smart Phone</h4>
+                    </div>
+                    <div class="box-sale-product">
+                        <!-- ngRepeat: item in categorydevice -->
+                        <div class="box-sale-4" ng-repeat="itm in phone">
+                            <a href="#/golive">
+                                <div class="product_img">
+                                    <img src="images/product/{{itm.productpic}}.png" />
+                                </div>
+                                <div class="product_name">
+                                    <h3>{{itm.productname}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="box-sale-4" ng-repeat="itm in smartphone">
+                            <a href="#/orderDevice">
+                                <div class="product_img">
+                                    <img src="images/product/{{itm.productpic}}.png" />
+                                </div>
+                                <div class="product_name">
+                                    <h3>{{itm.productname}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="tablet">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="pull-left ttl_main_sale">Tablet</h4>
+                    </div>
+                    <div class="box-sale-product">
+                        <!-- ngRepeat: item in categorydevice -->
+                        <div class="box-sale-4" ng-repeat="itm in tablet">
+                            <a href="#/orderDevice">
+                                <div class="product_img">
+                                    <img src="images/product/{{itm.productpic}}.png" />
+                                </div>
+                                <div class="product_name">
+                                    <h3>{{itm.productname}}</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+
+    // Page scrolling feature
+    $('a.page-scroll').bind('click', function(event) {
+        var link = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $(link.attr('href')).offset().top - 150
+        }, 500);
+        event.preventDefault();
+    });
+
+});
+</script>

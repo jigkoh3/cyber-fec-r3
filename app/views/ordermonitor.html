@@ -1,0 +1,342 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div>
+                    <br>
+                    <p>Order Monitor > Order Detail</p>
+                </div>
+            </div>
+        </div>
+</nav>
+<div id="wrapper">
+    <div class="container">
+        <div>
+            <!-- <div class="col-md-1"></div> -->
+            <br>
+            <h4>Order Monitor</h4>
+            <p></p>
+            <div class="well">
+                <form action="demo_form.asp" method="get">
+                    <h4>ค้นหา Order</h4>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <div class="form-group">
+                                    <label>Order ID</label>
+                                    <input type="text" class="form-control ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Product</label>
+                                <select class="form-control">
+                                    <option value="0">-- กรุณาเลือก --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label>Shop Code</label>
+                                <input type="text" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group ">
+                                <label>&nbsp;</label>
+                                <input type="button" class="form-control numberic" value="...">
+                                <!-- <button class="btn btn-default">&nbsp;...&nbsp;</button> -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label>ผู้สร้าง Order</label>
+                                <input type="text" class="form-control numberic">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <label>คำค้น</label>
+                                <input type="text" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>หมายเลขบัตรประชาชน/พาสปอร์ต</label>
+                                <input type="text" class="form-control numberic">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Current Process</label>
+                                <select class="form-control">
+                                    <option value="0">-- กรุณาเลือก --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Order Status</label>
+                                <select class="form-control">
+                                    <option value="0">-- กรุณาเลือก --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group  has-feedback">
+                                <label>วันที่เริ่ม </label>
+                                <input type="text" class="form-control date-picker" id="birthDay" value="12/10/2558">
+                                <span class="form-control-feedback is-bound"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group  has-feedback">
+                                <label>วันที่สิ้นสุด </label>
+                                <input type="text" class="form-control date-picker" id="birthDay" value="12/10/2558">
+                                <span class="form-control-feedback is-bound"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button class="btn btn-success" id="modallistpayment" data-dismiss="modal" align="right" onclick="location.href='#printpreview'">ค้นหา</button>
+                                <button class="btn btn-success" type="reset" value="Reset">Clear</button>
+                            </div>
+                        </div>
+                </form>
+                <!--  <div class="col-md-4">
+                        <div class="form-group">
+                            <button class="btn btn-success" id="modallistpayment" data-dismiss="modal" align="right" onclick="location.href='#printpreview'">ยืนยัน</button>
+                        </div>
+                    </div> -->
+                <div class="col-md-4"></div>
+                </div>
+            </div>
+            <div class="row">
+                <h3>ผลการค้นหา</h3>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <button class="btn btn-default" align="right" onclick="location.href='#'">ค้นหา</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table width="100%" border="1">
+        <thead>
+            <tr>
+                <th class="head-table">Order ID</th>
+                <th class="head-table">Current Process</th>
+                <th class="head-table">Product</th>
+                <th class="head-table">Subscriber</th>
+                <th class="head-table">Customer Name</th>
+                <th class="head-table">Status</th>
+                <th class="head-table">Fail Description</th>
+                <th class="head-table">Shop Code</th>
+                <th class="head-table">Shop Name</th>
+                <th class="head-table">Create By</th>
+                <th class="head-table">Create Date</th>
+                <th class="head-table">Resume</th>
+                <th class="head-table">Reprint App From</th>
+                <th class="head-table">Cancel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="#/dataorder">T000000001</a></td>
+                <td>Order Summary</td>
+                <td>TRUE MOVE H</td>
+                <td>0809995555</td>
+                <td>ยุทธนา อินทร์ดอย</td>
+                <td>Draft</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan22</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td><a href="#/listpayment">Resume</a></td>
+                <td>&nbsp;</td>
+                <td><a href="#/listpayment">Cancel</a></td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000002</a></td>
+                <td>Capture Order</td>
+                <td>FREE YOU</td>
+                <td>0809995556</td>
+                <td>วรรณรากาญจน์ เหล่าโนนคร้อ</td>
+                <td>Draft</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan23</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td><a href="#/orderCapture">Resume</a></td>
+                <td>&nbsp;</td>
+                <td><a href="#/orderCapture">Cancel</a></td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000003</a></td>
+                <td>
+                    Payment
+                </td>
+                <td>Only You Only TRUE</td>
+                <td>0809995557</td>
+                <td>อุษณีย์ พกสิน</td>
+                <td>Draft</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan24</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td><a href="#/payment">Resume</a></td>
+                <td>&nbsp;</td>
+                <td><a href="#/payment">Cancel</a></td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000004</a></td>
+                <td>
+                    Payment
+                </td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>พัชรี เจริญพานนท์</td>
+                <td>Draft</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan25</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td><a href="#/payment">Resume</a></td>
+                <td>&nbsp;</td>
+                <td><a href="#/payment">Cancel</a></td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000005</a></td>
+                <td>
+                    Stock Issue
+                </td>
+                <td>Device</td>
+                <td>0809995557</td>
+                <td>สิงห์ชัย แซ่ฮั้ง</td>
+                <td>Draft</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan26</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td><a href="#/stockissue">Resume</a></td>
+                <td>&nbsp;</td>
+                <td><a href="#/stockissue">Cancel</a></td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000006</a></td>
+                <td>
+                    Confirm Order
+                </td>
+                <td>SOOK2FIBER</td>
+                <td>023335555,898765</td>
+                <td>ชุมพจน์ โชติกลาง</td>
+                <td>Draft</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan27</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td><a href="#/printpreview">Resume</a></td>
+                <td>&nbsp;</td>
+                <td><a href="#/printpreview">Cancel</a></td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000007</a></td>
+                <td>&nbsp;</td>
+                <td>Real Future</td>
+                <td>0897775555</td>
+                <td>อดิศร เทศขำ</td>
+                <td>Confirm</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan28</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td>&nbsp;</td>
+                <td><a href="#/printpreview">Reprint</a></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000008</a></td>
+                <td>&nbsp;</td>
+                <td>Sook3</td>
+                <td>0816665555,023335555,898765</td>
+                <td>ญาณี เขตพิทักษ์</td>
+                <td>Processing</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan29</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000009</a></td>
+                <td>&nbsp;</td>
+                <td>TOL</td>
+                <td>026664444</td>
+                <td>เพ็ญพักต์ กองสุข</td>
+                <td>Fail</td>
+                <td>xx xx xx</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan30</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td>&nbsp;</td>
+                <td><a href="#/printpreview">Reprint</a></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><a href="#/dataorder">T000000010</a></td>
+                <td>&nbsp;</td>
+                <td>True Card</td>
+                <td>0892221111</td>
+                <td>จงพร สุภาวิดา</td>
+                <td>Complete</td>
+                <td>&nbsp;</td>
+                <td>80000124</td>
+                <td>ใยแก้ว</td>
+                <td>piyan31</td>
+                <td>dd/mm/yyyy hh:mm:ss</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Footer -->
+<div class="modal-footer">
+    <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+</div>

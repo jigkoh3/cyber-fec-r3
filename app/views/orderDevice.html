@@ -1,0 +1,120 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div><br><p>
+Home > Products > Devices > iPhone </p>
+                </div>
+            </div>
+        </div>
+</nav>
+<div id="wrapper">
+    <div class="container">
+        <div class="row ">
+            <br>
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+                <h4>{{trueProduct.productName}}</h4></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"><img src="images/product/{{trueProduct.productImg}}.png" /></div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <div data-toggle="buttons" class="btn-group btn-group-justified">
+                                    <label class="btn btn-default active" id="labelAdd" ng-click="selectTab('1')">
+                                        <input type="radio" value="1"> โปรโมชั่น
+                                    </label>
+                                    <label class="btn btn-default" ng-click="selectTab('2')">
+                                        <input type="radio" value="2"> ซื้อเครื่องเปล่า
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-12 "></div>
+                    <div class="col-md-3 text-center">
+                        <h3>Silver </h3></div>
+                    <div class="col-md-3 text-center">
+                        <h3>Gold </h3></div>
+                    <div class="col-md-3 text-center">
+                        <h3>Space Gray </h3></div> -->
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <h3>Gold</h3>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3>Silver</h3>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3>Gray </h3>
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="itm  in trueProduct.productColor">
+                        <!--  <div class="col-md-2" style="margin-top:21px;">
+                            <img src="images/product/{{itm.colorImg}}.png" /></div> -->
+                        <div class="col-md-12">
+                            <div class="row ">
+                                <div class="col-md-3" ng-repeat="itmMem in itm.memSize">
+                                    <!-- <p><center>Avaliable</center></p><br> -->
+                                    <!-- <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h3>{{itm.colorName}} </h3>
+                                        </div>
+                                    </div> -->
+                                    <div class="row ">
+                                        <div class="col-md-12 col-centered text-center">
+                                            <label class="{{itmMem.stock}}">{{itmMem.stock=="red" ? "สินค้าหมด" : "พร้อมขาย"}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-centered text-center">
+                                            <button ng-disabled="itmMem.stock =='red'" class="btn btn-default gray">{{itmMem.sizeName}}
+                                                <br>&nbsp;&nbsp;{{itmMem.price | number:2}}&nbsp;&nbsp;</button>
+                                        </div>
+                                        <br>
+                                    </div>
+                                    <div class="row top10">
+                                        <div class="col-md-12 col-centered text-center">
+                                            <input type="number" ng-disabled="itmMem.stock =='red'" ng-model="itmMem.piece" ng-change="calculate(itmMem)" onfocus="" style=" width: 60px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row top_tll">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-1">
+                    <h4>{{trueProduct.productTotal}}</h4>
+                </div>
+                <div class="col-md-2">
+                    <h4>  {{calculate() | number:2 }}  บาท</h4>
+                </div>
+            </div>
+            <div class="row" style="height:30px;">
+            </div>
+            <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <button class="btn btn-success" ng-click="next()">ถัดไป</button>
+                </div>
+            </div>
+        </div>
+        <!-- Footer style="border-size:0.5px; border-style:solid;"-->
+        <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+    </div>

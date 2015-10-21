@@ -1,0 +1,192 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="row top_tll">
+        <div class="col-md-9 col-md-offset-2">
+            <p class="ttl_main">สินค้าและบริการ</p>
+
+        </div>
+    </div>
+
+    <div class="row content">
+        <div class="col-md-10 col-md-offset-2 sale-main">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="pull-left ttl_main_sale">โปรโมชั่นแนะนำ</h4>
+                </div>
+                <div class="col-md-6">
+                    <a href="javascript:;" class="pull-right viewall"> ดูทั้งหมด</a>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="box-sale-main">
+                    <li class="box-sale-4" ng-repeat="item in promotionList">
+                        <a href="javascript:;" ng-click="showPopOver('pop'+item.id)">
+                            <div class="sale_ttl">
+                                <p>{{item.download}} </p> <span>/ {{item.upload}} Mbps.</span>
+
+                            </div>
+                            <div class="sale_logo">
+                                <img src="images/sale/logo_gold.png" />
+                            </div>
+                            <div class="sale_detail">
+                                <ul>
+                                    <li>TOL 50/5.0 Mbps. </li>
+                                    <li>TVS GOLD HD 170 ช่อง 39 HD</li>
+                                    <li>TMVH 450 mins+DATA 4GB</li>
+                                    <li>Fixline Plus 100 mins</li>
+                                </ul>
+                            </div>
+                            <div class="sale_price">
+                                <h3>4P Value+ {{item.price | number}}</h3>
+                            </div>
+                            <div class="sale_pomo">
+                                <a href="javascript:;">
+                                    <img src="images/sale/icon_pomo.png" />
+                                </a>
+                            </div>
+                        </a>
+                        <p class="docsis">ไฟเบอร์เคเบิลอินเทอร์เน็ต (Docsis)</p>
+                        <!--popover1-->
+                        <div id="pop{{item.id}}" class="popover popover_sale" align="center">
+                            <div class="h_popover">
+                                <h3 class="name_pro">4P Value+</h3>
+                                <a href="javascript:;" ng-click="closePopOver('pop'+item.id)" class="close_popover"></a>
+                            </div>
+                            <div class="popover-content">
+                                <div class="content-pop-sale">
+                                    <ul class="pop-sale-detail">
+                                        <li><button type="button" class="check__status login__submit btn">ตรวจสอบพื้นที่ให้บริการ</button></li>
+                                        <li>
+                                            <select class="form-control btn_open_tol hidden" disabled>
+                                                <option>+ ทรูออนไลน์</option>
+                                                <option>+ ทรูออนไลน์1</option>
+                                                <option>+ ทรูออนไลน์2</option>
+                                                <option>+ ทรูออนไลน์3</option>
+                                            </select>
+                                            <div class="btn-group bootstrap-select form-control btn_open_tol"><button type="button" class="btn dropdown-toggle disabled btn-default" data-toggle="dropdown" tabindex="-1" title="+ ทรูออนไลน์"><span class="filter-option pull-left">+ ทรูออนไลน์</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li data-original-index="0" class="disabled selected"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1" class="disabled"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์1</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2" class="disabled listitem3"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์2</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3" class="disabled"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์3</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
+                                        </li>
+                                        <li>
+                                            <select class="form-control btn_open_tvs hidden" disabled>
+                                                <option>+ ทรูออนไลน์</option>
+                                                <option>+ ทรูออนไลน์1</option>
+                                                <option>+ ทรูออนไลน์2</option>
+                                                <option>+ ทรูออนไลน์3</option>
+                                            </select>
+                                            <div class="btn-group bootstrap-select form-control btn_open_tvs"><button type="button" class="btn dropdown-toggle disabled btn-default" data-toggle="dropdown" tabindex="-1" title="+ ทรูออนไลน์"><span class="filter-option pull-left">+ ทรูออนไลน์</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li data-original-index="0" class="disabled selected"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1" class="disabled"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์1</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2" class="disabled listitem3"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์2</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3" class="disabled"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์3</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
+                                        </li>
+                                        <li>
+                                            <select class="form-control btn_open_tmv hidden" disabled>
+                                                <option>+ ทรูออนไลน์</option>
+                                                <option>+ ทรูออนไลน์1</option>
+                                                <option>+ ทรูออนไลน์2</option>
+                                                <option>+ ทรูออนไลน์3</option>
+                                            </select>
+                                            <div class="btn-group bootstrap-select form-control btn_open_tmv"><button type="button" class="btn dropdown-toggle disabled btn-default" data-toggle="dropdown" tabindex="-1" title="+ ทรูออนไลน์"><span class="filter-option pull-left">+ ทรูออนไลน์</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner" role="menu"><li data-original-index="0" class="disabled selected"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="1" class="disabled"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์1</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์1</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="2" class="disabled listitem3"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์2</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์2</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li><li data-original-index="3" class="disabled"><a tabindex="-1" class="" data-normalized-text="<span class=&quot;text&quot;>+ ทรูออนไลน์3</span>" data-tokens="null" href="#"><span class="text">+ ทรูออนไลน์3</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li></ul></div></div>
+                                        </li>
+                                        <li><button type="button" class="check_create btn" disabled>Create</button></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--popover1-->
+                    </li>
+                </ul>
+            </div>
+            <!----------------------สินค้าและบริการ------------------------>
+            <h4 class="pull-left ttl_main_sale">เปิดบริการใหม่</h4>
+            <div class="row">
+                <div class="new-open-data">
+                    <div class="box-sale-4">
+                        <div class="logo-open-data">
+                            <img src="images/commons/truemove_online.png" />
+                        </div>
+                        <a href="#/openTruemoveh">
+                            <div class="open-data-detail open-tol">
+                                <p>เปิดบริการใหม่</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box-sale-4">
+                        <div class="logo-open-data">
+                            <img src="images/commons/truemove_visions.png" />
+                        </div>
+                        <a href="open-data-visions.html">
+                            <div class="open-data-detail open-tvs">
+                                <p>เปิดบริการใหม่</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box-sale-4">
+                        <div class="logo-open-data">
+                            <img src="images/commons/truemoveh.png" />
+                        </div>
+                        <a href="#modalopenservice" data-toggle="modal" onclick="return false;">
+                            <div class="open-data-detail open-tmv">
+                                <p>เปิดบริการใหม่</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box-sale-4">
+						<div class="logo-open-data">
+                            <img src="images/commons/truemoveh.png" />
+                        </div>
+                        <a href="open-data-all.html">
+                            <div class="open-data-detail open-all">
+                                <p>+เปิดบริการทั้งหมด</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!----------------------เปิดบริการใหม่------------------------>
+            <!----------------------เครื่องและอุปกรณ์------------------------>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="pull-left ttl_main_sale">เครื่องและอุปกรณ์</h4>
+                </div>
+                <div class="col-md-6">
+                    <a href="#/allProduct" class="pull-right viewall"> ดูทั้งหมด</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="box-sale-product">
+                    <div class="box-sale-4" ng-repeat="item in detaildevice">
+                        <a href="javascript:;">
+                            <div class="product_img">
+                                <img src="{{item.Image}}" />
+                                <div class="product_img_3g">
+                                    <ul>
+                                        <li> <img src="{{item.Image3g}}" /> </li>
+                                        <li> <img src="{{item.Image4g}}" /> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_name">
+                                <h3>{{item.Name}}</h3>
+                            </div>
+                            <div class="product_price">
+
+                                <!--<p class="price_t_main">ราคา 29,450.00 บาท</p>
+                                <p class="price_t_id hide">พิเศษ 19,450.00 บาท</p>-->
+                            </div>
+                        </a>
+                        <div class="gami_trigger">
+                            <!--<a href="#modalproduct" id="modalPricePlan" class="btn_gami_trigger btn " onclick="return false;" data-toggle="modal">สั่งซื้อ</a>-->
+                            <button type="button" class="btn_gami_trigger btn" ng-click="order()" >สั่งซื้อ</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!----------------------เครื่องและอุปกรณ์------------------------>
+
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+</div>

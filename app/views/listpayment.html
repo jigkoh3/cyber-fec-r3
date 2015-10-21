@@ -1,0 +1,183 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div><br><p>
+Home > Products > Devices > iPhone > Promotion > Priceplan > Order Summary </p>
+                </div>
+            </div>
+        </div>
+</nav>
+
+<div id="wrapper">
+    <div class="content m_content">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-9">
+                <h5 class="">สรุปรายการซื้อสินค้า</h5>
+                <br />
+                <div class="content-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr class="row">
+                                <th class="col-md-1" style="background-color: #c8bbbb"></th>
+                                <th class="col-md-6" style="background-color: #c8bbbb; "><span><h5> รายการรับชำระ</h5></span></th>
+                                <th class="col-md-2" style="background-color: #c8bbbb;text-align:right;" ><span><h5>ราคา</h5></span></th>
+                                <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
+                            </tr>
+                            <tr class="row" ng-repeat="itm in ordersummary">
+                                <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
+                                <th class="col-md-6">{{itm.promotion}}</th>
+                                <th class="col-md-2" style="text-align:right;">{{itm.price}} <span> </span></th>
+                                <th class="col-md-1"><span> บาท</span></th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1">
+                                    <i class="fa fa-plus-circle fa-lg fa-2x" style="color:red" href="#modalAdd" onclick="return false;" data-toggle="modal" style="background-color: #5cb85c; border-color: #4cae4c; "></i>
+                                </th>
+                                <th class="col-md-6"></th>
+                                <th class="col-md-2"></th>
+                                <th class="col-md-1"></th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1 form-control-feedback" style="text-align:right;">
+                                </th>
+                                <th class="col-md-6 form-control-feedback" style="text-align:right;">
+                                    จำนวนเงินที่ต้องชำระ
+                                </th>
+                                <th class="col-md-2 form-control-feedback" style="text-align:right;">
+                                    29,450.00
+                                </th>
+                                <th class="col-md-1">
+                                    <span>บาท</span>
+                                </th>
+                             
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!--  <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-8">
+                        <h5>ประเภทการรับชำระ</h5>
+                    </div>
+
+                </div> -->
+                <!--  <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-8">
+                        <div class="col-md-4">
+                            <input type="radio" name="typepayment" checked value="N"> เงินสด
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="typepayment" value="B"> บัตรเครดิตเต็มจำนวน
+                        </div>
+                        <div class="col-md-4">
+                            <input type="radio" name="typepayment" value="O"> บัตรเครดิตผ่อนจ่าย
+                        </div>
+                    </div>
+
+                </div> -->
+                <div class="col-md-12 form-buttons">
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <!-- <input type="submit" onclick="location.href='#landingpage'" value="เพิ่มรายการสินค้า" class="btn btn-defalt">
+                                <input type="submit" ng-click="newCustomer()" value="ยืนยันการสั่งซื้อ" class="btn btn-success"> -->
+                                <button class="btn btn-cancel" class="btn btn-success"  onclick="location.href='#landingpage'">เพิ่มรายการสินค้า</button>
+                                <button class="btn btn-success" class="btn btn-success"  onclick="location.href='#orderCapture'">ตกลง</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalAdd" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>ส่วนลด / รหัสการจอง</h5>
+                    <br>
+                    <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
+                    <!-- <div class="col-md-12">
+                        <input type="text" placeholder="--ค้นหา--" ng-model="pricePlanFilter" class="form-control">
+                    </div> -->
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-6">ประเภท</div>
+                        <div class="col-md-5">ค้นหา</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="radio"> ส่วนลด
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio"> คูปอง
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio"> รหัสการจอง
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr class="row">
+                                <th class="col-md-1" style="background-color: #c8bbbb"></th>
+                                <th class="col-md-7" style="background-color: #c8bbbb; "><span><h5> รหัสคูปอง</h5></span></th>
+                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>จำนวนเงิน</h5></span></th>
+                            </tr>
+                            <tr class="row">
+                                <td class="col-md-1">
+                                    <i class="fa fa-minus-circle fa-lg fa-2x" style="color:red" />
+                                </td>
+                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
+                                <td class="col-md-2">1,290.00</td>
+                            </tr>
+                            <tr class="row">
+                                <td class="col-md-1">
+                                    <i class="fa fa-minus-circle fa-lg fa-2x" style="color:red" />
+                                </td>
+                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
+                                <td class="col-md-2">1,290.00</td>
+                            </tr>
+                        </table>
+                        <div class="row top_tll">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-2">รวม</div>
+                            <div class="col-md-2">2,580.00</div>
+                            <div class="col-md-2">บาท</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" data-dismiss="modal">เลือก</button>
+                    <button class="btn btn-cancel" data-dismiss="modal">ยกเลิก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

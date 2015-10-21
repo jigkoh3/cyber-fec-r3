@@ -1,0 +1,25 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-2 sale-main">
+            <div class="row">
+            <div class="box-sale-product" ng-repeat="itm in categorydevice">
+                <!-- ngRepeat: item in categorydevice -->
+                <div class="box-sale-4">
+                    <a href="#/saleiphone">
+                        <div class="product_img">
+                            <img src="images/product/{{itm.productpic}}.png" />
+                        </div>
+                        <div class="product_name">
+                            <h3 class="ng-binding">{{itm.productname}}</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+</div>

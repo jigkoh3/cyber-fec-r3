@@ -1,0 +1,34 @@
+ <!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<div id="wrapper">
+    <div class="container">
+        <div class="col-md-10 col-md-offset-2 sale-main">
+            <div class="row">
+                <div class="box-sale-product" >
+                    <div class="box-sale-4" ng-repeat = "itm in iPhone">
+                        <a href="#/orderDevice">
+                            <div class="product_img">
+                                <img src="images/product/{{itm.imageIphone}}.png" />
+                                <div class="product_img_3g">
+                                    <ul>
+                                        <li ng-repeat="nt in itm.networks"> <img src="images/icon/{{nt.networkname}}.png" /> </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product_name">
+                                <h3>{{itm.iphonename}}</h3>
+                            </div>
+                            
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer -->
+<footer class="footer" ng-include="'views/common/footer.html'"></footer>
+</div>

@@ -1,0 +1,218 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class="navbar-default landing-bar">
+    <div class="container">
+        <!-- <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ui-sref="dashboard" class="navbar-brand">HOMER</a>
+            <div class="brand-desc">
+                Landing page for Homer app
+            </div>
+        </div> -->
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div class="col-md-6">
+                    <br><p>
+Home </p></div>
+                <div class="col-md-6">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active ng-menu"><a class="page-scroll" href="#booking">ข้อมูลการจอง</a></li>
+                        <li class="ng-menu"><a class="page-scroll" page-scroll href="#truemove">True Move H</a></li>
+                        <li class="ng-menu"><a class="page-scroll" page-scroll href="#truevision">True Vision</a></li>
+                        <li class="ng-menu"><a class="page-scroll" page-scroll href="#trueonline">True Online</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div id="wrapper">
+    <br>
+    <br>
+    <br>
+    <div class="row"></div>
+    <div class="container">
+        <div class="content">
+            <div class="content-top" id="booking">
+                <h3>ข้อมูลการจอง</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="box-pre1">
+                                <ul ng-repeat="itm in dataPro1">
+                                    <li class="box_active" ng-hover-display>
+                                        <div class="box-pre-dt001">
+                                            <p>{{itm.name}}</p>
+                                            <h3>{{itm.passWord}}</h3>
+                                            <h4>{{itm.product}}</h4>
+                                            <h4>{{itm.getPre}}</h4>
+                                            <h4>{{itm.dateIn}}</h4>
+                                            <h4>{{itm.dateOut}}</h4>
+                                            <h4>{{itm.getPro}}</h4>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box-pre1" >
+                                <ul ng-repeat="itm in dataPro2">
+                                    <li class="box_active" style="background:#c1c1c1;" ng-hover-display>
+                                        <div class="box-pre-dt001">
+                                            <p>{{itm.name}}</p>
+                                            <h3>{{itm.passWord}}</h3>
+                                            <h4>{{itm.product}}</h4>
+                                            <h4>{{itm.getPre}}</h4>
+                                            <h4>{{itm.dateIn}}</h4>
+                                            <h4>{{itm.dateOut}}</h4>
+                                            <h4>{{itm.getPro}}</h4>
+                                            <h4>{{itm.getplace}}</h4>
+                                            <h4>{{itm.getdate}}</h4>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row"></div>
+        <br>
+        <br>
+        <br>
+        <div class="content" id="truemove">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile">
+                        <h5></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="box-pre">
+                                <ul ng-repeat="itm in trueMoveHProdeucts">
+                                    <li class="box_active" ng-hover-display>
+                                        <div class="box-pre-dt01">
+                                            <p>{{itm.prodCate}}</p>
+                                            <h3>{{itm.subNo}}</h3>
+                                            <h4>{{itm.pricePlane}}</h4>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+        <br>
+        <br>
+        <br>
+        <div class="content" id="truevision">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo_true_vis">
+                        <h5></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="box-pre">
+                                <ul ng-repeat="itm in trueVisionProdeucts">
+                                    <li class="box_active" ng-hover-display>
+                                        <div class="box-pre-dt01">
+                                            <p>{{itm.prodCate}}</p>
+                                            <h3>{{itm.subNo}}</h3>
+                                            <h4>{{itm.pricePlane}}</h4>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+        <br>
+        <br>
+        <br>
+        <div class="content" id="trueonline">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo_true_online">
+                        <h5></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="box-pre">
+                                <ul ng-repeat="itm in trueOnlineProdeucts">
+                                    <li class="box_active" ng-hover-display>
+                                        <div class="box-pre-dt01">
+                                            <p>{{itm.prodCate}}</p>
+                                            <h3>{{itm.subNo}}</h3>
+                                            <h4>{{itm.pricePlane}}</h4>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+    <!-- Footer -->
+    <!-- <footer class="footer" ng-include="'views/common/footer.html'"></footer> -->
+</div>
+<script>
+$(document).ready(function() {
+
+    // Page scrolling feature
+    $('a.page-scroll').bind('click', function(event) {
+        var link = $(this);
+        $('html, body').stop().animate({
+            scrollTop: $(link.attr('href')).offset().top - 150
+        }, 500);
+        event.preventDefault();
+    });
+
+});
+</script>
