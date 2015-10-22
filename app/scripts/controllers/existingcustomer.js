@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('existingcustomerCtrl', function($scope) {
+    .controller('existingcustomerCtrl', function($scope, bookingService) {
 
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
@@ -21,23 +21,39 @@ angular.module('fec3App')
             'Karma'
         ];
 
-        $scope.dataPro1 = [{
-            name: "ชื่อลูกค้า: คุณสุขแสนสุข ใจอารีย์",
-            passWord: "รหัสการจอง: 20141733882",
-            product: "สินค้า: 3000036061 iPhone 6 plus 16GB Gold ",
-            getPre: "นัดรับสินค้า: 80000124 (true shop ใยแก้ว)",
+bookingService.getBookingByCiti(function(result){
+    //console.log(result);
+    if(result.status)
+    {
+        $scope.dataPro1 = result.data["response-data"].bookings;
+        
+    }
+    else{
+        console.log(result);
+    }
+});
 
-        }];
 
-        $scope.dataPro2 = [{
-            name: "ชื่อลูกค้า: คุณสุขแสนสุข ใจอารีย์",
-            passWord: "รหัสการจอง: 20141733889",
-            product: "สินค้า: 3000036061 iPhone 6 plus 16GB Silver",
-            getPre: "นัดรับสินค้า: 80000124 (true shop ใยแก้ว)",
-            getplace: "รับสินค้าที่: 80000124 (true shop ใยแก้ว)",
-            getdate: "วันที่รับสินค้า 01/12/2015"
 
-        }];
+
+
+        // $scope.dataPro1 = [{
+        //     name: "ชื่อลูกค้า: คุณสุขแสนสุข ใจอารีย์",
+        //     passWord: "รหัสการจอง: 20141733882",
+        //     product: "สินค้า: 3000036061 iPhone 6 plus 16GB Gold ",
+        //     getPre: "นัดรับสินค้า: 80000124 (true shop ใยแก้ว)",
+
+        // }];
+
+        // $scope.dataPro2 = [{
+        //     name: "ชื่อลูกค้า: คุณสุขแสนสุข ใจอารีย์",
+        //     passWord: "รหัสการจอง: 20141733889",
+        //     product: "สินค้า: 3000036061 iPhone 6 plus 16GB Silver",
+        //     getPre: "นัดรับสินค้า: 80000124 (true shop ใยแก้ว)",
+        //     getplace: "รับสินค้าที่: 80000124 (true shop ใยแก้ว)",
+        //     getdate: "วันที่รับสินค้า 01/12/2015"
+
+        // }];
 
         $scope.trueMoveHProdeucts = [{
             prodCate: "ทรูมูฟเอช รายเดือน",

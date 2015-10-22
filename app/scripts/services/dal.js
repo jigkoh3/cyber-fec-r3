@@ -13,8 +13,8 @@ angular.module('fec3App')
             };
             var httpRequest = {
                 method: "POST",
-                url: '/webui/services/gateway/get.service',
-                //url: getURL('services/gateway/get.service'),
+                //url: '/webui/services/gateway/get.service',
+                url: getURL('services/gateway/get.service'),
                 data: requestData,
                 timeout: 180000
             };
@@ -67,8 +67,8 @@ angular.module('fec3App')
             console.log(data);
             var httpRequest = {
                 method: "POST",
-                url: '/webui/services/gateway/post.service',
-                //url: getURL('services/gateway/post.service'),
+                //url: '/webui/services/gateway/post.service',
+                url: getURL('services/gateway/post.service'),
                 data: data,
                 timeout: 180000
             };
