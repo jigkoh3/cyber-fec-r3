@@ -34,11 +34,11 @@ angular
             //     controller: 'allproductsCtrl',
             //     controllerAs: 'allproducts'
             // })
-            // .when('/products', {
-            //     templateUrl: 'views/products.html',
-            //     controller: 'productsCtrl',
-            //     controllerAs: 'products'
-            // })
+            .when('/products', {
+                templateUrl: 'views/products.html',
+                controller: 'productsCtrl',
+                controllerAs: 'products'
+            })
             // .when('/saleiphone', {
             //     templateUrl: 'views/saleiphone.html',
             //     controller: 'saleiphoneCtrl',
