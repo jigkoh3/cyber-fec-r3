@@ -462,10 +462,16 @@ angular.module('fec3App')
                     },
                     "display-message": null
                 };
+
+                
+
+                var recommend = $filter('filter')(result["response-data"].categories, { "name": "Recommend" });
+                //console.log(recommend);
+
                 $timeout(function() {
                     fnCallback({
                         status: true,
-                        data: result,
+                        data: recommend,
                         error: "",
                         msgErr: ""
                     });
