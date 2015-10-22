@@ -463,10 +463,11 @@ angular.module('fec3App')
                     "display-message": null
                 };
 
+                var recommend = $filter('filter')(result["response-data"].categories, { "name": "Recommend" });
                 $timeout(function() {
                     fnCallback({
                         status: true,
-                        data: result,
+                        data: recommend,
                         error: "",
                         msgErr: ""
                     });
@@ -934,10 +935,11 @@ angular.module('fec3App')
                     },
                     "display-message": null
                 };
+var devices = $filter('filter')(result["response-data"].categories, { "name": "Device" });
                 $timeout(function() {
                     fnCallback({
                         status: true,
-                        data: result,
+                        data: devices,
                         error: "",
                         msgErr: ""
                     });
