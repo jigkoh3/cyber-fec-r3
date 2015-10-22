@@ -55,7 +55,7 @@ function userMenu($rootScope) {
 function customerToggleGet($rootScope, $localstorage) {
     return {
         restrict: 'EA',
-        templateUrl: '/views/templates/customer-toggle-get.html',
+        templateUrl: 'views/templates/customer-toggle-get.html',
         controller: function($scope, $element, $location, customerService) {
             $scope.inputCardNo = "";
 
@@ -120,7 +120,7 @@ function customerToggleGet($rootScope, $localstorage) {
 function userToggleInfo($rootScope, $localstorage) {
     return {
         restrict: 'EA',
-        templateUrl: '/views/templates/user-toggle-info.html',
+        templateUrl: 'views/templates/user-toggle-info.html',
         controller: function($scope, $element) {
             //console.log($localstorage.getObject("userProfile"));
             $scope.userinfo = $localstorage.getObject("userProfile");
@@ -134,7 +134,7 @@ function userToggleInfo($rootScope, $localstorage) {
 function customerToggleInfo($rootScope, $localstorage) {
     return {
         restrict: 'EA',
-        templateUrl: '/views/templates/customer-toggle-info.html',
+        templateUrl: 'views/templates/customer-toggle-info.html',
         controller: function($scope, $element, $location) {
             $scope.customerProfile = $localstorage.getObject("customerProfile");
             $scope.onClickEndServe = function() {
@@ -150,7 +150,7 @@ function customerToggleInfo($rootScope, $localstorage) {
 function userBarInfo($rootScope) {
     return {
         restrict: 'EA',
-        templateUrl: '/views/templates/user-bar-info.html',
+        templateUrl: 'views/templates/user-bar-info.html',
         controller: function($scope, $element, $localstorage) {
             $scope.userinfo = $localstorage.getObject("userProfile");
         }

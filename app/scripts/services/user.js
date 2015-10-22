@@ -8,7 +8,7 @@ angular.module('fec3App')
                 //http://sff-dev.true.th:18087/security/auth/application/shop
                 var target = '/security/auth/application/shop';
 
-                dalService.callServiceGetByPass(target, null, function(result) {
+                dalService.callServiceGet(target, null, function(result) {
                     fnCallback(result);
                 });
             } else {
@@ -20,24 +20,6 @@ angular.module('fec3App')
                         "shopCode": "80000001",
                         "shopNameTh": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
                         "shopNameEn": "True Distribution & Sales Co., Ltd. (Seacon Square Branch)",
-                        "shopIntName": null,
-                        "shopStatus": "A"
-                    }, {
-                        "shopCode": "80000002",
-                        "shopNameTh": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขายูไนเต็ด เซ็นเตอร์)",
-                        "shopNameEn": "True Distribution & Sales Co., Ltd. (United Center Branch)",
-                        "shopIntName": null,
-                        "shopStatus": "A"
-                    }, {
-                        "shopCode": "80000010",
-                        "shopNameTh": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขาเดอะมอลล์ ท่าพระ)",
-                        "shopNameEn": "True Distribution & Sales Co., Ltd. (The Mall Thapra Branch)",
-                        "shopIntName": null,
-                        "shopStatus": "A"
-                    }, {
-                        "shopCode": "80000011",
-                        "shopNameTh": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขาอื้อจือเหลียง)",
-                        "shopNameEn": "True Distribution & Sales Co., Ltd. (U Chu Liang Building Branch)",
                         "shopIntName": null,
                         "shopStatus": "A"
                     }]
