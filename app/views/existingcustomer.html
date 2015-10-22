@@ -18,8 +18,10 @@
         <div id="navbar" class="navbar-collapse collapse">
             <div class="row">
                 <div class="col-md-6">
-                    <br><p>
-Home </p></div>
+                    <br>
+                    <p>
+                        Home </p>
+                </div>
                 <div class="col-md-6">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active ng-menu"><a class="page-scroll" href="#booking">ข้อมูลการจอง</a></li>
@@ -46,43 +48,26 @@ Home </p></div>
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-10">
-                            <div class="box-pre1">
-                                <ul ng-repeat="itm in dataPro1">
+                            <div class="box-pre1" ng-repeat="itm in dataPro1">
+                                <ul>
                                     <li class="box_active" ng-hover-display>
                                         <div class="box-pre-dt001">
-                                            <p>{{itm.name}}</p>
-                                            <h3>{{itm.passWord}}</h3>
-                                            <h4>{{itm.product}}</h4>
-                                            <h4>{{itm.getPre}}</h4>
-                                            <h4>{{itm.dateIn}}</h4>
-                                            <h4>{{itm.dateOut}}</h4>
-                                            <h4>{{itm.getPro}}</h4>
+                                            <p>รหัสการจอง: {{itm.bookingId}}</p>
+                                            <h3>{{itm.campaignCode}}</h3>
+                                            <h4>รหัสสินค้า: {{itm.productCode}}</h4>
+                                            <h4>สินค้า: {{itm.productName}}</h4>
+                                            <h4>นัดรับสินค้าที่: {{itm.receiveShop}} ({{itm.receiveShopName}})</h4>
+                                            <h4>วันที่นัดรับสินค้า: {{itm.expectReceiveDate}}</h4>
+                                            <h4>วันที่รับสินค้าจริง: {{itm.receiveDate}}</h4>
                                         </div>
                                     </li>
-                                </ul>
+                                </ul> 
                             </div>
-                            <div class="box-pre1" >
-                                <ul ng-repeat="itm in dataPro2">
-                                    <li class="box_active" style="background:#c1c1c1;" ng-hover-display>
-                                        <div class="box-pre-dt001">
-                                            <p>{{itm.name}}</p>
-                                            <h3>{{itm.passWord}}</h3>
-                                            <h4>{{itm.product}}</h4>
-                                            <h4>{{itm.getPre}}</h4>
-                                            <h4>{{itm.dateIn}}</h4>
-                                            <h4>{{itm.dateOut}}</h4>
-                                            <h4>{{itm.getPro}}</h4>
-                                            <h4>{{itm.getplace}}</h4>
-                                            <h4>{{itm.getdate}}</h4>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row"></div>
         <br>
