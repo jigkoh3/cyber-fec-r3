@@ -12,7 +12,7 @@ angular.module('fec3App')
                 // product-id-number
                 var target = '/profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
 
-                dalService.callServiceGetByPass(target, null, function(result) {
+                dalService.callServiceGet(target, null, function(result) {
                     fnCallback(result);
                 });
             } else {

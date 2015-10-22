@@ -8,55 +8,54 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productsCtrl', function($scope) {
+    .controller('productsCtrl', function($scope, productService) {
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
         });
 
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+      
+      productService.getCategories(function(result){
+            console.log(result);
+        });
 
-        $scope.aircard = [{
-            productname: "Air Card 1",
-            productpic: "Picture1",
-        }, {
-            productname: "Air Card 2",
-            productpic: "Picture1",
+        // $scope.aircard = [{
+        //     productname: "Air Card 1",
+        //     productpic: "Picture1",
+        // }, {
+        //     productname: "Air Card 2",
+        //     productpic: "Picture1",
 
-        }];
-
-
-        $scope.smartphone = [{
-            productname: "SAMSUNG Galaxy Note5",
-            productpic: "note5",
-
-        }, {
-            productname: "iPhone 6",
-            productpic: "iPhone",
-        }];
+        // }];
 
 
-        $scope.phone = [{
+        // $scope.smartphone = [{
+        //     productname: "SAMSUNG Galaxy Note5",
+        //     productpic: "note5",
 
-            productname: "Go Live",
-            productpic: "Go_Live",
-        }];
+        // }, {
+        //     productname: "iPhone 6",
+        //     productpic: "iPhone",
+        // }];
 
 
-        $scope.tablet = [{
-            productname: "SAMSUNG Galaxy Tab3",
-            productpic: "tab3",
-        }, {
-            productname: "SAMSUNG Galaxy Tab4",
-            productpic: "tab4",
-        }, {
-            productname: "iPad mini3",
-            productpic: "ipadmini3",
-        }];
+        // $scope.phone = [{
+
+        //     productname: "Go Live",
+        //     productpic: "Go_Live",
+        // }];
+
+
+        // $scope.tablet = [{
+        //     productname: "SAMSUNG Galaxy Tab3",
+        //     productpic: "tab3",
+        // }, {
+        //     productname: "SAMSUNG Galaxy Tab4",
+        //     productpic: "tab4",
+        // }, {
+        //     productname: "iPad mini3",
+        //     productpic: "ipadmini3",
+        // }];
 
 
 

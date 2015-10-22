@@ -20,7 +20,17 @@ angular.module('fec3App')
                             if (resp.data["response-data"].length == 0) {
                                 console.log(resp.data);
                             } else if (resp.data["response-data"].length == 1) {
-                                $location.path('/main')
+                                var val = resp.data["response-data"][0].shopCode + ":" + resp.data["response-data"][0].shopNameTh;
+                                userService.setShopSelectd(val, function(result) {
+                                    if (result.status) {
+                                        console.log(result);
+                                        $location.path('/main')
+                                    } else {
+                                        console.log(result);
+                                    }
+
+                                });
+                                
                             } else {
                                 $scope.selectShops = resp.data["response-data"];
                             }
