@@ -1,4 +1,5 @@
-<div class="container" id="migratePostToPreContent">
+<div id="wrapper">
+    <div class="container" id="migratePostToPreContent">
     <div class="content-top">
     </div>
     <div class="content m_content">
@@ -18,15 +19,10 @@
                             </div>
                             <div class="col-md-7">
                                 <p></p>
-                                <select class="form-control" name="select-shop" id="select-shop">
-                                    <option value="./#/" ng-repeat="itm in selectShops">{{itm.branch}}</option>
+                                <select class="form-control"  ng-model="shopSelected">
+                                    <option ng-repeat="itm in selectShops">{{itm.shopCode}}:{{itm.shopNameTh}} </option>
                                 </select>
-                                <script type="text/javascript">
-                                var urlmenu = document.getElementById('select-shop');
-                                urlmenu.onchange = function() {
-                                    window.open(this.options[this.selectedIndex].value);
-                                };
-                                </script>
+                                
                             </div>
                         </div>
                     </div>
@@ -36,4 +32,6 @@
         </div>
     </div>
 </div>
+</div>
+
 

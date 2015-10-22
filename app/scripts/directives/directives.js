@@ -39,9 +39,9 @@ function customerMenu($rootScope) {
 function userMenu($rootScope) {
     return {
         restrict: 'EA',
-        template: '<a ng-click="toggleUser()" class="btn btn-login dropdown-toggle"><p class="navbar-text navbar-text-right"><i class="fa fa-user"></i> ID: 01014764</p></a>',
-        controller: function($scope, $element) {
-
+        template: '<a ng-click="toggleUser()" class="btn btn-login dropdown-toggle"><p class="navbar-text navbar-text-right"><i class="fa fa-user"></i> ID: {{userinfo.saleCode}}</p></a>',
+        controller: function($scope, $element, $localstorage) {
+            $scope.userinfo = $localstorage.getObject("userProfile");
             $scope.toggleUser = function() {
 
                 $element.parent().toggleClass('open');
@@ -52,11 +52,11 @@ function userMenu($rootScope) {
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
-function customerToggleGet($rootScope,$localstorage) {
+function customerToggleGet($rootScope, $localstorage) {
     return {
         restrict: 'EA',
         templateUrl: '/views/templates/customer-toggle-get.html',
-        controller: function($scope, $element, $location) {
+        controller: function($scope, $element, $location, customerService) {
             $scope.inputCardNo = "";
 
             $scope.cardTypes = [{
@@ -71,24 +71,45 @@ function customerToggleGet($rootScope,$localstorage) {
             }, {
                 name: "True Vision Account",
                 value: "04"
+            }];
+            $scope.cardTypeSelected = "01";
+            $scope.onReadcard = function() {
+                alert("read card");
             }
-            ];
-
-
             $scope.onCardNoKeydown = function(inputCardNo) {
-                if (inputCardNo && inputCardNo.length == 13) {
-                    // $scope.inputCardNo = cardNo;
-                    console.log(inputCardNo);
-                    var customerProfile = {
-                        customerId:"8891-3888-8007-2403",
-                        expireDate:"08/2015",
-                        citizenId:"3600800664204",
-                        fullName:"นางสาว สุขแสนสุข ใจอารีย์"
-                    };
-                    $localstorage.setObject("customerProfile",customerProfile);
-                    $location.path('/existingcustomer')
+
+                    switch ($scope.cardTypeSelected) {
+                        case "01":
+                            if (inputCardNo && inputCardNo.length == 13) {
+                                // console.log(inputCardNo);
+
+                                customerService.getCustomer(inputCardNo, $scope.cardTypeSelected, function(result) {
+                                    if (result.status && result.data["response-data"]) {
+                                        console.log(result);
+
+                                        var customerProfile = result.data["response-data"];
+                                        $localstorage.setObject("customerProfile", customerProfile);
+                                        $location.path('/existingcustomer')
+                                    } else {
+                                        console.log(result);
+                                    }
+                                })
+                            }
+                            break;
+                        case "02":
+                            console.log("02")
+                            break;
+
+                    }
+
                 }
-            }
+                // $scope.$watch('cardTypeSelected', function(val) {
+                //     if (val) {
+                //         console.log(val);
+
+            //     }
+
+            // });
         }
 
     };
@@ -96,27 +117,29 @@ function customerToggleGet($rootScope,$localstorage) {
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
-function userToggleInfo($rootScope) {
+function userToggleInfo($rootScope, $localstorage) {
     return {
         restrict: 'EA',
         templateUrl: '/views/templates/user-toggle-info.html',
         controller: function($scope, $element) {
-            $scope.userinfo = {id:"01014764",name:"นางสาว ทรู ทรูมูฟเอช",shopcode:"123456",shopname:"เซ็นทรัลพลาซา พระราม 2",cosale:"นายทรูมูฟ เอช"};
+            //console.log($localstorage.getObject("userProfile"));
+            $scope.userinfo = $localstorage.getObject("userProfile");
+
         }
     };
 };
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
-function customerToggleInfo($rootScope,$localstorage) {
+function customerToggleInfo($rootScope, $localstorage) {
     return {
         restrict: 'EA',
         templateUrl: '/views/templates/customer-toggle-info.html',
         controller: function($scope, $element, $location) {
             $scope.customerProfile = $localstorage.getObject("customerProfile");
             $scope.onClickEndServe = function() {
-                $localstorage.setObject("customerProfile",null)
-                $location.path('/')
+                $localstorage.setObject("customerProfile", null)
+                $location.path('/main')
             }
         }
     };
@@ -128,8 +151,8 @@ function userBarInfo($rootScope) {
     return {
         restrict: 'EA',
         templateUrl: '/views/templates/user-bar-info.html',
-        controller: function($scope, $element, $location) {
-            $scope.userinfo = {id:"01014764",name:"นางสาว ทรู ทรูมูฟเอช",shopcode:"123456",shopname:"เซ็นทรัลพลาซา พระราม 2",mobileno:"089-444-7208"};
+        controller: function($scope, $element, $localstorage) {
+            $scope.userinfo = $localstorage.getObject("userProfile");
         }
     };
 };
@@ -138,14 +161,13 @@ function userBarInfo($rootScope) {
  */
 function ngHoverDisplay($rootScope) {
     return {
-        link : function(scope, element, attrs) {
+        link: function(scope, element, attrs) {
             element.parent().bind('mouseenter', function() {
                 element.find('p').hide(200);
             });
             element.parent().bind('mouseleave', function() {
-                 element.find('p').show(200);
+                element.find('p').show(200);
             });
-       }
+        }
     };
 };
-

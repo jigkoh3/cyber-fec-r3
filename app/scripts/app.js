@@ -19,16 +19,16 @@ angular
                 controller: 'selectshopCtrl',
                 controllerAs: 'selectshop'
             })
-            // .when('/aftersale', {
-            //     templateUrl: 'views/aftersale.html',
-            //     controller: 'aftersaleCtrl',
-            //     controllerAs: 'aftersale'
-            // })
-            // .when('/landingpage', {
-            //     templateUrl: 'views/landingpage.html',
-            //     controller: 'landingpageCtrl',
-            //     controllerAs: 'landingpage'
-            // })
+            .when('/main', {
+                templateUrl: 'views/main.html',
+                controller: 'MainCtrl',
+                controllerAs: 'main'
+            })
+            .when('/landingpage', {
+                templateUrl: 'views/landingpage.html',
+                controller: 'landingpageCtrl',
+                controllerAs: 'landingpage'
+            })
             // .when('/allproducts', {
             //     templateUrl: 'views/allproducts.html',
             //     controller: 'allproductsCtrl',
@@ -60,11 +60,11 @@ angular
             //     controller: 'promotiondeviceCtrl',
             //     controllerAs: 'promotiondevice'
             // })
-            // .when('/existingcustomer', {
-            //     templateUrl: 'views/existingcustomer.html',
-            //     controller: 'existingcustomerCtrl',
-            //     controllerAs: 'existingcustomer'
-            // })
+            .when('/existingcustomer', {
+                templateUrl: 'views/existingcustomer.html',
+                controller: 'existingcustomerCtrl',
+                controllerAs: 'existingcustomer'
+            })
             // .when('/selectshop', {
             //     templateUrl: 'views/selectshop.html',
             //     controller: 'selectshopCtrl',
