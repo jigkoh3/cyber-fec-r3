@@ -38,7 +38,7 @@ angular.module('fec3App')
             return win;
         };
 
-
+        //var url = getSecondAuthenURL()+"SecondAuthen.jsp?App=WEBUI&TrxID=" + $scope.TrxID + "&Retry=yes&Goto=";
         var url = "https://xxo-uat.true.th:11443/SSORESTFul/SecondAuthen.jsp?App=WEBUI&TrxID=" + $scope.TrxID + "&Retry=yes&Goto=";
 
         

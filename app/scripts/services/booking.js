@@ -3,16 +3,21 @@
 angular.module('fec3App')
     .service('bookingService', function($http, $filter, $timeout, dalService) {
 
-        this.getBookingByCiti = function(fnCallback) {
+        this.getBookingByCiti = function(payload, fnCallback) {
             if (!dalService.demo) {
-                //http://sff-dev.true.th:18087/profiles/customer/get?
-                // certificateid
-                // certificatetype
-                // product-id-name 
-                // product-id-number
-                var target = '/sales-services/rest/event/get_bookings_by_citizenid';
 
-                dalService.callServiceGetByPass(target, null, function(result) {
+
+                var request = {
+                    "shopCode": payload.shopCode,
+                    "userId": payload.userId,
+                    "transactionId": payload.transactionId,
+                    "param": {
+                        "citizenId": payload.citizenId
+                    },
+                    'target': '/sales-services/rest/event/get_bookings_by_citizenid'
+                };
+
+                dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
                 });
             } else {
@@ -46,13 +51,24 @@ angular.module('fec3App')
             }
         };
 
-        this.getBookingByBid = function(userId, shopCode, transactionId, fnCallback) {
+        this.getBookingByBid = function(payload, fnCallback) {
             if (!dalService.demo) {
-                "userId": "01030000",
-                "shopCode": "80000001",
-                "transactionId": "S00000000000001",
-                var target = '/sales-services/rest/event/get_booking_by_bid_and_cid?userId=' + userId + '&shopCode' + 'transactionId';
-                dalService.callServiceGetByPass(target, null, function(result) {
+
+                // var request = {
+                //     'target': '/sales-services/rest/event/get_booking_by_bid_and_cid'
+                // }
+                var request = {
+                    "shopCode": payload.shopCode,
+                    "userId": payload.userId,
+                    "transactionId": payload.transactionId,
+                    "param": {
+                        "bookingId": payload.bookingId,
+                        "citizenId": payload.citizenId
+                    },
+                    'target': '/sales-services/rest/event/get_booking_by_bid_and_cid'
+                };
+                
+                dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
                 });
             } else {
