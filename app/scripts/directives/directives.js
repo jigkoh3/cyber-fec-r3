@@ -13,6 +13,7 @@ angular
     .directive('customerToggleInfo', customerToggleInfo)
     .directive('userBarInfo', userBarInfo)
     .directive('ngHoverDisplay', ngHoverDisplay)
+    .directive('ngMenu',ngMenu)
 
 
 
@@ -169,5 +170,18 @@ function ngHoverDisplay($rootScope) {
                 element.find('p').show(200);
             });
         }
+    };
+};
+
+function ngMenu($rootScope, $localstorage) {
+    return {
+        restrict: 'EA',
+        templateUrl: 'views/templates/menu.html',
+        controller: function($scope, $element, $location, customerService) {
+            var userinfo = $localstorage.getObject("userProfile");
+            //console.log(userinfo.menus);
+            $scope.menu = userinfo.menus;
+        }
+
     };
 };

@@ -15,9 +15,9 @@ angular
     .config(function($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/selectshop.html',
-                controller: 'selectshopCtrl',
-                controllerAs: 'selectshop'
+                templateUrl: 'views/welcome.html',
+                controller: 'welcomeCtrl',
+                controllerAs: 'welcome'
             })
             .when('/main', {
                 templateUrl: 'views/main.html',
@@ -65,11 +65,11 @@ angular
                 controller: 'existingcustomerCtrl',
                 controllerAs: 'existingcustomer'
             })
-            // .when('/selectshop', {
-            //     templateUrl: 'views/selectshop.html',
-            //     controller: 'selectshopCtrl',
-            //     controllerAs: 'selectshop'
-            // })
+            .when('/selectshop', {
+                templateUrl: 'views/selectshop.html',
+                controller: 'selectshopCtrl',
+                controllerAs: 'selectshop'
+            })
 
             // .when('/listpayment', {
             //     templateUrl: 'views/listpayment.html',

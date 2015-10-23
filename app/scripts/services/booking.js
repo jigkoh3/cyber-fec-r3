@@ -1,21 +1,22 @@
 'use strict';
 
 angular.module('fec3App')
-    .service('bookingService', function($http, $filter, $timeout, dalService) {
-
-        this.getBookingByCiti = function(payload, fnCallback) {
+    .service('bookingService', function($http, $filter, $timeout, $localstorage, dalService) {
+        var saleinfo = $localstorage.getObject("userProfile");
+        var customerInfo = $localstorage.getObject("customerProfile");
+        var request = {
+                    "shopCode": saleinfo.shopSelected,
+                    "userId": saleinfo.saleCode,
+                    "transactionId": saleinfo.saleCode,
+                    "param": {
+                        "citizenId": ""
+                    }
+                }; 
+        this.getBookingByCiti = function(fnCallback) {
             if (!dalService.demo) {
 
-
-                var request = {
-                    "shopCode": payload.shopCode,
-                    "userId": payload.userId,
-                    "transactionId": payload.transactionId,
-                    "param": {
-                        "citizenId": payload.citizenId
-                    },
-                    'target': '/sales-services/rest/event/get_bookings_by_citizenid'
-                };
+                
+                request.target = '/sales-services/rest/event/get_bookings_by_citizenid';
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -51,22 +52,10 @@ angular.module('fec3App')
             }
         };
 
-        this.getBookingByBid = function(payload, fnCallback) {
+        this.getBookingByBid = function(bookingId,fnCallback) {
             if (!dalService.demo) {
 
-                // var request = {
-                //     'target': '/sales-services/rest/event/get_booking_by_bid_and_cid'
-                // }
-                var request = {
-                    "shopCode": payload.shopCode,
-                    "userId": payload.userId,
-                    "transactionId": payload.transactionId,
-                    "param": {
-                        "bookingId": payload.bookingId,
-                        "citizenId": payload.citizenId
-                    },
-                    'target': '/sales-services/rest/event/get_booking_by_bid_and_cid'
-                };
+                request.target = '/sales-services/rest/event/get_booking_by_bid_and_cid';
                 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
