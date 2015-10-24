@@ -14,9 +14,15 @@ angular.module('fec3App')
             $(this).addClass('active');
         });
 
-      
-      productService.getCategories(function(result){
-            console.log(result);
+
+        productService.getDevices(function(result) {
+            
+            if(result.status){
+                //console.log(result.data);
+                $scope.categories = result.data;
+            }else{
+
+            }
         });
 
         // $scope.aircard = [{

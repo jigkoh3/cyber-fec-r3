@@ -13782,12 +13782,14 @@ html.ie8 .pop-sale-detail .btn-group {
 
 .product_img {
     position: relative;
+    /*background-image: url("../images/product/iPhone.png");*/
 }
 
 .product_img > img {
     width: 200px;
     display: block;
     margin: auto;
+
 }
 
 .product_img_3g ul {

@@ -14,22 +14,27 @@ angular.module('fec3App')
             $(this).addClass('active');
         });
 
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
 
-        $scope.gotopricePlan = function() {
-            window.location = "#/landingpage";
-            setTimeout(function() {
-                window.location = "#/pricePlan";
-            }, 1000);
 
-        };
+        // $scope.gotopricePlan = function() {
+        //     window.location = "#/landingpage";
+        //     setTimeout(function() {
+        //         window.location = "#/pricePlan";
+        //     }, 1000);
 
-        productService.getProductRecommened(function(result){
-            console.log(result);
+        // };
+
+        productService.getProductRecommend(function(result){
+            // console.log(result);
+            // $scope.truePromotions
+            if(result.status){
+                console.log(result.data);
+                $scope.truePromotions = result.data.Promotions;
+                $scope.trueDevices = result.data.Devices;
+            }
+            else{
+                console.log(result.data);
+            }
         });
         // $scope.truePromotions = [{
         //     promotionCode: "gold",

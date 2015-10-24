@@ -5,14 +5,17 @@
     <div class="container">
         <div id="navbar" class="navbar-collapse collapse">
             <div class="row">
-                <div class="col-md-6"> <br><p>
+                <div class="col-xs-3"> <br><p>
 Home > Products </p></div>
-                <div class="col-md-6">
-                    <ul class="nav navbar-nav navbar-right">
+                <div class="col-xs-9">
+                    <!--  -->
+                    <div class="row">
+                        <ul class="nav navbar-nav navbar-right">
                         <li class="active ng-menu"><a class="page-scroll" href="#promotion">โปรโมชั่นแนะนำ</a></li>
                         <li class="ng-menu"><a class="page-scroll" page-scroll href="#new">เปิดบริการใหม่</a></li>
                         <li class="ng-menu"><a class="page-scroll" page-scroll href="#device">เครื่องและอุปกรณ์</a></li>
                     </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,31 +44,11 @@ Home > Products </p></div>
                         <ul class="box-sale-main">
                             <li class="box-sale-4" ng-repeat="itm in truePromotions">
                                 <a href="">
-                                    <div class="sale_ttl">
-                                        <p>{{itm.upload}} </p> <span>/ {{itm.download}} Mbps.</span>
-                                    </div>
-                                    <div class="sale_logo">
-                                        <img src="images/sale/logo_{{itm.promotionCode}}.png" />
-                                    </div>
-                                    <div class="sale_detail">
-                                        <ul>
-                                            <li ng-repeat="itmDtl in itm.promotionDtls">{{itmDtl.desc}}</li>
-                                            <!-- <li>cvb</li>
-                                    <li>fgdf</li>
-                                    <li>fddfg</li>
-                                    <li>cfdfg</li> -->
-                                        </ul>
-                                    </div>
-                                    <div class="sale_price">
-                                        <h3>{{itm.pricePlan}}</h3>
-                                    </div>
-                                    <div class="sale_pomo">
-                                        <a href="#">
-                                            <img src="images/sale/icon_pomo.png" />
-                                        </a>
+                                    <div class="product_img">
+                                        <img actual-src="images/product/{{itm.id}}.png" ng-src="images/product/noImg.png"/>
                                     </div>
                                 </a>
-                                <p class="docsis">{{itm.description}}</p>
+                                <p class="docsis">{{itm.name}}</p>
                             </li>
                         </ul>
                     </div>
@@ -128,21 +111,16 @@ Home > Products </p></div>
                             <div class="box-sale-4" ng-repeat="itm in trueDevices">
                                 <a href="#/orderDevice">
                                     <div class="product_img">
-                                        <img src="images/product/{{itm.imgAS}}.png" />
-                                        <div class="product_img_3g">
-                                            <ul>
-                                                <li> <img src="images/icon/icon_3g.png" /> </li>
-                                                <li> <img src="images/icon/icon_4g.png" /> </li>
-                                            </ul>
-                                        </div>
+                                        
+                                        <img actual-src="images/product/{{itm.id}}.png" ng-src="images/product/noImg.png"/>
                                     </div>
                                     <div class="product_name">
                                         <h3>{{itm.name}}</h3>
                                     </div>
-                                    <div class="product_price">
+                                    <!-- <div class="product_price">
                                         <p class="price_t_main">ราคา {{itm.price}} บาท</p>
                                         <p class="price_t_id hide">พิเศษ {{itm.price}} บาท</p>
-                                    </div>
+                                    </div> -->
                                 </a>
                                 <div class="gami_trigger">
                                     <button type="button" class="btn_gami_trigger btn">สั่งซื้อ</button>
