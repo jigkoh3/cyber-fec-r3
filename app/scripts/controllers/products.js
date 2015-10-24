@@ -25,6 +25,15 @@ angular.module('fec3App')
             }
         });
 
+        $scope.dilldown = function(item){
+            //console.log(item);
+            if(item.child && item.child.length >= 1)
+            {
+                $scope.categories= item.child;
+            }
+            
+        }
+
         // $scope.aircard = [{
         //     productname: "Air Card 1",
         //     productpic: "Picture1",

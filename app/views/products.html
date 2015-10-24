@@ -38,7 +38,7 @@
                  <div class="box-sale-product">
                     <!-- ngRepeat: item in categorydevice -->
                     <div class="box-sale-4" ng-repeat="itm in categories">
-                        <a href="#/orderDevice">
+                        <a ng-click = "dilldown(itm)">
                             <div class="product_img">
                                 <img actual-src="images/product/{{itm.id}}.png" ng-src="images/product/noImg.png"/>
                             </div>
