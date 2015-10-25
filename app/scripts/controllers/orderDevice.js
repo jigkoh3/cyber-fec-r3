@@ -58,7 +58,7 @@ angular.module('fec3App')
                         piece: ""
                     }]
                 }, {
-                     colorName: "Black",
+                     colorName: "Gray",
                     // colorImg: "black",
                     memSize: [{
                         sizeName: "128 GB",

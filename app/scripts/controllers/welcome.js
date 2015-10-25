@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('fec3App')
-    .controller('welcomeCtrl', function($scope, $location, userService) {
-
+    .controller('welcomeCtrl', function($scope, $location, $loading, userService) {
+        $loading.show();
         userService.initailData(function(result) {
+            $loading.hide();
             //console.log(result.data);
             if (result.status) {
                 

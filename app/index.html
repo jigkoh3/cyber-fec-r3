@@ -15,6 +15,14 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script language="javascript">
+    function quitBox(cmd) {
+        if (cmd == 'quit') {
+            open(location, '_self').close();
+        }
+        return false;
+    }
+    </script>
 </head>
 
 <body ng-app="fec3App">
@@ -27,13 +35,17 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-linq/angular-linq.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
+    <script src="bower_components/angular-linq/angular-linq.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -69,13 +81,14 @@
     <script src="scripts/controllers/priceplanexisting.js"></script>
     <script src="scripts/controllers/ordercaptureexisting.js"></script>
     <script src="scripts/controllers/welcome.js"></script>
+    <script src="scripts/controllers/header.js"></script>
+    <script src="scripts/controllers/alert.js"></script>
     <!-- build:js services -->
     <script src="scripts/services/dal.js"></script>
     <script src="scripts/services/user.js"></script>
     <script src="scripts/services/customer.js"></script>
     <script src="scripts/services/booking.js"></script>
     <script src="scripts/services/product.js"></script>
-
     <!-- build:js directives -->
     <script src="scripts/directives/directives.js"></script>
     <!-- build:js factories -->

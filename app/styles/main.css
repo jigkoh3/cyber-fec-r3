@@ -3894,18 +3894,23 @@ fieldset[disabled] .btn-menu {
     background-color: #fff;
     border-color: #ccc;
 }
-.gray{
+
+.gray {
     background-color: silver;
 }
-.yellow{
-    color:yellow;
+
+.yellow {
+    color: yellow;
 }
-.green{
-    color:green;
+
+.green {
+    color: green;
 }
-.red{
-    color:red;
+
+.red {
+    color: red;
 }
+
 .btn-default:hover,
 .btn-default:focus,
 .btn-default.focus,
@@ -5292,14 +5297,14 @@ tbody.collapse.in {
     padding-left: 0;
     padding-right: 0;
 }
-.landing-bar{
+
+.landing-bar {
     margin-top: -30px;
     position: fixed;
     right: 0;
     left: 0;
     z-index: 2;
 }
-
 
 .navbar-collapse:before,
 .navbar-collapse:after {
@@ -5319,7 +5324,7 @@ tbody.collapse.in {
 @media (max-width: 991px) {
     /*.navbar-collapse.collapse {
         display: none;
-    }*/
+    }
     .navbar-collapse {
         width: auto;
         border-top: 0;
@@ -5327,7 +5332,7 @@ tbody.collapse.in {
     }
     .collapse.retention {
         visibility: visible;
-    }
+    }*/
 }
 
 .navbar-fixed-top .navbar-collapse,
@@ -12778,13 +12783,15 @@ only screen and (min-resolution: 2dppx) {
         margin: 4px 0px;
     }
 }
-#header{
+
+#header {
     position: fixed;
-    top:0;
+    top: 0;
     right: 0;
     left: 0;
     z-index: 1030
 }
+
 .header {
     background-color: #ed1c24;
 }
@@ -13782,6 +13789,7 @@ html.ie8 .pop-sale-detail .btn-group {
 
 .product_img {
     position: relative;
+    /*height:260px;*/
     /*background-image: url("../images/product/iPhone.png");*/
 }
 
@@ -13789,7 +13797,6 @@ html.ie8 .pop-sale-detail .btn-group {
     width: 200px;
     display: block;
     margin: auto;
-
 }
 
 .product_img_3g ul {
@@ -14508,10 +14515,12 @@ textarea.remark-message {
 .current-info p.label {
     line-height: 19px;
 }
-.col-centered{
+
+.col-centered {
     float: none;
     margin: 0 auto;
 }
+
 .modal,
 .modal-dialog {
     z-index: 9000;
@@ -14521,18 +14530,21 @@ textarea.remark-message {
     height: 500%;
     z-index: 2000;
 }
-.top10{
+
+.top10 {
     margin-top: -10px;
 }
-.info-bar{
-    background:#000;
+
+.info-bar {
+    background: #000;
     /*margin-top: -30px;*/
-    height:100%;
-    color:#fff;
+    height: 100%;
+    color: #fff;
     padding-top: 40px;
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
+
 #wrapper {
     /*margin: 120px 0 0 0;*/
     padding: 0;
@@ -14543,15 +14555,11 @@ textarea.remark-message {
     min-height: 100%
 }
 
-
-
-
-
-
 body {
     margin-top: 80px;
     font-family: "Varela Round", sans-serif;
 }
+
 .containertt {
     max-width: 960px;
     width: 100%;
@@ -14572,10 +14580,9 @@ h1 {
     display: inline-block;
     padding: 15px 25px;
     background: none;
-   /* text-transform: uppercase;*/
+    /* text-transform: uppercase;*/
     cursor: pointer;
     font-style: bold;
-
 }
 
 .tabs li.current {
@@ -14598,7 +14605,6 @@ h1 {
 .head-select {
     background: red;
 }
-
 
 .box-pre-dt001 {
     width: 100%;
@@ -14640,6 +14646,11 @@ h1 {
     background: #FFCC00;
 }
 
+.booking {
+    color: #777777;
+    background: #FFCC00;
+}
+
 .box-pre1 li.listitem3 {
     margin-right: 0px !important;
 }
@@ -14653,6 +14664,19 @@ h1 {
 }
 
 .head-table {
-    text-align:center;
+    text-align: center;
     background-color: #CCCCCC;
+}
+.button-align {
+        text-align: right;
+}
+@media (max-width: 768px) {
+    .button-align {
+        text-align: center;
+    }
+}
+@media (max-width: 768px) {
+    .xs-center {
+        text-align: center;
+    }
 }

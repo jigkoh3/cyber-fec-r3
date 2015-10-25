@@ -488,6 +488,22 @@ angular.module('fec3App')
                     "display-message": null
                 };
 
+                var data2 = {
+                    "status": "UNSUCCESSFUL",
+                    "display-messages": [{
+                        "message": "request sim prefix  is wrong format for company(RM)",
+                        "message-code": "",
+                        "message-type": "ERROR",
+                        "en-message": "request sim prefix  is wrong format for company(RM)",
+                        "th-message": "request sim prefix  is wrong format for company(RM)",
+                        "technical-message": "request sim prefix  is wrong format for company(RM)"
+                    }],
+                    "trx-id": "4Q15KDZCTBQYP",
+                    "process-instance": "tmsapnpr1 (instance: SFF_node4)",
+                    "response-data": {}
+
+                };
+
                 $timeout(function() {
                     onSuccess({
                         status: true,
@@ -510,13 +526,13 @@ angular.module('fec3App')
                 var Promotions = $filter('filter')(recommend[0].child, {
                     "name": "Promotions"
                 });
-                if(Promotions && Promotions.length >=1){
+                if (Promotions && Promotions.length >= 1) {
                     result.Promotions = Promotions[0].child;
                 }
                 var Devices = $filter('filter')(recommend[0].child, {
                     "name": "Devices"
                 });
-                if(Devices && Devices.length >=1){
+                if (Devices && Devices.length >= 1) {
                     result.Devices = Devices[0].child;
                 }
                 fnCallback({

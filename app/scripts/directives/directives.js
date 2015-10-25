@@ -14,6 +14,7 @@ angular
     .directive('userBarInfo', userBarInfo)
     .directive('ngHoverDisplay', ngHoverDisplay)
     .directive('ngMenu', ngMenu)
+    .directive('version', version)
     .directive('actualSrc', function() {
         return {
             link: function postLink(scope, element, attrs) {
@@ -69,11 +70,11 @@ function userMenu($rootScope) {
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
-function customerToggleGet($rootScope, $localstorage) {
+function customerToggleGet($rootScope, $localstorage, $loading) {
     return {
         restrict: 'EA',
         templateUrl: 'views/templates/customer-toggle-get.html',
-        controller: function($scope, $element, $location, customerService) {
+        controller: function($scope, $element, $location, $message, customerService) {
             $scope.inputCardNo = "";
 
             $scope.cardTypes = [{
@@ -94,21 +95,20 @@ function customerToggleGet($rootScope, $localstorage) {
                 alert("read card");
             }
             $scope.onCardNoKeydown = function(inputCardNo) {
-
+                    //console.log(inputCardNo);
                     switch ($scope.cardTypeSelected) {
                         case "01":
                             if (inputCardNo && inputCardNo.length == 13) {
                                 // console.log(inputCardNo);
+                                $loading.show();
+                                customerService.getCustomerManual(inputCardNo, "I", function(result) {
+                                    $loading.hide();
+                                    if (result.status) {
+                                        //console.log(result);
 
-                                customerService.getCustomer(inputCardNo, $scope.cardTypeSelected, function(result) {
-                                    if (result.status && result.data["response-data"]) {
-                                        console.log(result);
-
-                                        var customerProfile = result.data["response-data"];
-                                        $localstorage.setObject("customerProfile", customerProfile);
                                         $location.path('/existingcustomer')
                                     } else {
-                                        console.log(result);
+                                        $message.alert(result.data["display-messages"][0]);
                                     }
                                 })
                             }
@@ -199,5 +199,12 @@ function ngMenu($rootScope, $localstorage) {
             $scope.menu = userinfo.menus;
         }
 
+    };
+};
+
+function version() {
+    return {
+        restrict: 'EA',
+        template: 'Version : 0.0.1'
     };
 };

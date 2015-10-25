@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('landingpageCtrl', function($scope, productService) {
+    .controller('landingpageCtrl', function($scope, $loading, productService) {
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
@@ -23,10 +23,11 @@ angular.module('fec3App')
         //     }, 1000);
 
         // };
-
+        $loading.show();
         productService.getProductRecommend(function(result){
             // console.log(result);
             // $scope.truePromotions
+            $loading.hide();
             if(result.status){
                 console.log(result.data);
                 $scope.truePromotions = result.data.Promotions;

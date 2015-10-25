@@ -1,27 +1,5 @@
 <ul class="nav navmenu-nav">
-    <!-- <li data-toggle="collapse" data-target="#aftersale" class="collapsed">
-        <a href="" class="dropdown-toggle-submenu-v2">บริการหลังการขาย <i class="fa fa-angle-down"></i></a>
-        <ul class="sub-menu collapse dropdown-menu-v2" id="aftersale">
-            <li><a href="#/cancelOrder">Cancel Order</a></li>
-            <li><a href="#/changeInstallation">Change Installation</a></li>
-            <li><a href="#/changePromotion">Change Promotion</a></li>
-            <li><a href="#/disConnect">Disconnect</a></li>
-            <li><a href="#/deBundle">Debundle</a></li>
-            <li><a href="#/addOutlet">Add Outlet</a></li>
-            <li><a href="#/removeOutlet">Remove Outlet</a></li>
-            <li><a href="#/changeTelno">Change TelNo./Priceplan/Feature</a></li>
-        </ul>
-    </li>
-    <li data-toggle="collapse" data-target="#saleservice" class="collapsed">
-        <a href="" class="dropdown-toggle-submenu-v2">สินค้าและบริการ <i class="fa fa-angle-down"></i></a>
-        <ul class="sub-menu collapse dropdown-menu-v2" id="saleservice">
-            <li><a href="#/sale">สินค้าและบริการ</a></li>
-            <li><a href="">โปรโมชั่นแนะนำ</a></li>
-            <li><a href="">เครื่องและอุปกรณ์</a></li>
-        </ul>
-    </li>
-    <li><a href="" data-toggle="modal" data-target=".modalbooking">ข้อมูลการจอง</a></li>
-    <li><a class="disabled">ชำระสินค้าและบริการ</a></li> -->
+    
     <li ng-repeat="itm in menu" data-toggle="collapse" class="collapsed" data-target="#submenu{{itm.id}}">
         <a href="" class="dropdown-toggle-submenu-v2" ng-show="itm.childMenuList.length > 0">{{itm.menuName}} <i class="fa fa-angle-down" ></i></a>
         <ul class="sub-menu collapse dropdown-menu-v2" id="submenu{{itm.id}}" ng-show="itm.childMenuList.length > 0">
@@ -30,4 +8,5 @@
         </ul>
         <a href="#/{{itm.menuActionInternet}}" class="dropdown-toggle-submenu-v2" ng-show="itm.childMenuList.length == 0">{{itm.menuName}} </a>
     </li>
+    <!-- <li class="collapsed"><a class="dropdown-toggle-submenu-v2">Version : 0.0.1</a></li> -->
 </ul>
