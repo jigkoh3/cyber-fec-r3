@@ -120,6 +120,51 @@ angular.module('fec3App')
 
             });
         };
+        this.getOrderId = function(channel, shopcodes, fnCallback) {
+            var generateOrder_target = "?channel=" + (channel ? channel : "") + "&dealer=" + (shopcodes ? shopcodes : "");
+            //generateOrder_target = "";
+
+            if (generateOrder_target == "") {
+                if (channel) {
+                    generateOrder_target = "?channel=" + channel;
+                }
+                if (shopcodes && shopcodes.length > 0) {
+                    if (generateOrder_target) {
+                        generateOrder_target = "?dealer=" + shopcodes[0];
+                    } else {
+                        generateOrder_target += "&dealer=" + shopcodes[0];
+                    }
+                }
+            }
+            //alert(generateOrder_target);
+            //call generate-order-id
+            that.generateOrderId(generateOrder_target, function(data) {
+                fnCallback({
+                    TrxID: data["trx-id"],
+                    orderId: data["response-data"]
+                });
+            });
+        };
+        this.generateOrderId = function(parameter, fnCallback) {
+            //var target = 'aftersales/order/generate-id?channel=WEBUI&dealer=80000011';
+            var target = 'sales/order/generate-id' + parameter;
+            var headers = {
+                'WEB_METHOD_CHANNEL': 'WEBUI'
+            };
+            if (!that.demo) {
+                that.callServiceGet(target, headers, function(result) {
+                    fnCallback(result.data);
+                });
+            } else {
+                fnCallback({
+                    "status": "SUCCESSFUL",
+                    "trx-id": "4EONTQNYU4VZ",
+                    "process-instance": "psaapdv1 (instance: SFF_node1)",
+                    "response-data": "15070800DEMO000000002"
+                });
+            }
+
+        };
 
         this.second_authen = function(trx_id, fnCallback) {
             var target = 'security/identity/second_authen?trx_id=' + trx_id + '&app_id=WEBUI';

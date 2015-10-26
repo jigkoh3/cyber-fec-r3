@@ -74,7 +74,7 @@ function customerToggleGet($rootScope) {
     return {
         restrict: 'EA',
         templateUrl: 'views/templates/customer-toggle-get.html',
-        controller: function($scope, $element, $location, $localstorage, $loading, dalService, $message, customerService) {
+        controller: function($scope, $element, $location, $localstorage, $loading, dalService, $message, customerService, dalService) {
             $scope.divID = "customerToggleGet";
             $scope.inputCardNo = "";
             $scope.onReading = false;
@@ -102,11 +102,11 @@ function customerToggleGet($rootScope) {
                 //         CitizenID: "3180200336928"
                 //     });
                 // }, 1001);
-                
+
                 // setTimeout(function() {
                 //     $scope.readCardError("card reader not found.");
                 // }, 1001);
-                
+
             }
             $scope.SetCardValue = function(result) {
                 //$scope.onReading = false;
@@ -114,7 +114,14 @@ function customerToggleGet($rootScope) {
                 var cardInfo = eval(result);
                 //console.log(cardInfo);
                 $localstorage.setObject("cardInfo", cardInfo);
+                var customerProfile = $localstorage.getObject("customerProfile");
 
+                customerProfile.certificateId = cardInfo.CitizenID;
+                customerProfile.title = cardInfo.PrefixTH;
+                customerProfile.firstName = cardInfo.FirstNameTH;
+                customerProfile.lastName = cardInfo.LastNameTH;
+
+                $localstorage.setObject("customerProfile", customerProfile);
                 //$scope.inputCardNo = cardInfo.CitizenID;
                 //$loading.show();
                 customerService.getCustomerManual(cardInfo.CitizenID, "I", function(result) {
@@ -170,143 +177,155 @@ function customerToggleGet($rootScope) {
             var isSSOSuccessed = false;
             $scope.openSSO = function() {
 
-                var openDialog = function(uri, name, options, closeCallback) {
-                    var win = window.open(uri, name, options);
-                    var interval = window.setInterval(function() {
-                        try {
-                            if (win == null || win.closed) {
-                                window.clearInterval(interval);
-                                closeCallback(win);
-                            }
-                        } catch (e) {}
-                    }, 1000);
-                    return win;
-                };
-                var url = dalService.secondAuthenURL + "SecondAuthen.jsp?App=WEBUI&TrxID=" + $scope.TrxID + "&Retry=yes&Goto=";
-                var userinfo = $localstorage.getObject("userProfile");
-                //console.log(userinfo);
-                if (userinfo.isSecondAuthen == false && userinfo.shopType == "1") {
-                    setTimeout(function() {
-                        $('#inputCardNo').focus();
-                        $('#inputCardNo').removeAttr('readonly');
-                    }, 100);
+                    // dalService.getOrderId(result.channel, result.shopcode, function(resultData) {
+                    //     localStorage.setItem('getOrderId', resultData);
+                    //     $scope.TrxID = resultData.TrxID;
+                    //     $scope.orderId = resultData.orderId;
+                    // };
+                    var d = new Date();
 
-                } else {
-                    if (!isSSOSuccessed) {
-                        openDialog(url, "MsgWindow", "width=800, height=600", function(w) {
-                            //alert('debug : close and call(second_authen?trx_id=' + $scope.TrxID + '&app_id=WEBUI)');
-                            $loading.show()
-                            dalService.second_authen("4EONTQNYU4VZ", function(result) {
-                                //alert(result["status"]);
-                                $loading.hide();
-                                //console.log(result);
-                                //$scope.secondAuthenData = result;
-                                if (result["status"] == "SUCCESSFUL") {
-                                    isSSOSuccessed = true;
-                                    setTimeout(function() {
-                                        $('#inputCardNo').focus();
-                                        $('#inputCardNo').removeAttr('readonly');
-                                    }, 1001);
-                                } else {
 
-                                    setTimeout(function() {
-                                        $message.alert({
-                                            "message": result["display-messages"][0]["message"],
-                                            "message-code": result["display-messages"][0]["message-code"],
-                                            "message-type": "WARNING",
-                                            "en-message": result["display-messages"][0]["en-message"],
-                                            "th-message": result["display-messages"][0]["th-message"],
-                                            "technical-message": result["display-messages"][0]["technical-message"]
-                                        });
-                                    }, 1000);
+                    $scope.TrxID = d.getTime() + '';
+                    $localstorage.setItem('TrxID', $scope.TrxID);
+
+                    var openDialog = function(uri, name, options, closeCallback) {
+                        var win = window.open(uri, name, options);
+                        var interval = window.setInterval(function() {
+                            try {
+                                if (win == null || win.closed) {
+                                    window.clearInterval(interval);
+                                    closeCallback(win);
                                 }
+                            } catch (e) {}
+                        }, 1000);
+                        return win;
+                    };
+
+                    var url = dalService.secondAuthenURL + "SecondAuthen.jsp?App=WEBUI&TrxID=" + $scope.TrxID + "&Retry=yes&Goto=";
+                    var userinfo = $localstorage.getObject("userProfile");
+                    //console.log(userinfo);
+                    if (userinfo.isSecondAuthen == false && userinfo.shopType == "1") {
+                        setTimeout(function() {
+                            $('#inputCardNo').focus();
+                            $('#inputCardNo').removeAttr('readonly');
+                        }, 100);
+
+                    } else {
+                        if (!isSSOSuccessed) {
+                            openDialog(url, "MsgWindow", "width=800, height=600", function(w) {
+                                //alert('debug : close and call(second_authen?trx_id=' + $scope.TrxID + '&app_id=WEBUI)');
+                                $loading.show()
+                                dalService.second_authen($scope.TrxID, function(result) {
+                                    //alert(result["status"]);
+                                    $loading.hide();
+                                    //console.log(result);
+                                    //$scope.secondAuthenData = result;
+                                    if (result["status"] == "SUCCESSFUL") {
+                                        isSSOSuccessed = true;
+                                        setTimeout(function() {
+                                            $('#inputCardNo').focus();
+                                            $('#inputCardNo').removeAttr('readonly');
+                                        }, 1001);
+                                    } else {
+
+                                        setTimeout(function() {
+                                            $message.alert({
+                                                "message": result["display-messages"][0]["message"],
+                                                "message-code": result["display-messages"][0]["message-code"],
+                                                "message-type": "WARNING",
+                                                "en-message": result["display-messages"][0]["en-message"],
+                                                "th-message": result["display-messages"][0]["th-message"],
+                                                "technical-message": result["display-messages"][0]["technical-message"]
+                                            });
+                                        }, 1000);
+                                    }
+                                });
+
                             });
+                        }
 
-                        });
+
                     }
+                }
 
+            }
 
+        };
+    };
+    /**
+     * minimalizaSidebar - Directive for minimalize sidebar
+     */
+    function userToggleInfo($rootScope, $localstorage) {
+        return {
+            restrict: 'EA',
+            templateUrl: 'views/templates/user-toggle-info.html',
+            controller: function($scope, $element) {
+                //console.log($localstorage.getObject("userProfile"));
+                $scope.userinfo = $localstorage.getObject("userProfile");
+
+            }
+        };
+    };
+    /**
+     * minimalizaSidebar - Directive for minimalize sidebar
+     */
+    function customerToggleInfo($rootScope, $localstorage) {
+        return {
+            restrict: 'EA',
+            templateUrl: 'views/templates/customer-toggle-info.html',
+            controller: function($scope, $element, $location) {
+                $scope.customerProfile = $localstorage.getObject("customerProfile");
+                $scope.onClickEndServe = function() {
+                    $localstorage.setObject("customerProfile", null)
+                    $location.path('/main')
                 }
             }
-
-        }
-
+        };
     };
-};
-/**
- * minimalizaSidebar - Directive for minimalize sidebar
- */
-function userToggleInfo($rootScope, $localstorage) {
-    return {
-        restrict: 'EA',
-        templateUrl: 'views/templates/user-toggle-info.html',
-        controller: function($scope, $element) {
-            //console.log($localstorage.getObject("userProfile"));
-            $scope.userinfo = $localstorage.getObject("userProfile");
-
-        }
-    };
-};
-/**
- * minimalizaSidebar - Directive for minimalize sidebar
- */
-function customerToggleInfo($rootScope, $localstorage) {
-    return {
-        restrict: 'EA',
-        templateUrl: 'views/templates/customer-toggle-info.html',
-        controller: function($scope, $element, $location) {
-            $scope.customerProfile = $localstorage.getObject("customerProfile");
-            $scope.onClickEndServe = function() {
-                $localstorage.setObject("customerProfile", null)
-                $location.path('/main')
+    /**
+     * minimalizaSidebar - Directive for minimalize sidebar
+     */
+    function userBarInfo($rootScope) {
+        return {
+            restrict: 'EA',
+            templateUrl: 'views/templates/user-bar-info.html',
+            controller: function($scope, $element, $localstorage) {
+                $scope.userinfo = $localstorage.getObject("userProfile");
             }
-        }
+        };
     };
-};
-/**
- * minimalizaSidebar - Directive for minimalize sidebar
- */
-function userBarInfo($rootScope) {
-    return {
-        restrict: 'EA',
-        templateUrl: 'views/templates/user-bar-info.html',
-        controller: function($scope, $element, $localstorage) {
-            $scope.userinfo = $localstorage.getObject("userProfile");
-        }
+    /**
+     * minimalizaSidebar - Directive for minimalize sidebar
+     */
+    function ngHoverDisplay($rootScope) {
+        return {
+            link: function(scope, element, attrs) {
+                element.parent().bind('mouseenter', function() {
+                    element.find('p').hide(200);
+                });
+                element.parent().bind('mouseleave', function() {
+                    element.find('p').show(200);
+                });
+            }
+        };
     };
-};
-/**
- * minimalizaSidebar - Directive for minimalize sidebar
- */
-function ngHoverDisplay($rootScope) {
-    return {
-        link: function(scope, element, attrs) {
-            element.parent().bind('mouseenter', function() {
-                element.find('p').hide(200);
-            });
-            element.parent().bind('mouseleave', function() {
-                element.find('p').show(200);
-            });
-        }
-    };
-};
 
-function ngMenu($rootScope, $localstorage) {
-    return {
-        restrict: 'EA',
-        templateUrl: 'views/templates/menu.html',
-        controller: function($scope, $element, $location, customerService) {
-            var userinfo = $localstorage.getObject("userProfile");
-            //console.log(userinfo.menus);
-            $scope.menu = userinfo.menus;
-        }
+    function ngMenu($rootScope, $localstorage) {
+        return {
+            restrict: 'EA',
+            templateUrl: 'views/templates/menu.html',
+            controller: function($scope, $element, $location, customerService) {
+                var userinfo = $localstorage.getObject("userProfile");
+                //console.log(userinfo.menus);
+                $scope.menu = userinfo.menus;
+            }
 
+        };
     };
-};
 
-function version() {
-    return {
-        restrict: 'EA',
-        template: 'Version : 0.0.1'
+    function version() {
+        return {
+            restrict: 'EA',
+            template: 'Version : 0.0.1'
+        };
     };
-};

@@ -659,6 +659,8 @@ angular.module('fec3App')
                         "childMenuList": []
                     }]
                 };
+
+                
                 $timeout(function() {
                     fnCallback({
                         status: true,
