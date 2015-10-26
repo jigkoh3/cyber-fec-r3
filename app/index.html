@@ -15,6 +15,38 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    
+    <script language="javascript">
+    function quitBox(cmd) {
+        if (cmd == 'quit') {
+            open(location, '_self').close();
+        }
+        return false;
+    }
+    </script>
+</head>
+
+<body ng-app="fec3App">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <div ng-view=""></div>
+    <!-- Read Card USB -->
+    <object id="card" classid="CLSID:D6083DBA-4351-4DA9-85D5-9069544998F1" style="width:0px;height:0px;"></object>
+    <script for="card" event="CardChange(state,args)">
+    function card::CardChange(state, args) {
+        var scope = angular.element(document.getElementById("custGet")).scope();
+        
+        if (state == 'ReadSuccess') {
+            scope.SetCardValue(args);
+        }
+        if (state == 'Error') {
+            scope.readCardError(args);
+        }
+
+    }
+    </script>
     <script>
     function ReadCard(Method) {
         var scope = angular.element($("#custGet")).scope();
@@ -37,37 +69,6 @@
     function ShowData(str) {
         var obj = eval(str);
         //alert(str);
-    }
-    </script>
-    <script language="javascript">
-    function quitBox(cmd) {
-        if (cmd == 'quit') {
-            open(location, '_self').close();
-        }
-        return false;
-    }
-    </script>
-</head>
-
-<body ng-app="fec3App">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!-- Add your site or application content here -->
-    <div ng-view=""></div>
-    <!-- Read Card USB -->
-    <object id="card" classid="CLSID:D6083DBA-4351-4DA9-85D5-9069544998F1" style="width:0px;height:0px;"></object>
-    <script for="card" event="CardChange(state,args)">
-    function card::CardChange(state, args) {
-        var scope = angular.element($("#custGet")).scope();
-        
-        if (state == 'ReadSuccess') {
-            scope.SetCardValue(args);
-        }
-        if (state == 'Error') {
-            scope.readCardError(args);
-        }
-
     }
     </script>
     <!-- end read card usb -->
