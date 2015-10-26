@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productsCtrl', function($scope, productService) {
+    .controller('productsCtrl', function($scope, $location, $loading, $message, productService) {
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
@@ -21,15 +21,23 @@ angular.module('fec3App')
                 //console.log(result.data);
                 $scope.categories = result.data;
             }else{
-
+                $message.alert(result.data["display-messages"][0]);
             }
         });
-
+        $scope.imgPrefix = function(id){
+            //var preFixURL = 'http://172.19.193.71/sale/img/category/';
+            var preFixURL = 'http://localhost:9000/images/category/'
+            return preFixURL + id + '.png';
+        };
         $scope.dilldown = function(item){
             //console.log(item);
             if(item.child && item.child.length >= 1)
             {
                 $scope.categories= item.child;
+            }else{
+                // var target = '/orderDevice?id='  + item.id +'&name=' + item.name;
+                // $location.path(target);
+                $location.path('/orderDevice').search({id: item.id,name: item.name});
             }
             
         }

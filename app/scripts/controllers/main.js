@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('MainCtrl', function($scope, $location, $localstorage, $loading, $message, $linq, productService) {
+    .controller('MainCtrl', function($scope, $location, $localstorage, $loading, $message, productService) {
         $loading.show();
         productService.getCategories(function(result) {
             //console.log(result.data);
@@ -16,61 +16,8 @@ angular.module('fec3App')
             if (result.status) {
                 var master = $localstorage.getObject("master");
                 //console.log(master);
-                var products = {
-                    "response-data": {
-                        "products": [{
-                            "code": "iPhone6",
-                            "name": "iPhone6",
-                            "desc": "iPhone6",
-                            "type": "string",
-                            "price": 1.5,
-                            "qty": 8,
-                            "productInfo": {
-                                "capacity": "16 M",
-                                "color": "Gold"
-                            }
-                        }, {
-                            "code": "iPhone6",
-                            "name": "iPhone6",
-                            "desc": "iPhone6",
-                            "type": "string",
-                            "price": 1.5,
-                            "qty": 7,
-                            "productInfo": {
-                                "capacity": "16 M",
-                                "color": "Gold"
-                            }
-                        }, {
-                            "code": "iPhone6",
-                            "name": "iPhone6",
-                            "desc": "iPhone6",
-                            "type": "string",
-                            "price": 1.5,
-                            "qty": 5,
-                            "productInfo": {
-                                "capacity": "16 M",
-                                "color": "Silver"
-                            }
-                        }]
-                    }
-                }
-                var queryResult = $linq.Enumerable().From(products["response-data"].products)
-                    .GroupBy("$.name", null,
-                        function(key, g) {
-                            var result = {
-                                name: key,
-                                colors: g.GroupBy("$.productInfo.color",null,
-                                function(color,c){
-                                    var cr = {
-                                        name:color
-                                    }
-                                    return cr;
-                                }).ToArray()
-                            }
-                            return result;
-                        }).ToArray();
-
-                console.log("queryResult : ", queryResult);
+                
+                
 
             } else {
                 $message.alert(result.data["display-messages"][0]);

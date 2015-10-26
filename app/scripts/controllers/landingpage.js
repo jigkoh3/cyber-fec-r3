@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('landingpageCtrl', function($scope, $loading, productService) {
+    .controller('landingpageCtrl', function($scope, $loading, $message, productService) {
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
@@ -34,9 +34,14 @@ angular.module('fec3App')
                 $scope.trueDevices = result.data.Devices;
             }
             else{
-                console.log(result.data);
+                $message.alert(result.data["display-messages"][0]);
             }
         });
+        $scope.imgPrefix = function(id){
+            //var preFixURL = 'http://172.19.193.71/sale/img/category/';
+            var preFixURL = 'http://localhost:9000/images/category/'
+            return preFixURL + id + '.png';
+        };
         // $scope.truePromotions = [{
         //     promotionCode: "gold",
         //     upload: "50",

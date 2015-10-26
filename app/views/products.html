@@ -40,7 +40,7 @@
                     <div class="box-sale-4" ng-repeat="itm in categories">
                         <a ng-click = "dilldown(itm)">
                             <div class="product_img">
-                                <img actual-src="images/product/{{itm.id}}.png" ng-src="images/product/noImg.png"/>
+                                <img actual-src="{{imgPrefix(itm.id)}}" ng-src="{{imgPrefix(0)}}"/>
                             </div>
                             <div class="product_name">
                                 <h3>{{itm.name}}</h3>

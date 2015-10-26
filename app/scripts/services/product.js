@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fec3App')
-    .service('productService', function($http, $filter, $timeout, $localstorage, dalService) {
+    .service('productService', function($http, $filter, $timeout, $localstorage, $linq, dalService) {
         var saleinfo = $localstorage.getObject("userProfile");
         var customerInfo = $localstorage.getObject("customerProfile");
         var request = {
@@ -35,7 +35,7 @@ angular.module('fec3App')
 
             if (!dalService.demo) {
 
-                request.target = '/sales-services/rest/master/get_products_by_category';
+                request.target = '/sales-services/rest/master/get_categories';
 
                 dalService.callServicePost(request, null, function(result) {
                     onSuccess(result);
@@ -515,6 +515,7 @@ angular.module('fec3App')
             }
         };
 
+        //for landing page
         this.getProductRecommend = function(fnCallback) {
             var result = {};
             var master = $localstorage.getObject("master");
@@ -547,6 +548,7 @@ angular.module('fec3App')
 
         };
 
+        //for view all devices
         this.getDevices = function(fnCallback) {
             var result = {};
             var master = $localstorage.getObject("master");
@@ -567,5 +569,212 @@ angular.module('fec3App')
             }
 
         };
+
+        this.getProductByCategory = function(category_id, fnCallback) {
+            var onSuccess = function(result) {
+                if (result.status) {
+                    if (result.data["response-data"]) {
+                        var queryResult = $linq.Enumerable().From(result.data["response-data"].products)
+                            .GroupBy("$.name", null,
+                                function(key, g) {
+                                    var result = {
+                                        productName: key,
+                                        //productImg: key.code,
+                                        productColor: g.GroupBy("$.productInfo.color", null,
+                                            function(color, c) {
+                                                var cr = {
+                                                    colorName: color,
+                                                    memSize: c.GroupBy("{capacity: $.productInfo.capacity, price: $.price, qty: $.qty, code: $.code}", null,
+                                                        function(k, m) {
+                                                            var cap = {
+                                                                code: k.code,
+                                                                sizeName: k.capacity,
+                                                                price: k.price,
+                                                                stock: ( k.qty==0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
+                                                                piece: k.qty
+                                                            }
+                                                            return cap;
+                                                        }).ToArray()
+                                                }
+
+                                                return cr;
+                                            }).ToArray()
+                                    }
+                                    return result;
+                                }).ToArray();
+
+                        //console.log("queryResult : ", queryResult);
+                        fnCallback({
+                            status: true,
+                            data: queryResult[0],
+                            error: "",
+                            msgErr: ""
+                        });
+                    } else {
+                        fnCallback(result);
+                    }
+
+                }
+
+
+            };
+
+            if (!dalService.demo) {
+
+                request.param.category_id = category_id;
+                request.param.customer_type = "*";
+                request.target = '/sales-services/rest/master/get_products_by_category';
+
+                dalService.callServicePost(request, null, function(result) {
+                    onSuccess(result);
+                });
+            } else {
+                var result = {
+                    "response-data": {
+                        "products": [{
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 27000,
+                            "qty": 8,
+                            "productInfo": {
+                                "capacity": "16 M",
+                                "color": "Gold"
+                            }
+                        }, {
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 27000,
+                            "qty": 7,
+                            "productInfo": {
+                                "capacity": "16 M",
+                                "color": "Gray"
+                            }
+                        }, {
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 27000,
+                            "qty": 5,
+                            "productInfo": {
+                                "capacity": "16 M",
+                                "color": "Silver"
+                            }
+                        },{
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 31000,
+                            "qty": 8,
+                            "productInfo": {
+                                "capacity": "64 M",
+                                "color": "Gold"
+                            }
+                        }, {
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 31000,
+                            "qty": 1,
+                            "productInfo": {
+                                "capacity": "64 M",
+                                "color": "Gray"
+                            }
+                        }, {
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 31000,
+                            "qty": 5,
+                            "productInfo": {
+                                "capacity": "64 M",
+                                "color": "Silver"
+                            }
+                        },{
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 37000,
+                            "qty": 8,
+                            "productInfo": {
+                                "capacity": "128 M",
+                                "color": "Gold"
+                            }
+                        }, {
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 37000,
+                            "qty": 7,
+                            "productInfo": {
+                                "capacity": "128 M",
+                                "color": "Gray"
+                            }
+                        }, {
+                            "code": "IPhone 6 Plus",
+                            "name": "IPhone 6 Plus",
+                            "desc": "IPhone 6 Plus",
+                            "type": "string",
+                            "price": 37000,
+                            "qty": 0,
+                            "productInfo": {
+                                "capacity": "128 M",
+                                "color": "Silver"
+                            }
+                        }]
+                    }
+                };
+
+                var data2 = {
+                    "status": "UNSUCCESSFUL",
+                    "display-messages": [{
+                        "message": "request sim prefix  is wrong format for company(RM)",
+                        "message-code": "",
+                        "message-type": "ERROR",
+                        "en-message": "request sim prefix  is wrong format for company(RM)",
+                        "th-message": "request sim prefix  is wrong format for company(RM)",
+                        "technical-message": "request sim prefix  is wrong format for company(RM)"
+                    }],
+                    "trx-id": "4Q15KDZCTBQYP",
+                    "process-instance": "tmsapnpr1 (instance: SFF_node4)",
+                    "response-data": {}
+
+                };
+
+                $timeout(function() {
+                    onSuccess({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
+        };
+
+        this.getProduct = function(fnCallback) {
+
+        };
+
+        this.getPromotionSet = function(fnCallback) {
+
+        };
+
+        this.getCampaign = function(fnCallback) {
+
+        };
+
+        this.verify = function(fnCallback) {
+
+        }
 
     });

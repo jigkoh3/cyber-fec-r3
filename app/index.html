@@ -15,6 +15,30 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <script>
+    function ReadCard(Method) {
+        var scope = angular.element($("#custGet")).scope();
+        scope.onReadcard();
+        if (navigator.userAgent.indexOf('Chrome') > 0) {
+            try {
+                var str = document.getElementById('card').Run(Method.replace('Read', 'ReadWait'));
+                ShowData(str);
+            } catch (err) {
+
+
+                scope.readCardError("Chrome : ไม่พบเครื่องอ่านบัตร");
+            }
+
+        } else {
+            document.getElementById('card').Run(Method);
+        }
+    }
+
+    function ShowData(str) {
+        var obj = eval(str);
+        //alert(str);
+    }
+    </script>
     <script language="javascript">
     function quitBox(cmd) {
         if (cmd == 'quit') {
@@ -31,6 +55,22 @@
     <![endif]-->
     <!-- Add your site or application content here -->
     <div ng-view=""></div>
+    <!-- Read Card USB -->
+    <object id="card" classid="CLSID:D6083DBA-4351-4DA9-85D5-9069544998F1" style="width:0px;height:0px;"></object>
+    <script for="card" event="CardChange(state,args)">
+    function card::CardChange(state, args) {
+        var scope = angular.element($("#custGet")).scope();
+        
+        if (state == 'ReadSuccess') {
+            scope.SetCardValue(args);
+        }
+        if (state == 'Error') {
+            scope.readCardError(args);
+        }
+
+    }
+    </script>
+    <!-- end read card usb -->
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -45,11 +85,11 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/bootbox/bootbox.js"></script>
     <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
-    <script src="bower_components/angular-linq/angular-linq.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/utils.js"></script>
     <!-- build:js controllers -->
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/about.js"></script>

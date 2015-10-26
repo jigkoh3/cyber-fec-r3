@@ -70,13 +70,16 @@ function userMenu($rootScope) {
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
-function customerToggleGet($rootScope, $localstorage, $loading) {
+function customerToggleGet($rootScope) {
     return {
         restrict: 'EA',
         templateUrl: 'views/templates/customer-toggle-get.html',
-        controller: function($scope, $element, $location, $message, customerService) {
+        controller: function($scope, $element, $location, $localstorage, $loading, dalService, $message, customerService) {
+            $scope.divID = "customerToggleGet";
             $scope.inputCardNo = "";
-
+            $scope.onReading = false;
+            $scope.isReadCardErroe = false;
+            $scope.readCardErrorDesc = "";
             $scope.cardTypes = [{
                 name: "หมายเลขบัตรประชาชน/พาสพอร์ต",
                 value: "01"
@@ -92,41 +95,140 @@ function customerToggleGet($rootScope, $localstorage, $loading) {
             }];
             $scope.cardTypeSelected = "01";
             $scope.onReadcard = function() {
-                alert("read card");
+                $loading.show();
+                //$scope.onReading = true;
+                // setTimeout(function() {
+                //     $scope.SetCardValue({
+                //         CitizenID: "3180200336928"
+                //     });
+                // }, 1001);
+                
+                // setTimeout(function() {
+                //     $scope.readCardError("card reader not found.");
+                // }, 1001);
+                
             }
-            $scope.onCardNoKeydown = function(inputCardNo) {
-                    //console.log(inputCardNo);
-                    switch ($scope.cardTypeSelected) {
-                        case "01":
-                            if (inputCardNo && inputCardNo.length == 13) {
-                                // console.log(inputCardNo);
-                                $loading.show();
-                                customerService.getCustomerManual(inputCardNo, "I", function(result) {
-                                    $loading.hide();
-                                    if (result.status) {
-                                        //console.log(result);
+            $scope.SetCardValue = function(result) {
+                //$scope.onReading = false;
+                //$loading.hide();
+                var cardInfo = eval(result);
+                //console.log(cardInfo);
+                $localstorage.setObject("cardInfo", cardInfo);
 
-                                        $location.path('/existingcustomer')
-                                    } else {
-                                        $message.alert(result.data["display-messages"][0]);
-                                    }
-                                })
-                            }
-                            break;
-                        case "02":
-                            console.log("02")
-                            break;
+                //$scope.inputCardNo = cardInfo.CitizenID;
+                //$loading.show();
+                customerService.getCustomerManual(cardInfo.CitizenID, "I", function(result) {
+                    $loading.hide();
+                    if (result.status) {
+                        //console.log(result);
 
+                        $location.path('/existingcustomer')
+                    } else {
+                        $message.alert(result.data["display-messages"][0]);
                     }
+                })
+
+            };
+            $scope.readCardError = function(msg) {
+                //$scope.onReading = false;
+                $loading.hide();
+                $message.alert({
+                    "message": msg,
+                    "message-code": "",
+                    "message-type": "WARNING",
+                    "en-message": msg,
+                    "th-message": msg,
+                    "technical-message": "Readcard event error"
+                });
+            };
+            $scope.onCardNoKeydown = function(inputCardNo) {
+                //console.log(inputCardNo);
+                switch ($scope.cardTypeSelected) {
+                    case "01":
+                        if (inputCardNo && inputCardNo.length == 13) {
+                            // console.log(inputCardNo);
+                            $loading.show();
+                            customerService.getCustomerManual(inputCardNo, "I", function(result) {
+                                $loading.hide();
+                                if (result.status) {
+                                    //console.log(result);
+
+                                    $location.path('/existingcustomer')
+                                } else {
+                                    $message.alert(result.data["display-messages"][0]);
+                                }
+                            })
+                        }
+                        break;
+                    case "02":
+                        console.log("02")
+                        break;
 
                 }
-                // $scope.$watch('cardTypeSelected', function(val) {
-                //     if (val) {
-                //         console.log(val);
 
-            //     }
+            }
+            var isSSOSuccessed = false;
+            $scope.openSSO = function() {
 
-            // });
+                var openDialog = function(uri, name, options, closeCallback) {
+                    var win = window.open(uri, name, options);
+                    var interval = window.setInterval(function() {
+                        try {
+                            if (win == null || win.closed) {
+                                window.clearInterval(interval);
+                                closeCallback(win);
+                            }
+                        } catch (e) {}
+                    }, 1000);
+                    return win;
+                };
+                var url = dalService.secondAuthenURL + "SecondAuthen.jsp?App=WEBUI&TrxID=" + $scope.TrxID + "&Retry=yes&Goto=";
+                var userinfo = $localstorage.getObject("userProfile");
+                //console.log(userinfo);
+                if (userinfo.isSecondAuthen == false && userinfo.shopType == "1") {
+                    setTimeout(function() {
+                        $('#inputCardNo').focus();
+                        $('#inputCardNo').removeAttr('readonly');
+                    }, 100);
+
+                } else {
+                    if (!isSSOSuccessed) {
+                        openDialog(url, "MsgWindow", "width=800, height=600", function(w) {
+                            //alert('debug : close and call(second_authen?trx_id=' + $scope.TrxID + '&app_id=WEBUI)');
+                            $loading.show()
+                            dalService.second_authen("4EONTQNYU4VZ", function(result) {
+                                //alert(result["status"]);
+                                $loading.hide();
+                                //console.log(result);
+                                //$scope.secondAuthenData = result;
+                                if (result["status"] == "SUCCESSFUL") {
+                                    isSSOSuccessed = true;
+                                    setTimeout(function() {
+                                        $('#inputCardNo').focus();
+                                        $('#inputCardNo').removeAttr('readonly');
+                                    }, 1001);
+                                } else {
+
+                                    setTimeout(function() {
+                                        $message.alert({
+                                            "message": result["display-messages"][0]["message"],
+                                            "message-code": result["display-messages"][0]["message-code"],
+                                            "message-type": "WARNING",
+                                            "en-message": result["display-messages"][0]["en-message"],
+                                            "th-message": result["display-messages"][0]["th-message"],
+                                            "technical-message": result["display-messages"][0]["technical-message"]
+                                        });
+                                    }, 1000);
+                                }
+                            });
+
+                        });
+                    }
+
+
+                }
+            }
+
         }
 
     };

@@ -45,7 +45,7 @@ Home > Products </p></div>
                             <li class="box-sale-4" ng-repeat="itm in truePromotions">
                                 <a href="">
                                     <div class="product_img">
-                                        <img actual-src="images/product/{{itm.id}}.png" ng-src="images/product/noImg.png"/>
+                                        <img actual-src="utils.imgPromotionPrefix({{itm.id}})" ng-src="images/product/noImg.png"/>
                                     </div>
                                 </a>
                                 <p class="docsis">{{itm.name}}</p>
@@ -109,10 +109,10 @@ Home > Products </p></div>
                     <div class="row">
                         <div class="box-sale-product">
                             <div class="box-sale-4" ng-repeat="itm in trueDevices">
-                                <a href="#/orderDevice">
+                                <a href="#/orderDevice?id={{itm.id}}&name={{itm.name}}">
                                     <div class="product_img">
                                         
-                                        <img actual-src="images/product/{{itm.id}}.png" ng-src="images/product/noImg.png"/>
+                                        <img actual-src="{{imgPrefix(itm.id)}}" ng-src="{{imgPrefix(0)}}"/>
                                     </div>
                                     <div class="product_name">
                                         <h3>{{itm.name}}</h3>

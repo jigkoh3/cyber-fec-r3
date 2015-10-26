@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fec3App')
-    .controller('welcomeCtrl', function($scope, $location, $loading, userService) {
+    .controller('welcomeCtrl', function($scope, $location, $loading, $message, userService) {
         $loading.show();
         userService.initailData(function(result) {
             $loading.hide();
@@ -16,7 +16,7 @@ angular.module('fec3App')
                     $location.path('/selectshop')
                 }
             } else {
-                console.log(result.data);
+                $message.alert(result.data["display-messages"][0]);
             }
         });
         
