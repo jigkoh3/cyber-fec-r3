@@ -17,6 +17,7 @@ angular.module('fec3App')
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
         });
+<<<<<<< HEAD
         // this.awesomeThings = [
         //     'HTML5 Boilerplate',
         //     'AngularJS',
@@ -24,6 +25,9 @@ angular.module('fec3App')
         // ];
        
 
+=======
+       
+>>>>>>> 280cc09f0f831be1ec0751bdcb18f517ad4adf3f
         $scope.tabname = "1";
         $scope.selectTab = function(tab) {
             $scope.tabname = tab;

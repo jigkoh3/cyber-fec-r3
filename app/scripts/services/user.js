@@ -47,7 +47,7 @@ angular.module('fec3App')
             } else {
                 var result = {
                     "status": "SUCCESSFUL",
-                    "trx-id": "3N11IVYGQ9NJX",
+                    "trx-id": "3311IKIIUXB3X",
                     "process-instance": "psaapdv1 (instance: SFF_node1)",
                     "response-data": [{
                         "id": 1,
@@ -610,6 +610,25 @@ angular.module('fec3App')
                         "menuActionIntranet": "payment",
                         "menuTarget": "payment",
                         "menuDescription": "payment",
+                        "menuEnabled": "Y",
+                        "menuStyle": null,
+                        "menuWord": null,
+                        "menuCreatedDate": null,
+                        "menuUpdatedDate": null,
+                        "menuUpdatedBy": null,
+                        "menuIconPath": null,
+                        "menuPopup": "TRUE",
+                        "childMenuList": null
+                    }, {
+                        "id": 34,
+                        "menuName": "Order Status Report",
+                        "menuParentId": 0,
+                        "menuSequence": 34,
+                        "menuSystem": null,
+                        "menuActionInternet": "order",
+                        "menuActionIntranet": "order",
+                        "menuTarget": "order",
+                        "menuDescription": "order",
                         "menuEnabled": "Y",
                         "menuStyle": null,
                         "menuWord": null,
