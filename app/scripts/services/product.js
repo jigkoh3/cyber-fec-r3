@@ -575,7 +575,7 @@ angular.module('fec3App')
                 if (result.status) {
                     if (result.data["response-data"]) {
                         var queryResult = $linq.Enumerable().From(result.data["response-data"].products)
-                            .GroupBy("$.name", null,
+                            .GroupBy("$.type", null,
                                 function(key, g) {
                                     var result = {
                                         productName: key,
@@ -590,7 +590,7 @@ angular.module('fec3App')
                                                                 code: k.code,
                                                                 sizeName: k.capacity,
                                                                 price: k.price,
-                                                                stock: ( k.qty==0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
+                                                                stock: (k.qty == 0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
                                                                 piece: k.qty
                                                             }
                                                             return cap;
@@ -630,108 +630,124 @@ angular.module('fec3App')
                 });
             } else {
                 var result = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
                     "response-data": {
                         "products": [{
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 27000,
-                            "qty": 8,
+                            "code": "3000005918",
+                            "name": "3000005918-H/S,IPHONE 4,16GB,BLACK",
+                            "desc": "H/S,IPHONE 4,16GB,BLACK",
+                            "type": "P",
+                            "qty": 3,
+                            "price": 20263,
                             "productInfo": {
-                                "capacity": "16 M",
-                                "color": "Gold"
+                                "capacity": "16GB",
+                                "color": "Black"
                             }
                         }, {
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 27000,
-                            "qty": 7,
-                            "productInfo": {
-                                "capacity": "16 M",
-                                "color": "Gray"
-                            }
-                        }, {
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 27000,
-                            "qty": 5,
-                            "productInfo": {
-                                "capacity": "16 M",
-                                "color": "Silver"
-                            }
-                        },{
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 31000,
-                            "qty": 8,
-                            "productInfo": {
-                                "capacity": "64 M",
-                                "color": "Gold"
-                            }
-                        }, {
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 31000,
-                            "qty": 1,
-                            "productInfo": {
-                                "capacity": "64 M",
-                                "color": "Gray"
-                            }
-                        }, {
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 31000,
-                            "qty": 5,
-                            "productInfo": {
-                                "capacity": "64 M",
-                                "color": "Silver"
-                            }
-                        },{
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 37000,
-                            "qty": 8,
-                            "productInfo": {
-                                "capacity": "128 M",
-                                "color": "Gold"
-                            }
-                        }, {
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 37000,
-                            "qty": 7,
-                            "productInfo": {
-                                "capacity": "128 M",
-                                "color": "Gray"
-                            }
-                        }, {
-                            "code": "IPhone 6 Plus",
-                            "name": "IPhone 6 Plus",
-                            "desc": "IPhone 6 Plus",
-                            "type": "string",
-                            "price": 37000,
+                            "code": "3000005921",
+                            "name": "3000005921-H/S,IPHONE 4,16GB,WHITE THA(SELL)",
+                            "desc": "H/S,IPHONE 4,16GB,WHITE THA(SELL)",
+                            "type": "P",
                             "qty": 0,
+                            "price": 20263,
                             "productInfo": {
-                                "capacity": "128 M",
-                                "color": "Silver"
+                                "capacity": "16GB",
+                                "color": "White"
+                            }
+                        }, {
+                            "code": "3000005922",
+                            "name": "3000005922-H/S,IPHONE 4,32GB,BLACK",
+                            "desc": "H/S,IPHONE 4,32GB,BLACK",
+                            "type": "P",
+                            "qty": 8,
+                            "price": 23775,
+                            "productInfo": {
+                                "capacity": "32GB",
+                                "color": "Black"
+                            }
+                        }, {
+                            "code": "3000005923",
+                            "name": "3000005922-H/S,IPHONE 4,32GB,BLACK",
+                            "desc": "H/S,IPHONE 4,32GB,BLACK",
+                            "type": "P",
+                            "qty": 2,
+                            "price": 23775,
+                            "productInfo": {
+                                "capacity": "32GB",
+                                "color": "Black"
+                            }
+                        }, {
+                            "code": "3000005925",
+                            "name": "3000005925-H/S,IPHONE 4,32GB,WHITE THA(SELL)",
+                            "desc": "H/S,IPHONE 4,32GB,WHITE THA(SELL)",
+                            "type": "P",
+                            "qty": 0,
+                            "price": 23775,
+                            "productInfo": {
+                                "capacity": "32GB",
+                                "color": "White"
+                            }
+                        }, {
+                            "code": "3000011348",
+                            "name": "3000011348-H/S,IPHONE 4,8GB,GSM-THA,BK,MD128TH/A",
+                            "desc": "H/S,IPHONE 4,8GB,GSM-THA,BK,MD128TH/A",
+                            "type": "P",
+                            "qty": 7,
+                            "price": 11200,
+                            "productInfo": {
+                                "capacity": "16GB",
+                                "color": "Black"
+                            }
+                        }, {
+                            "code": "3000011402",
+                            "name": "3000011402-H/S,IPHONE 4,8GB,GSM-THA,WH,MD198TH/A",
+                            "desc": "H/S,IPHONE 4,8GB,GSM-THA,WH,MD198TH/A",
+                            "type": "P",
+                            "qty": 15,
+                            "price": 11200,
+                            "productInfo": {
+                                "capacity": null,
+                                "color": null
+                            }
+                        }, {
+                            "code": "3000012634",
+                            "name": "3000012634-H/S, IP4-16BK-6M.WARRANTEE",
+                            "desc": "H/S, IP4-16BK-6M.WARRANTEE",
+                            "type": "P",
+                            "qty": 0,
+                            "price": 20263,
+                            "productInfo": {
+                                "capacity": null,
+                                "color": null
+                            }
+                        }, {
+                            "code": "3000012636",
+                            "name": "3000012636-H/S, IP4-32BK-6M.WARRANTEE",
+                            "desc": "H/S, IP4-32BK-6M.WARRANTEE",
+                            "type": "P",
+                            "qty": 0,
+                            "price": 23775,
+                            "productInfo": {
+                                "capacity": null,
+                                "color": null
+                            }
+                        }, {
+                            "code": "3000012637",
+                            "name": "3000012637-H/S, IP4-32WH-6M.WARRANTEE",
+                            "desc": "H/S, IP4-32WH-6M.WARRANTEE",
+                            "type": "P",
+                            "qty": 0,
+                            "price": 23775,
+                            "productInfo": {
+                                "capacity": null,
+                                "color": null
                             }
                         }]
-                    }
+                    },
+                    "display-message": null
                 };
 
                 var data2 = {

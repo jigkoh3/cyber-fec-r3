@@ -6,7 +6,7 @@
             <li ng-repeat="subitm in itm.childMenuList"><a href="#/{{subitm.menuActionInternet}}">{{subitm.menuName}}</a></li>
             
         </ul>
-        <a href="#/{{itm.menuActionInternet}}" class="dropdown-toggle-submenu-v2" ng-show="itm.childMenuList.length == 0">{{itm.menuName}} </a>
+        <a href="#/{{itm.menuActionInternet}}" class="dropdown-toggle-submenu-v2" ng-show="itm.childMenuList == null">{{itm.menuName}} </a>
     </li>
     <!-- <li class="collapsed"><a class="dropdown-toggle-submenu-v2">Version : 0.0.1</a></li> -->
 </ul>

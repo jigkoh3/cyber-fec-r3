@@ -599,26 +599,7 @@ angular.module('fec3App')
                         "menuUpdatedBy": null,
                         "menuIconPath": null,
                         "menuPopup": "TRUE",
-                        "childMenuList": [{
-                            "id": 31,
-                            "menuName": "สินค้าและบริการ",
-                            "menuParentId": 30,
-                            "menuSequence": 31,
-                            "menuSystem": null,
-                            "menuActionInternet": "landingpage",
-                            "menuActionIntranet": null,
-                            "menuTarget": null,
-                            "menuDescription": null,
-                            "menuEnabled": "Y",
-                            "menuStyle": null,
-                            "menuWord": null,
-                            "menuCreatedDate": null,
-                            "menuUpdatedDate": null,
-                            "menuUpdatedBy": null,
-                            "menuIconPath": null,
-                            "menuPopup": "TRUE",
-                            "childMenuList": []
-                        }]
+                        "childMenuList": null
                     }, {
                         "id": 33,
                         "menuName": "ชำระสินค้าและบริการ",
@@ -637,7 +618,7 @@ angular.module('fec3App')
                         "menuUpdatedBy": null,
                         "menuIconPath": null,
                         "menuPopup": "TRUE",
-                        "childMenuList": []
+                        "childMenuList": null
                     }, {
                         "id": 34,
                         "menuName": "Order Status Report",
@@ -656,7 +637,7 @@ angular.module('fec3App')
                         "menuUpdatedBy": null,
                         "menuIconPath": null,
                         "menuPopup": "TRUE",
-                        "childMenuList": []
+                        "childMenuList": null
                     }]
                 };
 
