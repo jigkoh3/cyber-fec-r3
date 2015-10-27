@@ -8,20 +8,23 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('orderDeviceCtrl', function($routeParams,$scope, $location, $loading, $message, productService) {
+    .controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, productService) {
 
-       
+
+
+
+
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
         $loading.show();
-        productService.getProductByCategory(1,function(result) {
+        productService.getProductByCategory(1, function(result) {
             //console.log(result.data);
             $loading.hide();
             if (result.status) {
-                
+
                 console.log(result.data);
                 $scope.trueProduct = result.data;
-                
+
 
             } else {
                 $message.alert(result.data["display-messages"][0]);
@@ -30,12 +33,12 @@ angular.module('fec3App')
 
 
         });
-        $scope.imgPrefix = function(id){
+        $scope.imgPrefix = function(id) {
             //var preFixURL = 'http://172.19.193.71/sale/img/category/';
             var preFixURL = 'http://localhost:9000/images/category/'
             return preFixURL + id + '.png';
         };
-        
+
 
         // $scope.trueProduct = {
         //     productName: "IPhone 6 Plus",
@@ -106,25 +109,38 @@ angular.module('fec3App')
         // };
 
         $scope.total = 0;
-        // $scope.calculate = function(item) {
-        //     // console.log($scope.trueProduct.productColor[0].memSize);
-        //     var total = 0;
-        //     angular.forEach($scope.trueProduct.productColor, function(itm) {
-        //         var totalByColor = 0;
-        //         angular.forEach(itm.memSize, function(item) {
+        $scope.calculate = function(item) {
+            console.log(item);
+         // //console.log($scope.trueProduct.productColor[0].memSize);
+         //    var total = 0;
+         //    angular.forEach($scope.trueProduct.productColor, function(itm) {
+         //        var totalByColor = 0;
+         //        angular.forEach(itm.memSize, function(item) {
 
-        //             totalByColor += item.price * item.piece;
+         //            totalByColor += item.price * item.piece;
 
-        //             // console.log($scope.total);
-        //         })
-        //         //console.debug(totalByColor);
-        //         total += totalByColor;
+         //             console.log($scope.total);
+         //        })
+         //        console.debug(totalByColor);
+         //        total += totalByColor;
 
-        //     })
-        //     return total;
-        //     //$scope.total += item.price * item.piece;
+         //    })
+         //    return total;
+         //    // $scope.total += item.price * item.piece;
 
-        // }
+         var arr = $scope.trueProduct.productColor;
+         var sum = 0;
+            for(var i=0; i<arr.length; i++){
+                var sum_i = 0;
+                for(var ii=0; ii<arr[i].memSize.length; ii++){
+                    var sum_ii = 0;
+                    if($scope.proItem['piece'+arr[i].colorName+ii]){
+                        sum = sum+$scope.proItem['piece'+arr[i].colorName+ii]*item.price;
+                    }
+                }
+            }
+         $scope.total = sum;
+        }
 
         $scope.detail = "";
         // $scope.preDetail = function(item) {
@@ -167,7 +183,33 @@ angular.module('fec3App')
         }
         $scope.tabselected = "1";
         $scope.selectTab = function(idx) {
+
+            $scope.total = 0;
+            var arr = $scope.trueProduct.productColor;
+            for(var i=0; i<arr.length; i++){
+                
+                for(var ii=0; ii<arr[i].memSize.length; ii++){
+                    $scope.proItem['piece'+arr[i].colorName+ii] = null;
+                }
+            }
+                
+            
             $scope.tabselected = idx;
+        }
+        $scope.proItem = {
+            "pieceGold0": null
+        }
+        var oldProItem = "";
+        $scope.choose = function(itm,id) {
+            $scope.calculate(itm);
+            if(oldProItem != id){
+                $scope.proItem['piece'+oldProItem] = null;
+                oldProItem = id;
+            }
+            $scope.proItem['piece'+id] = 1;
+            console.log($scope.proItem['piece'+id]);
+            console.log(id);
+
         }
 
     });
