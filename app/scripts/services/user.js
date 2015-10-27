@@ -47,7 +47,11 @@ angular.module('fec3App')
             } else {
                 var result = {
                     "status": "SUCCESSFUL",
+<<<<<<< HEAD
                     "trx-id": "3311IKIIUXB3X",
+=======
+                    "trx-id": "3N11IVYGQ9NJX",
+>>>>>>> f639f6400447e80f2f848baa07bca48dac1a4b4c
                     "process-instance": "psaapdv1 (instance: SFF_node1)",
                     "response-data": [{
                         "id": 1,
@@ -610,6 +614,7 @@ angular.module('fec3App')
                         "menuActionIntranet": "payment",
                         "menuTarget": "payment",
                         "menuDescription": "payment",
+<<<<<<< HEAD
                         "menuEnabled": "Y",
                         "menuStyle": null,
                         "menuWord": null,
@@ -629,6 +634,8 @@ angular.module('fec3App')
                         "menuActionIntranet": "order",
                         "menuTarget": "order",
                         "menuDescription": "order",
+=======
+>>>>>>> f639f6400447e80f2f848baa07bca48dac1a4b4c
                         "menuEnabled": "Y",
                         "menuStyle": null,
                         "menuWord": null,

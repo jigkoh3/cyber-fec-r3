@@ -112,8 +112,9 @@ function customerToggleGet($rootScope) {
                 //$scope.onReading = false;
                 //$loading.hide();
                 var cardInfo = eval(result);
-                //console.log(cardInfo);
+                //console.log(JSON.stringify(cardInfo) );
                 $localstorage.setObject("cardInfo", cardInfo);
+                
 
                 //$scope.inputCardNo = cardInfo.CitizenID;
                 //$loading.show();
