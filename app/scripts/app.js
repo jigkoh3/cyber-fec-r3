@@ -53,10 +53,10 @@ angular
                 controllerAs: 'orderDevice'
             })
             .when('/promotion', {
-                templateUrl: 'views/underconstruction.html'
-                    // templateUrl: 'views/promotion.html',
-                    // controller: 'promotionCtrl',
-                    // controllerAs: 'promotion'
+                // templateUrl: 'views/underconstruction.html'
+                    templateUrl: 'views/promotion.html',
+                    controller: 'promotionCtrl',
+                    controllerAs: 'promotion'
             })
 
         // .when('/promotionDevice', {
