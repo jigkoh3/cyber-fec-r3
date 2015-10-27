@@ -1,0 +1,101 @@
+<div class="col-md-10 col-md-offset-2 sale-main">
+    <section id="promotion">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="pull-left ttl_main_sale">โปรโมชั่นแนะนำ</h4>
+            </div>
+            <div class="col-md-6">
+                <!--  <a href="#/products" class="pull-right viewall"> ดูทั้งหมด</a> -->
+            </div>
+        </div>
+        <div class="row">
+            <ul class="box-sale-main">
+                <li class="box-sale-4" ng-repeat="itm in truePromotions">
+                    <a href="">
+                        <div class="product_img">
+                            <img actual-src="{{imgPrefix(itm.id)}}" ng-src="images/category/0.png" />
+                        </div>
+                    </a>
+                    <p class="docsis">{{itm.name}}</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section id="new">
+        <h4 class="pull-left ttl_main_sale">เปิดบริการใหม่</h4>
+        <div class="row">
+            <div class="new-open-data">
+                <div class="box-sale-4" ผ>
+                    <div class="logo-open-data">
+                        <img src="images/commons/truemove_online.png" />
+                    </div>
+                    <a href="#/pricePlan">
+                        <div class="open-data-detail open-tol">
+                            <p>เปิดบริการใหม่</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="box-sale-4">
+                    <div class="logo-open-data">
+                        <img src="images/commons/truemove_visions.png" />
+                    </div>
+                    <a href="#/pricePlan">
+                        <div class="open-data-detail open-tvs">
+                            <p>เปิดบริการใหม่</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="box-sale-4">
+                    <div class="logo-open-data">
+                        <img src="images/commons/truemoveh.png" />
+                    </div>
+                    <a href="#modalopenservice" data-toggle="modal" onclick="return false;">
+                        <div class="open-data-detail open-tmv">
+                            <p>เปิดบริการใหม่</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="box-sale-4">
+                    <a href="#/pricePlan">
+                        <div class="open-data-detail open-all">
+                            <p>+เปิดบริการทั้งหมด</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="device">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="pull-left ttl_main_sale">เครื่องและอุปกรณ์</h4>
+            </div>
+            <div class="col-md-6">
+                <!-- <a href="#/products" class="pull-right viewall"> ดูทั้งหมด</a> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="box-sale-product">
+                <div class="box-sale-4" ng-repeat="itm in trueDevices">
+                    <a href="#/orderDevice?id={{itm.id}}&name={{itm.name}}">
+                        <div class="product_img">
+                            <img actual-src="{{imgPrefix(itm.id)}}" ng-src="images/category/0.png" />
+                        </div>
+                        <div class="product_name">
+                            <h3>{{itm.name}}</h3>
+                        </div>
+                        <!-- <div class="product_price">
+                                        <p class="price_t_main">ราคา {{itm.price}} บาท</p>
+                                        <p class="price_t_id hide">พิเศษ {{itm.price}} บาท</p>
+                                    </div> -->
+                    </a>
+                    <div class="gami_trigger">
+                        <a href="#/orderDevice?id={{itm.id}}&name={{itm.name}}">
+                            <button type="button" class="btn_gami_trigger btn">สั่งซื้อ</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

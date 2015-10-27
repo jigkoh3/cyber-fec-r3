@@ -3,7 +3,8 @@
 angular.module('fec3App')
     .service('dalService', function($filter, $http) {
         var that = this;
-        this.demo = true;
+        this.demo = true; //default is false
+        this.bypass = false; //defalse is false
 
         if (that.demo) {
             this.secondAuthenURL = "https://sso-devt.true.th:11443/"; //DEV
@@ -14,8 +15,7 @@ angular.module('fec3App')
             this.secondAuthenURL = getSecondAuthenURL();
         }
 
-
-        this.callServiceGet = function(target, headers, fnCallback) {
+        this.callServiceGetGateway = function(target, headers, fnCallback) {
             var requestData = {
                 target: target
             };
@@ -70,8 +70,72 @@ angular.module('fec3App')
 
             });
         };
+        this.callServiceGetBypass = function(target, headers, fnCallback) {
+            var requestData = {
+                target: target
+            };
+            var httpRequest = {
+                method: "POST",
+                url: getURL('services/gateway/get.service'),
+                data: requestData,
+                timeout: 180000
+            };
+            if (headers != null) {
+                httpRequest.headers = headers;
+            }
+            if (localStorage.getItem('orderId')) {
+                httpRequest.headers = {
+                    'WEB_METHOD_CHANNEL': 'WEBUI',
+                    'E2E_REFID': localStorage.getItem('orderId')
+                };
+            }
+            //console.log(httpRequest);
+            $http(httpRequest).success(function(data) {
+                console.log('success ::: callServiceGet');
+                console.log(requestData.target);
+                console.log(data);
 
-        this.callServicePost = function(data, headers, fnCallback) {
+                if (data.status == "SUCCESSFUL") {
+                    fnCallback({
+                        status: true,
+                        data: data,
+                        error: "",
+                        msgErr: ""
+                    });
+                } else {
+                    fnCallback({
+                        status: false,
+                        data: data,
+                        error: "ERROR",
+                        msgErr: ""
+                    });
+
+                }
+            }).error(function(data, status, errorJSON) {
+                console.log('error ::: callServiceGet');
+                console.log(requestData.target);
+                console.log("ERROR");
+                console.log(status, data, errorJSON);
+                fnCallback({
+                    status: false,
+                    data: data,
+                    error: status,
+                    msgErr: status == 0 ? "Can not connect!" : ""
+                });
+
+            });
+        };
+        this.callServiceGet = function(target, headers, fnCallback) {
+            
+            if(that.bypass){
+                that.callServiceGetBypass(target, headers, fnCallback);
+            }else{
+                that.callServiceGetGateway(target, headers, fnCallback);
+            }
+
+        };
+
+        this.callServicePostGateway = function(data, headers, fnCallback) {
             console.log(data);
             var httpRequest = {
                 method: "POST",
@@ -120,6 +184,65 @@ angular.module('fec3App')
 
             });
         };
+
+        this.callServicePostBypass = function(data, headers, fnCallback) {
+            console.log(data);
+            var httpRequest = {
+                method: "POST",
+                url: getURL('services/gateway/post.service'),
+                data: data,
+                timeout: 180000
+            };
+
+            if (headers != null) {
+                //httpRequest.headers = headers;
+            }
+            if (localStorage.getItem('orderId')) {
+                httpRequest.headers = {
+                    'WEB_METHOD_CHANNEL': 'WEBUI',
+                    'E2E_REFID': localStorage.getItem('orderId')
+                };
+            }
+            $http(httpRequest).success(function(data) {
+                console.log(data);
+                if (data.status == "SUCCESSFUL") {
+                    fnCallback({
+                        status: true,
+                        data: data,
+                        error: "",
+                        msgErr: ""
+                    });
+                } else {
+                    fnCallback({
+                        status: false,
+                        data: data,
+                        error: "ERROR",
+                        msgErr: ""
+                    });
+
+                }
+            }).error(function(dataErr, status) {
+                console.log("ERROR");
+                console.log(status, dataErr);
+                fnCallback({
+                    status: false,
+                    data: "",
+                    error: status,
+                    msgErr: status == 0 ? "Can not connect!" : ""
+                });
+
+
+            });
+        };
+
+        this.callServicePost = function(data, headers, fnCallback) {
+            if(that.bypass){
+                that.callServicePostBypass(data, headers, fnCallback);
+            }else{
+                that.callServicePostGateway(data, headers, fnCallback);
+            }
+        };
+
         this.getOrderId = function(channel, shopcodes, fnCallback) {
             var generateOrder_target = "?channel=" + (channel ? channel : "") + "&dealer=" + (shopcodes ? shopcodes : "");
             //generateOrder_target = "";
@@ -145,6 +268,7 @@ angular.module('fec3App')
                 });
             });
         };
+
         this.generateOrderId = function(parameter, fnCallback) {
             //var target = 'aftersales/order/generate-id?channel=WEBUI&dealer=80000011';
             var target = 'sales/order/generate-id' + parameter;
@@ -167,12 +291,12 @@ angular.module('fec3App')
         };
 
         this.second_authen = function(trx_id, fnCallback) {
-            var target = 'security/identity/second_authen?trx_id=' + trx_id + '&app_id=WEBUI';
+            var target = '/security/identity/second_authen?trx_id=' + trx_id + '&app_id=WEBUI';
             var headers = {
                 'WEB_METHOD_CHANNEL': 'WEBUI'
             };
             if (!that.demo) {
-                that.callServiceGetByPass(target, headers, function(result) {
+                that.callServiceGet(target, headers, function(result) {
                     fnCallback(result.data);
                 });
             } else {

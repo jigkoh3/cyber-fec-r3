@@ -722,7 +722,7 @@ angular.module('fec3App')
                 });
             };
 
-            if (dalService.demo) {
+            if (dalService.demo || dalService.bypass) {
                 onSuccess(result);
 
             } else {

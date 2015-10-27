@@ -15,6 +15,7 @@ angular
     .directive('ngHoverDisplay', ngHoverDisplay)
     .directive('ngMenu', ngMenu)
     .directive('version', version)
+    .directive('recommend', recommend)
     .directive('actualSrc', function() {
         return {
             link: function postLink(scope, element, attrs) {
@@ -188,7 +189,7 @@ function customerToggleGet($rootScope) {
 
 
                     $scope.TrxID = d.getTime() + '';
-                    $localstorage.setItem('TrxID', $scope.TrxID);
+                    //$localstorage.setItem('TrxID', $scope.TrxID);
 
                     var openDialog = function(uri, name, options, closeCallback) {
                         var win = window.open(uri, name, options);
@@ -329,5 +330,17 @@ function customerToggleGet($rootScope) {
         return {
             restrict: 'EA',
             template: 'Version : 0.0.1'
+        };
+    };
+
+    function recommend($rootScope, $localstorage) {
+        return {
+            restrict: 'EA',
+            templateUrl: 'views/templates/recommend.html',
+            controller: function($scope, $element) {
+                //console.log($localstorage.getObject("userProfile"));
+                //$scope.userinfo = $localstorage.getObject("userProfile");
+
+            }
         };
     };

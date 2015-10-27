@@ -32,21 +32,11 @@ angular
                 controller: 'landingpageCtrl',
                 controllerAs: 'landingpage'
             })
-            // .when('/allproducts', {
-            //     templateUrl: 'views/allproducts.html',
-            //     controller: 'allproductsCtrl',
-            //     controllerAs: 'allproducts'
-            // })
             .when('/products', {
                 templateUrl: 'views/products.html',
                 controller: 'productsCtrl',
                 controllerAs: 'products'
             })
-            // .when('/saleiphone', {
-            //     templateUrl: 'views/saleiphone.html',
-            //     controller: 'saleiphoneCtrl',
-            //     controllerAs: 'saleiphone'
-            // })
             .when('/orderDevice/:id?/:name?', {
                 templateUrl: 'views/orderDevice.html',
                 controller: 'orderDeviceCtrl',
@@ -54,17 +44,11 @@ angular
             })
             .when('/promotion', {
                 // templateUrl: 'views/underconstruction.html'
-                    templateUrl: 'views/promotion.html',
-                    controller: 'promotionCtrl',
-                    controllerAs: 'promotion'
+                templateUrl: 'views/promotion.html',
+                controller: 'promotionCtrl',
+                controllerAs: 'promotion'
             })
-
-        // .when('/promotionDevice', {
-        //     templateUrl: 'views/promotionDevice.html',
-        //     controller: 'promotiondeviceCtrl',
-        //     controllerAs: 'promotiondevice'
-        // })
-        .when('/existingcustomer', {
+            .when('/existingcustomer', {
                 templateUrl: 'views/existingcustomer.html',
                 controller: 'existingcustomerCtrl',
                 controllerAs: 'existingcustomer'
@@ -74,8 +58,7 @@ angular
                 controller: 'selectshopCtrl',
                 controllerAs: 'selectshop'
             })
-
-        .when('/listpayment', {
+            .when('/listpayment', {
                 templateUrl: 'views/underconstruction.html'
                     // templateUrl: 'views/listpayment.html',
                     // controller: 'listpaymentCtrl',
@@ -185,6 +168,11 @@ angular
             //     templateUrl: 'views/dataorder.html',
             //     // controller: 'printpreviewCtrl',
             //     // controllerAs: 'printpreview'
+            // })
+            // .when('/allproducts', {
+            //     templateUrl: 'views/allproducts.html',
+            //     controller: 'allproductsCtrl',
+            //     controllerAs: 'allproducts'
             // })
             .when('/payment', {
                 templateUrl: 'views/underconstruction.html',
