@@ -31,6 +31,7 @@ angular.module('fec3App')
             if(result.status){
                 console.log(result.data);
                 $scope.truePromotions = result.data.Promotions;
+                $scope.trueServices = result.data.เปิดบริการ;
                 $scope.trueDevices = result.data.Devices;
             }
             else{

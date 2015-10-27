@@ -14,11 +14,7 @@ angular.module('fec3App')
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
         });
-        // this.awesomeThings = [
-        //     'HTML5 Boilerplate',
-        //     'AngularJS',
-        //     'Karma'
-        // ];
+       
         $scope.tabname = "1";
         $scope.selectTab = function(tab) {
             $scope.tabname = tab;
