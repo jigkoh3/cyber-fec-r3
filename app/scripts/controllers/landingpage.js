@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('landingpageCtrl', function($scope, $loading, $message, productService) {
+    .controller('landingpageCtrl', function($scope, $loading, $message, $location , productService) {
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
@@ -30,9 +30,10 @@ angular.module('fec3App')
             $loading.hide();
             if(result.status){
                 console.log(result.data);
-                $scope.truePromotions = result.data.Promotions;
-                $scope.trueServices = result.data.เปิดบริการ;
-                $scope.trueDevices = result.data.Devices;
+                // $scope.truePromotions = result.data.Promotions;
+                // $scope.trueServices = result.data.เปิดบริการ;
+                // $scope.trueDevices = result.data.Devices;
+                $scope.recommend = result.data;
             }
             else{
                 $message.alert(result.data["display-messages"][0]);
@@ -43,6 +44,17 @@ angular.module('fec3App')
             var preFixURL = 'http://localhost:9000/images/category/'
             return preFixURL + id + '.png';
         };
+
+        $scope.viewCate = function(item){
+
+            if(item.child && item.child.length >= 1)
+            {
+                $location.path('/products').search({id: item.id,name: item.name});
+            }else{
+                
+                $location.path('/orderDevice').search({id: item.id,name: item.name});
+            }
+        }
         // $scope.truePromotions = [{
         //     promotionCode: "gold",
         //     upload: "50",
