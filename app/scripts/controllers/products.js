@@ -8,14 +8,15 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productsCtrl', function($scope, $location, $loading, $message, productService) {
+    .controller('productsCtrl', function($scope, $location, $loading, $message,  $routeParams, productService) {
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
             $(this).addClass('active');
         });
 
-
-        productService.getDevices(function(result) {
+        $scope.id = $routeParams.id;
+        $scope.name = $routeParams.name;
+        productService.getCategoryByName($scope.name,function(result) {
             
             if(result.status){
                 //console.log(result.data);

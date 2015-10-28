@@ -32,7 +32,7 @@ angular
                 controller: 'landingpageCtrl',
                 controllerAs: 'landingpage'
             })
-            .when('/products', {
+            .when('/products/:id?/:name?', {
                 templateUrl: 'views/products.html',
                 controller: 'productsCtrl',
                 controllerAs: 'products'

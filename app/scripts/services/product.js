@@ -793,4 +793,24 @@ angular.module('fec3App')
 
         }
 
+        this.getCategoryByName = function(name, fnCallback) {
+            var result = {};
+            var master = $localstorage.getObject("master");
+            var category  = $filter('filter')(master.categories, {
+                "name": name
+            });
+            //console.log(Devices);
+            if (category && category.length >= 1) {
+                result = category[0].child;
+                fnCallback({
+                    status: true,
+                    data: result,
+                    error: "",
+                    msgErr: ""
+                });
+            } else {
+
+            }
+        }
+
     });
