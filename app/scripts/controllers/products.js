@@ -22,7 +22,7 @@ angular.module('fec3App')
                 //console.log(result.data);
                 $scope.categories = result.data;
             }else{
-                $message.alert(result.data["display-messages"][0]);
+                $message.alert(result.data["display-message"]);
             }
         });
         $scope.imgPrefix = function(id){

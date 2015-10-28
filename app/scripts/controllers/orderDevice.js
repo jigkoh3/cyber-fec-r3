@@ -17,7 +17,7 @@ angular.module('fec3App')
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
         $loading.show();
-        productService.getProductByCategory(1, function(result) {
+        productService.getProductByCategory($scope.id, function(result) {
             //console.log(result.data);
             $loading.hide();
             if (result.status) {
@@ -27,7 +27,7 @@ angular.module('fec3App')
 
 
             } else {
-                $message.alert(result.data["display-messages"][0]);
+                $message.alert(result.data["display-message"]);
                 //console.log(result.data);
             }
 

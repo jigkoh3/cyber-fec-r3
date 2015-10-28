@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('landingpageCtrl', function($scope, $loading, $message, $location,$anchorScroll, productService) {
+    .controller('landingpageCtrl', function($scope, $loading, $message, $location, $anchorScroll, productService) {
         // $('.ng-menu').click(function() {
         //     $('.ng-menu').removeClass('active');
         //     $(this).addClass('active');
@@ -24,20 +24,36 @@ angular.module('fec3App')
 
         // };
         $loading.show();
-        productService.getProductRecommend(function(result) {
-            // console.log(result);
-            // $scope.truePromotions
+        productService.getCategories(function(result) {
+            //console.log(result.data);
             $loading.hide();
             if (result.status) {
-                console.log(result.data);
-                // $scope.truePromotions = result.data.Promotions;
-                // $scope.trueServices = result.data.เปิดบริการ;
-                // $scope.trueDevices = result.data.Devices;
-                $scope.recommend = result.data;
+                productService.getProductRecommend(function(result) {
+                    // console.log(result);
+                    // $scope.truePromotions
+                    $loading.hide();
+                    if (result.status) {
+                        console.log(result.data);
+                        // $scope.truePromotions = result.data.Promotions;
+                        // $scope.trueServices = result.data.เปิดบริการ;
+                        // $scope.trueDevices = result.data.Devices;
+                        $scope.recommend = result.data;
+                    } else {
+                        $message.alert(result.data["display-message"]);
+                    }
+                });
+
             } else {
                 $message.alert(result.data["display-messages"][0]);
+                //console.log(result.data);
             }
+
+
         });
+
+
+
+
         $scope.imgPrefix = function(id) {
             //var preFixURL = 'http://172.19.193.71/sale/img/category/';
             var preFixURL = 'http://localhost:9000/images/category/'
@@ -64,7 +80,7 @@ angular.module('fec3App')
             //alert(x);
             var newHash = 'anchor' + x;
             $anchorScroll(newHash);
-            
+
         };
         // $scope.truePromotions = [{
         //     promotionCode: "gold",
