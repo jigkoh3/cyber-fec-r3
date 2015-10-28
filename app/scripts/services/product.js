@@ -524,21 +524,21 @@ angular.module('fec3App')
             });
 
             if (recommend && recommend.length >= 1) {
-                var Promotions = $filter('filter')(recommend[0].child, {
-                    "name": "Promotions"
-                });
-                if (Promotions && Promotions.length >= 1) {
-                    result.Promotions = Promotions[0].child;
-                }
-                var Devices = $filter('filter')(recommend[0].child, {
-                    "name": "Devices"
-                });
-                if (Devices && Devices.length >= 1) {
-                    result.Devices = Devices[0].child;
-                }
+                // var Promotions = $filter('filter')(recommend[0].child, {
+                //     "name": "Promotions"
+                // });
+                // if (Promotions && Promotions.length >= 1) {
+                //     result.Promotions = Promotions[0].child;
+                // }
+                // var Devices = $filter('filter')(recommend[0].child, {
+                //     "name": "Devices"
+                // });
+                // if (Devices && Devices.length >= 1) {
+                //     result.Devices = Devices[0].child;
+                // }
                 fnCallback({
                     status: true,
-                    data: result,
+                    data: recommend[0],
                     error: "",
                     msgErr: ""
                 });

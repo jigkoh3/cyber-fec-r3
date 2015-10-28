@@ -13794,8 +13794,8 @@ html.ie8 .pop-sale-detail .btn-group {
 }
 
 .product_img > img {
-    width: 200px;
-    height: 250px;
+/*    width: 200px;
+    height: 250px;*/
     display: block;
     margin: auto;
 }
