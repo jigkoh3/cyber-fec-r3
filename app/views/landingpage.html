@@ -14,8 +14,9 @@
                     <!--  -->
                     <div class="row">
                         <ul class="nav navbar-nav navbar-right">
-                            <li ng-repeat="item in recommend.child" class="active ng-menu">
-                                <a class="page-scroll" page-scroll href="#{{item.id}}">{{item.name}}</a>
+                            <li ng-repeat="item in recommend.child" landing-click >
+                                <!-- <a class="page-scroll" page-scroll href="#804">{{item.name}}</a> -->
+                                <a href="" ng-click="gotoAnchor(item.id)" >{{item.name}}</a>
                             </li>
                             <!--   <li class="ng-menu"><a class="page-scroll" page-scroll href="#new">เปิดบริการใหม่</a></li>
                             <li class="ng-menu"><a class="page-scroll" page-scroll href="#device">เครื่องและอุปกรณ์</a></li> -->

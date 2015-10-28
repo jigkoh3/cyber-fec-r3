@@ -441,11 +441,47 @@ angular.module('fec3App')
                             }, {
                                 "id": 805,
                                 "name": "Promotions",
-                                "child": []
+                                "child": [{
+                                    "id": 819,
+                                    "name": "Other",
+                                    "child": []
+                                }, {
+                                    "id": 817,
+                                    "name": "Samsung",
+                                    "child": []
+                                }, {
+                                    "id": 818,
+                                    "name": "iPhone 6",
+                                    "child": []
+                                },{
+                                    "id": 819,
+                                    "name": "Other",
+                                    "child": []
+                                }, {
+                                    "id": 817,
+                                    "name": "Samsung",
+                                    "child": []
+                                }, {
+                                    "id": 818,
+                                    "name": "iPhone 6",
+                                    "child": []
+                                }]
                             }, {
                                 "id": 806,
                                 "name": "Services",
-                                "child": []
+                                "child": [{
+                                    "id": 829,
+                                    "name": "Other",
+                                    "child": []
+                                }, {
+                                    "id": 827,
+                                    "name": "Samsung",
+                                    "child": []
+                                }, {
+                                    "id": 828,
+                                    "name": "iPhone 6",
+                                    "child": []
+                                }]
                             }]
                         }, {
                             "id": 97,
@@ -796,7 +832,7 @@ angular.module('fec3App')
         this.getCategoryByName = function(name, fnCallback) {
             var result = {};
             var master = $localstorage.getObject("master");
-            var category  = $filter('filter')(master.categories, {
+            var category = $filter('filter')(master.categories, {
                 "name": name
             });
             //console.log(Devices);

@@ -14,6 +14,9 @@ angular
         'ngBootbox',
         'angular-linq'
     ])
+    .run(['$anchorScroll', function($anchorScroll) {
+        $anchorScroll.yOffset = 100; // always scroll by 50 extra pixels
+    }])
     .config(function($routeProvider, $httpProvider) {
         //$httpProvider.interceptors.push('smartUIHttpInterceptor');
         $routeProvider

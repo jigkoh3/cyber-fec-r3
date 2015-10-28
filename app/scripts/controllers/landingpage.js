@@ -8,11 +8,11 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('landingpageCtrl', function($scope, $loading, $message, $location , productService) {
-        $('.ng-menu').click(function() {
-            $('.ng-menu').removeClass('active');
-            $(this).addClass('active');
-        });
+    .controller('landingpageCtrl', function($scope, $loading, $message, $location,$anchorScroll, productService) {
+        // $('.ng-menu').click(function() {
+        //     $('.ng-menu').removeClass('active');
+        //     $(this).addClass('active');
+        // });
 
 
 
@@ -24,37 +24,48 @@ angular.module('fec3App')
 
         // };
         $loading.show();
-        productService.getProductRecommend(function(result){
+        productService.getProductRecommend(function(result) {
             // console.log(result);
             // $scope.truePromotions
             $loading.hide();
-            if(result.status){
+            if (result.status) {
                 console.log(result.data);
                 // $scope.truePromotions = result.data.Promotions;
                 // $scope.trueServices = result.data.เปิดบริการ;
                 // $scope.trueDevices = result.data.Devices;
                 $scope.recommend = result.data;
-            }
-            else{
+            } else {
                 $message.alert(result.data["display-messages"][0]);
             }
         });
-        $scope.imgPrefix = function(id){
+        $scope.imgPrefix = function(id) {
             //var preFixURL = 'http://172.19.193.71/sale/img/category/';
             var preFixURL = 'http://localhost:9000/images/category/'
             return preFixURL + id + '.png';
         };
 
-        $scope.viewCate = function(item){
+        $scope.viewCate = function(item) {
 
-            if(item.child && item.child.length >= 1)
-            {
-                $location.path('/products').search({id: item.id,name: item.name});
-            }else{
-                
-                $location.path('/orderDevice').search({id: item.id,name: item.name});
+            if (item.child && item.child.length >= 1) {
+                $location.path('/products').search({
+                    id: item.id,
+                    name: item.name
+                });
+            } else {
+
+                $location.path('/orderDevice').search({
+                    id: item.id,
+                    name: item.name
+                });
             }
         }
+
+        $scope.gotoAnchor = function(x) {
+            //alert(x);
+            var newHash = 'anchor' + x;
+            $anchorScroll(newHash);
+            
+        };
         // $scope.truePromotions = [{
         //     promotionCode: "gold",
         //     upload: "50",
