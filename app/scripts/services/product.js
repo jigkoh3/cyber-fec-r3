@@ -794,14 +794,42 @@ angular.module('fec3App')
         }
 
         this.getCategoryByName = function(name, fnCallback) {
+            console.log(name);
             var result = {};
             var master = $localstorage.getObject("master");
-            var category  = $filter('filter')(master.categories, {
-                "name": name
-            });
+            var getAll = function(source) {
+                 var res = $filter('filter')(source, {
+                        "name": name
+                    });
+                    if(res && res.length >= 1)
+                    {
+                        return res;
+                    }else{
+                        for(var i=0; i<source.length; i++){
+                            if(source[i].child && source[i].child.length >= 1){
+                            var a = getAll(source[i].child);  
+                            if(a && a.length >= 1) {
+                                return a;
+                                break;
+
+                            }
+                        }
+                        else{
+                            //return null;
+                        }
+                   
+                        }
+                        
+                        
+                }
+                
+                
+            };
+            var category = getAll(master.categories);
             //console.log(Devices);
             if (category && category.length >= 1) {
                 result = category[0].child;
+                console.log(result);
                 fnCallback({
                     status: true,
                     data: result,
