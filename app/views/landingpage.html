@@ -14,9 +14,11 @@
                     <!--  -->
                     <div class="row">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active ng-menu"><a class="page-scroll" href="#promotion">โปรโมชั่นแนะนำ</a></li>
-                            <li class="ng-menu"><a class="page-scroll" page-scroll href="#new">เปิดบริการใหม่</a></li>
-                            <li class="ng-menu"><a class="page-scroll" page-scroll href="#device">เครื่องและอุปกรณ์</a></li>
+                            <li ng-repeat="item in recommend.child" class="active ng-menu">
+                                <a class="page-scroll" page-scroll href="#{{item.id}}">{{item.name}}</a>
+                            </li>
+                            <!--   <li class="ng-menu"><a class="page-scroll" page-scroll href="#new">เปิดบริการใหม่</a></li>
+                            <li class="ng-menu"><a class="page-scroll" page-scroll href="#device">เครื่องและอุปกรณ์</a></li> -->
                         </ul>
                     </div>
                 </div>
@@ -38,7 +40,7 @@
         <div class="row content">
             <recommend></recommend>
         </div>
-        <div id="modalopenservice" tabindex="-1" class="modal fade modalopenservice" data-backdrop="static" data-keyboard="false">
+        <!-- <div id="modalopenservice" tabindex="-1" class="modal fade modalopenservice" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -102,7 +104,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Footer -->
         <footer class="footer" ng-include="'views/common/footer.html'"></footer>
     </div>
@@ -111,6 +113,7 @@
 
         // Page scrolling feature
         $('a.page-scroll').bind('click', function(event) {
+            alert("abccccc");
             var link = $(this);
             $('html, body').stop().animate({
                 scrollTop: $(link.attr('href')).offset().top - 100
