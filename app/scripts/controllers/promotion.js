@@ -8,7 +8,17 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('promotionCtrl', function($scope) {
+    .controller('promotionCtrl', function($scope, $loading, $message, productService) {
+
+        productService.getCampaign(function(result){
+            // console.log(result);
+            $scope.campaigns=result.data['response-data'].product.campaigns;
+           
+        });
+        productService.getPromotionSet(function(result){
+            console.log(result);
+            $scope.promotions=result.data['response-data'].product.promotions;
+        });
 
         $('.ng-menu').click(function() {
             $('.ng-menu').removeClass('active');
@@ -41,42 +51,33 @@ angular.module('fec3App')
         };
 
 
-        $scope.campaigns1 = [{
-            campaignName: "RS499 TC_iPhone 6 & 6 Plus discount 5000bt",
-            details: [{
-                name: "เลือก Promotion ismart 499, 699, 899 หรือ Jumbo 599, 799, 999"
-            }, {
-                name: "ชำระล่วงหน้า 6 เดือน สัญญา 12 เดือน"
-            }],
-            price: "ราคาเครื่องลด  5000 บาท เหลือ  24,450 บาท"
-        }];
+        // $scope.campaigns = [{
+        //     campaignName: "RS499 TC_iPhone 6 & 6 Plus discount 5000bt",
+        //     details: [{
+        //         name: "เลือก Promotion ismart 499, 699, 899 หรือ Jumbo 599, 799, 999"
+        //     }, {
+        //         name: "ชำระล่วงหน้า 6 เดือน สัญญา 12 เดือน"
+        //     }],
+        //     price: "ราคาเครื่องลด  5000 บาท เหลือ  24,450 บาท"
+        // }];
 
 
 
-        $scope.campaigns2 = [{
-            campaignName: "RS491 RF_Existing iPhone 6 &amp; 6 Plus discount 500",
-            details: [{
-                name: "เลือก Promotion ismart 499, 699, 899 หรือ Jumbo 599, 799, 999"
-            }, {
-                name: "ชำระล่วงหน้า 6 เดือน สัญญา 12 เดือน"
-            }],
-            price: "ราคาเครื่องลด  5000 บาท เหลือ  24,450 บาท"
-        }];
 
 
-        $scope.promotions = [{
-            promotionName: "PT343 Device with Sim (TUC)",
-            details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (TUC)"
-        }, {
-            promotionName: "PT343 Device with Sim (RMV)",
-            details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (RMV)"
-        }];
+        // $scope.promotions = [{
+        //     promotionName: "PT343 Device with Sim (TUC)",
+        //     details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (TUC)"
+        // }, {
+        //     promotionName: "PT343 Device with Sim (RMV)",
+        //     details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (RMV)"
+        // }];
 
-        $scope.campaignTypes = [{
-            type: "RF",
-        }, {
-            type: "TC",
-        }];
+        // $scope.campaignTypes = [{
+        //     type: "RF",
+        // }, {
+        //     type: "TC",
+        // }];
 
 
 
