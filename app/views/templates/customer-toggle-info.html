@@ -11,7 +11,7 @@
         <h3><small>ประเภทลูกค้า</small></h3>
         <!-- <div class="form-group"> -->
         <div class="col-md-12">
-            <select class="form-control" ng-model="customerProfile.customerType" >
+            <select class="form-control" ng-model="customerProfile.customerType" ng-disabled="customerProfile.customerTypeSelected">
                 <option value="I">บุคคลธรรมดา (I)</option>
                 <option value="B">Business (B)</option>
                 <option value="C">Corporate (C)</option>
@@ -23,6 +23,14 @@
         </div>
         <button class="btn btn-danger" ng-click="onClickEndServe()">เสร็จสิ้นการให้บริการ</button>
     </div>
+    <!-- <div class="navmenu">
+        <ul class="nav navmenu-nav">
+            <li><a href="#/existingcustomer" class="dropdown-toggle-submenu-v2">บริการหลังการขาย </a></li>
+            <li><a href="#/landingpage" class="dropdown-toggle-submenu-v2">สินค้าและบริการ </a></li>
+            <li><a href="#/ordermonitor" class="dropdown-toggle-submenu-v2">Order Monitor</a></li>
+            <li><a class="disabled">ชำระสินค้าและบริการ</a></li>
+        </ul>
+    </div> -->
     <version></version>
     <div class="navmenu">
         <ng-menu></ng-menu>

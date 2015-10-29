@@ -5,7 +5,7 @@
         
         <!-- ReadCard -->
         <!-- <a ng-click="onReadcard()" class="btn btn-readcard"></a> -->
-        <a onclick="ReadCard('ReadP');" class="btn btn-readcard"></a>
+        <a onclick="ReadCard();" class="btn btn-readcard"></a>
         <!-- end Readcard -->
         <input type="hidden" id="divID" value="{{divID}}" />
         <div class="row">
@@ -33,11 +33,21 @@
             <div class="form-group">
                 <div class="col-md-12">
                     <input  placeholder="กรอกหมายเลขบัตร/หมายเลขบริการ" class="form-control" ng-keyup="onCardNoKeydown(inputCardNo)" ng-model="inputCardNo" ng-click="openSSO()" id="inputCardNo" readonly>
+                    <!-- <input  placeholder="กรอกหมายเลขบัตร/หมายเลขบริการ" class="form-control" ng-keyup="onCardNoKeydown(inputCardNo)" ng-model="inputCardNo" id="inputCardNo"
+                    > -->
                 </div>
             </div>
         </div>
     </div>
-    
+    <!-- <div class="navmenu">
+        <ul class="nav navmenu-nav">
+            <li><a href="#/existingcustomer" class="dropdown-toggle-submenu-v2">บริการหลังการขาย </a>
+            </li>
+            <li><a href="#/landingpage" class="dropdown-toggle-submenu-v2">สินค้าและบริการ </a></li>
+            <li><a href="#/ordermonitor" class="dropdown-toggle-submenu-v2">Order Monitor</a></li>
+            <li><a class="disabled">ชำระสินค้าและบริการ</a></li>
+        </ul>
+    </div> -->
     <version></version>
     <div class="navmenu">
         <ng-menu></ng-menu>

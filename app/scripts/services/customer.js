@@ -409,7 +409,16 @@ angular.module('fec3App')
         this.getCustomerManual = function(certificateid, certificatetype, fnCallback) {
 
             var onSuccess = function(result) {
-                if (result.status) {
+                if (result.data["display-messages"]  && result.data["display-messages"].length >= 1) {
+                	//fnCallback(result);
+                	fnCallback({
+                        status: false,
+                        data: result.data,
+                        error: "error",
+                        msgErr: ""
+                    });
+                } else {
+                    
                     if (result.data["response-data"]) {
 
                         customerProfile.existData = result.data["response-data"];
@@ -450,8 +459,6 @@ angular.module('fec3App')
                         });
 
                     }
-                } else {
-                    fnCallback(result);
                 }
 
 
@@ -659,8 +666,6 @@ angular.module('fec3App')
                     "response-data": {}
 
                 };
-
-                
 
                 $timeout(function() {
                     onSuccess({
