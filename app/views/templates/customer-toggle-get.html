@@ -8,16 +8,7 @@
         <a onclick="ReadCard();" class="btn btn-readcard"></a>
         <!-- end Readcard -->
         <input type="hidden" id="divID" value="{{divID}}" />
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-9">
-                <div ng-show="onReading">
-                    <i class="fa fa-spin fa-spinner"></i>
-                    กำลังอ่านข้อมูล...
-                </div>
-                <span ng-show="isReadCardErroe" style="color:red;">*{{readCardErrorDesc}}</span>
-            </div>
-        </div>
+
         <p>หรือ</p>
         <div class="form-horizontal">
             <div class="form-group">
@@ -39,15 +30,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="navmenu">
-        <ul class="nav navmenu-nav">
-            <li><a href="#/existingcustomer" class="dropdown-toggle-submenu-v2">บริการหลังการขาย </a>
-            </li>
-            <li><a href="#/landingpage" class="dropdown-toggle-submenu-v2">สินค้าและบริการ </a></li>
-            <li><a href="#/ordermonitor" class="dropdown-toggle-submenu-v2">Order Monitor</a></li>
-            <li><a class="disabled">ชำระสินค้าและบริการ</a></li>
-        </ul>
-    </div> -->
     <version></version>
     <div class="navmenu">
         <ng-menu></ng-menu>

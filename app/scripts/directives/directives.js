@@ -171,14 +171,10 @@ function customerToggleGet($rootScope) {
                             })
                         }
                         break;
-                    switch($scope.cardTypeSelected){
+                    
                      case "02":
-                    }
-                        if (inputCardNo && inputCardNo.length == 13) {
-                            $loading.shoe();
-                        customerService.getC
-                        }
-                        // console.log("02")
+                    
+                        console.log("02")
                         break;
 
                 }
