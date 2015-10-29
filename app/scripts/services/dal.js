@@ -3,7 +3,7 @@
 angular.module('fec3App')
     .service('dalService', function($filter, $http) {
         var that = this;
-        this.demo = false;
+        this.demo = true;
 
         if (that.demo) {
             this.secondAuthenURL = "https://sso-devt.true.th:11443/"; //DEV
