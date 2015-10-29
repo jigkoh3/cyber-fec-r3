@@ -20,7 +20,7 @@ angular.module('fec3App')
                 
 
             } else {
-                $message.alert(result.data["display-messages"][0]);
+                $message.alert(result.data["display-message"]);
                 //console.log(result.data);
             }
 

@@ -423,6 +423,22 @@ angular.module('fec3App')
                             "id": 803,
                             "name": "Recommend",
                             "child": [{
+                                "id": 804,
+                                "name": "Devices",
+                                "child": [{
+                                    "id": 809,
+                                    "name": "Other",
+                                    "child": []
+                                }, {
+                                    "id": 807,
+                                    "name": "Samsung",
+                                    "child": []
+                                }, {
+                                    "id": 808,
+                                    "name": "iPhone 6",
+                                    "child": []
+                                }]
+                            }, {
                                 "id": 805,
                                 "name": "Promotions",
                                 "child": [{
@@ -437,7 +453,7 @@ angular.module('fec3App')
                                     "id": 818,
                                     "name": "iPhone 6",
                                     "child": []
-                                }, {
+                                },{
                                     "id": 819,
                                     "name": "Other",
                                     "child": []
@@ -818,43 +834,41 @@ angular.module('fec3App')
             var result = {};
             var master = $localstorage.getObject("master");
 
-
+           
 
             var getAll = function(source) {
-                var res = $filter('filter')(source, {
-                    "name": name
-                });
-                if (res && res.length >= 1) {
-                    return res;
-                } else {
-                    for (var i = 0; i < source.length; i++) {
-                        if (source[i].child && source[i].child.length >= 1) {
-                            var a = getAll(source[i].child);
-                            if (a && a.length >= 1) {
+                 var res = $filter('filter')(source, {
+                        "name": name
+                    });
+                    if(res && res.length >= 1)
+                    {
+                        return res;
+                    }else{
+                        for(var i=0; i<source.length; i++){
+                            if(source[i].child && source[i].child.length >= 1){
+                            var a = getAll(source[i].child);  
+                            if(a && a.length >= 1) {
                                 return a;
                                 break;
 
                             }
-                        } else {
+                        }
+                        else{
                             //return null;
                         }
-
-                    }
-
-
+                   
+                        }
+                        
+                        
                 }
-
-
+                
+                
             };
             var category = getAll(master.categories);
-<<<<<<< HEAD
-// >>>>>>> 5cfe4e12010c2b95d0bfc2b831d891dd23551d03
-=======
 
->>>>>>> 2bc34ce7c90fe750f7a639822384b2b5f7b9277a
             //console.log(Devices);
             if (category && category.length >= 1) {
-                result = category;
+                result = category[0].child;
                 console.log(result);
                 fnCallback({
                     status: true,

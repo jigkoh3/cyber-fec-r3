@@ -47,7 +47,7 @@ angular.module('fec3App')
             } else {
                 var result = {
                     "status": "SUCCESSFUL",
-                    "trx-id": "3311IKIIUXB3X",
+                    "trx-id": "3EY4K2MPJ8GL",
                     "process-instance": "psaapdv1 (instance: SFF_node1)",
                     "response-data": [{
                         "id": 1,
@@ -69,7 +69,7 @@ angular.module('fec3App')
                         "menuPopup": "TRUE",
                         "childMenuList": [{
                             "id": 2,
-                            "menuName": "แสดงบริการทั้งหมด",
+                            "menuName": "ข้อมูลการจอง",
                             "menuParentId": 1,
                             "menuSequence": 2,
                             "menuSystem": null,
@@ -110,7 +110,7 @@ angular.module('fec3App')
                                 "menuParentId": 3,
                                 "menuSequence": 4,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -128,7 +128,7 @@ angular.module('fec3App')
                                     "menuParentId": 4,
                                     "menuSequence": 5,
                                     "menuSystem": null,
-                                    "menuActionInternet": "existingcustomer",
+                                    "menuActionInternet": null,
                                     "menuActionIntranet": null,
                                     "menuTarget": null,
                                     "menuDescription": null,
@@ -147,7 +147,7 @@ angular.module('fec3App')
                                     "menuParentId": 4,
                                     "menuSequence": 6,
                                     "menuSystem": null,
-                                    "menuActionInternet": "existingcustomer",
+                                    "menuActionInternet": null,
                                     "menuActionIntranet": null,
                                     "menuTarget": null,
                                     "menuDescription": null,
@@ -163,11 +163,11 @@ angular.module('fec3App')
                                 }]
                             }, {
                                 "id": 7,
-                                "menuName": "โอนเปลี่ยนเจ้าของ",
+                                "menuName": "âÍ¹à»ÅÕèÂ¹à¨éÒ¢Í§",
                                 "menuParentId": 3,
                                 "menuSequence": 7,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -182,11 +182,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 8,
-                                "menuName": "สมัครและยกเลิกบริการ IR/IDD",
+                                "menuName": "ÊÁÑ¤ÃáÅÐÂ¡àÅÔ¡ºÃÔ¡ÒÃ IR/IDD",
                                 "menuParentId": 3,
                                 "menuSequence": 8,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -201,11 +201,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 9,
-                                "menuName": "ระงับสัญญาณชั่วคราว",
+                                "menuName": "ÃÐ§ÑºÊÑ­­Ò³ªÑèÇ¤ÃÒÇ",
                                 "menuParentId": 3,
                                 "menuSequence": 9,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -220,11 +220,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 10,
-                                "menuName": "เปิดสัญญาณจากการระงับใช้ชั่วคราว",
+                                "menuName": "à»Ô´ÊÑ­­Ò³¨Ò¡¡ÒÃÃÐ§ÑºãªéªÑèÇ¤ÃÒÇ",
                                 "menuParentId": 3,
                                 "menuSequence": 10,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -239,11 +239,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 11,
-                                "menuName": "เปลี่ยนเบอร์จากรายเดือนเป็นเติมเงิน",
+                                "menuName": "à»ÅÕèÂ¹àºÍÃì¨Ò¡ÃÒÂà´×Í¹à»ç¹àµÔÁà§Ô¹",
                                 "menuParentId": 3,
                                 "menuSequence": 11,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -258,11 +258,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 12,
-                                "menuName": "เปลี่ยนจากเติมเงินเป็นรายเดือน",
+                                "menuName": "à»ÅÕèÂ¹¨Ò¡àµÔÁà§Ô¹à»ç¹ÃÒÂà´×Í¹",
                                 "menuParentId": 3,
                                 "menuSequence": 12,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -277,11 +277,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 13,
-                                "menuName": "เปลี่ยน SIM",
+                                "menuName": "à»ÅÕèÂ¹ SIM",
                                 "menuParentId": 3,
                                 "menuSequence": 13,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -296,11 +296,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 14,
-                                "menuName": "ยกเลิกเลขหมาย",
+                                "menuName": "Â¡àÅÔ¡àÅ¢ËÁÒÂ",
                                 "menuParentId": 3,
                                 "menuSequence": 14,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -315,11 +315,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 15,
-                                "menuName": "เปิดสัญญาณจากการถูกยกเลิกเลขหมาย",
+                                "menuName": "à»Ô´ÊÑ­­Ò³¨Ò¡¡ÒÃ¶Ù¡Â¡àÅÔ¡àÅ¢ËÁÒÂ",
                                 "menuParentId": 3,
                                 "menuSequence": 15,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -353,11 +353,11 @@ angular.module('fec3App')
                             "menuPopup": "TRUE",
                             "childMenuList": [{
                                 "id": 17,
-                                "menuName": "ยกเลิก Order ก่อนติดตั้ง",
+                                "menuName": "Â¡àÅÔ¡ Order ¡èÍ¹µÔ´µÑé§",
                                 "menuParentId": 16,
                                 "menuSequence": 17,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -372,11 +372,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 18,
-                                "menuName": "เปลี่ยนวันที่ติดตั้ง",
+                                "menuName": "à»ÅÕèÂ¹ÇÑ¹·ÕèµÔ´µÑé§",
                                 "menuParentId": 16,
                                 "menuSequence": 18,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -391,11 +391,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 19,
-                                "menuName": "เปลี่ยน Promotion และ Package",
+                                "menuName": "à»ÅÕèÂ¹ Promotion áÅÐ Package",
                                 "menuParentId": 16,
                                 "menuSequence": 19,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -413,7 +413,7 @@ angular.module('fec3App')
                                     "menuParentId": 19,
                                     "menuSequence": 20,
                                     "menuSystem": null,
-                                    "menuActionInternet": "existingcustomer",
+                                    "menuActionInternet": null,
                                     "menuActionIntranet": null,
                                     "menuTarget": null,
                                     "menuDescription": null,
@@ -432,7 +432,7 @@ angular.module('fec3App')
                                     "menuParentId": 19,
                                     "menuSequence": 21,
                                     "menuSystem": null,
-                                    "menuActionInternet": "existingcustomer",
+                                    "menuActionInternet": null,
                                     "menuActionIntranet": null,
                                     "menuTarget": null,
                                     "menuDescription": null,
@@ -451,7 +451,7 @@ angular.module('fec3App')
                                     "menuParentId": 19,
                                     "menuSequence": 22,
                                     "menuSystem": null,
-                                    "menuActionInternet": "existingcustomer",
+                                    "menuActionInternet": null,
                                     "menuActionIntranet": null,
                                     "menuTarget": null,
                                     "menuDescription": null,
@@ -467,11 +467,11 @@ angular.module('fec3App')
                                 }]
                             }, {
                                 "id": 23,
-                                "menuName": "เปลี่ยนแปลงบริการ Fix Line Plus",
+                                "menuName": "à»ÅÕèÂ¹á»Å§ºÃÔ¡ÒÃ Fix Line Plus",
                                 "menuParentId": 16,
                                 "menuSequence": 23,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -486,11 +486,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 24,
-                                "menuName": "บริการ Fiver TV",
+                                "menuName": "ºÃÔ¡ÒÃ Fiver TV",
                                 "menuParentId": 16,
                                 "menuSequence": 24,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -504,11 +504,11 @@ angular.module('fec3App')
                                 "menuPopup": "TRUE",
                                 "childMenuList": [{
                                     "id": 25,
-                                    "menuName": "เพิ่มจุดติดตั้ง",
+                                    "menuName": "à¾ÔèÁ¨Ø´µÔ´µÑé§",
                                     "menuParentId": 24,
                                     "menuSequence": 25,
                                     "menuSystem": null,
-                                    "menuActionInternet": "existingcustomer",
+                                    "menuActionInternet": null,
                                     "menuActionIntranet": null,
                                     "menuTarget": null,
                                     "menuDescription": null,
@@ -523,11 +523,11 @@ angular.module('fec3App')
                                     "childMenuList": []
                                 }, {
                                     "id": 26,
-                                    "menuName": "ลดจุดติดตั้ง",
+                                    "menuName": "Å´¨Ø´µÔ´µÑé§",
                                     "menuParentId": 24,
                                     "menuSequence": 26,
                                     "menuSystem": null,
-                                    "menuActionInternet": "existingcustomer",
+                                    "menuActionInternet": null,
                                     "menuActionIntranet": null,
                                     "menuTarget": null,
                                     "menuDescription": null,
@@ -543,11 +543,11 @@ angular.module('fec3App')
                                 }]
                             }, {
                                 "id": 27,
-                                "menuName": "ยกเลิกบริการ (Disconnect)",
+                                "menuName": "Â¡àÅÔ¡ºÃÔ¡ÒÃ (Disconnect)",
                                 "menuParentId": 16,
                                 "menuSequence": 27,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -562,11 +562,11 @@ angular.module('fec3App')
                                 "childMenuList": []
                             }, {
                                 "id": 28,
-                                "menuName": "ยกเลิกบริการ Convergence (Debundle)",
+                                "menuName": "Â¡àÅÔ¡ºÃÔ¡ÒÃ Convergence (Debundle)",
                                 "menuParentId": 16,
                                 "menuSequence": 28,
                                 "menuSystem": null,
-                                "menuActionInternet": "existingcustomer",
+                                "menuActionInternet": null,
                                 "menuActionIntranet": null,
                                 "menuTarget": null,
                                 "menuDescription": null,
@@ -588,9 +588,9 @@ angular.module('fec3App')
                         "menuSequence": 30,
                         "menuSystem": null,
                         "menuActionInternet": "landingpage",
-                        "menuActionIntranet": "landingpage",
-                        "menuTarget": "landingpage",
-                        "menuDescription": "landingpage",
+                        "menuActionIntranet": null,
+                        "menuTarget": null,
+                        "menuDescription": null,
                         "menuEnabled": "Y",
                         "menuStyle": null,
                         "menuWord": null,
@@ -599,7 +599,26 @@ angular.module('fec3App')
                         "menuUpdatedBy": null,
                         "menuIconPath": null,
                         "menuPopup": "TRUE",
-                        "childMenuList": null
+                        "childMenuList": [{
+                            "id": 31,
+                            "menuName": "สินค้าและบริการ",
+                            "menuParentId": 30,
+                            "menuSequence": 31,
+                            "menuSystem": null,
+                            "menuActionInternet": "landingpage",
+                            "menuActionIntranet": null,
+                            "menuTarget": null,
+                            "menuDescription": null,
+                            "menuEnabled": "Y",
+                            "menuStyle": null,
+                            "menuWord": null,
+                            "menuCreatedDate": null,
+                            "menuUpdatedDate": null,
+                            "menuUpdatedBy": null,
+                            "menuIconPath": null,
+                            "menuPopup": "TRUE",
+                            "childMenuList": []
+                        }]
                     }, {
                         "id": 33,
                         "menuName": "ชำระสินค้าและบริการ",
@@ -607,9 +626,9 @@ angular.module('fec3App')
                         "menuSequence": 33,
                         "menuSystem": null,
                         "menuActionInternet": "payment",
-                        "menuActionIntranet": "payment",
-                        "menuTarget": "payment",
-                        "menuDescription": "payment",
+                        "menuActionIntranet": null,
+                        "menuTarget": null,
+                        "menuDescription": null,
                         "menuEnabled": "Y",
                         "menuStyle": null,
                         "menuWord": null,
@@ -618,7 +637,7 @@ angular.module('fec3App')
                         "menuUpdatedBy": null,
                         "menuIconPath": null,
                         "menuPopup": "TRUE",
-                        "childMenuList": null
+                        "childMenuList": []
                     }, {
                         "id": 34,
                         "menuName": "Order Status Report",
@@ -626,9 +645,9 @@ angular.module('fec3App')
                         "menuSequence": 34,
                         "menuSystem": null,
                         "menuActionInternet": "order",
-                        "menuActionIntranet": "order",
-                        "menuTarget": "order",
-                        "menuDescription": "order",
+                        "menuActionIntranet": null,
+                        "menuTarget": null,
+                        "menuDescription": null,
                         "menuEnabled": "Y",
                         "menuStyle": null,
                         "menuWord": null,
@@ -637,11 +656,9 @@ angular.module('fec3App')
                         "menuUpdatedBy": null,
                         "menuIconPath": null,
                         "menuPopup": "TRUE",
-                        "childMenuList": null
+                        "childMenuList": []
                     }]
                 };
-
-                
                 $timeout(function() {
                     fnCallback({
                         status: true,
@@ -722,7 +739,7 @@ angular.module('fec3App')
                 });
             };
 
-            if (dalService.demo || dalService.bypass) {
+            if (dalService.demo) {
                 onSuccess(result);
 
             } else {

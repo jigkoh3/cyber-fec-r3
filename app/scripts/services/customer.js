@@ -410,8 +410,8 @@ angular.module('fec3App')
 
             var onSuccess = function(result) {
                 if (result.data["display-messages"]  && result.data["display-messages"].length >= 1) {
-                    //fnCallback(result);
-                    fnCallback({
+                	//fnCallback(result);
+                	fnCallback({
                         status: false,
                         data: result.data,
                         error: "error",
