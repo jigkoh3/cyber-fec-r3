@@ -55,7 +55,7 @@ angular.module('fec3App')
         //     subNo: "0865333463",
         //     pricePlane: "PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m"
         // }];
-
+ 
         // $scope.trueVisionProdeucts = [{
         //     prodCate: "ทรูวิชั่น",
         //     subNo: "029044589",

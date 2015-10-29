@@ -16,16 +16,21 @@ angular.module('fec3App')
             if (result.status) {
                 var master = $localstorage.getObject("master");
                 //console.log(master);
-                
-                
+
+
 
             } else {
                 $message.alert(result.data["display-message"]);
                 //console.log(result.data);
             }
 
-
+            $scope.onClickEndServe = function() {
+                $localstorage.setObject("customerProfile", null)
+                $location.path('/main')
+            }
         });
+
+
         // $scope.disasbledInput = true;
         // $scope.openSSO = function() {
         //     //var new_window = window.open('', "MsgWindow", "width=320, height=240");

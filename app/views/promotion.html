@@ -5,8 +5,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <div class="row">
                 <div>
-                    <br><p>
-Home > Products > Devices > iPhone > Promotion</p>
+                    <br>
+                    <p>
+                        Home > Products > Devices > iPhone > Promotion</p>
                 </div>
             </div>
         </div>
@@ -78,16 +79,16 @@ Home > Products > Devices > iPhone > Promotion</p>
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <div ng-repeat="itm in campaigns1 | filter : query">
+                                                <div ng-repeat="itm in campaigns | filter : query">
                                                     <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color: #CCFFFF; border-color: #33FFFF; ">
                                                         <div class="col-md-12">
-                                                            <b>{{itm.campaignName}}</b>
+                                                            <b>{{itm.code}} {{itm.name}}</b>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <ul>
-                                                                        <li ng-repeat="a in itm.details">{{a.name}}
+                                                                        <li>{{itm.name}}
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -95,29 +96,7 @@ Home > Products > Devices > iPhone > Promotion</p>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <b>{{itm.price}}</b>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div ng-repeat="itm in campaigns2 | filter : query">
-                                                    <div class="well" href="#modalCampaign2" onclick="return false;" data-toggle="modal" style="background-color: #CCFFFF; border-color: #33FFFF; ">
-                                                        <div class="col-md-12">
-                                                            <b>{{itm.campaignName}}</b>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <ul>
-                                                                        <li ng-repeat="a in itm.details">{{a.name}}
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <b>{{itm.price}}</b>
+                                                                <b>{{itm.desc}}</b>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -140,12 +119,12 @@ Home > Products > Devices > iPhone > Promotion</p>
                                                 <div ng-repeat="itm in promotions | filter : query">
                                                     <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color:pink">
                                                         <div class="col-md-12">
-                                                            <b>{{itm.promotionName}}</b>
+                                                            <b>{{itm.name}}</b>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <ul>
-                                                                    <li>{{itm.details}}</li>
+                                                                    <li>{{itm.code}}</li>
                                                                 </ul>
                                                             </div>
                                                         </div>
