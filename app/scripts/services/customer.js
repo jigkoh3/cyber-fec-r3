@@ -286,10 +286,26 @@ angular.module('fec3App')
                         }
                     }
                 };
+
+                var data2 = {
+                    "status": "UNSUCCESSFUL",
+                    "display-messages": [{
+                        "message": "request sim prefix  is wrong format for company(RM)",
+                        "message-code": "",
+                        "message-type": "ERROR",
+                        "en-message": "request sim prefix  is wrong format for company(RM)",
+                        "th-message": "request sim prefix  is wrong format for company(RM)",
+                        "technical-message": "request sim prefix  is wrong format for company(RM)"
+                    }],
+                    "trx-id": "4Q15KDZCTBQYP",
+                    "process-instance": "tmsapnpr1 (instance: SFF_node4)",
+                    "response-data": {}
+
+                };
                 $timeout(function() {
                     onSuccess({
-                        status: true,
-                        data: result,
+                        status: false,
+                        data: data2,
                         error: "",
                         msgErr: ""
                     });
@@ -407,10 +423,7 @@ angular.module('fec3App')
         };
 
         this.getCustomerManual = function(certificateid, certificatetype, fnCallback) {
-            $scope.onClickEndServe = function() {
-                $localstorage.setObject("customerProfile", null)
-                $location.path('/main')
-            }
+            $localstorage.setObject("customerProfile", null);
             var onSuccess = function(result) {
                 if (result.data["display-messages"] && result.data["display-messages"].length >= 1) {
                     //fnCallback(result);

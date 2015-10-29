@@ -318,8 +318,8 @@ function customerToggleInfo($rootScope, $localstorage) {
         controller: function($scope, $element, $location) {
             $scope.customerProfile = $localstorage.getObject("customerProfile");
             $scope.onClickEndServe = function() {
-                $localstorage.setObject("customerProfile", null)
-                $location.path('/main')
+                $localstorage.setObject("customerProfile", null);
+                $location.path('/main');
             }
         }
     };

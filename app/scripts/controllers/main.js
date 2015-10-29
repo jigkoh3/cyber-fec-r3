@@ -25,10 +25,7 @@ angular.module('fec3App')
             }
         });
 
-         $scope.onClickEndServe = function() {
-                $localstorage.setObject("customerProfile", null)
-                $location.path('/main')
-            }
+        $localstorage.setObject("customerProfile", null);
 
 
         // $scope.disasbledInput = true;
