@@ -23,21 +23,14 @@ angular.module('fec3App')
                 $message.alert(result.data["display-message"]);
                 //console.log(result.data);
             }
-
-            $scope.onClickEndServe = function() {
-                $localstorage.setObject("customerProfile", null)
-                $location.path('/main')
-            }
         });
-<<<<<<< HEAD
+
          $scope.onClickEndServe = function() {
                 $localstorage.setObject("customerProfile", null)
                 $location.path('/main')
             }
-=======
 
 
->>>>>>> 0491171597abc8d21acf3763b20929f913c467d0
         // $scope.disasbledInput = true;
         // $scope.openSSO = function() {
         //     //var new_window = window.open('', "MsgWindow", "width=320, height=240");
