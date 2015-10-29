@@ -5,11 +5,11 @@
                 <label class="col-sm-2 control-label text-right">รหัสพนักงานขาย</label>
                 <div class="col-sm-2">
                     
-                    <input  type="text" class="form-control" ng-model="userinfo.saleCode">
+                    <input  type="text" class="form-control" ng-model="userinfo.saleCode" ng-disabled="userinfo.isEdit">
                 </div>
                 <label class="col-sm-2 control-label text-right">ชื่อพนักงาน</label>
                 <div class="col-sm-2">
-                    <input  type="text" class="form-control" ng-model="userinfo.thaiName">
+                    <input  type="text" class="form-control" ng-model="userinfo.thaiName" ng-disabled="userinfo.isEdit">
                 </div>
                 <label class="col-sm-2 control-label text-right">ผู้ช่วยขาย</label>
                 <div class="col-sm-2">
