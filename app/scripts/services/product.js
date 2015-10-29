@@ -865,11 +865,7 @@ angular.module('fec3App')
                 
             };
             var category = getAll(master.categories);
-<<<<<<< HEAD
-// >>>>>>> 5cfe4e12010c2b95d0bfc2b831d891dd23551d03
-=======
 
->>>>>>> 2bc34ce7c90fe750f7a639822384b2b5f7b9277a
             //console.log(Devices);
             if (category && category.length >= 1) {
                 result = category[0].child;
