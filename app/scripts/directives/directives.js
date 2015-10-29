@@ -171,16 +171,45 @@ function customerToggleGet($rootScope) {
                             })
                         }
                         break;
-                    switch($scope.cardTypeSelected){
-                     case "02":
-                    }
-                        if (inputCardNo && inputCardNo.length == 13) {
-                            $loading.shoe();
-                        customerService.getC
-                        }
-                        // console.log("02")
-                        break;
+                    case "02":
+                        $loading.show();
+                            customerService.getCustomerByTMV(inputCardNo, "msisdn", function(result) {
+                                $loading.hide();
+                                if (result.status) {
+                                    //console.log(result);
 
+                                    $location.path('/existingcustomer')
+                                } else {
+                                    $message.alert(result.data["display-messages"][0]);
+                                }
+                            })
+                        break;
+                    case "03":
+                        $loading.show();
+                            customerService.getCustomerByTMV(inputCardNo, "assettnumber", function(result) {
+                                $loading.hide();
+                                if (result.status) {
+                                    //console.log(result);
+
+                                    $location.path('/existingcustomer')
+                                } else {
+                                    $message.alert(result.data["display-messages"][0]);
+                                }
+                            })
+                        break;
+                        case "04":
+                        $loading.show();
+                            customerService.getCustomerByTMV(inputCardNo, "tvsnumber", function(result) {
+                                $loading.hide();
+                                if (result.status) {
+                                    //console.log(result);
+
+                                    $location.path('/existingcustomer')
+                                } else {
+                                    $message.alert(result.data["display-messages"][0]);
+                                }
+                            })
+                        break;
                 }
 
             }

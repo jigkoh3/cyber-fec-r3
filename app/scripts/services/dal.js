@@ -181,7 +181,7 @@ angular.module('fec3App')
                 if (trx_id == "4EONTQNYU4VZ") {
                     fnCallback(data);
                 } else {
-                    fnCallback(data2);
+                    fnCallback(data);
                 }
 
             }
