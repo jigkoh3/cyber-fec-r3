@@ -26,6 +26,10 @@ angular.module('fec3App')
 
 
         });
+         $scope.onClickEndServe = function() {
+                $localstorage.setObject("customerProfile", null)
+                $location.path('/main')
+            }
         // $scope.disasbledInput = true;
         // $scope.openSSO = function() {
         //     //var new_window = window.open('', "MsgWindow", "width=320, height=240");

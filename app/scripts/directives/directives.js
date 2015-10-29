@@ -171,13 +171,20 @@ function customerToggleGet($rootScope) {
                             })
                         }
                         break;
-                    case "02":
-                        console.log("02")
+                    switch($scope.cardTypeSelected){
+                     case "02":
+                    }
+                        if (inputCardNo && inputCardNo.length == 13) {
+                            $loading.shoe();
+                        customerService.getC
+                        }
+                        // console.log("02")
                         break;
 
                 }
 
             }
+
             var isSSOSuccessed = false;
             $scope.openSSO = function() {
 

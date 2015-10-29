@@ -407,18 +407,21 @@ angular.module('fec3App')
         }
 
         this.getCustomerManual = function(certificateid, certificatetype, fnCallback) {
-
+             $scope.onClickEndServe = function() {
+                $localstorage.setObject("customerProfile", null)
+                $location.path('/main')
+            }
             var onSuccess = function(result) {
-                if (result.data["display-messages"]  && result.data["display-messages"].length >= 1) {
-                	//fnCallback(result);
-                	fnCallback({
+                if (result.data["display-messages"] && result.data["display-messages"].length >= 1) {
+                    //fnCallback(result);
+                    fnCallback({
                         status: false,
                         data: result.data,
                         error: "error",
                         msgErr: ""
                     });
                 } else {
-                    
+
                     if (result.data["response-data"]) {
 
                         customerProfile.existData = result.data["response-data"];
@@ -465,7 +468,7 @@ angular.module('fec3App')
             };
             if (!dalService.demo) {
 
-                var target = '/profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
+                var target = '/profiles/customer/get?certificateid=' + certificateId + '&certificatetype=' + certificatetype;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
@@ -678,4 +681,71 @@ angular.module('fec3App')
             }
         };
 
+        this.getCustomerByTMV = function(certificateid, certificatetype, productIdNumber, fnCallback) {
+
+            var onSuccess = function(result) {
+                if (result.data["display-messages"] && result.data["display-messages"].length >= 1) {
+                    fnCallback({
+                        status: false,
+                        data: result.data,
+                        error: "error",
+                        msgErr: ""
+                    });
+                } else {
+                    
+                }
+            }
+
+        };
+
+        if (!dalService.demo) {
+
+            var target = '/profiles/tmv/customer/get?certificateid' + certificateid + 'certificatetype' + certificatetype + 'productIdNumber' + productIdNumber;
+
+            dalService.callServiceGet(target, null, function(result) {
+                onSuccess(result);
+            });
+        } else {
+            var result = {
+                "status": "SUCCESSFUL",
+                "trx-id": "49142WTF4IWE5",
+                "process-instance": "psaapdv1 (instance: SFF_node1)",
+                "response-data": {
+                    "contact-mobile-number": "",
+                    "contact-email": "",
+                    "id-number": "2012044608878",
+                    "tax-id": "",
+                    "branch-code": "",
+                    "customer-level": "",
+                    "customer-sublevel": "",
+                    "customer-sublevel-id": "",
+                    "company-code": "RM",
+                    "installed-products": [{
+                        "ouId": "15187",
+                        "ban": "10049516",
+                        "product-category": "TMV",
+                        "product-type": "PRICEPLAN",
+                        "account-category": "I",
+                        "product-id": "EDATAP88",
+                        "product-name": "EDATAP88",
+                        "product-description": "Biz&amp;Ent RC 299_Data UNLTD 1GB",
+                        "bill-cycle": "2",
+                        "company-code": "RM",
+                        "product-id-name": "MSISDN",
+                        "product-id-number": "0870100023"
+                    }],
+                    "address-list": {}
+                }
+
+            }
+        };
+        // $timeout(function() {
+        //     onSuccess({
+        //         status: true,
+        //          data: result,
+        //         error: "",
+        //         msgErr: ""
+        //     });
+        // }, 1000);
+     
     });
