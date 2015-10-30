@@ -14647,10 +14647,7 @@ h1 {
     background: #FFCC00;
 }
 
-.booking {
-    color: #777777;
-    background: #FFCC00;
-}
+
 
 .box-pre1 li.listitem3 {
     margin-right: 0px !important;
@@ -14680,4 +14677,13 @@ h1 {
     .xs-center {
         text-align: center;
     }
+}
+
+.booking-inactive{
+    color: #fff;
+    background: silver;
+}
+.booking-active {
+    color: #777777;
+    background: #FFCC00;
 }

@@ -119,15 +119,20 @@
                                                 <div ng-repeat="itm in promotions | filter : query">
                                                     <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color:pink">
                                                         <div class="col-md-12">
-                                                            <b>{{itm.name}}</b>
+                                                            <b>{{itm.code}} {{itm.name}}</b>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <ul>
-                                                                    <li>{{itm.code}}</li>
+                                                                    <li>{{itm.desc}}</li>
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        <!-- <div class="row">
+                                                            <div class="col-md-12">
+                                                                <b>{{itm.desc}}</b>
+                                                            </div>
+                                                        </div -->
                                                     </div>
                                                 </div>
                                             </div>

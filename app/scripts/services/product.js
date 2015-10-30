@@ -843,7 +843,7 @@ angular.module('fec3App')
                             "campaigns": [{
                                 "code": "PP228",
                                 "name": "C15 With PP ",
-                                "desc": "ABC1234"
+                                "desc": null
                             }, {
                                 "code": "RS080",
                                 "name": "RS080 : iPhone5_Free You",

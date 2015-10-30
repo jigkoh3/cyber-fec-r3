@@ -23,6 +23,11 @@ angular.module('fec3App')
             $scope.trueOnlineProdeucts = customerProfile.TOL;
         }
         $loading.hide();
+
+        $scope.bookingsClass = function(expectRecpDate){
+            console.log(expectRecpDate);
+            return "booking-inactive";
+        }
         // bookingService.getBookingByCiti(function(result) {
 
         //     if (result.status) {

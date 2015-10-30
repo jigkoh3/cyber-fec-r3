@@ -423,7 +423,7 @@ angular.module('fec3App')
         };
 
         this.getCustomerManual = function(certificateid, certificatetype, fnCallback) {
-            $localstorage.setObject("customerProfile", null);
+            $localstorage.destroy("customerProfile");
             var onSuccess = function(result) {
                 if (result.data["display-messages"] && result.data["display-messages"].length >= 1) {
                     //fnCallback(result);

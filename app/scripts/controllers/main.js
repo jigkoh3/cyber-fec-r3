@@ -25,7 +25,7 @@ angular.module('fec3App')
             }
         });
 
-        $localstorage.setObject("customerProfile", null);
+        $localstorage.destroy("customerProfile");
 
 
         // $scope.disasbledInput = true;
