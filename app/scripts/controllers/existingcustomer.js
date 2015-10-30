@@ -16,7 +16,7 @@ angular.module('fec3App')
         });
         $loading.show();
         var customerProfile = $localstorage.getObject("customerProfile");
-        if(customerProfile){
+        if (customerProfile) {
             $scope.dataPro1 = customerProfile.bookings;
             $scope.trueMoveHProdeucts = customerProfile.TMV;
             $scope.trueVisionProdeucts = customerProfile.TVS;
@@ -24,10 +24,25 @@ angular.module('fec3App')
         }
         $loading.hide();
 
-        $scope.bookingsClass = function(expectRecpDate){
-            console.log(expectRecpDate);
-            return "booking-inactive";
+        $scope.bookingsClass = function(expectRecpDate,receiveDate) {
+            console.log("api resp: " + expectRecpDate);
+            console.log("api receive: " + receiveDate);
+
+            var dateData = new Date(expectRecpDate.replace('T', ' '));
+            console.log("chg format:" + dateData);
+            var curDate = new Date();
+            var bclass = "";
+          
+            if ((dateData > curDate) && (receiveDate == null || receiveDate == '' )){
+                bclass = "booking-active";
+
+            } else {
+                bclass = "booking-inactive";
+            }
+            return bclass;
         }
+
+
         // bookingService.getBookingByCiti(function(result) {
 
         //     if (result.status) {
@@ -60,7 +75,7 @@ angular.module('fec3App')
         //     subNo: "0865333463",
         //     pricePlane: "PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m"
         // }];
- 
+
         // $scope.trueVisionProdeucts = [{
         //     prodCate: "ทรูวิชั่น",
         //     subNo: "029044589",
