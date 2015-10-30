@@ -33,7 +33,7 @@ angular.module('fec3App')
             var curDate = new Date();
             var bclass = "";
           
-            if ((dateData > curDate) && (receiveDate == null || receiveDate == '' )){
+            if ((dateData < curDate) && (receiveDate == null || receiveDate == '' )){
                 bclass = "booking-active";
 
             } else {

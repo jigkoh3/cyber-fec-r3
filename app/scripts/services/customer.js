@@ -54,7 +54,16 @@ angular.module('fec3App')
                             "productName": "3000013631-H/S,IPHONE 5,16GB,GSM-THA,BK,MD297TH/A",
                             "receiveShop": "80000001",
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
-                            "expectReceiveDate": "2015-11-01T16:01:00",
+                            "expectReceiveDate": "2015-11-02T16:01:00",
+                            "receiveDate": "2016-09-07T04:04:13"
+                        },{
+                            "bookingId": "201483743176",
+                            "campaignCode": null,
+                            "productCode": "3000013630",
+                            "productName": "3000013631-H/S,IPHONE 5,16GB,GSM-THA,BK,MD297TH/A",
+                            "receiveShop": "80000001",
+                            "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
+                            "expectReceiveDate": "2015-11-02T16:01:00",
                             "receiveDate": "2015-09-07T04:04:13"
                         }
                         ]
@@ -500,7 +509,7 @@ angular.module('fec3App')
             };
             if (!dalService.demo) {
 
-                var target = '/profiles/customer/get?certificateid=' + certificateId + '&certificatetype=' + certificatetype;
+                var target = '/profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
@@ -774,7 +783,7 @@ angular.module('fec3App')
 
             if (!dalService.demo) {
 
-                var target = '/profiles/customer/get?product-id-name=' + productIdName + '&product-id-number' + productIdNumber;
+                var target = '/profiles/customer/get?product-id-name=' + productIdName + '&product-id-number=' + productIdNumber;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
