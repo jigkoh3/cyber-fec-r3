@@ -10,9 +10,12 @@
 angular.module('fec3App')
   .controller('headerCtrl', function ($scope, $localstorage) {
   	$scope.isAuthen = false;
-  	var customerProfile = $localstorage.getObject("customerProfile");
-  	if(customerProfile != null)
+  	var customerProfile = $localstorage.get("customerProfile");
+  	//$localstorage.log("customerProfile");
+  	//console.log(customerProfile);
+  	if(customerProfile)
   	{
+  		//console.log("isAuthen : true" )
   		$scope.isAuthen = true;
   	}
     

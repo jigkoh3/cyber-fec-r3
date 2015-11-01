@@ -8,21 +8,8 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('landingpageCtrl', function($scope, $loading, $message, $location, $anchorScroll, productService) {
-        // $('.ng-menu').click(function() {
-        //     $('.ng-menu').removeClass('active');
-        //     $(this).addClass('active');
-        // });
-
-
-
-        // $scope.gotopricePlan = function() {
-        //     window.location = "#/landingpage";
-        //     setTimeout(function() {
-        //         window.location = "#/pricePlan";
-        //     }, 1000);
-
-        // };
+    .controller('landingpageCtrl', function($scope, $loading, $message, $location, anchorSmoothScroll, productService) {
+        $scope.selectedTab = "";
         $loading.show();
         productService.getCategories(function(result) {
             //console.log(result.data);
@@ -34,10 +21,8 @@ angular.module('fec3App')
                     $loading.hide();
                     if (result.status) {
                         console.log(result.data);
-                        // $scope.truePromotions = result.data.Promotions;
-                        // $scope.trueServices = result.data.เปิดบริการ;
-                        // $scope.trueDevices = result.data.Devices;
                         $scope.recommend = result.data;
+                        $scope.selectedTab = $scope.recommend.child[0].id;
                     } else {
                         $message.alert(result.data["display-message"]);
                     }
@@ -76,133 +61,11 @@ angular.module('fec3App')
             }
         }
 
-        $scope.gotoAnchor = function(x) {
-            //alert(x);
-            var newHash = 'anchor' + x;
-            $anchorScroll(newHash);
-
+        
+        $scope.gotoElement = function(eID) {
+            
+            anchorSmoothScroll.scrollTo(eID);
+            $scope.selectedTab=eID;
         };
-        // $scope.truePromotions = [{
-        //     promotionCode: "gold",
-        //     upload: "50",
-        //     download: "5.0",
-        //     pricePlan: "4P Value + 2,999",
-        //     description: "ไฟเบอร์เคเบิลอินเทอร์เน็ต (Docsis)",
-        //     promotionDtls: [{
-        //         desc: "TOL 50/5.0 Mbps."
-        //     }, {
-        //         desc: "TVS GOLD HD 170 ช่อง 39 HD"
-        //     }, {
-        //         desc: "TMVH 450 mins+DATA 4GB"
-        //     }, {
-        //         desc: "Fixline Plus 100 mins"
-        //     }]
-        // }, {
-        //     promotionCode: "gold",
-        //     upload: "50",
-        //     download: "5.0",
-        //     pricePlan: "4P Value + 2,999",
-        //     description: "ไฟเบอร์เคเบิลอินเทอร์เน็ต (Docsis)",
-        //     promotionDtls: [{
-        //         desc: "TOL 50/5.0 Mbps."
-        //     }, {
-        //         desc: "TVS GOLD HD 170 ช่อง 39 HD"
-        //     }, {
-        //         desc: "TMVH 450 mins+DATA 4GB"
-        //     }, {
-        //         desc: "Fixline Plus 100 mins"
-        //     }]
-        // }, {
-        //     promotionCode: "gold",
-        //     upload: "50",
-        //     download: "5.0",
-        //     pricePlan: "4P Value + 2,999",
-        //     description: "ไฟเบอร์เคเบิลอินเทอร์เน็ต (Docsis)",
-        //     promotionDtls: [{
-        //         desc: "TOL 50/5.0 Mbps."
-        //     }, {
-        //         desc: "TVS GOLD HD 170 ช่อง 39 HD"
-        //     }, {
-        //         desc: "TMVH 450 mins+DATA 4GB"
-        //     }, {
-        //         desc: "Fixline Plus 100 mins"
-        //     }]
-        // }, {
-        //     promotionCode: "gold",
-        //     upload: "50",
-        //     download: "5.0",
-        //     pricePlan: "4P Value + 2,999",
-        //     description: "ไฟเบอร์เคเบิลอินเทอร์เน็ต (Docsis)",
-        //     promotionDtls: [{
-        //         desc: "TOL 50/5.0 Mbps."
-        //     }, {
-        //         desc: "TVS GOLD HD 170 ช่อง 39 HD"
-        //     }, {
-        //         desc: "TMVH 450 mins+DATA 4GB"
-        //     }, {
-        //         desc: "Fixline Plus 100 mins"
-        //     }]
-        // }, {
-        //     promotionCode: "gold",
-        //     upload: "50",
-        //     download: "5.0",
-        //     pricePlan: "4P Value + 2,999",
-        //     description: "ไฟเบอร์เคเบิลอินเทอร์เน็ต (Docsis)",
-        //     promotionDtls: [{
-        //         desc: "TOL 50/5.0 Mbps."
-        //     }, {
-        //         desc: "TVS GOLD HD 170 ช่อง 39 HD"
-        //     }, {
-        //         desc: "TMVH 450 mins+DATA 4GB"
-        //     }, {
-        //         desc: "Fixline Plus 100 mins"
-        //     }]
-        // }, {
-        //     promotionCode: "gold",
-        //     upload: "50",
-        //     download: "5.0",
-        //     pricePlan: "4P Value + 2,999",
-        //     description: "ไฟเบอร์เคเบิลอินเทอร์เน็ต (Docsis)",
-        //     promotionDtls: [{
-        //         desc: "TOL 50/5.0 Mbps."
-        //     }, {
-        //         desc: "TVS GOLD HD 170 ช่อง 39 HD"
-        //     }, {
-        //         desc: "TMVH 450 mins+DATA 4GB"
-        //     }, {
-        //         desc: "Fixline Plus 100 mins"
-        //     }]
-        // }];
-
-        // $scope.trueDevices = [{
-        //     name: "iPhone 6 Plus",
-        //     price: "29,450.00",
-        //     imgAS: "iPhone_6_Plus",
-        //     networks: ["3g", "4g"]
-        // }, {
-        //     name: "iPhone 6",
-        //     price: "29,450.00",
-        //     imgAS: "Picture4",
-        //     networks: ["3g", "4g"]
-        // }, {
-        //     name: "iPhone 6 Plus",
-        //     price: "29,450.00",
-        //     imgAS: "iPhone_6_Plus",
-        //     networks: ["3g", "4g"]
-        // }, {
-        //     name: "iPhone 6 Plus",
-        //     price: "29,450.00",
-        //     imgAS: "iPhone_6_Plus",
-        //     networks: ["3g", "4g"]
-        // }, {
-        //     name: "iPhone 6 Plus",
-        //     price: "29,450.00",
-        //     imgAS: "iPhone_6_Plus",
-        //     networks: ["3g", "4g"]
-        // }, {
-        //     name: "iPhone 6 Plus",
-        //     price: "29,450.00",
-        //     imgAS: "iPhone_6_Plus",
-        //     networks: ["3g", "4g"]
-        // }];
+        
     });

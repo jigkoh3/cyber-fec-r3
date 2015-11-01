@@ -38,7 +38,7 @@ angular.module('fec3App')
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
                             "expectReceiveDate": "2014-11-02T16:01:00",
                             "receiveDate": "2015-09-07T04:04:13"
-                        },{
+                        }, {
                             "bookingId": "201483743176",
                             "campaignCode": null,
                             "productCode": "3000013630",
@@ -47,7 +47,7 @@ angular.module('fec3App')
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
                             "expectReceiveDate": "2016-11-02T16:01:00",
                             "receiveDate": ""
-                        },{
+                        }, {
                             "bookingId": "201483743176",
                             "campaignCode": null,
                             "productCode": "3000013630",
@@ -56,7 +56,7 @@ angular.module('fec3App')
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
                             "expectReceiveDate": "2015-11-02T16:01:00",
                             "receiveDate": "2016-09-07T04:04:13"
-                        },{
+                        }, {
                             "bookingId": "201483743176",
                             "campaignCode": null,
                             "productCode": "3000013630",
@@ -65,8 +65,7 @@ angular.module('fec3App')
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
                             "expectReceiveDate": "2015-11-02T16:01:00",
                             "receiveDate": "2015-09-07T04:04:13"
-                        }
-                        ]
+                        }]
                     },
                     "display-message": null
                 };
@@ -332,8 +331,8 @@ angular.module('fec3App')
                 };
                 $timeout(function() {
                     onSuccess({
-                        status: false,
-                        data: data2,
+                        status: true,
+                        data: result,
                         error: "",
                         msgErr: ""
                     });
@@ -452,6 +451,16 @@ angular.module('fec3App')
 
         this.getCustomerManual = function(certificateid, certificatetype, fnCallback) {
             $localstorage.destroy("customerProfile");
+            customerProfile.certificateId = certificateid;
+            
+            that.getBookingByCiti(function(result) {
+                if (result.status && result.data["response-data"]) {
+                    customerProfile.bookings = result.data["response-data"].bookings;
+                    $localstorage.setObject("customerProfile", customerProfile);
+                }
+
+            });
+            $localstorage.setObject("customerProfile", customerProfile);
             var onSuccess = function(result) {
                 if (result.data["display-messages"] && result.data["display-messages"].length >= 1) {
                     //fnCallback(result);
@@ -468,35 +477,29 @@ angular.module('fec3App')
                         customerProfile.existData = result.data["response-data"];
                         delete customerProfile.existData['installed-products'];
 
-                        customerProfile.certificateId = certificateid;
                         customerProfile.title = customerProfile.existData.title;
                         customerProfile.firstName = customerProfile.existData.firstname;
                         customerProfile.lastName = customerProfile.existData.lastname;
                         customerProfile.customerType = customerProfile.existData["customer-type"];
                         customerProfile.customerTypeSelected = true;
-                        that.getBookingByCiti(function(result) {
+                        that.getTrueMove(certificateid, certificatetype, function(result) {
                             if (result.status && result.data["response-data"]) {
-                                customerProfile.bookings = result.data["response-data"].bookings;
+                                customerProfile.TMV = result.data["response-data"]["installed-products"];
                             }
-                            that.getTrueMove(certificateid, certificatetype, function(result) {
+                            that.getTrueOnline(certificateid, certificatetype, function(result) {
                                 if (result.status && result.data["response-data"]) {
-                                    customerProfile.TMV = result.data["response-data"]["installed-products"];
+                                    customerProfile.TOL = result.data["response-data"]["installed-products"];
                                 }
-                                that.getTrueOnline(certificateid, certificatetype, function(result) {
+                                that.getTrueVision(certificateid, certificatetype, function(result) {
                                     if (result.status && result.data["response-data"]) {
-                                        customerProfile.TOL = result.data["response-data"]["installed-products"];
+                                        customerProfile.TVS = result.data["response-data"]["installed-products"];
                                     }
-                                    that.getTrueVision(certificateid, certificatetype, function(result) {
-                                        if (result.status && result.data["response-data"]) {
-                                            customerProfile.TVS = result.data["response-data"]["installed-products"];
-                                        }
-                                        $localstorage.setObject("customerProfile", customerProfile);
-                                        fnCallback({
-                                            status: true,
-                                            data: customerProfile,
-                                            error: "",
-                                            msgErr: ""
-                                        });
+                                    $localstorage.setObject("customerProfile", customerProfile);
+                                    fnCallback({
+                                        status: true,
+                                        data: customerProfile,
+                                        error: "",
+                                        msgErr: ""
                                     });
                                 });
                             });
@@ -505,6 +508,287 @@ angular.module('fec3App')
                     }
                 }
 
+
+            };
+            if (!dalService.demo) {
+
+                var target = '/profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
+
+                dalService.callServiceGet(target, null, function(result) {
+                    onSuccess(result);
+                });
+            } else {
+
+                var result = {
+                    "status": "SUCCESSFUL",
+                    "trx-id": "2R1TMA1C40B1F",
+                    "process-instance": "psaapdv1 (instance: SFF_node1)",
+                    "response-data": {
+                        "gender": "MALE",
+                        "title": "นาย",
+                        "title-code": "T0",
+                        "firstname": "มินิท",
+                        "lastname": "เงินติดล้อ",
+                        "birthdate": "1980-08-20T00:00:00+0700",
+                        "customer-type": "I",
+                        "contact-number": "027883838",
+                        "contact-mobile-number": "0870009987",
+                        "contact-email": "ss@gmail.com",
+                        "id-number": "83838838",
+                        "tax-id": "888832883898709",
+                        "id-expire-date": "2018-06-30T00:00:00+0700",
+                        "branch-code": "branch1",
+                        "customer-level": "NON_TOP",
+                        "customer-sublevel": "NONE",
+                        "customer-sublevel-id": "1",
+                        "installed-products": [{
+                            "product-category": "TMV",
+                            "product-type": "PRICEPLAN",
+                            "product-status": "ACTIVE",
+                            "account-category": "I",
+                            "account-sub-type": "SRS",
+                            "product-name": "RMIPHP50",
+                            "product-description": "(FYL)Free size 599, voice400mins net2GB 50%,3mths",
+                            "company-code": "RM",
+                            "product-properties": {
+                                "MOBILE-SERVICE-TYPE": "POSTPAID",
+                                "CUSTOMER-ID": "",
+                                "BILL-CYCLE": ""
+                            },
+                            "address-list": {
+                                "BILLING_ADDRESS": {
+                                    "number": "61/238",
+                                    "moo": "8",
+                                    "village": "moo ban",
+                                    "street": "ratchada",
+                                    "soi": "81",
+                                    "district": "dindaeng",
+                                    "province": "Bangkok",
+                                    "building-name": "Pakin",
+                                    "building-room": "22",
+                                    "building-floor": "13",
+                                    "sub-district": "Dindaeng",
+                                    "zip": "10400",
+                                    "household": "18"
+                                },
+                                "TAX_ADDRESS": {
+                                    "number": "61/238",
+                                    "moo": "8",
+                                    "village": "moo ban",
+                                    "street": "ratchada",
+                                    "soi": "81",
+                                    "district": "dindaeng",
+                                    "province": "Bangkok",
+                                    "building-name": "Pakin",
+                                    "building-room": "22",
+                                    "building-floor": "13",
+                                    "sub-district": "Dindaeng",
+                                    "zip": "10400",
+                                    "household": "18"
+                                }
+                            },
+                            "product-id-name": "MSISDN",
+                            "product-id-number": "0868838826",
+                            "installed-date": "2015-06-14T00:00:00+0700"
+                        }, {
+                            "product-category": "TMV",
+                            "product-type": "PRICEPLAN",
+                            "product-status": "ACTIVE",
+                            "account-category": "I",
+                            "account-sub-type": "SRS",
+                            "product-name": "NETSVP64",
+                            "product-description": "(FYP) iNet 899, net5GB UNLTD WiFi UNLTD (50%,5mth)",
+                            "company-code": "RM",
+                            "product-properties": {
+                                "MOBILE-SERVICE-TYPE": "PREPAID"
+                            },
+                            "product-id-name": "MSISDN",
+                            "product-id-number": "0878886455",
+                            "installed-date": "2015-01-17T00:00:00+0700"
+                        }, {
+                            "product-category": "TOL",
+                            "product-type": "PROMOTION",
+                            "product-status": "ACTIVE",
+                            "account-category": "BUS",
+                            "account-sub-type": "SRS",
+                            "product-name": "3476",
+                            "product-description": "FT-27 Fiber to the home for consumer",
+                            "product-properties": {},
+                            "address-list": {
+                                "BILLING_ADDRESS": {
+                                    "number": "61/238",
+                                    "moo": "8",
+                                    "village": "moo ban",
+                                    "street": "ratchada",
+                                    "soi": "81",
+                                    "district": "dindaeng",
+                                    "province": "Bangkok",
+                                    "building-name": "Pakin",
+                                    "building-room": "22",
+                                    "building-floor": "13",
+                                    "sub-district": "Dindaeng",
+                                    "zip": "10400",
+                                    "household": "18"
+                                },
+                                "INSTALLATION_ADDRESS": {
+                                    "number": "61/238",
+                                    "moo": "8",
+                                    "village": "moo ban",
+                                    "street": "ratchada",
+                                    "soi": "81",
+                                    "district": "dindaeng",
+                                    "province": "Bangkok",
+                                    "building-name": "Pakin",
+                                    "building-room": "22",
+                                    "building-floor": "13",
+                                    "sub-district": "Dindaeng",
+                                    "zip": "10400",
+                                    "household": "18"
+                                }
+                            },
+                            "product-id-name": "ASSET_NUMBER",
+                            "product-id-number": "88008089886",
+                            "installed-date": "2015-06-14T00:00:00+0700"
+                        }, {
+                            "product-category": "TVS",
+                            "product-type": "PROMOTION",
+                            "product-status": "ACTIVE",
+                            "account-category": "I",
+                            "account-sub-type": "SRS",
+                            "product-name": "2984",
+                            "product-description": "Platinum HD",
+                            "product-properties": {},
+                            "address-list": {
+                                "BILLING_ADDRESS": {
+                                    "number": "61/238",
+                                    "moo": "8",
+                                    "village": "moo ban",
+                                    "street": "ratchada",
+                                    "soi": "81",
+                                    "district": "dindaeng",
+                                    "province": "Bangkok",
+                                    "building-name": "Pakin",
+                                    "building-room": "22",
+                                    "building-floor": "13",
+                                    "sub-district": "Dindaeng",
+                                    "zip": "10400",
+                                    "household": "18"
+                                }
+                            },
+                            "product-id-name": "TVS_NUMBER",
+                            "product-id-number": "588377",
+                            "installed-date": "2015-06-14T00:00:00+0700"
+                        }],
+                        "address-list": {
+                            "CUSTOMER_ADDRESS": {
+                                "number": "61/238",
+                                "moo": "8",
+                                "village": "moo ban",
+                                "street": "ratchada",
+                                "soi": "81",
+                                "district": "dindaeng",
+                                "province": "Bangkok",
+                                "building-name": "Pakin",
+                                "building-room": "22",
+                                "building-floor": "13",
+                                "sub-district": "Dindaeng",
+                                "zip": "10400",
+                                "household": "18"
+                            }
+                        }
+                    }
+                };
+
+                var data2 = {
+                    "status": "UNSUCCESSFUL",
+                    "display-messages": [{
+                        "message": "request sim prefix  is wrong format for company(RM)",
+                        "message-code": "",
+                        "message-type": "ERROR",
+                        "en-message": "request sim prefix  is wrong format for company(RM)",
+                        "th-message": "request sim prefix  is wrong format for company(RM)",
+                        "technical-message": "request sim prefix  is wrong format for company(RM)"
+                    }],
+                    "trx-id": "4Q15KDZCTBQYP",
+                    "process-instance": "tmsapnpr1 (instance: SFF_node4)",
+                    "response-data": {}
+
+                };
+
+                $timeout(function() {
+                    onSuccess({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
+        };
+
+        this.getCustomerReadCard = function(fnCallback) {
+            $localstorage.destroy("customerProfile");
+            var cardInfo = $localstorage.getObject("cardInfo");
+            customerProfile.certificateId = cardInfo.CitizenID;
+            customerProfile.title = cardInfo.PrefixTH;
+            customerProfile.firstName = cardInfo.FirstNameTH;
+            customerProfile.lastName = cardInfo.LastNameTH;
+            that.getBookingByCiti(function(result) {
+                if (result.status && result.data["response-data"]) {
+                    customerProfile.bookings = result.data["response-data"].bookings;
+                    $localstorage.setObject("customerProfile", customerProfile);
+                }
+
+            });
+            $localstorage.setObject("customerProfile", customerProfile);
+            var certificateid = cardInfo.CitizenID;
+            var certificatetype = "I";
+            var onSuccess = function(result) {
+                if (result.data["display-messages"] && result.data["display-messages"].length >= 1) {
+                    //fnCallback(result);
+                    fnCallback({
+                        status: false,
+                        data: result.data,
+                        error: "error",
+                        msgErr: ""
+                    });
+                } else {
+
+                    if (result.data["response-data"]) {
+
+                        customerProfile.existData = result.data["response-data"];
+                        delete customerProfile.existData['installed-products'];
+
+                        customerProfile.title = customerProfile.existData.title;
+                        customerProfile.firstName = customerProfile.existData.firstname;
+                        customerProfile.lastName = customerProfile.existData.lastname;
+                        customerProfile.customerType = customerProfile.existData["customer-type"];
+                        customerProfile.customerTypeSelected = true;
+                        that.getTrueMove(certificateid, certificatetype, function(result) {
+                            if (result.status && result.data["response-data"]) {
+                                customerProfile.TMV = result.data["response-data"]["installed-products"];
+                            }
+                            that.getTrueOnline(certificateid, certificatetype, function(result) {
+                                if (result.status && result.data["response-data"]) {
+                                    customerProfile.TOL = result.data["response-data"]["installed-products"];
+                                }
+                                that.getTrueVision(certificateid, certificatetype, function(result) {
+                                    if (result.status && result.data["response-data"]) {
+                                        customerProfile.TVS = result.data["response-data"]["installed-products"];
+                                    }
+                                    $localstorage.setObject("customerProfile", customerProfile);
+                                    fnCallback({
+                                        status: true,
+                                        data: customerProfile,
+                                        error: "",
+                                        msgErr: ""
+                                    });
+                                });
+                            });
+                        });
+
+                    }
+                }
 
             };
             if (!dalService.demo) {
