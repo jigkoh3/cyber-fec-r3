@@ -1,8 +1,8 @@
 @charset "UTF-8";
 @font-face {
     font-family: 'FontAwesome';
-    src: url('../app/fonts/awesome/fontawesome-webfont.eot');
-    src: url('../app/fonts/awesome/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/awesome/fontawesome-webfont.woff') format('woff'), url('../fonts/awesome/fontawesome-webfont.ttf') format('truetype'), url('../fonts/awesome/fontawesome-webfont.svg#FontAwesome') format('svg');
+    src: url('../fonts/awesome/fontawesome-webfont.eot');
+    src: url('../fonts/awesome/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/awesome/fontawesome-webfont.woff') format('woff'), url('../fonts/awesome/fontawesome-webfont.ttf') format('truetype'), url('../fonts/awesome/fontawesome-webfont.svg#FontAwesome') format('svg');
     font-weight: normal;
     font-style: normal;
 }
