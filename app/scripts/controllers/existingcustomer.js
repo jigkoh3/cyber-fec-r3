@@ -24,47 +24,49 @@ angular.module('fec3App')
             $scope.trueOnlineProdeucts = customerProfile.TOL;
 
             //set default tab
-            $scope.selectedTab = $scope.dataPro1 && $scope.dataPro1.length >= 1 ? "booking" 
-                            : $scope.trueMoveHProdeucts ? "truemove" 
-                            : $scope.trueVisionProdeucts ? "truevision" 
-                            : $scope.trueOnlineProdeucts ? "trueonline"
-                            : ""
-                            ;
+            $scope.selectedTab = $scope.dataPro1 && $scope.dataPro1.length >= 1 ? "booking" : $scope.trueMoveHProdeucts ? "truemove" : $scope.trueVisionProdeucts ? "truevision" : $scope.trueOnlineProdeucts ? "trueonline" : "";
         }
         $loading.hide();
 
-        $scope.bookingsClass = function(expectRecpDate,receiveDate) {
+        $scope.bookingsClass = function(expectRecpDate, receiveDate) {
             //console.log("api resp: " + expectRecpDate);
             //console.log("api receive: " + receiveDate);
+            try {
+                var dateData = new Date(expectRecpDate);
+                //console.log("chg format:" + dateData);
+                var curDate = new Date();
+                var bclass = "";
+                //&& (receiveDate == null || receiveDate == '' )
+                //console.log( dateData + "<" + curDate + " is " + (dateData < curDate));
+                if ((dateData > curDate) && (receiveDate == null || receiveDate == '')) {
+                    // ยังไม่ถึงกำหนดรับสินค้า
+                    // ยังไม่รับสินค้า
 
-            var dateData = new Date(expectRecpDate.replace('T', ' '));
-            //console.log("chg format:" + dateData);
-            var curDate = new Date();
-            var bclass = "";
-            //&& (receiveDate == null || receiveDate == '' )
-            //console.log( dateData + "<" + curDate + " is " + (dateData < curDate));
-            if ((dateData > curDate) && (receiveDate == null || receiveDate == '' )){ 
-                // ยังไม่ถึงกำหนดรับสินค้า
-                // ยังไม่รับสินค้า
-                
-                bclass = "booking-active";
+                    bclass = "booking-active";
 
-            } else {
-                bclass = "booking-inactive";
+                } else {
+                    bclass = "booking-inactive";
+                }
+                return bclass;
+            } catch (err) {
+                console.log(err);
             }
-            return bclass;
+
         }
 
-        $scope.formatDate = function(strDate){
-            var dateData = new Date(strDate.replace('T', ' '));
+        $scope.formatDate = function(strDate) {
+            var dateData = new Date(strDate);
+
+            //console.log(strDate + " -> " + dateData);
             return dateData;
+
         }
 
         $scope.gotoElement = function(eID) {
-            $scope.selectedTab=eID;
+            $scope.selectedTab = eID;
             anchorSmoothScroll.scrollTo(eID);
-            
+
         };
 
-        
+
     });

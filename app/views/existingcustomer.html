@@ -10,7 +10,7 @@
                     <p>
                         Home </p>
                 </div>
-                <div class="col-xs-9">
+                <div class="col-xs-9 hidden-xs">
                     <ul class="nav navbar-nav navbar-right">
                         <li  ng-show="dataPro1 && dataPro1.length >= 1" ng-class="{'active':selectedTab === 'booking'}" class="ng-menu"><a  href="" ng-click="gotoElement('booking')">ข้อมูลการจอง</a></li>
                         <li  ng-show="trueMoveHProdeucts" ng-class="{'active':selectedTab === 'truemove'}" class="ng-menu"><a href="" ng-click="gotoElement('truemove')">True Move H</a></li>
@@ -48,8 +48,8 @@
                                                         <div class="col-xs-12">รหัสสินค้า: {{itm.productCode}}</div>
                                                         <div class="col-xs-12">สินค้า: {{itm.productName}}</div>
                                                         <div class="col-xs-12">นัดรับสินค้าที่: {{itm.receiveShopName}}</div>
-                                                        <div class="col-xs-12">วันที่นัดรับสินค้า: {{itm.expectReceiveDate=="" ? "" : formatDate(itm.expectReceiveDate) | date:"dd/MM/yyyy h:mm"}}</div>
-                                                        <div class="col-xs-12">วันที่รับสินค้าจริง: {{itm.receiveDate == "" ? "" : formatDate(itm.receiveDate) | date:"dd/MM/yyyy h:mm"}}</div>
+                                                        <div class="col-xs-12">วันที่นัดรับสินค้า: {{itm.expectReceiveDate=='' ? '' : formatDate(itm.expectReceiveDate) | date:"dd/MM/yyyy h:mm"}}</div>
+                                                        <div class="col-xs-12">วันที่รับสินค้าจริง: {{itm.receiveDate == '' ? '' : formatDate(itm.receiveDate) | date:"dd/MM/yyyy h:mm"}}</div>
                                                     </div>
                                                 </h4>
                                             </div>
