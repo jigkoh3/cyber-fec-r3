@@ -8,5 +8,5 @@ version 0.0.1
    - fix get booking with case new customer
    - fix display layout of exitingcustomer
    - fix second authen
-- 1/11/2015 (v001-fix-2)
    - fix ie8
+ - 1/11/2015 (v002)
