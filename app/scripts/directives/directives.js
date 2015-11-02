@@ -17,22 +17,7 @@ angular
     .directive('ngMenu', ngMenu)
     .directive('version', version)
     .directive('recommend', recommend)
-    .directive('actualSrc', function() {
-        return {
-            link: function postLink(scope, element, attrs) {
-                attrs.$observe('actualSrc', function(newVal, oldVal) {
-                    if (newVal != undefined) {
-                        var img = new Image();
-                        img.src = attrs.actualSrc;
-                        angular.element(img).bind('load', function() {
-                            element.attr("src", attrs.actualSrc);
-                        });
-                    }
-                });
-
-            }
-        }
-    })
+    .directive('actualSrc', actualSrc)
 
 
 
@@ -72,7 +57,7 @@ function userMenu($rootScope) {
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
-function customerToggleGet($rootScope) {
+function customerToggleGet($rootScope, $route) {
     return {
         restrict: 'EA',
         templateUrl: 'views/templates/customer-toggle-get.html',
@@ -117,23 +102,19 @@ function customerToggleGet($rootScope) {
                 //console.log(JSON.stringify(cardInfo) );
                 $localstorage.setObject("cardInfo", cardInfo);
 
-                var customerProfile = $localstorage.getObject("customerProfile");
-
-                customerProfile.certificateId = cardInfo.CitizenID;
-                customerProfile.title = cardInfo.PrefixTH;
-                customerProfile.firstName = cardInfo.FirstNameTH;
-                customerProfile.lastName = cardInfo.LastNameTH;
-
-
-                $localstorage.setObject("customerProfile", customerProfile);
-                //$scope.inputCardNo = cardInfo.CitizenID;
                 //$loading.show();
-                customerService.getCustomerManual(cardInfo.CitizenID, "I", function(result) {
-                    $loading.hide();
+                customerService.getCustomerReadCard(function(result) {
+                    //$loading.hide();
                     if (result.status) {
                         //console.log(result);
 
-                        $location.path('/existingcustomer')
+
+                        //console.log($route.current);
+                        if ($route.current.templateUrl == "views/main.html") {
+                            $location.path('/existingcustomer')
+                        } else {
+                            $route.reload();
+                        }
                     } else {
                         $message.alert(result.data["display-messages"][0]);
                     }
@@ -163,8 +144,15 @@ function customerToggleGet($rootScope) {
                                 $loading.hide();
                                 if (result.status) {
                                     //console.log(result);
+                                    //$localstorage.log("customerProfile");
 
-                                    $location.path('/existingcustomer')
+                                    //console.log($route.current);
+                                    if ($route.current.templateUrl == "views/main.html") {
+                                        $location.path('/existingcustomer')
+                                    } else {
+                                        $route.reload();
+                                    }
+
                                 } else {
                                     $message.alert(result.data["display-messages"][0]);
                                 }
@@ -174,43 +162,45 @@ function customerToggleGet($rootScope) {
 
                     case "02":
                         $loading.show();
-                            customerService.getCustomerByTMV(inputCardNo, "msisdn", function(result) {
-                                $loading.hide();
-                                if (result.status) {
-                                    //console.log(result);
+                        customerService.getCustomerByTMV(inputCardNo, "msisdn", function(result) {
+                            $loading.hide();
+                            if (result.status) {
+                                //console.log(result);
 
-                                    $location.path('/existingcustomer')
-                                } else {
-                                    $message.alert(result.data["display-messages"][0]);
-                                }
-                            })
+                                $location.path('/existingcustomer')
+                            } else {
+                                $message.alert(result.data["display-messages"][0]);
+                            }
+                        })
 
                         break;
                     case "03":
                         $loading.show();
-                            customerService.getCustomerByTMV(inputCardNo, "assetnumber", function(result) {
-                                $loading.hide();
-                                if (result.status) {
-                                    //console.log(result);
 
-                                    $location.path('/existingcustomer')
-                                } else {
-                                    $message.alert(result.data["display-messages"][0]);
-                                }
-                            })
+                        customerService.getCustomerByTMV(inputCardNo, "assetnumber", function(result) {
+                            $loading.hide();
+                            if (result.status) {
+                                //console.log(result);
+
+
+                                $location.path('/existingcustomer')
+                            } else {
+                                $message.alert(result.data["display-messages"][0]);
+                            }
+                        })
                         break;
-                        case "04":
+                    case "04":
                         $loading.show();
-                            customerService.getCustomerByTMV(inputCardNo, "tvsnumber", function(result) {
-                                $loading.hide();
-                                if (result.status) {
-                                    //console.log(result);
+                        customerService.getCustomerByTMV(inputCardNo, "tvsnumber", function(result) {
+                            $loading.hide();
+                            if (result.status) {
+                                //console.log(result);
 
-                                    $location.path('/existingcustomer')
-                                } else {
-                                    $message.alert(result.data["display-messages"][0]);
-                                }
-                            })
+                                $location.path('/existingcustomer')
+                            } else {
+                                $message.alert(result.data["display-messages"][0]);
+                            }
+                        })
                         break;
                 }
 
@@ -262,7 +252,7 @@ function customerToggleGet($rootScope) {
                                 $loading.hide();
                                 //console.log(result);
                                 //$scope.secondAuthenData = result;
-                                if (result["status"] == "SUCCESSFUL") {
+                                if (result.status) {
                                     isSSOSuccessed = true;
                                     setTimeout(function() {
                                         $('#inputCardNo').focus();
@@ -272,12 +262,12 @@ function customerToggleGet($rootScope) {
 
                                     setTimeout(function() {
                                         $message.alert({
-                                            "message": result["display-messages"][0]["message"],
-                                            "message-code": result["display-messages"][0]["message-code"],
+                                            "message": result.data["display-messages"][0]["message"],
+                                            "message-code": result.data["display-messages"][0]["message-code"],
                                             "message-type": "WARNING",
-                                            "en-message": result["display-messages"][0]["en-message"],
-                                            "th-message": result["display-messages"][0]["th-message"],
-                                            "technical-message": result["display-messages"][0]["technical-message"]
+                                            "en-message": result.data["display-messages"][0]["en-message"],
+                                            "th-message": result.data["display-messages"][0]["th-message"],
+                                            "technical-message": result.data["display-messages"][0]["technical-message"]
                                         });
                                     }, 1000);
                                 }
@@ -318,7 +308,7 @@ function customerToggleInfo($rootScope, $localstorage) {
         controller: function($scope, $element, $location) {
             $scope.customerProfile = $localstorage.getObject("customerProfile");
             $scope.onClickEndServe = function() {
-                
+
                 $localstorage.destroy("customerProfile");
                 $location.path('/main');
             }
@@ -358,7 +348,7 @@ function landingClick($rootScope) {
     return {
         link: function(scope, element, attrs) {
             element.parent().bind('click', function() {
-                
+
                 element.addClass('active').siblings().removeClass('active');
                 // var link = $(this);
                 // $('html, body').stop().animate({
@@ -382,7 +372,7 @@ function landingClick($rootScope) {
                 // attrs.$observe('myText', function(value) {
                 //     console.log('class=', value);
                 // });
-                
+
             });
 
         }
@@ -417,6 +407,22 @@ function recommend($rootScope, $localstorage) {
             //console.log($localstorage.getObject("userProfile"));
             //$scope.userinfo = $localstorage.getObject("userProfile");
 
+        }
+    };
+};
+
+function actualSrc() {
+    return {
+        link: function postLink(scope, element, attrs) {
+            attrs.$observe('actualSrc', function(newVal, oldVal) {
+                if (newVal != undefined) {
+                    var img = new Image();
+                    img.src = attrs.actualSrc;
+                    angular.element(img).bind('load', function() {
+                        element.attr("src", attrs.actualSrc);
+                    });
+                }
+            });
         }
     };
 };

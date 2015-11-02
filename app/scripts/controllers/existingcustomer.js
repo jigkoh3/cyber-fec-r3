@@ -8,12 +8,13 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('existingcustomerCtrl', function($scope, $loading, $localstorage) {
+    .controller('existingcustomerCtrl', function($scope, $loading, $localstorage, anchorSmoothScroll) {
 
-        $('.ng-menu').click(function() {
-            $('.ng-menu').removeClass('active');
-            $(this).addClass('active');
-        });
+        // $('.ng-menu').click(function() {
+        //     $('.ng-menu').removeClass('active');
+        //     $(this).addClass('active');
+        // });
+
         $loading.show();
         var customerProfile = $localstorage.getObject("customerProfile");
         if (customerProfile) {
@@ -21,78 +22,51 @@ angular.module('fec3App')
             $scope.trueMoveHProdeucts = customerProfile.TMV;
             $scope.trueVisionProdeucts = customerProfile.TVS;
             $scope.trueOnlineProdeucts = customerProfile.TOL;
+
+            //set default tab
+            $scope.selectedTab = $scope.dataPro1 && $scope.dataPro1.length >= 1 ? "booking" : $scope.trueMoveHProdeucts ? "truemove" : $scope.trueVisionProdeucts ? "truevision" : $scope.trueOnlineProdeucts ? "trueonline" : "";
         }
         $loading.hide();
 
-        $scope.bookingsClass = function(expectRecpDate,receiveDate) {
-            console.log("api resp: " + expectRecpDate);
-            console.log("api receive: " + receiveDate);
+        $scope.bookingsClass = function(expectRecpDate, receiveDate) {
+            //console.log("api resp: " + expectRecpDate);
+            //console.log("api receive: " + receiveDate);
+            try {
+                var dateData = new Date(expectRecpDate);
+                //console.log("chg format:" + dateData);
+                var curDate = new Date();
+                var bclass = "";
+                //&& (receiveDate == null || receiveDate == '' )
+                //console.log( dateData + "<" + curDate + " is " + (dateData < curDate));
+                if ((dateData > curDate) && (receiveDate == null || receiveDate == '')) {
+                    // ยังไม่ถึงกำหนดรับสินค้า
+                    // ยังไม่รับสินค้า
 
-            var dateData = new Date(expectRecpDate.replace('T', ' '));
-            console.log("chg format:" + dateData);
-            var curDate = new Date();
-            var bclass = "";
-          
-            if ((dateData < curDate) && (receiveDate == null || receiveDate == '' )){
-                bclass = "booking-active";
+                    bclass = "booking-active";
 
-            } else {
-                bclass = "booking-inactive";
+                } else {
+                    bclass = "booking-inactive";
+                }
+                return bclass;
+            } catch (err) {
+                console.log(err);
             }
-            return bclass;
+
         }
 
+        $scope.formatDate = function(strDate) {
+            var dateData = new Date(strDate);
 
-        // bookingService.getBookingByCiti(function(result) {
+            //console.log(strDate + " -> " + dateData);
+            return dateData;
 
-        //     if (result.status) {
-        //         $scope.dataPro1 = result.data["response-data"].bookings;
+        }
 
-        //     } else {
-        //         console.log(result);
-        //     }
-        // });
+        $scope.gotoElement = function(eID) {
+            $scope.selectedTab = eID;
+            anchorSmoothScroll.scrollTo(eID);
+
+        };
 
 
-        // $scope.trueMoveHProdeucts = [{
-        //     prodCate: "ทรูมูฟเอช รายเดือน",
-        //     subNo: "0865333463",
-        //     pricePlane: "PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m"
-        // }, {
-        //     prodCate: "ทรูมูฟเอช รายเดือน",
-        //     subNo: "0865333463",
-        //     pricePlane: "PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m"
-        // }, {
-        //     prodCate: "ทรูมูฟเอช รายเดือน",
-        //     subNo: "0865333463",
-        //     pricePlane: "PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m"
-        // }, {
-        //     prodCate: "ทรูมูฟเอช รายเดือน",
-        //     subNo: "0865333463",
-        //     pricePlane: "PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m"
-        // }, {
-        //     prodCate: "ทรูมูฟเอช รายเดือน",
-        //     subNo: "0865333463",
-        //     pricePlane: "PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m PLSMAP10: 4G iSmart399, V450m, WIFI, TVS1GB, Free5GB 6m.6m"
-        // }];
-
-        // $scope.trueVisionProdeucts = [{
-        //     prodCate: "ทรูวิชั่น",
-        //     subNo: "029044589",
-        //     pricePlane: "Gold Package"
-        // }, {
-        //     prodCate: "ทรูวิชั่น",
-        //     subNo: "029044589",
-        //     pricePlane: "Gold Package"
-        // }];
-
-        // $scope.trueOnlineProdeucts = [{
-        //     prodCate: "ทรูออนไลน์",
-        //     subNo: "9100198785",
-        //     pricePlane: "Change Ultra hi-speed 2013 (03)15M/1.5M + RTWIFI(02)"
-        // }, {
-        //     prodCate: "ทรูออนไลน์",
-        //     subNo: "9100198785",
-        //     pricePlane: "Change Ultra hi-speed 2013 (03)15M/1.5M + RTWIFI(02)"
-        // }];
     });

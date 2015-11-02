@@ -14,9 +14,9 @@
                     <!--  -->
                     <div class="row">
                         <ul class="nav navbar-nav navbar-right">
-                            <li ng-repeat="item in recommend.child" landing-click >
+                            <li id="ng-menu-{{item.id}}" ng-class="{'active':selectedTab === item.id}" class="ng-menu" ng-repeat="item in recommend.child">
                                 <!-- <a class="page-scroll" page-scroll href="#804">{{item.name}}</a> -->
-                                <a href="" ng-click="gotoAnchor(item.id)" >{{item.name}}</a>
+                                <a href="" ng-click="gotoElement(item.id)" >{{item.name}}</a>
                             </li>
                             <!--   <li class="ng-menu"><a class="page-scroll" page-scroll href="#new">เปิดบริการใหม่</a></li>
                             <li class="ng-menu"><a class="page-scroll" page-scroll href="#device">เครื่องและอุปกรณ์</a></li> -->
@@ -41,86 +41,10 @@
         <div class="row content">
             <recommend></recommend>
         </div>
-        <!-- <div id="modalopenservice" tabindex="-1" class="modal fade modalopenservice" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="blue bigger">
-                   <b>เปิดบริการใหม่</b>
-                </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row ">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-6 well ">
-                                <h5><b>บริษัท</b></h5>
-                                <p>
-                                    <center>
-                                        <div class="row ">
-                                            <div class="col-md-6 ">
-                                                <input type="radio" name="radSize" checked="checked" />
-                                                <label for="sizeSmall">RTV</label>
-                                            </div>
-                                            <div class="col-md-6 ">
-                                                <input type="radio" name="radSize" />
-                                                <label for="sizeMed">TUC</label>
-                                            </div>
-                                            <center>
-                                        </div>
-                                </p>
-                            </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8">
-                                <div data-toggle="buttons" class="btn-group btn-group-justified">
-                                    <label class="btn btn-default active" ng-click="changeType('N')">
-                                        <input type="radio" name="type" ng-model="serviceType" value="N"> รายเดือน
-                                    </label>
-                                    <label class="btn btn-default" ng-click="changeType('B')">
-                                        <input type="radio" name="type" ng-model="serviceType" value="B"> เติมเงิน
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div class="row">
-                            <p></p>
-                            <div class="col-md-12 ">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-3">
-                                    จำนวนเบอร์ที่ขอเปิด
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" placeholder="จำนวน" class="form-control">
-                                </div>
-                                <div class="col-md-3"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button ng-click="gotopricePlan()" data-dismiss="modal" class="btn btn-success">ตกลง</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        
         <!-- Footer -->
+        
         <footer class="footer" ng-include="'views/common/footer.html'"></footer>
     </div>
-    <script>
-    $(document).ready(function() {
-
-        // Page scrolling feature
-        $('a.page-scroll').bind('click', function(event) {
-            alert("abccccc");
-            var link = $(this);
-            $('html, body').stop().animate({
-                scrollTop: $(link.attr('href')).offset().top - 100
-            }, 500);
-            event.preventDefault();
-        });
-
-    });
-    </script>
+</div>
+    

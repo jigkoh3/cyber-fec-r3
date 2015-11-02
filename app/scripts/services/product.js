@@ -3,7 +3,7 @@
 angular.module('fec3App')
     .service('productService', function($http, $filter, $timeout, $localstorage, $linq, dalService) {
         var saleinfo = $localstorage.getObject("userProfile");
-        var customerInfo = $localstorage.getObject("customerProfile");
+        //var customerInfo = $localstorage.getObject("customerProfile");
         var request = {
             "shopCode": saleinfo.shopSelected,
             "userId": saleinfo.saleCode,

@@ -126,9 +126,54 @@ angular.module('fec3App')
             var headers = {
                 'WEB_METHOD_CHANNEL': 'WEBUI'
             };
+            var onSuccess = function(result) {
+                if (result.status) {
+                    if (result.data["response-data"] 
+                        && result.data["response-data"].length > 0
+                        && result.data["response-data"][0].authRes 
+                        && result.data["response-data"][0].authRes.responseCode 
+                        && result.data["response-data"][0].authRes.responseCode == "200") {
+
+                        fnCallback({
+                            status: true,
+                            data: result.data,
+                            error: "",
+                            msgErr: ""
+                        });
+                    } else {
+                        var dataError = {
+                            "status": "UNSUCCESSFUL",
+                            "display-messages": [{
+                                "message": "",
+                                "message-code": "",
+                                "message-type": "ERROR",
+                                "en-message": "",
+                                "th-message": "",
+                                "technical-message": ""
+                            }]
+                        };
+                        fnCallback({
+                            status: false,
+                            data: dataError,
+                            error: "",
+                            msgErr: ""
+                        });
+                    }
+
+                } else {
+                    fnCallback({
+                        status: false,
+                        data: result.data,
+                        error: "",
+                        msgErr: ""
+                    });
+                }
+
+
+            };
             if (!that.demo) {
                 that.callServiceGet(target, headers, function(result) {
-                    fnCallback(result.data);
+                    onSuccess(result);
                 });
             } else {
                 var data = {
@@ -148,6 +193,22 @@ angular.module('fec3App')
                     }]
                 };
                 var data2 = {
+                    "status": "SUCCESSFUL",
+                    "trx-id": "6OKMIN4J8HDZ",
+                    "process-instance": "psaapdv1 (instance: SFF_node1)",
+                    "response-data": [{
+                        "loginName": null,
+                        "employeeId": "",
+                        "authRes": {
+                            "app": "WEBUI",
+                            "info": "COMPANY=True Information Technology company limited;;DEPARTMENT=Information Technology (Infrastructure);;DIVISION=--;;EMPLOYEEID=10000004;;ENGLISHNAME=User Test4;;FIRSTNAME=User;;INITIALS=Mr.;;LOGINNAME=UserTSM4;;MAIL=usr_tsm4@Truecorp.co.th;;POSITION=IT Security Administration;;ROLES=CN=R-TSM-USER2,OU=Groups,DC=essoad,DC=th|CN=R-INCT-SALESUP,OU=Unused,OU=Groups,DC=essoad,DC=th;;SECTION=IT Security Administration;;SHOPCODE=80000001|80000001|80000005|80000008;;SURNAME=Test4;;THAINAME=นาย ไทย test4",
+                            "responseCode": "401",
+                            "responseDesc": "Error !!!!!!",
+                            "trxID": "71e5603394694c40a744739188496b83"
+                        }
+                    }]
+                };
+                var data3 = {
                     "status": "UNSUCCESSFUL",
                     "display-messages": [{
                         "message": "",
@@ -178,10 +239,22 @@ angular.module('fec3App')
                         }
                     }]
                 };
-                if (trx_id == "4EONTQNYU4VZ") {
-                    fnCallback(data);
+                var resp = data;
+                if (resp.status == "SUCCESSFUL") {
+                    onSuccess({
+                        status: true,
+                        data: resp,
+                        error: "",
+                        msgErr: ""
+                    });
                 } else {
-                    fnCallback(data);
+                    onSuccess({
+                        status: false,
+                        data: resp,
+                        error: "ERROR",
+                        msgErr: ""
+                    });
+
                 }
 
             }

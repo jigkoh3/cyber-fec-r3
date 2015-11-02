@@ -11934,8 +11934,8 @@ only screen and (min-resolution: 2dppx) {
 
 .box-pre ul li {
     position: relative;
-    width: 23.5%;
-    height: 125px;
+    width: 30%;
+    height: 150px;
     float: left;
     padding: 5px 5px 5px 10px;
     margin: 5px 5px 10px 5px;
@@ -12524,16 +12524,16 @@ ul.ul_true_on li {
 }
 
 .box-pre ul li h4 {
-    height: 53px;
+    /*height: 53px;*/
     overflow: hidden;
 }
 
 html.ie8 .box-pre ul li h4 {
-    height: 45px;
+    /*height: 45px;*/
 }
 
 .box-pre ul li:hover h4 {
-    height: 75px;
+    /*height: 75px;*/
     overflow: hidden;
     -moz-transition: all 0.5s;
     transition: all 0.5s cubic-bezier(.09, .11, .24, .91);
@@ -12776,7 +12776,7 @@ only screen and (min-resolution: 2dppx) {
 @media (max-width: 550px) {
     .box-pre ul li {
         width: 96%;
-        height: 100px;
+        /*height: 100px;*/
     }
     .box-pre-dt01 h3,
     .box-pre-dt01 h4 {
