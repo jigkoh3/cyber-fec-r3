@@ -60,7 +60,7 @@
     <script for="card" event="CardChange(state,args)">
     function card::CardChange(state, args) {
         var scope = angular.element($("#custGet")).scope();
-        
+
         if (state == 'ReadSuccess') {
             scope.SetCardValue(args);
         }
@@ -71,6 +71,8 @@
     }
     </script>
     <!-- end read card usb -->
+    
+    
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -87,6 +89,10 @@
     <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/angularjs-1.2/angular.js"></script>
+    <script src="bower_components/angularjs-1.2/angular-route.js"></script>
+    <![endif]-->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/utils.js"></script>
