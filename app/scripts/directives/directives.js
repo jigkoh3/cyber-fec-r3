@@ -309,7 +309,12 @@ function customerToggleInfo($rootScope, $localstorage) {
             $scope.customerProfile = $localstorage.getObject("customerProfile");
             $scope.onClickEndServe = function() {
 
+                var customer = $localstorage.getObject("customerProfile");
+                console.log("onClickEndServe");
+                console.log(customer);
                 $localstorage.destroy("customerProfile");
+                var cus = $localstorage.getObject("customerProfile");
+                console.log(cus);
                 $location.path('/main');
             }
         }

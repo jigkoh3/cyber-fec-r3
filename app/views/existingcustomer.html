@@ -49,7 +49,7 @@
                                                         <div class="col-xs-12">สินค้า: {{itm.productName}}</div>
                                                         <div class="col-xs-12">นัดรับสินค้าที่: {{itm.receiveShopName}}</div>
                                                         <div class="col-xs-12">วันที่นัดรับสินค้า: {{itm.expectReceiveDate=='' ? '' : formatDate(itm.expectReceiveDate) | date:"dd/MM/yyyy h:mm"}}</div>
-                                                        <div class="col-xs-12">วันที่รับสินค้าจริง: {{itm.receiveDate == '' ? '' : formatDate(itm.receiveDate) | date:"dd/MM/yyyy h:mm"}}</div>
+                                                        <div class="col-xs-12">วันที่รับสินค้าจริง: {{itm.receiveDate == null || itm.receiveDate == '' ? '' : formatDate(itm.receiveDate) | date:"dd/MM/yyyy h:mm"}}</div>
                                                     </div>
                                                 </h4>
                                             </div>
