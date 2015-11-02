@@ -627,7 +627,8 @@ angular.module('fec3App')
                                                                 sizeName: k.capacity,
                                                                 price: k.price,
                                                                 stock: (k.qty == 0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
-                                                                piece: k.qty
+                                                                piece: k.qty,
+                                                                itemcount: 1
                                                             }
                                                             return cap;
                                                         }).ToArray()

@@ -73,11 +73,31 @@ angular.module('fec3App')
         //     details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (RMV)"
         // }];
 
-        // $scope.campaignTypes = [{
-        //     type: "RF",
-        // }, {
-        //     type: "TC",
-        // }];
+        $scope.campaignTypes = [{
+            name: "All",
+            value: "00"
+        }, {
+            name: "TX",
+            value: "01"
+        }, {
+            name: "TR",
+            value: "02"
+        }, {
+            name: "TP",
+            value: "03"
+        }, {
+            name: "TN",
+            value: "04"
+        }, {
+            name: "TM",
+            value: "05"
+        }, {
+            name: "TD",
+            value: "06"
+        }, {
+            name: "RS",
+            value: "07"
+        }];
 
 
 

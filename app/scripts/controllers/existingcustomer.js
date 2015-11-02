@@ -41,7 +41,6 @@ angular.module('fec3App')
                 if ((dateData > curDate) && (receiveDate == null || receiveDate == '')) {
                     // ยังไม่ถึงกำหนดรับสินค้า
                     // ยังไม่รับสินค้า
-
                     bclass = "booking-active";
 
                 } else {
