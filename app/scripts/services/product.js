@@ -627,7 +627,8 @@ angular.module('fec3App')
                                                                 sizeName: k.capacity,
                                                                 price: k.price,
                                                                 stock: (k.qty == 0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
-                                                                piece: k.qty
+                                                                piece: k.qty,
+                                                                itemcount: 1
                                                             }
                                                             return cap;
                                                         }).ToArray()
@@ -801,8 +802,72 @@ angular.module('fec3App')
                     "response-data": {}
 
                 };
+                var result3 = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
+                    "response-data": {
+                        "products": [{
+                            "code": "3000014090",
+                            "name": "3000014090 H/S,GO LIVE,3031,WHITE",
+                            "desc": "H/S,GO LIVE,3031,WHITE",
+                            "type": "P",
+                            "qty": 0,
+                            "price": 990,
+                            "productInfo": {
+                                "capacity": "3031",
+                                "color": "White"
+                            }
+                        }, {
+                            "code": "3000014241",
+                            "name": "3000014241 H/S,GOLIVE,3031,WHITE WITH CABLE+SIM",
+                            "desc": "H/S,GOLIVE,3031,WHITE WITH CABLE+SIM",
+                            "type": "P",
+                            "qty": 7,
+                            "price": 990,
+                            "productInfo": {
+                                "capacity": "3031",
+                                "color": "White"
+                            }
+                        }, {
+                            "code": "3000014360",
+                            "name": "3000014360 H/S,GOLIVE,3031,WH WITH CABLE+Single SIM",
+                            "desc": "H/S,GOLIVE,3031,WH WITH CABLE+Single SIM",
+                            "type": "P",
+                            "qty": 0,
+                            "price": 990,
+                            "productInfo": {
+                                "capacity": "3031",
+                                "color": "White"
+                            }
+                        }, {
+                            "code": "3000014635",
+                            "name": "3000014635 H/S,GOLIVE,3031,WHITE WITH CABLE for MNP",
+                            "desc": "H/S,GOLIVE,3031,WHITE WITH CABLE for MNP",
+                            "type": "P",
+                            "qty": 0,
+                            "price": 990,
+                            "productInfo": {
+                                "capacity": "3031",
+                                "color": "White"
+                            }
+                        }]
+                    },
+                    "display-message": null
+                }
 
-                $timeout(function() {
+                if(category_id == "809"){
+                    $timeout(function() {
+                    onSuccess({
+                        status: true,
+                        data: result3,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+                } else{
+                    $timeout(function() {
                     onSuccess({
                         status: true,
                         data: result,
@@ -810,7 +875,9 @@ angular.module('fec3App')
                         msgErr: ""
                     });
                 }, 1000);
+                }
             }
+
         };
 
         this.getProduct = function(fnCallback) {
@@ -917,7 +984,7 @@ angular.module('fec3App')
                                 "code": "PN462",
                                 "name": "iPhone4 8GB  Contact 18 Month.",
                                 "desc": "โปรโมชั่นพิเศษสุดๆ"
-                            },{
+                            }, {
                                 "code": "PN4622",
                                 "name": "iPhone4 8GB  Contact 18 Month.",
                                 "desc": "โปรโมชั่นพิเศษสุดๆ"
