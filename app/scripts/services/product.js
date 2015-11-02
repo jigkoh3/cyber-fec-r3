@@ -824,7 +824,7 @@ angular.module('fec3App')
                             "name": "3000014241 H/S,GOLIVE,3031,WHITE WITH CABLE+SIM",
                             "desc": "H/S,GOLIVE,3031,WHITE WITH CABLE+SIM",
                             "type": "P",
-                            "qty": 7,
+                            "qty": 0,
                             "price": 990,
                             "productInfo": {
                                 "capacity": "3031",
