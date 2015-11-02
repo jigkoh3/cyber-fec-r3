@@ -188,7 +188,7 @@ function customerToggleGet($rootScope) {
                         break;
                     case "03":
                         $loading.show();
-                            customerService.getCustomerByTMV(inputCardNo, "assettnumber", function(result) {
+                            customerService.getCustomerByTMV(inputCardNo, "assetnumber", function(result) {
                                 $loading.hide();
                                 if (result.status) {
                                     //console.log(result);
