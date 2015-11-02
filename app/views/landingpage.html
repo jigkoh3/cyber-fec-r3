@@ -13,14 +13,15 @@
                 <div class="col-sm-9 hidden-xs">
                     <!--  -->
                     <div class="row">
+                         <!--[if !IE]> -->
                         <ul class="nav navbar-nav navbar-right">
                             <li id="ng-menu-{{item.id}}" ng-class="{'active':selectedTab === item.id}" class="ng-menu" ng-repeat="item in recommend.child">
-                                <!-- <a class="page-scroll" page-scroll href="#804">{{item.name}}</a> -->
+                                
                                 <a href="" ng-click="gotoElement(item.id)" >{{item.name}}</a>
                             </li>
-                            <!--   <li class="ng-menu"><a class="page-scroll" page-scroll href="#new">เปิดบริการใหม่</a></li>
-                            <li class="ng-menu"><a class="page-scroll" page-scroll href="#device">เครื่องและอุปกรณ์</a></li> -->
+                           
                         </ul>
+                        <!-- <![endif]-->
                     </div>
                 </div>
             </div>
