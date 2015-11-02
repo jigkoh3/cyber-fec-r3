@@ -9,11 +9,11 @@
             <div class="bb dropdown-menu mega-dropdown-menu menu">
                 <!-- <customer-toggle-info ng-show="isAuthen"></customer-toggle-info>
                 <customer-toggle-get ng-hide="isAuthen"></customer-toggle-get> -->
-                <div ng-if="isAuthen">
+                <div ng-show="isAuthen">
                    <!--  <customer-toggle-info ></customer-toggle-info> -->
                    <div customer-toggle-info></div>
                 </div>
-                <div ng-if="! isAuthen">
+                <div ng-show="! isAuthen">
                     <!-- <customer-toggle-get ></customer-toggle-get> -->
                     <div customer-toggle-get></div>
                 </div>

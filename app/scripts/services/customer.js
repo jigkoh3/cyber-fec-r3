@@ -37,7 +37,7 @@ angular.module('fec3App')
                             "receiveShop": "80000001",
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
                             "expectReceiveDate": "2014-11-02T16:01:00",
-                            "receiveDate": null
+                            "receiveDate": "2015-11-12T16:01:00"
                         }, {
                             "bookingId": "201483743176",
                             "campaignCode": null,
@@ -63,8 +63,8 @@ angular.module('fec3App')
                             "productName": "3000013631-H/S,IPHONE 5,16GB,GSM-THA,BK,MD297TH/A",
                             "receiveShop": "80000001",
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
-                            "expectReceiveDate": "2015-11-02T16:01:00",
-                            "receiveDate": ""
+                            "expectReceiveDate": "2016-11-02T16:01:00",
+                            "receiveDate": "2015-11-12T16:01:00"
                         }]
                     },
                     "display-message": null
@@ -452,6 +452,9 @@ angular.module('fec3App')
         this.getCustomerManual = function(certificateid, certificatetype, fnCallback) {
             $localstorage.destroy("customerProfile");
             customerProfile.certificateId = certificateid;
+            customerProfile.TMV = "[]";
+            customerProfile.TOL = "[]";
+            customerProfile.TVS = "[]";
             
             that.getBookingByCiti(function(result) {
                 if (result.status && result.data["response-data"]) {

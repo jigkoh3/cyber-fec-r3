@@ -1,11 +1,6 @@
 <div class="menu-content">
     <div class="menu-content-user-info ">
         <h4>ข้อมูลลูกค้า</h4>
-        <!-- <div class="card">
-            <div class="card-img"><img src="images/cards/card-black.png" class="media-object"></div>
-            <div class="card-detail">{{customerProfile.customerId}}
-                <br> EXP: {{customerProfile["id-expire-date"]}}</div>
-        </div> -->
         <h3><small>หมายเลขบัตรประชาชน/พาสปอร์ต</small> {{customerProfile.certificateId}}</h3>
         <h3><small>ชื่อ - นามสกุล</small>{{customerProfile.title}} {{customerProfile.firstName}} {{customerProfile.lastName}}</h3>
         <h3><small>ประเภทลูกค้า</small></h3>
@@ -17,22 +12,13 @@
                 <option value="C">Corporate (C)</option>
             </select>
         </div>
-        <!-- </div> -->
         <div class="col-md-12">
             <br>
         </div>
         <button class="btn btn-danger" ng-click="onClickEndServe()">เสร็จสิ้นการให้บริการ</button>
     </div>
-    <!-- <div class="navmenu">
-        <ul class="nav navmenu-nav">
-            <li><a href="#/existingcustomer" class="dropdown-toggle-submenu-v2">บริการหลังการขาย </a></li>
-            <li><a href="#/landingpage" class="dropdown-toggle-submenu-v2">สินค้าและบริการ </a></li>
-            <li><a href="#/ordermonitor" class="dropdown-toggle-submenu-v2">Order Monitor</a></li>
-            <li><a class="disabled">ชำระสินค้าและบริการ</a></li>
-        </ul>
-    </div> -->
-    <version></version>
+    <div version></div>
     <div class="navmenu">
-        <ng-menu></ng-menu>
+        <div ng-menu></div>
     </div>
 </div>

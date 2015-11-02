@@ -10,14 +10,14 @@
 angular.module('fec3App')
     .controller('promotionCtrl', function($scope, $loading, $message, productService) {
 
-        productService.getCampaign(function(result){
+        productService.getCampaign(function(result) {
             // console.log(result);
-            $scope.campaigns=result.data['response-data'].product.campaigns;
-           
+            $scope.campaigns = result.data['response-data'].product.campaigns;
+
         });
-        productService.getPromotionSet(function(result){
+        productService.getPromotionSet(function(result) {
             console.log(result);
-            $scope.promotions=result.data['response-data'].product.promotions;
+            $scope.promotions = result.data['response-data'].product.promotions;
         });
 
         $('.ng-menu').click(function() {
@@ -49,6 +49,26 @@ angular.module('fec3App')
             }, 1000);
 
         };
+
+        $scope.selectCampaignCode = "00";
+
+        $scope.onChangeCampaignCode = function(){
+            console.log($scope.selectCampaignCode);
+        };
+
+        // $scope.onSearchCampaign = function(item) {
+        //     if ($scope.saveDataCUG.filter) {
+        //         var groupId = item['group-id'].toUpperCase();
+        //         var searchValue = $scope.saveDataCUG.filter.toUpperCase();
+
+        //         if ((groupId.indexOf(searchValue) != 0)) {
+        //             return true;
+        //         }
+        //     } else {
+        //         return true;
+        //     }
+        //     return false;
+        // };
 
 
         // $scope.campaigns = [{

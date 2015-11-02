@@ -2,13 +2,11 @@
     <div class="menu-content-read-card">
         <h4>ตรวจสอบข้อมูลลูกค้า</h4>
         <p>อ่านข้อมูลจากบัตรประชาชน</p>
-        
         <!-- ReadCard -->
         <!-- <a ng-click="onReadcard()" class="btn btn-readcard"></a> -->
         <a onclick="ReadCard('ReadP');" class="btn btn-readcard"></a>
         <!-- end Readcard -->
         <input type="hidden" id="divID" value="{{divID}}" />
-
         <p>หรือ</p>
         <div class="form-horizontal">
             <div class="form-group">
@@ -23,15 +21,13 @@
             </div>
             <div class="form-group">
                 <div class="col-md-12">
-                    <input  placeholder="กรอกหมายเลขบัตร/หมายเลขบริการ" class="form-control" ng-keyup="onCardNoKeydown(inputCardNo)" ng-model="inputCardNo" ng-click="openSSO()" id="inputCardNo" readonly>
-                    <!-- <input  placeholder="กรอกหมายเลขบัตร/หมายเลขบริการ" class="form-control" ng-keyup="onCardNoKeydown(inputCardNo)" ng-model="inputCardNo" id="inputCardNo"
-                    > -->
+                    <input placeholder="กรอกหมายเลขบัตร/หมายเลขบริการ" class="form-control" ng-keyup="onCardNoKeydown(inputCardNo)" ng-model="inputCardNo" ng-click="openSSO()" id="inputCardNo" readonly>
                 </div>
             </div>
         </div>
     </div>
-    <version></version>
+    <div version></div>
     <div class="navmenu">
-        <ng-menu></ng-menu>
+        <div ng-menu></div>
     </div>
 </div>

@@ -73,13 +73,13 @@
                                                     <!-- <div class="col-md-3"></div>
                                                         <div class="col-md-3"></div> -->
                                                     <div class="col-md-3">
-                                                        <select class="form-control">
+                                                        <select class="form-control" ng-model="selectCampaignCode" ng-change="onChangeCampaignCode()">
                                                             <option ng-repeat="itm in campaignTypes">{{itm.name}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <div ng-repeat="itm in campaigns | filter : query">
+                                                <div ng-repeat="itm in campaigns | filter : onSearchCampaign">
                                                     <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color: #CCFFFF; border-color: #33FFFF; ">
                                                         <div class="col-md-12">
                                                             <b>{{itm.code}} {{itm.name}}</b>
