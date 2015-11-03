@@ -950,7 +950,15 @@ angular.module('fec3App')
         this.getPromotionSet = function(fnCallback) {
             if (!dalService.demo) {
 
+<<<<<<< HEAD
                 request.target = 'sales-services/rest/master/get_product';
+=======
+                request.param.userId = userId;
+                request.param.shopCode = shopCode;
+                request.param.transactionId = transactionId;
+                request.param.shopCode = shopCode;
+                request.target = 'sales-services/rest/master/get_promotionset';
+>>>>>>> ca59382b02d66bed9b15df2a74a20b3b84bce16f
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -962,95 +970,195 @@ angular.module('fec3App')
                     "trx-id": "S00000000000001",
                     "process-instance": "SFF_node1",
                     "response-data": {
-                        "product": {
-                            "name": "3000013633-H/S,IPHONE 5,32GB,GSM-THA,BK,MD299TH/A",
-                            "desc": "H/S,IPHONE 5,32GB,GSM-THA,BK,MD299TH/A",
-                            "price": 28250,
-                            "productInfo": {
-                                "appleCareCode": "APC"
-                            },
-                            "serviceInfo": null,
-                            "campaigns": [{
-                                "code": "PP228",
-                                "name": "C15 With PP ",
-                                "desc": null
-                            }, {
-                                "code": "RS080",
-                                "name": "RS080 : iPhone5_Free You",
-                                "desc": null
-                            }, {
-                                "code": "RS081",
-                                "name": "iPhone 5_MNP (Contract 10 mths)",
-                                "desc": null
-                            }, {
-                                "code": "RS084",
-                                "name": "Biz & Ent iPhone 5_H/S+SIM (Contract 10 mths)",
-                                "desc": null
-                            }, {
-                                "code": "RS085",
-                                "name": "Biz & Ent iPhone 5_H/S+SIM (No contract)",
-                                "desc": null
-                            }, {
-                                "code": "RS091",
-                                "name": "Biz & Ent iPhone 5_MNP (Contract 10 mths)",
-                                "desc": null
-                            }, {
-                                "code": "RS095",
-                                "name": "MNP Handset Discount 1,000Bt  ",
-                                "desc": null
-                            }, {
-                                "code": "RS098",
-                                "name": "MNP Handset Discount 1,000bt (Contract 6 mths)",
-                                "desc": null
-                            }, {
-                                "code": "RS109",
-                                "name": "TrueCard discount 1,000 Baht",
-                                "desc": null
-                            }, {
-                                "code": "RS112",
-                                "name": "GOV_Free You_Premium Tier",
-                                "desc": null
-                            }, {
-                                "code": "RS114",
-                                "name": "Apple Employee for True Group",
-                                "desc": null
-                            }, {
-                                "code": "RS115",
-                                "name": "Apple Employee for CP Group",
-                                "desc": null
-                            }, {
-                                "code": "RS128",
-                                "name": "RS128 : Handset+New Sim for Apple",
-                                "desc": null
-                            }, {
-                                "code": "RS238",
-                                "name": "RS238 : TC discount 1,000 Baht",
-                                "desc": null
-                            }, {
-                                "code": "RS396",
-                                "name": "RS396 : Pre2Post_True Super One 299 Baht",
-                                "desc": null
-                            }, {
-                                "code": "Test001",
-                                "name": "Test001_Test Reserve",
-                                "desc": null
-                            }, {
-                                "code": "TRN001",
-                                "name": "TRN001 : Training Campaign No Advance",
-                                "desc": null
-                            }, {
-                                "code": "TSM084",
-                                "name": "Biz & Ent iPhone 5_H/S+SIM (Contract 10 mths)",
-                                "desc": null
-                            }],
+                        "promotion": {
+                            "name": "True Smart 4.0\"_Shutdown campaign",
+                            "desc": "desc",
+                            "proposition": "931",
+                            "minBuy": 1,
+                            "maxGet": 1,
                             "promotions": [{
-                                "code": "PN462",
-                                "name": "iPhone4 8GB  Contact 18 Month.",
-                                "desc": "โปรโมชั่นพิเศษสุดๆ"
+                                "group": "Promotion_1",
+                                "type": "1",
+                                "amount": 0,
+                                "maxGet": 1,
+                                "force": true,
+                                "otherPayments": [],
+                                "products": [{
+                                    "code": "3000010338",
+                                    "name": "3000010338-ซิม,POS,MICRO REAL MOVE",
+                                    "price": 49,
+                                    "type": "P",
+                                    "productInfo": {
+                                        "appleCareCode": null,
+                                        "isSim": true,
+                                        "requireForm": false
+                                    },
+                                    "serviceInfo": null
+                                }, {
+                                    "code": "3000014923",
+                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
+                                    "price": 49,
+                                    "type": "P",
+                                    "productInfo": {
+                                        "appleCareCode": null,
+                                        "isSim": true,
+                                        "requireForm": false
+                                    },
+                                    "serviceInfo": null
+                                }]
                             }, {
-                                "code": "PN4622",
-                                "name": "iPhone4 8GB  Contact 18 Month.",
-                                "desc": "โปรโมชั่นพิเศษสุดๆ"
+                                "group": "Promotion_2",
+                                "type": "2",
+                                "amount": 0,
+                                "maxGet": 1,
+                                "force": false,
+                                "otherPayments": [],
+                                "products": [{
+                                    "code": "3000020172",
+                                    "name": "3000020172-H/S,SS,ERICA 3G HERO,TMV H SIM LOCK MNP",
+                                    "price": 1299,
+                                    "type": "P",
+                                    "productInfo": {
+                                        "appleCareCode": null,
+                                        "isSim": false,
+                                        "requireForm": false
+                                    },
+                                    "serviceInfo": null
+                                }]
+                            }, {
+                                "group": "Promotion_3",
+                                "type": "3",
+                                "amount": 1000,
+                                "maxGet": 1,
+                                "force": false,
+                                "otherPayments": [],
+                                "products": [{
+                                    "code": "3000013828",
+                                    "name": "3000013828 H/S,GOLIVE,DUAL CORE,BLACK",
+                                    "price": 3990,
+                                    "type": "P",
+                                    "productInfo": {
+                                        "appleCareCode": null,
+                                        "isSim": false,
+                                        "requireForm": false
+                                    },
+                                    "serviceInfo": null
+                                }]
+                            }, {
+                                "group": "Promotion_4",
+                                "type": "4",
+                                "amount": 50,
+                                "maxGet": 1,
+                                "force": false,
+                                "otherPayments": [],
+                                "products": [{
+                                    "code": "3000013483",
+                                    "name": "3000013483-ซิม,DEP,SWAP NANO TMV H",
+                                    "price": 0,
+                                    "type": "P",
+                                    "productInfo": {
+                                        "appleCareCode": null,
+                                        "isSim": true,
+                                        "requireForm": false
+                                    },
+                                    "serviceInfo": null
+                                }]
+                            }, {
+                                "group": "Promotion_5",
+                                "type": "5",
+                                "amount": 0,
+                                "maxGet": 1,
+                                "force": false,
+                                "otherPayments": [{
+                                    "code": "C17",
+                                    "name": "Free SIM Postpay  Partner Privilege for S2&&L2",
+                                    "amount": 21
+                                }],
+                                "products": [{
+                                    "code": "3000020354",
+                                    "name": "3000020354-ซิม,BAC,TMH1 MNP COMBI",
+                                    "price": 29,
+                                    "type": "P",
+                                    "productInfo": {
+                                        "appleCareCode": null,
+                                        "isSim": true,
+                                        "requireForm": false
+                                    },
+                                    "serviceInfo": null
+                                }]
+                            }],
+                            "products": [{
+                                "code": "TSM007",
+                                "name": "True Smart 4.0\"_Shutdown",
+                                "price": 0,
+                                "type": "S",
+                                "productInfo": null,
+                                "serviceInfo": {
+                                    "type": "4",
+                                    "isMobile": false,
+                                    "details": [{
+                                        "code": "SVRMV053",
+                                        "name": "RMV_PRE_Product",
+                                        "price": 1190
+                                    }, {
+                                        "code": "SVRMV047",
+                                        "name": "RMV_POST_Product",
+                                        "price": 1190
+                                    }, {
+                                        "code": "SVRFT003",
+                                        "name": "RFT_POST_Product",
+                                        "price": 1190
+                                    }, {
+                                        "code": "SVRFT004",
+                                        "name": "RFT_PRE_Product",
+                                        "price": 1190
+                                    }]
+                                },
+                                "discBaht": 0,
+                                "discPercent": 0,
+                                "minBuy": 0,
+                                "otherPayments": [],
+                                "param": [{
+                                    "key": "key1",
+                                    "value": "value1"
+                                }]
+                            }],
+                            "groupProducts": [{
+                                "group": "Device",
+                                "code": "3000034161",
+                                "name": "3000034161 H/S,SAGA 4121,4.0 INCH",
+                                "price": 1990,
+                                "type": "P",
+                                "productInfo": {
+                                    "appleCareCode": null,
+                                    "isSim": false,
+                                    "requireForm": false
+                                },
+                                "serviceInfo": null,
+                                "discBaht": 500,
+                                "discPercent": 0,
+                                "minBuy": 0,
+                                "otherPayments": [{
+                                    "code": "B60",
+                                    "name": "ซิม,POS,COMBI TMV H REGULAR-ใต้ล่าง 7 Mat 3000010853",
+                                    "amount": 500
+                                }]
+                            }, {
+                                "group": "Device",
+                                "code": "3000034378",
+                                "name": "3000034378 H/S,TRUE SMART,4121,4.0 INCH+SIM",
+                                "price": 1990,
+                                "type": "P",
+                                "productInfo": {
+                                    "appleCareCode": null,
+                                    "isSim": false,
+                                    "requireForm": false
+                                },
+                                "serviceInfo": null,
+                                "discBaht": 0,
+                                "discPercent": 20,
+                                "minBuy": 0,
+                                "otherPayments": []
                             }]
                         }
                     },
@@ -1088,7 +1196,13 @@ angular.module('fec3App')
 
             if (!dalService.demo) {
 
+<<<<<<< HEAD
                 request.target = 'sales-services/rest/master/get_product';
+=======
+                request.param.product_code = product_code;
+                request.param.product_type = product_type;
+                request.target = '/sales-services/rest/master/get_product';
+>>>>>>> ca59382b02d66bed9b15df2a74a20b3b84bce16f
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -1109,27 +1223,27 @@ angular.module('fec3App')
                             },
                             "serviceInfo": null,
                             "campaigns": [{
-                                "code": "PP228",
+                                "code": "TX228",
                                 "name": "C15 With PP ",
-                                "desc": null
+                                "desc": "test1234"
                             }, {
-                                "code": "RS080",
+                                "code": "TR080",
                                 "name": "RS080 : iPhone5_Free You",
-                                "desc": null
+                                "desc": "test4234"
                             }, {
-                                "code": "RS081",
+                                "code": "TP       081",
                                 "name": "iPhone 5_MNP (Contract 10 mths)",
                                 "desc": null
                             }, {
-                                "code": "RS084",
+                                "code": "TN084",
                                 "name": "Biz & Ent iPhone 5_H/S+SIM (Contract 10 mths)",
                                 "desc": null
                             }, {
-                                "code": "RS085",
+                                "code": "TM085",
                                 "name": "Biz & Ent iPhone 5_H/S+SIM (No contract)",
                                 "desc": null
                             }, {
-                                "code": "RS091",
+                                "code": "TD091",
                                 "name": "Biz & Ent iPhone 5_MNP (Contract 10 mths)",
                                 "desc": null
                             }, {
@@ -1145,39 +1259,39 @@ angular.module('fec3App')
                                 "name": "TrueCard discount 1,000 Baht",
                                 "desc": null
                             }, {
-                                "code": "RS112",
+                                "code": "TX112",
                                 "name": "GOV_Free You_Premium Tier",
                                 "desc": null
                             }, {
-                                "code": "RS114",
+                                "code": "TD114",
                                 "name": "Apple Employee for True Group",
                                 "desc": null
                             }, {
-                                "code": "RS115",
+                                "code": "TP115",
                                 "name": "Apple Employee for CP Group",
                                 "desc": null
                             }, {
-                                "code": "RS128",
+                                "code": "TN128",
                                 "name": "RS128 : Handset+New Sim for Apple",
                                 "desc": null
                             }, {
-                                "code": "RS238",
+                                "code": "TM238",
                                 "name": "RS238 : TC discount 1,000 Baht",
                                 "desc": null
                             }, {
-                                "code": "RS396",
+                                "code": "TR396",
                                 "name": "RS396 : Pre2Post_True Super One 299 Baht",
                                 "desc": null
                             }, {
-                                "code": "Test001",
+                                "code": "TX001",
                                 "name": "Test001_Test Reserve",
                                 "desc": null
                             }, {
-                                "code": "TRN001",
+                                "code": "TR001",
                                 "name": "TRN001 : Training Campaign No Advance",
                                 "desc": null
                             }, {
-                                "code": "TSM084",
+                                "code": "TM084",
                                 "name": "Biz & Ent iPhone 5_H/S+SIM (Contract 10 mths)",
                                 "desc": null
                             }],

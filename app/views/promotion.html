@@ -165,63 +165,29 @@
                     </div> -->
                 </div>
                 <div class="modal-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive" ng-repeat="item in promotionset">
                         <table class="table">
                             <tr class="row">
                                 <th class="col-md-1" style="background-color: #c8bbbb">
                                     <input type="checkbox" name="vehicle" value="Bike" style="margin-left:20px; margin-top:12px;">
                                 </th>
-                                <th class="col-md-7" style="background-color: #c8bbbb; "><span><h5> Accessories (ไม่เกิน 1 ชิ้น)</h5></span></th>
-                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>แลกซื้อ</h5></span></th>
+                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>{{item.group}}</h5></span></th>
+                                <th class="col-md-5" style="background-color: #c8bbbb; "><span><h5> (ไม่เกิน {{item.maxGet}} ชิ้น)</h5></span></th>
+                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>{{item.type}}</h5></span></th>
                                 <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
                             </tr>
-                            <tr class="row">
-                                <!-- <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
-                                <th class="col-md-5">{{itm.promotion}}</th>
-                                <th class="col-md-4">{{itm.price}} <span> &nbsp; บาท</span></th> -->
-                                <td class="col-md-1"></td>
-                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
-                                <td class="col-md-2">1,290.00</td>
-                                <td class="col-md-1">
-                                    <input class="form-control" type="text">
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <!-- <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
-                                <th class="col-md-5">{{itm.promotion}}</th>
-                                <th class="col-md-4">{{itm.price}} <span> &nbsp; บาท</span></th> -->
-                                <td class="col-md-1"></td>
-                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
-                                <td class="col-md-2">1,290.00</td>
+                            <tr class="row" ng-repeat="itm in item.products">
+                                 <td class="col-md-1"></td>
+                                <td class="col-md-2">{{itm.code}}</td>
+                                <td class="col-md-5">{{itm.name}}</td>
+                                <td class="col-md-2">{{itm.price}}</td>
                                 <td class="col-md-1">
                                     <input class="form-control" type="text">
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr class="row">
-                                <th class="col-md-1" style="background-color: #c8bbbb">
-                                    <input type="checkbox" name="vehicle" value="Bike" style="margin-left:20px; margin-top:12px;">
-                                </th>
-                                <th class="col-md-7" style="background-color: #c8bbbb; "><span><h5> Sim Card (ไม่เกิน 1 ชิ้น)</h5></span></th>
-                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>แลกซื้อ</h5></span></th>
-                                <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
-                            </tr>
-                            <tr class="row">
-                                <!-- <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
-                                <th class="col-md-5">{{itm.promotion}}</th>
-                                <th class="col-md-4">{{itm.price}} <span> &nbsp; บาท</span></th> -->
-                                <td class="col-md-1"></td>
-                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
-                                <td class="col-md-2">1,290.00</td>
-                                <td class="col-md-1">
-                                    <input class="form-control" type="text">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                   
                 </div>
                 <div class="modal-footer">
                     <button ng-click="gotopricePlan()" data-dismiss="modal" class="btn btn-success">ตกลง</button>
@@ -229,16 +195,18 @@
             </div>
         </div>
     </div>
+
+
+    <!-- สิ้นสุด Promotionset -->
+
+
+
     <div id="modalCampaign2" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5>Promotion Detail</h5>
                     <br>
-                    <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
-                    <!-- <div class="col-md-12">
-                        <input type="text" placeholder="--ค้นหา--" ng-model="pricePlanFilter" class="form-control">
-                    </div> -->
                 </div>
                 <div class="modal-body">
                     <div class="table-responsive">

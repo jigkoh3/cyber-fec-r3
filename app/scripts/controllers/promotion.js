@@ -13,11 +13,14 @@ angular.module('fec3App')
         productService.getCampaign(function(result) {
             // console.log(result);
             $scope.campaigns = result.data['response-data'].product.campaigns;
+            $scope.promotions = result.data['response-data'].product.promotions;
 
         });
+
+
         productService.getPromotionSet(function(result) {
             console.log(result);
-            $scope.promotions = result.data['response-data'].product.promotions;
+            $scope.promotionset = result.data['response-data'].promotion.promotions;
         });
 
         $('.ng-menu').click(function() {
@@ -52,23 +55,33 @@ angular.module('fec3App')
 
         $scope.selectCampaignCode = "00";
 
-        $scope.onChangeCampaignCode = function(){
+        $scope.onChangeCampaignCode = function() {
             console.log($scope.selectCampaignCode);
+            //var $filter("filter")(selectCampaignCode);
         };
 
-        // $scope.onSearchCampaign = function(item) {
-        //     if ($scope.saveDataCUG.filter) {
-        //         var groupId = item['group-id'].toUpperCase();
-        //         var searchValue = $scope.saveDataCUG.filter.toUpperCase();
+        $scope.onSearchCampaign = function(item) {
 
-        //         if ((groupId.indexOf(searchValue) != 0)) {
-        //             return true;
-        //         }
-        //     } else {
-        //         return true;
-        //     }
-        //     return false;
-        // };
+            if ($scope.query) {
+                //var name = item['name'].toUpperCase();
+                // var desc = item['desc'].toUpperCase();
+                var code = item['code'].toUpperCase();
+                var searchValue = $scope.query.toUpperCase();
+                var scCode = $scope.selectCampaignCode.toUpperCase();
+
+                if (//(name.indexOf(searchValue) >= 0) ||
+                    // (desc.indexOf(searchValue) >= 0) &&
+                    (code.indexOf(searchValue) >= 0) &&
+                    (code.indexOf(scCode) >= 0)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+            return false;
+        };
 
 
         // $scope.campaigns = [{
