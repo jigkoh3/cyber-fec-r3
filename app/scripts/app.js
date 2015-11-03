@@ -152,11 +152,11 @@ angular
             //     // controller: 'printpreviewCtrl',
             //     // controllerAs: 'printpreview'
             // })
-            // .when('/privilege', {
-            //     templateUrl: 'views/privilege.html',
-            //     // controller: 'printpreviewCtrl',
-            //     // controllerAs: 'printpreview'
-            // })
+            .when('/privilege', {
+                templateUrl: 'views/privilege.html',
+                controller: 'privilegeCtrl',
+                controllerAs: 'privilege'
+            })
             // .when('/complete', {
             //     templateUrl: 'views/complete.html',
             //     // controller: 'printpreviewCtrl',

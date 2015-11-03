@@ -17,7 +17,7 @@ angular.module('fec3App')
             if (!dalService.demo) {
 
                 request.param.citizenId = customerProfile.certificateId;
-                request.target = '/sales-services/rest/event/get_bookings_by_citizenid';
+                request.target = 'sales-services/rest/event/get_bookings_by_citizenid';
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -84,7 +84,7 @@ angular.module('fec3App')
             if (!dalService.demo) {
                 request.param.citizenId = customerProfile.certificateId;
                 request.param.bookingId = bookingId;
-                request.target = '/sales-services/rest/event/get_booking_by_bid_and_cid';
+                request.target = 'sales-services/rest/event/get_booking_by_bid_and_cid';
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -124,7 +124,7 @@ angular.module('fec3App')
             };
             if (!dalService.demo) {
                 //http://sff-dev.true.th:18087/profiles/tmv/customer/get?
-                var target = '/profiles/tmv/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
+                var target = 'profiles/tmv/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
@@ -236,7 +236,7 @@ angular.module('fec3App')
             };
             if (!dalService.demo) {
                 //http://sff-dev.true.th:18087/profiles/tvs/customer/get?
-                var target = '/profiles/tvs/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
+                var target = 'profiles/tvs/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
@@ -346,7 +346,7 @@ angular.module('fec3App')
             };
             if (!dalService.demo) {
                 //http://sff-dev.true.th:18087/profiles/tmv/customer/get?
-                var target = '/profiles/tol/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
+                var target = 'profiles/tol/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
@@ -518,7 +518,7 @@ angular.module('fec3App')
             };
             if (!dalService.demo) {
 
-                var target = '/profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
+                var target = 'profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
@@ -799,7 +799,7 @@ angular.module('fec3App')
             };
             if (!dalService.demo) {
 
-                var target = '/profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
+                var target = 'profiles/customer/get?certificateid=' + certificateid + '&certificatetype=' + certificatetype;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);
@@ -1073,7 +1073,7 @@ angular.module('fec3App')
 
             if (!dalService.demo) {
 
-                var target = '/profiles/customer/get?product-id-name=' + productIdName + '&product-id-number=' + productIdNumber;
+                var target = 'profiles/customer/get?product-id-name=' + productIdName + '&product-id-number=' + productIdNumber;
 
                 dalService.callServiceGet(target, null, function(result) {
                     onSuccess(result);

@@ -134,8 +134,8 @@ angular.module('fec3App')
                 var sum_i = 0;
                 for(var ii=0; ii<arr[i].memSize.length; ii++){
                     var sum_ii = 0;
-                    if($scope.proItem['piece'+arr[i].colorName+ii]){
-                        sum = sum+$scope.proItem['piece'+arr[i].colorName+ii]*item.price;
+                    if($scope.proItem['itemCount'+arr[i].colorName+ii]){
+                        sum = sum+$scope.proItem['itemCount'+arr[i].colorName+ii]*item.price;
                     }
                 }
             }
@@ -189,7 +189,7 @@ angular.module('fec3App')
             for(var i=0; i<arr.length; i++){
                 
                 for(var ii=0; ii<arr[i].memSize.length; ii++){
-                    $scope.proItem['piece'+arr[i].colorName+ii] = null;
+                    $scope.proItem['itemCount'+arr[i].colorName+ii] = null;
                 }
             }
                 
@@ -203,11 +203,11 @@ angular.module('fec3App')
         $scope.choose = function(itm,id) {
             $scope.calculate(itm);
             if(oldProItem != id){
-                $scope.proItem['piece'+oldProItem] = null;
+                $scope.proItem['itemCount'+oldProItem] = null;
                 oldProItem = id;
             }
-            $scope.proItem['piece'+id] = 1;
-            console.log($scope.proItem['piece'+id]);
+            $scope.proItem['itemCount'+id] = 1;
+            console.log($scope.proItem['itemCount'+id]);
             console.log(id);
 
         }

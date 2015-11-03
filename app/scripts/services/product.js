@@ -35,7 +35,7 @@ angular.module('fec3App')
 
             if (!dalService.demo) {
 
-                request.target = '/sales-services/rest/master/get_categories';
+                request.target = 'sales-services/rest/master/get_categories';
 
                 dalService.callServicePost(request, null, function(result) {
                     onSuccess(result);
@@ -607,40 +607,104 @@ angular.module('fec3App')
         };
 
         this.getProductByCategory = function(category_id, fnCallback) {
-            var onSuccess = function(result) {
+             var onSuccess = function(result) {
                 if (result.status) {
                     if (result.data["response-data"]) {
-                        var queryResult = $linq.Enumerable().From(result.data["response-data"].products)
-                            .GroupBy("$.type", null,
-                                function(key, g) {
-                                    var result = {
-                                        productName: key,
-                                        //productImg: key.code,
-                                        productColor: g.GroupBy("$.productInfo.color", null,
-                                            function(color, c) {
-                                                var cr = {
-                                                    colorName: color,
-                                                    memSize: c.GroupBy("{capacity: $.productInfo.capacity, price: $.price, qty: $.qty, code: $.code}", null,
-                                                        function(k, m) {
-                                                            var cap = {
-                                                                code: k.code,
-                                                                sizeName: k.capacity,
-                                                                price: k.price,
-                                                                stock: (k.qty == 0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
-                                                                piece: k.qty,
-                                                                itemcount: 1
-                                                            }
-                                                            return cap;
-                                                        }).ToArray()
-                                                }
+                        //var queryResult = $linq.Enumerable().From(result.data["response-data"].products)
+                        //    .GroupBy("$.type", null,
+                        //        function(key, g) {
+                        //            var result = {
+                        //                productName: key,
+                        //                //productImg: key.code,
+                        //                productColor: g.GroupBy("$.productInfo.color", null,
+                        //                    function(color, c) {
+                        //                        var cr = {
+                        //                            colorName: color,
+                        //                            memSize: c.GroupBy("{capacity: $.productInfo.capacity, price: $.price, qty: $.qty, code: $.code}", null,
+                        //                                function(k, m) {
+                        //                                    var cap = {
+                        //                                        code: k.code,
+                        //                                        sizeName: k.capacity,
+                        //                                        price: k.price,
+                        //                                        stock: (k.qty == 0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
+                        //                                        piece: k.qty
+                        //                                    }
+                        //                                    return cap;
+                        //                                }).ToArray()
+                        //                        }
 
-                                                return cr;
-                                            }).ToArray()
-                                    }
-                                    return result;
-                                }).ToArray();
+                        //                        return cr;
+                        //                    }).ToArray()
+                        //            }
+                        //            return result;
+                        //        }).ToArray();
+                        //console.log("response-data : ", result.data["response-data"].products);                        
+                        var dataGrpByColor = $linq.Enumerable().From(result.data["response-data"].products)
+                                                    .Distinct("$.productInfo.color")
+                                                    .Where("$.productInfo.color != null")
+                                                    .Select("$.productInfo.color")
+                                                    //.OrderBy("")                            
+                                                    .ToArray().sort();
+                        console.log("productInfo.color : ", dataGrpByColor);
 
-                        //console.log("queryResult : ", queryResult);
+                        //var dataGrpByMemSize = $linq.Enumerable().From(result.data["response-data"].products).GroupBy("$.productInfo.capacity").ToArray();
+                        var dataGrpByMemSize = $linq.Enumerable().From(result.data["response-data"].products)
+                                                    .Distinct("$.productInfo.capacity")
+                                                    .Where("$.productInfo.capacity != null")
+                                                    .Select("$.productInfo.capacity")
+                                                    //.OrderBy("")
+                                                    .ToArray().sort();
+                        //console.log("productInfo.capacity : ", dataGrpByMemSize);
+                        //console.log("===========================================");
+
+                        var retData = { productName: "P", productColor: [] };
+                        for (var cIdx = 0; cIdx < dataGrpByColor.length; cIdx++) {
+
+                            var productColorDetail = {
+                                colorName: dataGrpByColor[cIdx],
+                                memSize: []
+                            };
+
+                            for (var mIdx = 0; mIdx < dataGrpByMemSize.length; mIdx++) {
+
+                                var productItemDetail = { sizeName: dataGrpByMemSize[mIdx] };
+                                var prodItemResultList = $linq.Enumerable()
+                                                                .From(result.data["response-data"].products)
+                                                                .Where("$.productInfo.capacity == '" + dataGrpByMemSize[mIdx] + "' && $.productInfo.color == '" + dataGrpByColor[cIdx] + "'")
+                                                                .ToArray();
+
+                                //console.log("productInfo.color[" + dataGrpByColor[cIdx] + "].capacity[" + dataGrpByMemSize[mIdx] + "] : ", prodItemResultList);
+
+                                if (prodItemResultList != null && prodItemResultList.length > 0) {
+
+                                    productItemDetail.code = prodItemResultList[0].code;
+                                    productItemDetail.name = prodItemResultList[0].name;
+                                    productItemDetail.piece = prodItemResultList[0].qty;
+                                    productItemDetail.price = prodItemResultList[0].price;
+                                    productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty.qty >= 5 ? "green" : "yellow"));
+                                    productItemDetail.itemCount = prodItemResultList.length;
+
+                                } else {
+
+                                    productItemDetail.code = "";
+                                    productItemDetail.name = "";
+                                    productItemDetail.piece = "";
+                                    productItemDetail.price = "";
+                                    productItemDetail.stock = "";
+                                    productItemDetail.itemCount = 0;
+                                }
+
+                                productColorDetail.memSize.push(productItemDetail);
+                            }
+
+                            retData.productColor.push(productColorDetail);
+                        }
+                        var queryResult = [retData];
+
+                        console.log("===========================================");
+                        console.log("getProductByCategory : ", queryResult);
+                        console.log("===========================================");
+
                         fnCallback({
                             status: true,
                             data: queryResult[0],
@@ -655,12 +719,11 @@ angular.module('fec3App')
 
 
             };
-
             if (!dalService.demo) {
 
                 request.param.category_id = category_id;
                 request.param.customer_type = "*";
-                request.target = '/sales-services/rest/master/get_products_by_category';
+                request.target = 'sales-services/rest/master/get_products_by_category';
 
                 dalService.callServicePost(request, null, function(result) {
                     onSuccess(result);
@@ -691,8 +754,8 @@ angular.module('fec3App')
                             "qty": 0,
                             "price": 20263,
                             "productInfo": {
-                                "capacity": "16GB",
-                                "color": "White"
+                                "capacity": null,
+                                "color": null
                             }
                         }, {
                             "code": "3000005922",
@@ -746,8 +809,8 @@ angular.module('fec3App')
                             "qty": 15,
                             "price": 11200,
                             "productInfo": {
-                                "capacity": null,
-                                "color": null
+                                "capacity": "16GB",
+                                "color": "Space Gray"
                             }
                         }, {
                             "code": "3000012634",
@@ -810,7 +873,7 @@ angular.module('fec3App')
                     "response-data": {
                         "products": [{
                             "code": "3000014090",
-                            "name": "3000014090 H/S,GO LIVE,3031,WHITE",
+                            "name": "3000014090 H/S,GOLIVE,3031,WHITE",
                             "desc": "H/S,GO LIVE,3031,WHITE",
                             "type": "P",
                             "qty": 0,
@@ -857,24 +920,24 @@ angular.module('fec3App')
                     "display-message": null
                 }
 
-                if(category_id == "809"){
+                if (category_id == "809") {
                     $timeout(function() {
-                    onSuccess({
-                        status: true,
-                        data: result3,
-                        error: "",
-                        msgErr: ""
-                    });
-                }, 1000);
-                } else{
+                        onSuccess({
+                            status: true,
+                            data: result3,
+                            error: "",
+                            msgErr: ""
+                        });
+                    }, 1000);
+                } else {
                     $timeout(function() {
-                    onSuccess({
-                        status: true,
-                        data: result,
-                        error: "",
-                        msgErr: ""
-                    });
-                }, 1000);
+                        onSuccess({
+                            status: true,
+                            data: result,
+                            error: "",
+                            msgErr: ""
+                        });
+                    }, 1000);
                 }
             }
 
@@ -887,7 +950,7 @@ angular.module('fec3App')
         this.getPromotionSet = function(fnCallback) {
             if (!dalService.demo) {
 
-                request.target = '/sales-services/rest/master/get_product';
+                request.target = 'sales-services/rest/master/get_product';
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -1025,7 +1088,7 @@ angular.module('fec3App')
 
             if (!dalService.demo) {
 
-                request.target = '/sales-services/rest/master/get_product';
+                request.target = 'sales-services/rest/master/get_product';
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -1140,7 +1203,7 @@ angular.module('fec3App')
         };
 
         this.verify = function(fnCallback) {
-
+            
         }
 
         this.getCategoryByName = function(name, fnCallback) {
