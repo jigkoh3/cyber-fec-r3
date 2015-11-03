@@ -950,15 +950,13 @@ angular.module('fec3App')
         this.getPromotionSet = function(fnCallback) {
             if (!dalService.demo) {
 
-<<<<<<< HEAD
-                request.target = 'sales-services/rest/master/get_product';
-=======
+
                 request.param.userId = userId;
                 request.param.shopCode = shopCode;
                 request.param.transactionId = transactionId;
                 request.param.shopCode = shopCode;
                 request.target = 'sales-services/rest/master/get_promotionset';
->>>>>>> ca59382b02d66bed9b15df2a74a20b3b84bce16f
+
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
@@ -1196,13 +1194,11 @@ angular.module('fec3App')
 
             if (!dalService.demo) {
 
-<<<<<<< HEAD
                 request.target = 'sales-services/rest/master/get_product';
-=======
+
                 request.param.product_code = product_code;
                 request.param.product_type = product_type;
-                request.target = '/sales-services/rest/master/get_product';
->>>>>>> ca59382b02d66bed9b15df2a74a20b3b84bce16f
+
 
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
