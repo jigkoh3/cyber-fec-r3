@@ -11,12 +11,13 @@ angular.module('fec3App')
     .controller('choosecampaignCtrl', function($scope, $modal) {
     	
         $scope.data = $modal.campaignList();
-        //console.log($scope.ngDialogData);
-        $scope.ngBootBoxClose = function() {
-
-            bootbox.hideAll();
-            // try {
-            //     angular.element(document.getElementById('' + $('#divID').val())).scope().afterCloseWarning();
-            // } catch (e) {}
+        $scope.txtChanged = function(){
+            // var arr = $scope.data;
+            // for (var i = 0; i < arr.length; i++) {
+            //     $scope.proItem['' + arr.products[i].code] = 0;
+            // }
+            $modal.campaignSelected({code:"13",name:"name13"});
         };
+
+
     });

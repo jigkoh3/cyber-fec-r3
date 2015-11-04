@@ -44,64 +44,64 @@ angular
     })
     .service('anchorSmoothScroll', anchorSmoothScroll)
 
-function anchorSmoothScroll(){
+function anchorSmoothScroll() {
     this.scrollTo = function(eID) {
 
-            // This scrolling function 
-            // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
+        // This scrolling function 
+        // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript
 
-            var startY = currentYPosition();
-            var stopY = elmYPosition(eID) - 100;
-            var distance = stopY > startY ? stopY - startY : startY - stopY;
-            if (distance < 100) {
-                scrollTo(0, stopY);
-                return;
-            }
-            var speed = Math.round(distance / 100) * 500;
-            if (speed >= 20) speed = 20;
-            var step = Math.round(distance / 25);
-            var leapY = stopY > startY ? startY + step : startY - step;
-            var timer = 0;
-            if (stopY > startY) {
-                for (var i = startY; i < stopY; i += step) {
-                    setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
-                    leapY += step;
-                    if (leapY > stopY) leapY = stopY;
-                    timer++;
-                }
-                return;
-            }
-            for (var i = startY; i > stopY; i -= step) {
+        var startY = currentYPosition();
+        var stopY = elmYPosition(eID) - 100;
+        var distance = stopY > startY ? stopY - startY : startY - stopY;
+        if (distance < 100) {
+            scrollTo(0, stopY);
+            return;
+        }
+        var speed = Math.round(distance / 100) * 500;
+        if (speed >= 20) speed = 20;
+        var step = Math.round(distance / 25);
+        var leapY = stopY > startY ? startY + step : startY - step;
+        var timer = 0;
+        if (stopY > startY) {
+            for (var i = startY; i < stopY; i += step) {
                 setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
-                leapY -= step;
-                if (leapY < stopY) leapY = stopY;
+                leapY += step;
+                if (leapY > stopY) leapY = stopY;
                 timer++;
             }
+            return;
+        }
+        for (var i = startY; i > stopY; i -= step) {
+            setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
+            leapY -= step;
+            if (leapY < stopY) leapY = stopY;
+            timer++;
+        }
 
-            function currentYPosition() {
-                // Firefox, Chrome, Opera, Safari
-                if (self.pageYOffset) return self.pageYOffset;
-                // Internet Explorer 6 - standards mode
-                if (document.documentElement && document.documentElement.scrollTop)
-                    return document.documentElement.scrollTop;
-                // Internet Explorer 6, 7 and 8
-                if (document.body.scrollTop) return document.body.scrollTop;
-                return 0;
+        function currentYPosition() {
+            // Firefox, Chrome, Opera, Safari
+            if (self.pageYOffset) return self.pageYOffset;
+            // Internet Explorer 6 - standards mode
+            if (document.documentElement && document.documentElement.scrollTop)
+                return document.documentElement.scrollTop;
+            // Internet Explorer 6, 7 and 8
+            if (document.body.scrollTop) return document.body.scrollTop;
+            return 0;
+        }
+
+        function elmYPosition(eID) {
+            var elm = document.getElementById(eID);
+
+            var y = elm.offsetTop;
+            var node = elm;
+            while (node.offsetParent && node.offsetParent != document.body) {
+                node = node.offsetParent;
+                y += node.offsetTop;
             }
+            return y;
+        }
 
-            function elmYPosition(eID) {
-                var elm = document.getElementById(eID);
-                
-                var y = elm.offsetTop;
-                var node = elm;
-                while (node.offsetParent && node.offsetParent != document.body) {
-                    node = node.offsetParent;
-                    y += node.offsetTop;
-                }
-                return y;
-            }
-
-        };
+    };
 };
 
 
@@ -193,11 +193,15 @@ function message($ngBootbox) {
 function modal($ngBootbox) {
     var that = this;
     var _itm = null;
+    var _proSelected = null;
     return {
-        campaignList:function(){
+        campaignList: function() {
             return _itm;
         },
-        campaignSelector: function(itm) {
+        campaignSelected: function(data){
+            _proSelected = data;
+        },
+        campaignSelector: function(itm,fnCallback) {
             _itm = itm;
             //console.log(_alertMsg);
             setTimeout(function() {
@@ -209,7 +213,20 @@ function modal($ngBootbox) {
                     show: true,
                     backdrop: true,
                     closeButton: false,
-                    animate: true
+                    animate: true,
+                    buttons: {
+                        success: {
+                            label: "Ok",
+                            className: "btn-success",
+                            callback: function() {
+                                
+                                fnCallback({
+                                    status: true,
+                                    data: _proSelected
+                                });
+                            }
+                        }
+                    }
                 });
             }, 1001);
 

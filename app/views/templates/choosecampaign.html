@@ -30,7 +30,7 @@
                     <td class="col-md-6">{{itm.name}}</td>
                     <td class="col-md-1">{{itm.price}}</td>
                     <td class="col-md-1">
-                        <input style="width:50px;" type="text">
+                        <input style="width:50px;" type="text" ng-model="proItem[itm.code]" ng-change="txtChanged()">
                     </td>
                 </tr>
             </table>
@@ -46,8 +46,8 @@
     <div class="ngdialog-buttons">
         &nbsp;
     </div> -->
-    <div class="modal-footer">
-        <button ng-click="gotopricePlan()" data-dismiss="modal" class="btn btn-success">ตกลง</button>
+    <!-- <div class="modal-footer">
+        <button ng-click="gotopricePlan()" data-dismiss="modal" class="btn btn-success" ng-click="selectedPromotion()">ตกลง</button>
        
-    </div>
+    </div> -->
 </div>

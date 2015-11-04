@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('fec3App')
-    .service('productService', function ($http, $filter, $timeout, $localstorage, $linq, dalService, $log) {
-        
+    .service('productService', function($http, $filter, $timeout, $localstorage, $linq, dalService, $log) {
+
         var logger = $log.getInstance('productService');
         var saleinfo = $localstorage.getObject("userProfile");
         //var customerInfo = $localstorage.getObject("customerProfile");
@@ -908,11 +908,63 @@ angular.module('fec3App')
 
         };
 
-        this.getProduct = function(fnCallback) {
+        this.getCampaign = function(campaignCode,productCode,fnCallback) {
+            ///sales-services/rest/privilege/get_campaign
+            if (!dalService.demo) {
 
+                request.target = 'sales-services/rest/privilege/get_campaign';
+                request.param.campaign_code = campaignCode;
+                request.param.product_code = productCode;
+
+
+                dalService.callServicePost(request, null, function(result) {
+                    fnCallback(result);
+                });
+            } else {
+                var result = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
+                    "response-data": {
+                        "campaign": {
+                            "proposition": "854",
+                            "nasProposition": "0019969",
+                            "promotionSet": "PR860",
+                            "otherPayments": [{
+                                "code": "B25",
+                                "name": "Other Payment B25",
+                                "amount": 5000
+                            }],
+                            "discounts": [{
+                                "code": "TC017",
+                                "name": "Discount",
+                                "type": "B",
+                                "amount": 2000
+                            }],
+                            "services": [{
+                                "code": "DEVDIS",
+                                "name": "Device Discount"
+                            }],
+                            "verifyKeys": [
+                                "ThaiId"
+                            ]
+                        }
+                    },
+                    "display-message": null
+                };
+                $timeout(function() {
+                    fnCallback({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
         };
 
-        this.getPromotionSet = function(promotionCode,fnCallback) {
+        this.getPromotionSet = function(promotionCode, fnCallback) {
             if (!dalService.demo) {
 
 
@@ -1139,7 +1191,7 @@ angular.module('fec3App')
             }
         };
 
-        this.getProduct = function(productCode,productType,fnCallback) {
+        this.getProduct = function(productCode, productType, fnCallback) {
             if (!dalService.demo) {
 
                 request.target = 'sales-services/rest/master/get_product';
@@ -1277,19 +1329,18 @@ angular.module('fec3App')
                     //     "id": id
                     // });
                     var res = $linq.Enumerable().From(source.child)
-                    .Where(function (x) {
-                        return x.id == id
-                    }).ToArray();
+                        .Where(function(x) {
+                            return x.id == id
+                        }).ToArray();
 
                     if (res && res.length >= 1) {
                         return res;
-                        
+
                     } else {
 
                         for (var i = 0; i < source.child.length; i++) {
                             var ret = getAll(source.child[i]);
-                            if(ret && ret.length>=1)
-                            {
+                            if (ret && ret.length >= 1) {
                                 return ret;
                                 break;
                             }
@@ -1312,10 +1363,10 @@ angular.module('fec3App')
 
             };
             var category = result.child;
-            if(id && id != 0){
+            if (id && id != 0) {
                 category = getAll(result)[0].child;
             }
-           
+
 
             //console.log(Devices);
             if (category && category.length > 0) {

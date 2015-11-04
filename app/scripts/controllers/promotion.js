@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('promotionCtrl', function($scope, $loading, $modal, $message, $routeParams, productService) {
+    .controller('promotionCtrl', function($scope, $loading, $modal, $message, $routeParams, $location, productService) {
 
         var productCode = $routeParams.productCode;
         var productType = $routeParams.productType;
@@ -31,15 +31,60 @@ angular.module('fec3App')
         };
         $scope.choose = function(itm) {
             //alert(itm.code);
+            // productService.getPromotionSet(itm.code, function(result) {
+            //     console.log(result);
+            //     if (result.status){
+            //         var promotionset = result.data['response-data'].promotion.promotions;
+            //         $modal.campaignSelector(promotionset,function(result){
+            //             //alert(result.data.code);
+            //         });
+            //     }
+
+            // });
+            //$loading.show();
+            productService.getCampaign(itm.code, productCode, function(res) {
+                console.log(res);
+                if (res.status) {
+                    productService.getPromotionSet(res.data['response-data'].promotionSet, function(result) {
+                        console.log(result);
+                        if (result.status) {
+                            //$loading.hide();
+                            var promotionset = result.data['response-data'].promotion.promotions;
+                            $modal.campaignSelector(promotionset, function(result) {
+                                //alert(result.data.code);
+                                if (res.data['response-data'].verifyKeys 
+                                    && res.data['response-data'].verifyKeys.length==1 
+                                    && res.data['response-data'].verifyKeys[0] == "ThaiId") {
+                                        $location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                                }else{
+
+                                        $location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                                $('#bindDataAgain').click();
+                                }
+
+                            });
+                            //$location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                        }
+
+                    });
+                }
+
+            });
+        };
+
+        $scope.choosePro = function(itm) {
+            //$loading.show();
             productService.getPromotionSet(itm.code, function(result) {
                 console.log(result);
-                if (result.status){
+                //$loading.hide();
+                if (result.status) {
                     var promotionset = result.data['response-data'].promotion.promotions;
-                    $modal.campaignSelector(promotionset);
+                    $modal.campaignSelector(promotionset, function(result) {
+                        $location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                    });
                 }
-                
+
             });
-            
         };
 
         $scope.gotoprivilege = function() {
