@@ -105,11 +105,13 @@ angular.module('fec3App')
             $scope.total = sum;
         };
 
-        $scope.next = function() {
+        $scope.next = function(productCode, productType) {
             if ($scope.tabselected == "1") {
-                $location.path('/promotion')
+                $location.path('/promotion?productCode=' + productCode + '&productType=' + productType )
             } else {
                 $location.path('/listpayment')
             }
         };
+
+
     });
