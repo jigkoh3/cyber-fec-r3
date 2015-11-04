@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, productService) {
+    .controller('orderDeviceCtrl', function ($routeParams, $scope, $location, $loading, $message, productService, $log) {
         //get querystring request
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;

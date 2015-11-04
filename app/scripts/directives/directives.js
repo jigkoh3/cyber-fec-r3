@@ -20,7 +20,6 @@ angular
     .directive('actualSrc', actualSrc)
 
 
-
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
