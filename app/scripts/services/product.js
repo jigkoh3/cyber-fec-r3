@@ -1127,7 +1127,7 @@ angular.module('fec3App')
             }
         };
 
-        this.getCampaign = function(fnCallback) {
+        this.getProduct = function(productCode,productType,fnCallback) {
             if (!dalService.demo) {
 
                 request.target = 'sales-services/rest/master/get_product';
