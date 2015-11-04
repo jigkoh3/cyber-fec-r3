@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('promotionCtrl', function($scope, $loading, $message, $routeParams, productService) {
+    .controller('promotionCtrl', function($scope, $loading, $modal, $message, $routeParams, productService) {
 
         var productCode = $routeParams.productCode;
         var productType = $routeParams.productType;
@@ -39,6 +39,10 @@ angular.module('fec3App')
         $scope.tabname = "1";
         $scope.selectTab = function(tab) {
             $scope.tabname = tab;
+        };
+        $scope.choose = function(itm){
+            //alert(itm.code);
+            $modal.campaignSelector(itm);
         };
 
         $scope.gotoprivilege = function() {
