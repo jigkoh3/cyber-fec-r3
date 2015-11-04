@@ -193,26 +193,22 @@ function message($ngBootbox) {
 function modal($ngBootbox) {
     var that = this;
     var _itm = null;
-<<<<<<< HEAD
+
     var _proSelected = null;
-=======
-    var _item = null;
->>>>>>> e46ca88f53e3932fc9f6b317fba692ccc2f11221
+
     return {
         campaignList: function() {
             return _itm;
         },
-<<<<<<< HEAD
+
         campaignSelected: function(data){
             _proSelected = data;
         },
-        campaignSelector: function(itm,fnCallback) {
-=======
+        
         mathList: function() {
             return _item;
         },
-        campaignSelector: function(itm) {
->>>>>>> e46ca88f53e3932fc9f6b317fba692ccc2f11221
+        campaignSelector: function(itm,fnCallback) {
             _itm = itm;
             //console.log(_alertMsg);
             setTimeout(function() {

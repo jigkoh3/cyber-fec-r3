@@ -8,12 +8,14 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('promotionCtrl', function($scope, $loading, $modal, $message, $routeParams, $location, productService) {
+    .controller('promotionCtrl', function($scope, $loading, $modal, $message, $routeParams, $localstorage, $location, productService) {
 
         var productCode = $routeParams.productCode;
         var productType = $routeParams.productType;
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
+
+
         productService.getProduct(productCode, productType, function(result) {
             // console.log(result);
             $scope.campaigns = result.data['response-data'].product.campaigns;
@@ -30,36 +32,65 @@ angular.module('fec3App')
             $scope.tabname = tab;
         };
         $scope.choose = function(itm) {
-            //alert(itm.code);
-            // productService.getPromotionSet(itm.code, function(result) {
-            //     console.log(result);
-            //     if (result.status){
-            //         var promotionset = result.data['response-data'].promotion.promotions;
-            //         $modal.campaignSelector(promotionset,function(result){
-            //             //alert(result.data.code);
-            //         });
-            //     }
 
-            // });
-            //$loading.show();
+            $loading.show();
             productService.getCampaign(itm.code, productCode, function(res) {
                 console.log(res);
                 if (res.status) {
                     productService.getPromotionSet(res.data['response-data'].promotionSet, function(result) {
                         console.log(result);
                         if (result.status) {
-                            //$loading.hide();
+                            $loading.hide();
                             var promotionset = result.data['response-data'].promotion.promotions;
                             $modal.campaignSelector(promotionset, function(result) {
                                 //alert(result.data.code);
-                                if (res.data['response-data'].verifyKeys 
-                                    && res.data['response-data'].verifyKeys.length==1 
-                                    && res.data['response-data'].verifyKeys[0] == "ThaiId") {
-                                        $location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
-                                }else{
+                                if (res.data['response-data'].campaign.verifyKeys && res.data['response-data'].campaign.verifyKeys.length == 1 && res.data['response-data'].campaign.verifyKeys[0] == "ThaiId") {
+                                    //verlify thai-id
 
-                                        $location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
-                                $('#bindDataAgain').click();
+                                    var param = {
+                                        "campaign_code": itm.code,
+                                        "product_code": productCode,
+                                        "qty": 1,
+                                        "verifyKeys": [{
+                                            "key": "ThaiId",
+                                            "value": $localstorage.getObject("customerProfile").certificateId
+                                        }]
+                                    };
+                                    $loading.show();
+                                    productService.verify(param, function(result) {
+                                        //location.href='#priceplanexisting
+                                        $scope.isClick = false;
+                                        if (result.data['response-data']['result'] == 'Pass') {
+                                            $loading.hide();
+                                            location.href = '#pricePlan';
+                                            $('#bindDataAgain').click();
+                                        } else {
+                                            if (result.data['response-data']['result'] == "UnknowError") {
+                                                $message.alert({
+                                                    "message": "",
+                                                    "message-code": "",
+                                                    "message-type": "Warning",
+                                                    "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
+                                                    "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
+                                                    "technical-message": ""
+                                                });
+                                            }
+
+                                        }
+
+                                    });
+                                    
+                                    
+                                } else {
+
+                                    $location.path('/privilege').search({
+                                        id: $scope.id,
+                                        name: $scope.name,
+                                        campaignCode: itm.code,
+                                        productCode: productCode,
+                                        qty: 1
+                                    });
+                                    $('#bindDataAgain').click();
                                 }
 
                             });
@@ -73,14 +104,15 @@ angular.module('fec3App')
         };
 
         $scope.choosePro = function(itm) {
-            //$loading.show();
+            $loading.show();
             productService.getPromotionSet(itm.code, function(result) {
                 console.log(result);
-                //$loading.hide();
+                $loading.hide();
                 if (result.status) {
                     var promotionset = result.data['response-data'].promotion.promotions;
                     $modal.campaignSelector(promotionset, function(result) {
-                        $location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                        $location.path('/pricePlan'); //.search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                        $('#bindDataAgain').click();
                     });
                 }
 

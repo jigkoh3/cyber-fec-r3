@@ -1314,10 +1314,10 @@ angular.module('fec3App')
 
         this.verify = function(payload, fnCallback) {
             //
-            request.param.campaign_code = "RS228";
-            request.param.product_code = "3000024133";
+            request.param.campaign_code = payload.campaign_code;
+            request.param.product_code = payload.product_code;
             request.param.qty = 1;
-            request.param.verifyKeys = [];
+            request.param.verifyKeys = payload.verifyKeys;
             request.target = 'sales-services/rest/privilege/verify';
 
             if (!dalService.demo) {

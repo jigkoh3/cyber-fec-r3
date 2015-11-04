@@ -8,17 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-<<<<<<< HEAD
-    .controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, $modal, productService) {
-        //get querystring request
-        $scope.id = $routeParams.id;
-        $scope.name = $routeParams.name;
-        $scope.productCode = null;
-        $scope.productType = null;
-        //onload page event
-        $loading.show();
-        productService.getProductByCategory($scope.id, function(result) {
-=======
+
 
 .controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, $modal, productService) {
 
@@ -38,7 +28,6 @@ angular.module('fec3App')
             $scope.trueProduct = result.data;
         } else {
             $message.alert(result.data["display-message"]);
->>>>>>> e46ca88f53e3932fc9f6b317fba692ccc2f11221
             //console.log(result.data);
         }
     });
@@ -81,20 +70,7 @@ angular.module('fec3App')
             for (var ii = 0; ii < arr[i].memSize.length; ii++) {
                 $scope.proItem['piece' + arr[i].colorName + ii] = null;
             }
-<<<<<<< HEAD
-            $scope.tabselected = idx;
-        };
-        //??????
-        $scope.proItem = {
-            "pieceGold0": null
-        };
 
-        //
-        var oldProItem = "";
-        $scope.choose = function(itm, id) {
-            //console.log("selected itm piece :" + itm.piece)
-            //$modal.productSelector(itm);
-=======
         }
         $scope.tabselected = idx;
     };
@@ -107,11 +83,31 @@ angular.module('fec3App')
     var oldProItem = "";
     $scope.choose = function(itm, id) {
         //console.log("selected itm piece :" + itm.piece)
-        if (itm.itemCount > 1) {
-            $modal.productSelector(itm);
-        } else {
->>>>>>> e46ca88f53e3932fc9f6b317fba692ccc2f11221
-            if ($scope.tabselected == "1") {
+        // if (itm.itemCount > 1) {
+    //     $modal.productSelector(itm);
+    // } else {
+
+    //     if ($scope.tabselected == "1") {
+    //         if (oldProItem != id) {
+    //             $scope.proItem['piece' + oldProItem] = null;
+    //             oldProItem = id;
+    //         }
+    //         $scope.proItem['piece' + id] = 1;
+    //         console.log($scope.proItem['piece' + id]);
+    //         console.log(id);
+    //     } else {
+    //         if ($scope.proItem['piece' + id] < itm.piece) {
+    //             $scope.proItem['piece' + id] += 1;
+    //         } else {
+    //             $scope.proItem['piece' + id] = itm.piece;
+    //         }
+
+    //     }
+    //     $scope.productCode = itm.code;
+    //     $scope.productType = "P";
+    //     $scope.calculate(itm, 'piece' + id);
+    // }
+        if ($scope.tabselected == "1") {
                 if (oldProItem != id) {
                     $scope.proItem['piece' + oldProItem] = null;
                     oldProItem = id;
@@ -130,8 +126,6 @@ angular.module('fec3App')
             $scope.productCode = itm.code;
             $scope.productType = "P";
             $scope.calculate(itm, 'piece' + id);
-        }
-
 
     };
     //culate order total summary
