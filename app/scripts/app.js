@@ -187,10 +187,10 @@ angular
                 // controller: 'printpreviewCtrl',
                 // controllerAs: 'printpreview'
             })
-            .when('/orderSevice', {
-                templateUrl: 'views/orderSevice.html',
-                controller: 'orderSeviceCtrl',
-                controllerAs: 'orderSevice'
+            .when('/orderService', {
+                templateUrl: 'views/orderService.html',
+                controller: 'orderServiceCtrl',
+                controllerAs: 'orderService'
             })
             .otherwise({
                 redirectTo: '/'
