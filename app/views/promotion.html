@@ -44,127 +44,92 @@
                         </div>
                     </div>
                     <div class="well" style="background-color:#ffffff;">
-                                <br>
-                                <div ng-show="tabname=='1'">
-                                    <div class="tab-pane current" id="home">
-                                        <a href="" data-toggle="modal" data-target=".modalPromotion">
-                                            <div ng-controller="promotionCtrl">
-                                                <div class="row">
-                                                    <div class="col-md-9">
-                                                        <!-- Use ng-repeat with ul.li -->
-                                                        <input class="form-control" type="text" ng-model="query">
-                                                    </div>
-                                                    <!-- <div class="col-md-3"></div>
+                        <br>
+                        <div ng-show="tabname=='1'">
+                            <div class="tab-pane current" id="home">
+                                <a href="" data-toggle="modal" data-target=".modalPromotion">
+                                    <div ng-controller="promotionCtrl">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <!-- Use ng-repeat with ul.li -->
+                                                <input class="form-control" type="text" ng-model="query">
+                                            </div>
+                                            <!-- <div class="col-md-3"></div>
                                                         <div class="col-md-3"></div> -->
-                                                    <div class="col-md-3">
-                                                        <select class="form-control" ng-model="selectCampaignCode">
-                                                            <option ng-repeat="itm in campaignTypes">{{itm.name}}</option>
-                                                        </select>
+                                            <div class="col-md-3">
+                                                <select class="form-control" ng-model="selectCampaignCode">
+                                                    <option ng-repeat="itm in campaignTypes">{{itm.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div ng-repeat="itm in filteredCamps = (campaigns | filter : query | filter : startsWithLetter:selectCampaignCode)">
+                                            <div class="well" ng-click="choose(itm)" style="background-color: #CCFFFF; border-color: #33FFFF; ">
+                                                <div class="col-md-12">
+                                                    <b>{{itm.code}} {{itm.name}}</b>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <ul>
+                                                                <li>{{itm.desc}}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <br>
-                                                <div ng-repeat="itm in filteredCamps = (campaigns | filter : query | filter : startsWithLetter:selectCampaignCode)">
-                                                    <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color: #CCFFFF; border-color: #33FFFF; ">
-                                                        <div class="col-md-12">
-                                                            <b>{{itm.code}} {{itm.name}}</b>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <ul>
-                                                                        <li>{{itm.desc}}
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <!-- <div class="col-md-12">
+                                                <div class="row">
+                                                    <!-- <div class="col-md-12">
                                                                 <b>{{itm.desc}}</b>
                                                             </div> -->
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                                <div ng-show="!filteredCamps.length">ไม่พบข้อมูล</div>
                                             </div>
-                                        </a>
+                                        </div>
+                                        <div ng-show="!filteredCamps.length">ไม่พบข้อมูล</div>
                                     </div>
-                                </div>
-                                <div ng-show="tabname=='2'">
-                                    <div class="tab-pane current" id="home">
-                                        <a href="" data-toggle="modal" data-target=".modalPromotion">
-                                            <div ng-controller="promotionCtrl">
+                                </a>
+                            </div>
+                        </div>
+                        <div ng-show="tabname=='2'">
+                            <div class="tab-pane current" id="home">
+                                <a href="" data-toggle="modal" data-target=".modalPromotion">
+                                    <div ng-controller="promotionCtrl">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <!-- Use ng-repeat with ul.li -->
+                                                <input class="form-control" type="text" ng-model="query">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div ng-repeat="itm in filteredPros = (promotions | filter : query)">
+                                            <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color:pink">
+                                                <div class="col-md-12">
+                                                    <b>{{itm.code}} {{itm.name}}</b>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <!-- Use ng-repeat with ul.li -->
-                                                        <input class="form-control" type="text" ng-model="query">
+                                                        <ul>
+                                                            <li>{{itm.desc}}</li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <br>
-                                                <div ng-repeat="itm in filteredPros = (promotions | filter : query)">
-                                                    <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color:pink">
-                                                        <div class="col-md-12">
-                                                            <b>{{itm.code}} {{itm.name}}</b>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <ul>
-                                                                    <li>{{itm.desc}}</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <!-- <div class="row">
+                                                <!-- <div class="row">
                                                             <div class="col-md-12">
                                                                 <b>{{itm.desc}}</b>
                                                             </div>
                                                         </div -->
-                                                    </div>
-                                                </div>
-                                                <div ng-show="!filteredPros.length">ไม่พบข้อมูล</div>
                                             </div>
-                                        </a>
+                                        </div>
+                                        <div ng-show="!filteredPros.length">ไม่พบข้อมูล</div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- Footer style="border-size:0.5px; border-style:solid;"-->
                 <footer class="footer" ng-include="'views/common/footer.html'"></footer>
             </div>
-            <div id="modalIphone" tabindex="-1" class="modal" data-backdrop="static" data-keyboard="false">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <tr class="row">
-                                    <th class="col-md-3" style="background-color: #FF0000;color:white; ">
-                                        <h4> IPhone 6</h4></th>
-                                    <th class="col-md-3" style="background-color: #FF0000 ; "></th>
-                                    <th class="col-md-3" style="color:green;text-align:center; background-color: #FF0000 "></th>
-                                    <th class="col-md-1" style="text-align:center; background-color: #FF0000 "></th>
-                                    <th class="col-md-1" style="background-color: #FF0000 ; ">
-                                        <button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button>
-                                    </th>
-                                </tr>
-                                <tr class="row">
-                                    <th class="col-md-1" style="background-color: #c8bbbb; "></th>
-                                    <th class="col-md-3" style="background-color: #c8bbbb; "></th>
-                                    <th class="col-md-3" style="background-color: #c8bbbb; "></th>
-                                    <th class="col-md-3" style="background-color: #c8bbbb; text-align:center">ราคา</th>
-                                    <th class="col-md-1" style="background-color: #c8bbbb; ">จำนวน</th>
-                                </tr>
-                                <tr class="row">
-                                    <th class="col-md-1"></th>
-                                    <th class="col-md-3"></th>
-                                    <th class="col-md-3"></th>
-                                    <th class="col-md-3"></th>
-                                    <th class="col-md-1">
-                                        <button class="btn btn-success" data-dismiss="modal">ตกลง</button>
-                                    </th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+</div>
