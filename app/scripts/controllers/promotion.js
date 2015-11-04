@@ -37,7 +37,7 @@ angular.module('fec3App')
             productService.getCampaign(itm.code, productCode, function(res) {
                 console.log(res);
                 if (res.status) {
-                    productService.getPromotionSet(res.data['response-data'].promotionSet, function(result) {
+                    productService.getPromotionSet(res.data['response-data'].campaign.promotionSet, function(result) {
                         console.log(result);
                         if (result.status) {
                             $loading.hide();
