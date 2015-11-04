@@ -73,13 +73,13 @@
                                                     <!-- <div class="col-md-3"></div>
                                                         <div class="col-md-3"></div> -->
                                                     <div class="col-md-3">
-                                                        <select class="form-control" ng-model="selectCampaignCode" ng-change="onChangeCampaignCode()">
+                                                        <select class="form-control" ng-model="selectCampaignCode" >
                                                             <option ng-repeat="itm in campaignTypes">{{itm.name}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <div ng-repeat="itm in campaigns | filter : onSearchCampaign">
+                                                <div ng-repeat="itm in filteredCamps = (campaigns | filter : query | filter : startsWithLetter:selectCampaignCode)">
                                                     <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color: #CCFFFF; border-color: #33FFFF; ">
                                                         <div class="col-md-12">
                                                             <b>{{itm.code}} {{itm.name}}</b>
@@ -91,6 +91,7 @@
                                                                         <li>{{itm.desc}}
                                                                         </li>
                                                                     </ul>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -101,6 +102,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div ng-show="!filteredCamps.length">ไม่พบข้อมูล</div>
                                             </div>
                                         </a>
                                     </div>
@@ -177,7 +179,7 @@
                                 <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
                             </tr>
                             <tr class="row" ng-repeat="itm in item.products">
-                                 <td class="col-md-1"></td>
+                                <td class="col-md-1"></td>
                                 <td class="col-md-2">{{itm.code}}</td>
                                 <td class="col-md-5">{{itm.name}}</td>
                                 <td class="col-md-2">{{itm.price}}</td>
@@ -187,7 +189,6 @@
                             </tr>
                         </table>
                     </div>
-                   
                 </div>
                 <div class="modal-footer">
                     <button ng-click="gotopricePlan()" data-dismiss="modal" class="btn btn-success">ตกลง</button>
@@ -195,12 +196,7 @@
             </div>
         </div>
     </div>
-
-
     <!-- สิ้นสุด Promotionset -->
-
-
-
     <div id="modalCampaign2" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

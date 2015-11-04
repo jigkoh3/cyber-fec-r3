@@ -8,9 +8,11 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('promotionCtrl', function($scope, $loading, $message, productService) {
+    .controller('promotionCtrl', function($scope, $loading, $message, $routeParams, productService) {
 
-        productService.getCampaign(function(result) {
+        var productCode = $routeParams.productCode;
+        var productType = $routeParams.productType;
+        productService.getProduct(productCode,productType,function(result) {
             // console.log(result);
             $scope.campaigns = result.data['response-data'].product.campaigns;
             $scope.promotions = result.data['response-data'].product.promotions;
@@ -53,11 +55,24 @@ angular.module('fec3App')
 
         };
 
-        $scope.selectCampaignCode = "00";
+        $scope.selectCampaignCode = "All";
 
         $scope.onChangeCampaignCode = function() {
             console.log($scope.selectCampaignCode);
             //var $filter("filter")(selectCampaignCode);
+        };
+
+        $scope.startsWithLetter = function(item) {
+            if ($scope.selectCampaignCode != "All") {
+                if (item.code.substring(0, 2) == $scope.selectCampaignCode) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }else{
+                return true;
+            }
+
         };
 
         $scope.onSearchCampaign = function(item) {
@@ -69,7 +84,7 @@ angular.module('fec3App')
                 var searchValue = $scope.query.toUpperCase();
                 var scCode = $scope.selectCampaignCode.toUpperCase();
 
-                if (//(name.indexOf(searchValue) >= 0) ||
+                if ( //(name.indexOf(searchValue) >= 0) ||
                     // (desc.indexOf(searchValue) >= 0) &&
                     (code.indexOf(searchValue) >= 0) &&
                     (code.indexOf(scCode) >= 0)) {
@@ -108,28 +123,28 @@ angular.module('fec3App')
 
         $scope.campaignTypes = [{
             name: "All",
-            value: "00"
+            value: "All"
         }, {
             name: "TX",
-            value: "01"
+            value: "TX"
         }, {
             name: "TR",
-            value: "02"
+            value: "TR"
         }, {
             name: "TP",
-            value: "03"
+            value: "TP"
         }, {
             name: "TN",
-            value: "04"
+            value: "TN"
         }, {
             name: "TM",
-            value: "05"
+            value: "TM"
         }, {
             name: "TD",
-            value: "06"
+            value: "TD"
         }, {
             name: "RS",
-            value: "07"
+            value: "RS"
         }];
 
 
