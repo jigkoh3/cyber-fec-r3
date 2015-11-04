@@ -1,0 +1,36 @@
+<div>
+    <div class="ngdialog-message">
+        <h5>รายละเอียด</h5>
+        <table class="table">
+            <tr class="row">
+                <th class="col-md-1" style="background-color: #c8bbbb">
+                    <input type="checkbox" name="vehicle" value="Bike" style="margin-left:20px; margin-top:12px;">
+                </th>
+                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>item.group</h5></span></th>
+                <th class="col-md-5" style="background-color: #c8bbbb; "><span><h5> (ไม่เกิน item.maxGet ชิ้น)</h5></span></th>
+                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>item.type</h5></span></th>
+                <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
+            </tr>
+            <tr class="row" >
+                <td class="col-md-1"></td>
+                <td class="col-md-2">itm.code</td>
+                <td class="col-md-5">itm.name</td>
+                <td class="col-md-2">itm.price</td>
+                <td class="col-md-1">
+                    <input class="form-control" type="text">
+                </td>
+            </tr>
+        </table>
+        <p>
+            <b>* หากพบปัญหาในการใช้งาน กรุณาติดต่อ IT Helpdesk / 9700</b>
+        </p>
+    </div>
+    <div style="text-align:center;">
+        &nbsp;&nbsp;
+        <input type="button" ng-show="ngDialogData['message-type']=='ERROR' || ngDialogData['message-type']=='ERROR_CALL_SERVICE'" ng-click="ngBootBoxClose()" value=" Close " class="btn btn-danger">
+        <input type="button" ng-hide="(ngDialogData['message-type']=='ERROR') || (ngDialogData['message-type']=='ERROR_CALL_SERVICE')" ng-click="ngBootBoxClose()" value="OK" id="btn_ngbOK" class="btn btn-success">
+    </div>
+    <div class="ngdialog-buttons">
+        &nbsp;
+    </div>
+</div>

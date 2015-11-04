@@ -1,0 +1,71 @@
+<!-- Header -->
+<div id="header" ng-include="'views/common/headerserved.html'"></div>
+<!-- Main Wrapper -->
+<nav class=" navbar-default landing-bar">
+    <div class="container">
+        <div id="navbar" class="navbar-collapse collapse">
+            <div class="row">
+                <div>
+                    <br>
+                    <p>
+                        Home > Products > Devices > iPhone </p>
+                </div>
+            </div>
+        </div>
+</nav>
+<div id="wrapper">
+    <div class="container">
+        <div class="row " >
+            <br>
+            <div class="col-sm-2" ></div>
+            <div class="col-sm-10 xs-center" ng-repeat="itm in service">
+                <h4>{{itm.name}}</h4></div>
+            <div class="row">
+                <div class="col-sm-6 xs-center">
+                    <div class="row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4"><img actual-src="{{imgPrefix(itm.id)}}" ng-src="images/category/0.png" /></div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6" ng-repeat="itm in detail">
+                    <div class="row">
+                        <table class="table">
+                           
+                            <tr class="row">
+                                <th class="col-md-1" style="background-color: #c8bbbb; "></th>
+                                <th class="col-md-3" style="background-color: #c8bbbb; ">บริการ</th>
+                                <th class="col-md-3" style="background-color: #c8bbbb; "></th>
+                                <th class="col-md-3" style="background-color: #c8bbbb; text-align:center"></th>
+                                <th class="col-md-1" style="background-color: #c8bbbb; ">ราคา</th>
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1"><input type="radio"></th>
+                                <th class="col-md-9">{{itm.name}}</th>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-1"></th>
+                                 <th class="col-md-1">-</th>
+                                  <!--   <button class="btn btn-success" data-dismiss="modal">ตกลง</button> -->
+                                
+                            </tr>
+                            <tr class="row">
+                                <th class="col-md-1"><input type="radio"></th>
+                                <th class="col-md-9">{{itm.name2}}</th>
+                                <th class="col-md-1"></th>
+                                <th class="col-md-1"></th>
+                                 <th class="col-md-1">-</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+               
+            </div>
+            <!-- Footer style="border-size:0.5px; border-style:solid;"-->
+
+            <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+        </div>
+
+  
+
+       

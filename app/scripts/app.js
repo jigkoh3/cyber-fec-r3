@@ -90,7 +90,7 @@ angular
                 controller: 'orderDeviceCtrl',
                 controllerAs: 'orderDevice'
             })
-            .when('/promotion/:productCode?/:productType?', {
+            .when('/promotion/:id?/:name?/:productCode?/:productType?', {
                 // templateUrl: 'views/underconstruction.html'
                 templateUrl: 'views/promotion.html',
                 controller: 'promotionCtrl',
@@ -231,6 +231,11 @@ angular
                 templateUrl: 'views/underconstruction.html',
                 // controller: 'printpreviewCtrl',
                 // controllerAs: 'printpreview'
+            })
+            .when('/orderService', {
+                templateUrl: 'views/orderService.html',
+                controller: 'orderServiceCtrl',
+                controllerAs: 'orderService'
             })
             .otherwise({
                 redirectTo: '/'

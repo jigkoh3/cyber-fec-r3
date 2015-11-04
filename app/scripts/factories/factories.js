@@ -9,6 +9,7 @@ angular
     .factory('$localstorage', localstorage)
     .factory('$loading', loading)
     .factory('$message', message)
+    .factory('$modal', modal)
     .factory('smartUIHttpInterceptor', function($q, $rootScope) {
         return {
             request: function(config) {
@@ -186,5 +187,32 @@ function message($ngBootbox) {
                 $("#btn_ngbOK").focus();
             }, 800);
         }
+    }
+};
+
+function modal($ngBootbox) {
+    var that = this;
+    
+    return {
+        campaignSelector: function(itm) {
+            // _alertMsg = msg;
+            //console.log(_alertMsg);
+            setTimeout(function() {
+                $ngBootbox.customDialog({
+                    templateUrl: 'views/templates/choosecampaign.html',
+                    onEscape: function() {
+                        return false;
+                    },
+                    show: true,
+                    backdrop: true,
+                    closeButton: false,
+                    animate: true
+                });
+            }, 1001);
+
+            setTimeout(function() {
+                $("#btn_ngbOK").focus();
+            }, 800);
+        },
     }
 };
