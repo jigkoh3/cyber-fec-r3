@@ -187,6 +187,11 @@ angular
                 // controller: 'printpreviewCtrl',
                 // controllerAs: 'printpreview'
             })
+            .when('/orderSevice', {
+                templateUrl: 'views/orderSevice.html',
+                controller: 'orderSeviceCtrl',
+                controllerAs: 'orderSevice'
+            })
             .otherwise({
                 redirectTo: '/'
             });
