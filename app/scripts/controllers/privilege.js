@@ -33,7 +33,7 @@ angular.module('fec3App')
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
-                                "message-type": "Morning",
+                                "message-type": "Warning",
                                 "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
                                 "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
                                 "technical-message": ""

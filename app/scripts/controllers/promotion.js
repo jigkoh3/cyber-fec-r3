@@ -36,11 +36,14 @@ angular.module('fec3App')
             $loading.show();
             productService.getCampaign(itm.code, productCode, function(res) {
                 console.log(res);
+                 $loading.hide();
                 if (res.status) {
+                    $loading.show();
                     productService.getPromotionSet(res.data['response-data'].campaign.promotionSet, function(result) {
                         console.log(result);
+                        $loading.hide();
                         if (result.status) {
-                            $loading.hide();
+                           
                             var promotionset = result.data['response-data'].promotion.promotions;
                             $modal.campaignSelector(promotionset, function(result) {
                                 //alert(result.data.code);
@@ -60,8 +63,9 @@ angular.module('fec3App')
                                     productService.verify(param, function(result) {
                                         //location.href='#priceplanexisting
                                         $scope.isClick = false;
+                                         $loading.hide();
                                         if (result.data['response-data']['result'] == 'Pass') {
-                                            $loading.hide();
+                                           
                                             location.href = '#pricePlan';
                                             $('#bindDataAgain').click();
                                         } else {
@@ -95,9 +99,13 @@ angular.module('fec3App')
 
                             });
                             //$location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                        } else {
+                            $message.alert(result.data["display-message"]);
                         }
 
                     });
+                } else {
+                    $message.alert(res.data["display-message"]);
                 }
 
             });
@@ -114,6 +122,8 @@ angular.module('fec3App')
                         $location.path('/pricePlan'); //.search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
                         $('#bindDataAgain').click();
                     });
+                } else {
+                    $message.alert(result.data["display-message"]);
                 }
 
             });
