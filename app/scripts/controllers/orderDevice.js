@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, productService) {
+    .controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, $modal, productService) {
         //get querystring request
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
@@ -66,6 +66,7 @@ angular.module('fec3App')
         var oldProItem = "";
         $scope.choose = function(itm, id) {
             //console.log("selected itm piece :" + itm.piece)
+            $modal.productSelector(itm);
             if ($scope.tabselected == "1") {
                 if (oldProItem != id) {
                     $scope.proItem['piece' + oldProItem] = null;
@@ -121,5 +122,5 @@ angular.module('fec3App')
             }
         };
 
-
+        
     });
