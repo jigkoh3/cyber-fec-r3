@@ -637,8 +637,13 @@ angular.module('fec3App')
                                     productItemDetail.name = prodItemResultList[0].name;
                                     productItemDetail.piece = prodItemResultList[0].qty;
                                     productItemDetail.price = prodItemResultList[0].price;
+                                    productItemDetail.type = prodItemResultList[0].type;
                                     productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty >= 5 ? "green" : "yellow"));
                                     productItemDetail.itemCount = prodItemResultList.length;
+
+                                    for (var prodIdx = 0; prodIdx < prodItemResultList.length; prodIdx++) {
+                                        productItemDetail.childs.push(prodItemResultList[prodIdx]);
+                                    }
 
                                 } else {
 
@@ -647,6 +652,7 @@ angular.module('fec3App')
                                     productItemDetail.piece = "";
                                     productItemDetail.price = "";
                                     productItemDetail.stock = "";
+                                    productItemDetail.type = "";
                                     productItemDetail.itemCount = 0;
                                 }
 
