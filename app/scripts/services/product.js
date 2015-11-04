@@ -658,7 +658,7 @@ angular.module('fec3App')
                         var queryResult = [retData];
 
                         console.log("===========================================");
-                        console.log("getProductByCategory : ", queryResult);
+                        console.log("getProductByCategory Rukyee: ", queryResult);
                         console.log("===========================================");
 
                         fnCallback({
