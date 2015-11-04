@@ -12,6 +12,8 @@ angular.module('fec3App')
         //get querystring request
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
+        $scope.productCode = null;
+        $scope.productType = null;
         //onload page event
         $loading.show();
         productService.getProductByCategory($scope.id, function(result) {
@@ -72,21 +74,23 @@ angular.module('fec3App')
                 $scope.proItem['piece' + id] = 1;
                 console.log($scope.proItem['piece' + id]);
                 console.log(id);
-            }else{
-                if($scope.proItem['piece' + id] < itm.piece){
+            } else {
+                if ($scope.proItem['piece' + id] < itm.piece) {
                     $scope.proItem['piece' + id] += 1;
-                }else{
+                } else {
                     $scope.proItem['piece' + id] = itm.piece;
                 }
-                
+
             }
-            $scope.calculate(itm,'piece' + id);
+            $scope.productCode = itm.code;
+            $scope.productType = "P";
+            $scope.calculate(itm, 'piece' + id);
         };
         //culate order total summary
         $scope.total = 0;
         $scope.calculate = function(item, proItem) {
             console.log("calculate :" + $scope.proItem[proItem]);
-            if(!$scope.proItem[proItem]){// if more than max piece
+            if (!$scope.proItem[proItem]) { // if more than max piece
                 //console.log("more than max piece :" + item.piece);
                 $scope.proItem[proItem] = null;
             }
@@ -105,9 +109,13 @@ angular.module('fec3App')
             $scope.total = sum;
         };
 
-        $scope.next = function(productCode, productType) {
+        $scope.next = function() {
             if ($scope.tabselected == "1") {
-                $location.path('/promotion?productCode=' + productCode + '&productType=' + productType )
+                //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
+                if($scope.productCode && $scope.productType){
+                    $location.path('/promotion').search({productCode: $scope.productCode,productType: $scope.productType});
+                }
+                
             } else {
                 $location.path('/listpayment')
             }
