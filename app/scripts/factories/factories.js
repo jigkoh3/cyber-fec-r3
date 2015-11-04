@@ -217,5 +217,25 @@ function modal($ngBootbox) {
                 $("#btn_ngbOK").focus();
             }, 800);
         },
+        productSelector: function(itm) {
+            // _alertMsg = msg;
+            //console.log(_alertMsg);
+            setTimeout(function() {
+                $ngBootbox.customDialog({
+                    templateUrl: 'views/templates/productselector.html',
+                    onEscape: function() {
+                        return false;
+                    },
+                    show: true,
+                    backdrop: true,
+                    closeButton: false,
+                    animate: true
+                });
+            }, 1001);
+
+            setTimeout(function() {
+                $("#btn_ngbOK").focus();
+            }, 800);
+        }
     }
 };

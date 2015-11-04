@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('fec3App')
-    .service('productService', function($http, $filter, $timeout, $localstorage, $linq, dalService) {
+    .service('productService', function ($http, $filter, $timeout, $localstorage, $linq, dalService, $log) {
+        
+        var logger = $log.getInstance('productService');
         var saleinfo = $localstorage.getObject("userProfile");
         //var customerInfo = $localstorage.getObject("customerProfile");
         var request = {
@@ -599,7 +601,8 @@ angular.module('fec3App')
                             .Select("$.productInfo.color")
                             //.OrderBy("")                            
                             .ToArray().sort();
-                        console.log("productInfo.color : ", dataGrpByColor);
+
+                        logger.log("productInfo.color : ", dataGrpByColor);
 
                         var dataGrpByMemSize = $linq.Enumerable().From(result.data["response-data"].products)
                             .Distinct("$.productInfo.capacity")
@@ -663,9 +666,9 @@ angular.module('fec3App')
                         }
                         var queryResult = [retData];
 
-                        console.log("===========================================");
-                        console.log("getProductByCategory Rukyee: ", queryResult);
-                        console.log("===========================================");
+                        logger.log("===========================================");
+                        logger.log("getProductByCategory Rukyee: ", queryResult);
+                        logger.log("===========================================");
 
                         fnCallback({
                             status: true,
