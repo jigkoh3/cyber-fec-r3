@@ -12,6 +12,8 @@ angular.module('fec3App')
 
         var productCode = $routeParams.productCode;
         var productType = $routeParams.productType;
+        $scope.id = $routeParams.id;
+        $scope.name = $routeParams.name;
         productService.getProduct(productCode,productType,function(result) {
             // console.log(result);
             $scope.campaigns = result.data['response-data'].product.campaigns;

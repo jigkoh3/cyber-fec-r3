@@ -59,9 +59,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12 col-centered text-center">
-                                            <button ng-click="choose(itmMem,itm.colorName+$index)" ng-disabled="itmMem.stock =='red'" class="btn btn-default gray" ng-hide="itmMem.itemCount==0" >{{itmMem.sizeName}}
+                                            <button ng-click="choose(itmMem,itm.colorName+$index)" ng-disabled="itmMem.stock =='red'" class="btn btn-default gray" ng-hide="itmMem.itemCount==0">{{itmMem.sizeName}}
                                                 <br>&nbsp;&nbsp;{{itmMem.price | number:2}}&nbsp;&nbsp;</button>
-                                               <!--  href="#modalIphone" onclick="return false;" data-toggle="modal" -->
+                                            <!--  href="#modalIphone" onclick="return false;" data-toggle="modal" -->
                                         </div>
                                         <br>
                                     </div>
@@ -92,11 +92,9 @@
                 </div>
             </div>
             <!-- Footer style="border-size:0.5px; border-style:solid;"-->
-
             <footer class="footer" ng-include="'views/common/footer.html'"></footer>
         </div>
-
-     <div id="modalIphone" tabindex="-1" class="modal" data-backdrop="static" data-keyboard="false">
+        <div id="modalIphone" tabindex="-1" class="modal" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="table-responsive">
@@ -132,6 +130,5 @@
                 </div>
             </div>
         </div>
-
-
-       
+    </div>
+</div>
