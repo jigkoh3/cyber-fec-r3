@@ -11,55 +11,39 @@
                 </div>
             </div>
         </div>
+    </div>
 </nav>
-<div class="container" id="orderDeviceContent">
-    <div class="row content">
-        <div class="col-md-12 sale-main">
-            <div class="row">
-                <div class="col-md-6">
-                    <h4 class="pull-left ttl_main_sale"></h4>
-                </div>
-                <div class="col-md-6">
-                    <a href="javascript:;" class="pull-right viewall"> </a>
-                </div>
-            </div>
+<div id="wrapper">
+    <div class="container">
+        <div class="row ">
             <br>
-            <br>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 xs-center">
+                <h4>{{name}}</h4></div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-6 xs-center">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="row">
-                                <h4>iPhone 6 Plus</h4>
-                            </div>
-                            <div class="box-sale-4">
-                                <div class="product_img">
-                                    <img src="images/product/iPhone_6_Plus.png">
-                                    <div class="product_img_3g">
-                                        <ul></ul>
-                                    </div>
-                                </div>
-                                <div class="product_price">
-                                    <h4>I Phone 6 Plus (สีทอง)</h4>
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4"><img actual-src="{{imgPrefix(itm.id)}}" ng-src="images/category/0.png" /></div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-8 col-centered">
+                                <div data-toggle="buttons" class="btn-group btn-group-justified">
+                                    <label class="btn btn-default active" id="labelAdd" ng-click="selectTab('1')">
+                                        <input type="radio" value="1"> Campaign
+                                    </label>
+                                    <label class="btn btn-default" ng-click="selectTab('2')">
+                                        <input type="radio" value="2"> Promotion Set
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div data-toggle="buttons" class="btn-group btn-group-justified">
-                                            <label class="btn btn-default active" id="labelAdd" ng-click="selectTab('1')">
-                                                <input type="radio" value="1"> Campaign
-                                            </label>
-                                            <label class="btn btn-default" ng-click="selectTab('2')">
-                                                <input type="radio" value="2"> Promotion Set
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="well" style="background-color:#ffffff;">
+                    </div>
+                    <div class="well" style="background-color:#ffffff;">
                                 <br>
                                 <div ng-show="tabname=='1'">
                                     <div class="tab-pane current" id="home">
@@ -73,7 +57,7 @@
                                                     <!-- <div class="col-md-3"></div>
                                                         <div class="col-md-3"></div> -->
                                                     <div class="col-md-3">
-                                                        <select class="form-control" ng-model="selectCampaignCode" >
+                                                        <select class="form-control" ng-model="selectCampaignCode">
                                                             <option ng-repeat="itm in campaignTypes">{{itm.name}}</option>
                                                         </select>
                                                     </div>
@@ -91,7 +75,6 @@
                                                                         <li>{{itm.desc}}
                                                                         </li>
                                                                     </ul>
-                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -118,7 +101,7 @@
                                                     </div>
                                                 </div>
                                                 <br>
-                                                <div ng-repeat="itm in promotions | filter : query">
+                                                <div ng-repeat="itm in filteredPros = (promotions | filter : query)">
                                                     <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color:pink">
                                                         <div class="col-md-12">
                                                             <b>{{itm.code}} {{itm.name}}</b>
@@ -137,137 +120,51 @@
                                                         </div -->
                                                     </div>
                                                 </div>
+                                                <div ng-show="!filteredPros.length">ไม่พบข้อมูล</div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
                             </div>
+                </div>
+                <!-- Footer style="border-size:0.5px; border-style:solid;"-->
+                <footer class="footer" ng-include="'views/common/footer.html'"></footer>
+            </div>
+            <div id="modalIphone" tabindex="-1" class="modal" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-3" style="background-color: #FF0000;color:white; ">
+                                        <h4> IPhone 6</h4></th>
+                                    <th class="col-md-3" style="background-color: #FF0000 ; "></th>
+                                    <th class="col-md-3" style="color:green;text-align:center; background-color: #FF0000 "></th>
+                                    <th class="col-md-1" style="text-align:center; background-color: #FF0000 "></th>
+                                    <th class="col-md-1" style="background-color: #FF0000 ; ">
+                                        <button type="button" id="btnSecoundAuthenClose" class="close" data-dismiss="modal">&times;</button>
+                                    </th>
+                                </tr>
+                                <tr class="row">
+                                    <th class="col-md-1" style="background-color: #c8bbbb; "></th>
+                                    <th class="col-md-3" style="background-color: #c8bbbb; "></th>
+                                    <th class="col-md-3" style="background-color: #c8bbbb; "></th>
+                                    <th class="col-md-3" style="background-color: #c8bbbb; text-align:center">ราคา</th>
+                                    <th class="col-md-1" style="background-color: #c8bbbb; ">จำนวน</th>
+                                </tr>
+                                <tr class="row">
+                                    <th class="col-md-1"></th>
+                                    <th class="col-md-3"></th>
+                                    <th class="col-md-3"></th>
+                                    <th class="col-md-3"></th>
+                                    <th class="col-md-1">
+                                        <button class="btn btn-success" data-dismiss="modal">ตกลง</button>
+                                    </th>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8"></div>
-        <div class="col-md-2"></div>
-        <div class="col-md-2">
-            <!-- <button class="btn btn-success" onclick="location.href='#privilege'">ตกลง</button> -->
-        </div>
-    </div>
-    <div id="modalCampaign1" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Promotion Detail</h5>
-                    <br>
-                    <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
-                    <!-- <div class="col-md-12">
-                        <input type="text" placeholder="--ค้นหา--" ng-model="pricePlanFilter" class="form-control">
-                    </div> -->
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive" ng-repeat="item in promotionset">
-                        <table class="table">
-                            <tr class="row">
-                                <th class="col-md-1" style="background-color: #c8bbbb">
-                                    <input type="checkbox" name="vehicle" value="Bike" style="margin-left:20px; margin-top:12px;">
-                                </th>
-                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>{{item.group}}</h5></span></th>
-                                <th class="col-md-5" style="background-color: #c8bbbb; "><span><h5> (ไม่เกิน {{item.maxGet}} ชิ้น)</h5></span></th>
-                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>{{item.type}}</h5></span></th>
-                                <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
-                            </tr>
-                            <tr class="row" ng-repeat="itm in item.products">
-                                <td class="col-md-1"></td>
-                                <td class="col-md-2">{{itm.code}}</td>
-                                <td class="col-md-5">{{itm.name}}</td>
-                                <td class="col-md-2">{{itm.price}}</td>
-                                <td class="col-md-1">
-                                    <input class="form-control" type="text">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button ng-click="gotopricePlan()" data-dismiss="modal" class="btn btn-success">ตกลง</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- สิ้นสุด Promotionset -->
-    <div id="modalCampaign2" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Promotion Detail</h5>
-                    <br>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr class="row">
-                                <th class="col-md-1" style="background-color: #c8bbbb">
-                                    <input type="checkbox" name="vehicle" value="Bike" style="margin-left:20px; margin-top:12px;">
-                                </th>
-                                <th class="col-md-7" style="background-color: #c8bbbb; "><span><h5> Accessories (ไม่เกิน 1 ชิ้น)</h5></span></th>
-                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>แลกซื้อ</h5></span></th>
-                                <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
-                            </tr>
-                            <tr class="row">
-                                <!-- <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
-                                <th class="col-md-5">{{itm.promotion}}</th>
-                                <th class="col-md-4">{{itm.price}} <span> &nbsp; บาท</span></th> -->
-                                <td class="col-md-1"></td>
-                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
-                                <td class="col-md-2">1,290.00</td>
-                                <td class="col-md-1">
-                                    <input class="form-control" type="text">
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <!-- <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
-                                <th class="col-md-5">{{itm.promotion}}</th>
-                                <th class="col-md-4">{{itm.price}} <span> &nbsp; บาท</span></th> -->
-                                <td class="col-md-1"></td>
-                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
-                                <td class="col-md-2">1,290.00</td>
-                                <td class="col-md-1">
-                                    <input class="form-control" type="text">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr class="row">
-                                <th class="col-md-1" style="background-color: #c8bbbb">
-                                    <input type="checkbox" name="vehicle" value="Bike" style="margin-left:20px; margin-top:12px;">
-                                </th>
-                                <th class="col-md-7" style="background-color: #c8bbbb; "><span><h5> Sim Card (ไม่เกิน 1 ชิ้น)</h5></span></th>
-                                <th class="col-md-2" style="background-color: #c8bbbb; "><span><h5>แลกซื้อ</h5></span></th>
-                                <th class="col-md-1" style="background-color: #c8bbbb; "><span><h5></h5></span></th>
-                            </tr>
-                            <tr class="row">
-                                <!-- <th class="col-md-1"><img src="images/icon/{{itm.imageno}}.png" /></th>
-                                <th class="col-md-5">{{itm.promotion}}</th>
-                                <th class="col-md-4">{{itm.price}} <span> &nbsp; บาท</span></th> -->
-                                <td class="col-md-1"></td>
-                                <td class="col-md-7">9000008957 SPIGEN + Leather Fit Blue</td>
-                                <td class="col-md-2">1,290.00</td>
-                                <td class="col-md-1">
-                                    <input class="form-control" type="text">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button ng-click="gotoprivilege()" data-dismiss="modal" class="btn btn-success">ตกลง</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
