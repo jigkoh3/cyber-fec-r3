@@ -622,8 +622,10 @@ angular.module('fec3App')
                             for (var mIdx = 0; mIdx < dataGrpByMemSize.length; mIdx++) {
 
                                 var productItemDetail = {
-                                    sizeName: dataGrpByMemSize[mIdx]
+                                    sizeName: dataGrpByMemSize[mIdx],
+                                    childs: []
                                 };
+
                                 var prodItemResultList = $linq.Enumerable()
                                     .From(result.data["response-data"].products)
                                     .Where("$.productInfo.capacity == '" + dataGrpByMemSize[mIdx] + "' && $.productInfo.color == '" + dataGrpByColor[cIdx] + "'")
@@ -635,8 +637,13 @@ angular.module('fec3App')
                                     productItemDetail.name = prodItemResultList[0].name;
                                     productItemDetail.piece = prodItemResultList[0].qty;
                                     productItemDetail.price = prodItemResultList[0].price;
+                                    productItemDetail.type = prodItemResultList[0].type;
                                     productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty >= 5 ? "green" : "yellow"));
                                     productItemDetail.itemCount = prodItemResultList.length;
+
+                                    for (var prodIdx = 0; prodIdx < prodItemResultList.length; prodIdx++) {
+                                        productItemDetail.childs.push(prodItemResultList[prodIdx]);
+                                    }
 
                                 } else {
 
@@ -645,6 +652,7 @@ angular.module('fec3App')
                                     productItemDetail.piece = "";
                                     productItemDetail.price = "";
                                     productItemDetail.stock = "";
+                                    productItemDetail.type = "";
                                     productItemDetail.itemCount = 0;
                                 }
 
@@ -656,7 +664,7 @@ angular.module('fec3App')
                         var queryResult = [retData];
 
                         console.log("===========================================");
-                        console.log("getProductByCategory : ", queryResult);
+                        console.log("getProductByCategory Rukyee: ", queryResult);
                         console.log("===========================================");
 
                         fnCallback({
@@ -1127,7 +1135,7 @@ angular.module('fec3App')
             }
         };
 
-        this.getCampaign = function(fnCallback) {
+        this.getProduct = function(productCode,productType,fnCallback) {
             if (!dalService.demo) {
 
                 request.target = 'sales-services/rest/master/get_product';
