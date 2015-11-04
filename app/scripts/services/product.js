@@ -622,8 +622,10 @@ angular.module('fec3App')
                             for (var mIdx = 0; mIdx < dataGrpByMemSize.length; mIdx++) {
 
                                 var productItemDetail = {
-                                    sizeName: dataGrpByMemSize[mIdx]
+                                    sizeName: dataGrpByMemSize[mIdx],
+                                    childs: []
                                 };
+
                                 var prodItemResultList = $linq.Enumerable()
                                     .From(result.data["response-data"].products)
                                     .Where("$.productInfo.capacity == '" + dataGrpByMemSize[mIdx] + "' && $.productInfo.color == '" + dataGrpByColor[cIdx] + "'")
