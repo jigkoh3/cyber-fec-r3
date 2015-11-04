@@ -193,15 +193,26 @@ function message($ngBootbox) {
 function modal($ngBootbox) {
     var that = this;
     var _itm = null;
+<<<<<<< HEAD
     var _proSelected = null;
+=======
+    var _item = null;
+>>>>>>> e46ca88f53e3932fc9f6b317fba692ccc2f11221
     return {
         campaignList: function() {
             return _itm;
         },
+<<<<<<< HEAD
         campaignSelected: function(data){
             _proSelected = data;
         },
         campaignSelector: function(itm,fnCallback) {
+=======
+        mathList: function() {
+            return _item;
+        },
+        campaignSelector: function(itm) {
+>>>>>>> e46ca88f53e3932fc9f6b317fba692ccc2f11221
             _itm = itm;
             //console.log(_alertMsg);
             setTimeout(function() {
@@ -234,9 +245,9 @@ function modal($ngBootbox) {
                 $("#btn_ngbOK").focus();
             }, 800);
         },
-        productSelector: function(itm) {
-            // _alertMsg = msg;
-            //console.log(_alertMsg);
+        
+        productSelector: function(item) {
+            _item = item;
             setTimeout(function() {
                 $ngBootbox.customDialog({
                     templateUrl: 'views/templates/productselector.html',

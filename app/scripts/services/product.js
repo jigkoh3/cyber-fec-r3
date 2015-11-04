@@ -1312,7 +1312,40 @@ angular.module('fec3App')
             }
         };
 
-        this.verify = function(fnCallback) {
+        this.verify = function(payload, fnCallback) {
+            //
+            request.param.campaign_code = "RS228";
+            request.param.product_code = "3000024133";
+            request.param.qty = 1;
+            request.param.verifyKeys = [];
+            request.target = 'sales-services/rest/privilege/verify';
+
+            if (!dalService.demo) {
+                //
+                dalService.callServicePost(request, null, function(result) {
+                    fnCallback(result);
+                });
+            } else {
+                //
+                var result = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
+                    "response-data": {
+                        "result": "Pass"
+                    },
+                    "display-message": null
+                };
+                $timeout(function() {
+                    fnCallback({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
 
         }
 
