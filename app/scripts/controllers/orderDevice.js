@@ -9,13 +9,10 @@
  */
 angular.module('fec3App')
     .controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, productService) {
-
-
-
-
-
+        //get querystring request
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
+        //onload page event
         $loading.show();
         productService.getProductByCategory($scope.id, function(result) {
             //console.log(result.data);
@@ -24,193 +21,95 @@ angular.module('fec3App')
 
                 console.log(result.data);
                 $scope.trueProduct = result.data;
-
-
             } else {
                 $message.alert(result.data["display-message"]);
                 //console.log(result.data);
             }
-
-
         });
+        //display category image by category id
         $scope.imgPrefix = function(id) {
-            //var preFixURL = 'http://172.19.193.71/sale/img/category/';
             var preFixURL = 'http://localhost:9000/images/category/'
             return preFixURL + id + '.png';
         };
 
 
-        // $scope.trueProduct = {
-        //     productName: "IPhone 6 Plus",
-        //     productImg: "iPhone_6_Plus",
-        //     productTotal: "ราคารวม",
-        //     productColor: [{
-        //             colorName: "Gold",
-        //             // colorImg: "gold",
-        //             memSize: [{
-        //                 sizeName: "16 GB",
-        //                 price: "27000.00",
-        //                 stock: "yellow",
-        //                 piece: ""
-        //             }, {
-        //                 sizeName: "64 GB",
-        //                 price: "31000.00",
-        //                 stock: "green",
-        //                 piece: ""
-        //             }, {
-        //                 sizeName: "128 GB",
-        //                 price: "35000.00",
-        //                 stock: "red",
-        //                 piece: ""
-        //             }]
-        //         }, {
-        //             colorName: "Silver",
-        //             // colorImg: "silver",
-        //             memSize: [{
-        //                 sizeName: "16 GB",
-        //                 price: "27000.00",
-        //                 stock: "yellow",
-        //                 piece: ""
-        //             }, {
-        //                 sizeName: "64 GB",
-        //                 price: "31000.00",
-        //                 stock: "green",
-        //                 piece: ""
-        //             }, {
-        //                 sizeName: "128 GB",
-        //                 price: "35000.00",
-        //                 stock: "green",
-        //                 piece: ""
-        //             }]
-        //         }, {
-        //             colorName: "Gray",
-        //             // colorImg: "black",
-        //             memSize: [{
-        //                 sizeName: "16 GB",
-        //                 price: "27000.00",
-        //                 stock: "red",
-        //                 piece: ""
-        //             }, {
-        //                 sizeName: "64 GB",
-        //                 price: "31000.00",
-        //                 stock: "green",
-        //                 piece: ""
-        //             }, {
-        //                 sizeName: "128 GB",
-        //                 price: "35000.00",
-        //                 stock: "green",
-        //                 piece: ""
-        //             }]
-
-        //         }
-
-        //     ]
-
-        // };
-
-        $scope.total = 0;
-        $scope.calculate = function(item) {
-            console.log(item);
-         // //console.log($scope.trueProduct.productColor[0].memSize);
-         //    var total = 0;
-         //    angular.forEach($scope.trueProduct.productColor, function(itm) {
-         //        var totalByColor = 0;
-         //        angular.forEach(itm.memSize, function(item) {
-
-         //            totalByColor += item.price * item.piece;
-
-         //             console.log($scope.total);
-         //        })
-         //        console.debug(totalByColor);
-         //        total += totalByColor;
-
-         //    })
-         //    return total;
-         //    // $scope.total += item.price * item.piece;
-
-         var arr = $scope.trueProduct.productColor;
-         var sum = 0;
-            for(var i=0; i<arr.length; i++){
-                var sum_i = 0;
-                for(var ii=0; ii<arr[i].memSize.length; ii++){
-                    var sum_ii = 0;
-                    if($scope.proItem['itemCount'+arr[i].colorName+ii]){
-                        sum = sum+$scope.proItem['itemCount'+arr[i].colorName+ii]*item.price;
-                    }
-                }
-            }
-         $scope.total = sum;
-        }
-
         $scope.detail = "";
-        // $scope.preDetail = function(item) {
-        //     // console.log($scope.trueProduct.productColor[0].memSize);
-        //     var detail = "";
-        //     angular.forEach($scope.trueProduct.productColor, function(itm) {
-        //         var sizeDetail = "";
-        //         angular.forEach(itm.memSize, function(item) {
+        $scope.tabselected = "1"; // default promotion (promotion or device only)
 
-        //             sizeDetail == item.sizeName
-
-        //             // console.log($scope.total);
-        //         })
-        //         //console.debug(sizeDetail);
-        //         detail == sizeDetail;
-
-        //     })
-        //     return detail;
-        //     //$scope.total += item.price * item.piece;
-
-        // }
-
-
+        //is unUsed ????
         $scope.IsVisible = false;
         $scope.ShowHide = function() {
             //If DIV is visible it will be hidden and vice versa.
             $scope.IsVisible = $scope.IsVisible ? false : true;
+        };
+        //is initail set order volume (qty)s by item is null after select tab order action
+        $scope.selectTab = function(idx) {
 
-        }
+            $scope.total = 0;
+            var arr = $scope.trueProduct.productColor;
+            for (var i = 0; i < arr.length; i++) {
+
+                for (var ii = 0; ii < arr[i].memSize.length; ii++) {
+                    $scope.proItem['piece' + arr[i].colorName + ii] = null;
+                }
+            }
+            $scope.tabselected = idx;
+        };
+        //??????
+        $scope.proItem = {
+            "pieceGold0": null
+        };
+
+        //
+        var oldProItem = "";
+        $scope.choose = function(itm, id) {
+            //console.log("selected itm piece :" + itm.piece)
+            if ($scope.tabselected == "1") {
+                if (oldProItem != id) {
+                    $scope.proItem['piece' + oldProItem] = null;
+                    oldProItem = id;
+                }
+                $scope.proItem['piece' + id] = 1;
+                console.log($scope.proItem['piece' + id]);
+                console.log(id);
+            }else{
+                if($scope.proItem['piece' + id] < itm.piece){
+                    $scope.proItem['piece' + id] += 1;
+                }else{
+                    $scope.proItem['piece' + id] = itm.piece;
+                }
+                
+            }
+            $scope.calculate(itm,'piece' + id);
+        };
+        //culate order total summary
+        $scope.total = 0;
+        $scope.calculate = function(item, proItem) {
+            console.log("calculate :" + $scope.proItem[proItem]);
+            if(!$scope.proItem[proItem]){// if more than max piece
+                //console.log("more than max piece :" + item.piece);
+                $scope.proItem[proItem] = null;
+            }
+            var arr = $scope.trueProduct.productColor;
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                var sum_i = 0;
+                for (var ii = 0; ii < arr[i].memSize.length; ii++) {
+                    var sum_ii = 0;
+                    if ($scope.proItem['piece' + arr[i].colorName + ii]) {
+                        sum = sum + $scope.proItem['piece' + arr[i].colorName + ii] * item.price;
+                    }
+
+                }
+            }
+            $scope.total = sum;
+        };
 
         $scope.next = function() {
-            //alert("");
-            //onclick="location.href='#promotion'"
             if ($scope.tabselected == "1") {
                 $location.path('/promotion')
             } else {
                 $location.path('/listpayment')
             }
-
-        }
-        $scope.tabselected = "1";
-        $scope.selectTab = function(idx) {
-
-            $scope.total = 0;
-            var arr = $scope.trueProduct.productColor;
-            for(var i=0; i<arr.length; i++){
-                
-                for(var ii=0; ii<arr[i].memSize.length; ii++){
-                    $scope.proItem['itemCount'+arr[i].colorName+ii] = null;
-                }
-            }
-                
-            
-            $scope.tabselected = idx;
-        }
-        $scope.proItem = {
-            "pieceGold0": null
-        }
-        var oldProItem = "";
-        $scope.choose = function(itm,id) {
-            $scope.calculate(itm);
-            if(oldProItem != id){
-                $scope.proItem['itemCount'+oldProItem] = null;
-                oldProItem = id;
-            }
-            $scope.proItem['itemCount'+id] = 1;
-            console.log($scope.proItem['itemCount'+id]);
-            console.log(id);
-
-        }
-            
-
+        };
     });

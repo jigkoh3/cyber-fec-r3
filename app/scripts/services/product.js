@@ -10,12 +10,6 @@ angular.module('fec3App')
             "transactionId": saleinfo.saleCode,
             "param": {}
         };
-        // var devices = $filter('filter')(result["response-data"].categories, {
-        //             "name": "Device"
-        //         });
-        // var recommend = $filter('filter')(result["response-data"].categories, {
-        //             "name": "Recommend"
-        //         });
 
         this.getCategories = function(fnCallback) {
             var onSuccess = function(result) {
@@ -560,18 +554,6 @@ angular.module('fec3App')
             });
 
             if (recommend && recommend.length >= 1) {
-                // var Promotions = $filter('filter')(recommend[0].child, {
-                //     "name": "Promotions"
-                // });
-                // if (Promotions && Promotions.length >= 1) {
-                //     result.Promotions = Promotions[0].child;
-                // }
-                // var Devices = $filter('filter')(recommend[0].child, {
-                //     "name": "Devices"
-                // });
-                // if (Devices && Devices.length >= 1) {
-                //     result.Devices = Devices[0].child;
-                // }
                 fnCallback({
                     status: true,
                     data: recommend[0],
@@ -607,57 +589,29 @@ angular.module('fec3App')
         };
 
         this.getProductByCategory = function(category_id, fnCallback) {
-             var onSuccess = function(result) {
+            var onSuccess = function(result) {
                 if (result.status) {
                     if (result.data["response-data"]) {
-                        //var queryResult = $linq.Enumerable().From(result.data["response-data"].products)
-                        //    .GroupBy("$.type", null,
-                        //        function(key, g) {
-                        //            var result = {
-                        //                productName: key,
-                        //                //productImg: key.code,
-                        //                productColor: g.GroupBy("$.productInfo.color", null,
-                        //                    function(color, c) {
-                        //                        var cr = {
-                        //                            colorName: color,
-                        //                            memSize: c.GroupBy("{capacity: $.productInfo.capacity, price: $.price, qty: $.qty, code: $.code}", null,
-                        //                                function(k, m) {
-                        //                                    var cap = {
-                        //                                        code: k.code,
-                        //                                        sizeName: k.capacity,
-                        //                                        price: k.price,
-                        //                                        stock: (k.qty == 0 ? "red" : (k.qty >= 5 ? "green" : "yellow")),
-                        //                                        piece: k.qty
-                        //                                    }
-                        //                                    return cap;
-                        //                                }).ToArray()
-                        //                        }
 
-                        //                        return cr;
-                        //                    }).ToArray()
-                        //            }
-                        //            return result;
-                        //        }).ToArray();
-                        //console.log("response-data : ", result.data["response-data"].products);                        
                         var dataGrpByColor = $linq.Enumerable().From(result.data["response-data"].products)
-                                                    .Distinct("$.productInfo.color")
-                                                    .Where("$.productInfo.color != null")
-                                                    .Select("$.productInfo.color")
-                                                    //.OrderBy("")                            
-                                                    .ToArray().sort();
+                            .Distinct("$.productInfo.color")
+                            .Where("$.productInfo.color != null")
+                            .Select("$.productInfo.color")
+                            //.OrderBy("")                            
+                            .ToArray().sort();
                         console.log("productInfo.color : ", dataGrpByColor);
 
-                        //var dataGrpByMemSize = $linq.Enumerable().From(result.data["response-data"].products).GroupBy("$.productInfo.capacity").ToArray();
                         var dataGrpByMemSize = $linq.Enumerable().From(result.data["response-data"].products)
-                                                    .Distinct("$.productInfo.capacity")
-                                                    .Where("$.productInfo.capacity != null")
-                                                    .Select("$.productInfo.capacity")
-                                                    //.OrderBy("")
-                                                    .ToArray().sort();
-                        //console.log("productInfo.capacity : ", dataGrpByMemSize);
-                        //console.log("===========================================");
+                            .Distinct("$.productInfo.capacity")
+                            .Where("$.productInfo.capacity != null")
+                            .Select("$.productInfo.capacity")
+                            //.OrderBy("")
+                            .ToArray().sort();
 
-                        var retData = { productName: "P", productColor: [] };
+                        var retData = {
+                            productName: "P",
+                            productColor: []
+                        };
                         for (var cIdx = 0; cIdx < dataGrpByColor.length; cIdx++) {
 
                             var productColorDetail = {
@@ -667,13 +621,13 @@ angular.module('fec3App')
 
                             for (var mIdx = 0; mIdx < dataGrpByMemSize.length; mIdx++) {
 
-                                var productItemDetail = { sizeName: dataGrpByMemSize[mIdx] };
+                                var productItemDetail = {
+                                    sizeName: dataGrpByMemSize[mIdx]
+                                };
                                 var prodItemResultList = $linq.Enumerable()
-                                                                .From(result.data["response-data"].products)
-                                                                .Where("$.productInfo.capacity == '" + dataGrpByMemSize[mIdx] + "' && $.productInfo.color == '" + dataGrpByColor[cIdx] + "'")
-                                                                .ToArray();
-
-                                //console.log("productInfo.color[" + dataGrpByColor[cIdx] + "].capacity[" + dataGrpByMemSize[mIdx] + "] : ", prodItemResultList);
+                                    .From(result.data["response-data"].products)
+                                    .Where("$.productInfo.capacity == '" + dataGrpByMemSize[mIdx] + "' && $.productInfo.color == '" + dataGrpByColor[cIdx] + "'")
+                                    .ToArray();
 
                                 if (prodItemResultList != null && prodItemResultList.length > 0) {
 
@@ -681,7 +635,7 @@ angular.module('fec3App')
                                     productItemDetail.name = prodItemResultList[0].name;
                                     productItemDetail.piece = prodItemResultList[0].qty;
                                     productItemDetail.price = prodItemResultList[0].price;
-                                    productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty.qty >= 5 ? "green" : "yellow"));
+                                    productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty >= 5 ? "green" : "yellow"));
                                     productItemDetail.itemCount = prodItemResultList.length;
 
                                 } else {
@@ -1174,24 +1128,6 @@ angular.module('fec3App')
         };
 
         this.getCampaign = function(fnCallback) {
-            // var resp = {};
-            // var resp = $localstorage.getObject("resp");t;
-
-            // var onSuccess = function(result) {
-            //     if (result.status) {
-            //         if (result.data["response-data"]) {
-            //             var.resp = {};
-            //             resp.campaignlist = result.data["response-data"].compainglist;
-            //             $localstorage.setObject("resp,"
-            //                 resp);
-            //         } else {
-            //             console.log(resp.data)
-            //         }
-            //     }
-
-            //     fnCallback(result;)
-            // }
-
             if (!dalService.demo) {
 
                 request.target = 'sales-services/rest/master/get_product';
@@ -1309,51 +1245,68 @@ angular.module('fec3App')
                     });
                 }, 1000);
             }
-
         };
 
         this.verify = function(fnCallback) {
-            
+
         }
 
-        this.getCategoryByName = function(name, fnCallback) {
-            console.log(name);
+        this.getCategoryById = function(id, fnCallback) {
+            console.log(id);
             var result = {};
             var master = $localstorage.getObject("master");
-
-
-
+            result.id = 0;
+            result.name = "All";
+            result.child = master.categories;
             var getAll = function(source) {
-                var res = $filter('filter')(source, {
-                    "name": name
-                });
-                if (res && res.length >= 1) {
-                    return res;
-                } else {
-                    for (var i = 0; i < source.length; i++) {
-                        if (source[i].child && source[i].child.length >= 1) {
-                            var a = getAll(source[i].child);
-                            if (a && a.length >= 1) {
-                                return a;
+                if (source.child && source.child.length > 0) {
+                    // var res = $filter('filter')(source.child, {
+                    //     "id": id
+                    // });
+                    var res = $linq.Enumerable().From(source.child)
+                    .Where(function (x) {
+                        return x.id == id
+                    }).ToArray();
+
+                    if (res && res.length >= 1) {
+                        return res;
+                        
+                    } else {
+
+                        for (var i = 0; i < source.child.length; i++) {
+                            var ret = getAll(source.child[i]);
+                            if(ret && ret.length>=1)
+                            {
+                                return ret;
                                 break;
-
                             }
-                        } else {
-                            //return null;
                         }
+                        // for (var i = 0; i < source.length; i++) {
+                        //     if (source[i].child && source[i].child.length >= 1) {
+                        //         var a = getAll(source[i].child);
+                        //         if (a && a.length >= 1) {
+                        //             return a;
+                        //             break;
 
+                        //         }
+                        //     } else {
+                        //         //return null;
+                        //     }
+
+                        // }
                     }
-
-
                 }
 
-
             };
-            var category = getAll(master.categories);
+            var category = result.child;
+            if(id && id != 0){
+                category = getAll(result)[0].child;
+            }
+           
 
             //console.log(Devices);
-            if (category && category.length >= 1) {
-                result = category[0].child;
+            if (category && category.length > 0) {
+                result = category;
                 console.log(result);
                 fnCallback({
                     status: true,

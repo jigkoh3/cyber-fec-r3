@@ -2,21 +2,20 @@
 
 /**
  * @ngdoc function
- * @name fec3App.controller:AboutCtrl
+ * @name fec3App.controller:productsCtrl
  * @description
- * # AboutCtrl
+ * # productsCtrl
  * Controller of the fec3App
+ * display all categories or category by name
  */
 angular.module('fec3App')
     .controller('productsCtrl', function($scope, $location, $loading, $message,  $routeParams, productService) {
-        $('.ng-menu').click(function() {
-            $('.ng-menu').removeClass('active');
-            $(this).addClass('active');
-        });
-
+        //query string param
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
-        productService.getCategoryByName($scope.name,function(result) {
+
+        //on load page event
+        productService.getCategoryById($scope.id,function(result) {
             
             if(result.status){
                 //console.log(result.data);
@@ -25,64 +24,26 @@ angular.module('fec3App')
                 $message.alert(result.data["display-message"]);
             }
         });
+
+        //disply image by category
         $scope.imgPrefix = function(id){
             //var preFixURL = 'http://172.19.193.71/sale/img/category/';
             var preFixURL = 'http://localhost:9000/images/category/'
             return preFixURL + id + '.png';
         };
+
+        //dilldown recusive
+        //if category is have child then recusive data dilldown
+        //if categoru is not have child then navigate to route orderDevice(product by category)
         $scope.dilldown = function(item){
             //console.log(item);
             if(item.child && item.child.length >= 1)
             {
                 $scope.categories= item.child;
             }else{
-                // var target = '/orderDevice?id='  + item.id +'&name=' + item.name;
-                // $location.path(target);
                 $location.path('/orderDevice').search({id: item.id,name: item.name});
             }
             
         }
 
-        // $scope.aircard = [{
-        //     productname: "Air Card 1",
-        //     productpic: "Picture1",
-        // }, {
-        //     productname: "Air Card 2",
-        //     productpic: "Picture1",
-
-        // }];
-
-
-        // $scope.smartphone = [{
-        //     productname: "SAMSUNG Galaxy Note5",
-        //     productpic: "note5",
-
-        // }, {
-        //     productname: "iPhone 6",
-        //     productpic: "iPhone",
-        // }];
-
-
-        // $scope.phone = [{
-
-        //     productname: "Go Live",
-        //     productpic: "Go_Live",
-        // }];
-
-
-        // $scope.tablet = [{
-        //     productname: "SAMSUNG Galaxy Tab3",
-        //     productpic: "tab3",
-        // }, {
-        //     productname: "SAMSUNG Galaxy Tab4",
-        //     productpic: "tab4",
-        // }, {
-        //     productname: "iPad mini3",
-        //     productpic: "ipadmini3",
-        // }];
-
-
-
-
-        //$scope.trueDevices =[{name:"iPhone 6 Plus",price:"",imgAS:""}];
     });
