@@ -14,7 +14,7 @@ angular.module('fec3App')
         var productType = $routeParams.productType;
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
-        productService.getProduct(productCode,productType,function(result) {
+        productService.getProduct(productCode, productType, function(result) {
             // console.log(result);
             $scope.campaigns = result.data['response-data'].product.campaigns;
             $scope.promotions = result.data['response-data'].product.promotions;
@@ -22,27 +22,24 @@ angular.module('fec3App')
         });
 
 
-        productService.getPromotionSet(function(result) {
-            console.log(result);
-            $scope.promotionset = result.data['response-data'].promotion.promotions;
-        });
 
-        $('.ng-menu').click(function() {
-            $('.ng-menu').removeClass('active');
-            $(this).addClass('active');
-        });
-        // this.awesomeThings = [
-        //     'HTML5 Boilerplate',
-        //     'AngularJS',
-        //     'Karma'
-        // ];
+
+
         $scope.tabname = "1";
         $scope.selectTab = function(tab) {
             $scope.tabname = tab;
         };
-        $scope.choose = function(itm){
+        $scope.choose = function(itm) {
             //alert(itm.code);
-            $modal.campaignSelector(itm);
+            productService.getPromotionSet(itm.code, function(result) {
+                console.log(result);
+                if (result.status){
+                    var promotionset = result.data['response-data'].promotion.promotions;
+                    $modal.campaignSelector(promotionset);
+                }
+                
+            });
+            
         };
 
         $scope.gotoprivilege = function() {
@@ -75,7 +72,7 @@ angular.module('fec3App')
                 } else {
                     return false;
                 }
-            }else{
+            } else {
                 return true;
             }
 
@@ -104,28 +101,6 @@ angular.module('fec3App')
             return false;
         };
 
-
-        // $scope.campaigns = [{
-        //     campaignName: "RS499 TC_iPhone 6 & 6 Plus discount 5000bt",
-        //     details: [{
-        //         name: "เลือก Promotion ismart 499, 699, 899 หรือ Jumbo 599, 799, 999"
-        //     }, {
-        //         name: "ชำระล่วงหน้า 6 เดือน สัญญา 12 เดือน"
-        //     }],
-        //     price: "ราคาเครื่องลด  5000 บาท เหลือ  24,450 บาท"
-        // }];
-
-
-
-
-
-        // $scope.promotions = [{
-        //     promotionName: "PT343 Device with Sim (TUC)",
-        //     details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (TUC)"
-        // }, {
-        //     promotionName: "PT343 Device with Sim (RMV)",
-        //     details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (RMV)"
-        // }];
 
         $scope.campaignTypes = [{
             name: "All",

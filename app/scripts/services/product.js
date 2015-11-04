@@ -912,15 +912,16 @@ angular.module('fec3App')
 
         };
 
-        this.getPromotionSet = function(fnCallback) {
+        this.getPromotionSet = function(promotionCode,fnCallback) {
             if (!dalService.demo) {
 
 
-                request.param.userId = userId;
-                request.param.shopCode = shopCode;
-                request.param.transactionId = transactionId;
-                request.param.shopCode = shopCode;
+                // request.param.userId = userId;
+                // request.param.shopCode = shopCode;
+                // request.param.transactionId = transactionId;
+                // request.param.shopCode = shopCode;
                 request.target = 'sales-services/rest/master/get_promotionset';
+                request.param.promotion_code = promotionCode;
 
 
                 dalService.callServicePost(request, null, function(result) {
@@ -1143,8 +1144,9 @@ angular.module('fec3App')
 
                 request.target = 'sales-services/rest/master/get_product';
 
-                request.param.product_code = product_code;
-                request.param.product_type = product_type;
+                request.param.product_code = productCode;
+                request.param.product_type = productType;
+                request.param.customer_type = '*';
 
 
                 dalService.callServicePost(request, null, function(result) {

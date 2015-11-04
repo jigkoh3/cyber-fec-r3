@@ -8,9 +8,9 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productSelectorCtrl', function($scope, $modal) {
-        
-        $scope.data = $modal.mathList();
+    .controller('choosecampaignCtrl', function($scope, $modal) {
+    	
+        $scope.data = $modal.campaignList();
         //console.log($scope.ngDialogData);
         $scope.ngBootBoxClose = function() {
 
