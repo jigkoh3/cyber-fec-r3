@@ -45,7 +45,7 @@ angular
                 controller: 'orderDeviceCtrl',
                 controllerAs: 'orderDevice'
             })
-            .when('/promotion/:productCode?/:productType?', {
+            .when('/promotion/:id?/:name?/:productCode?/:productType?', {
                 // templateUrl: 'views/underconstruction.html'
                 templateUrl: 'views/promotion.html',
                 controller: 'promotionCtrl',

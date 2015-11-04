@@ -113,7 +113,7 @@ angular.module('fec3App')
             if ($scope.tabselected == "1") {
                 //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
                 if($scope.productCode && $scope.productType){
-                    $location.path('/promotion').search({productCode: $scope.productCode,productType: $scope.productType});
+                    $location.path('/promotion').search({id: $scope.id,name: $scope.name,productCode: $scope.productCode,productType: $scope.productType});
                 }
                 
             } else {
