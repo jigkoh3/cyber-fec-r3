@@ -192,10 +192,13 @@ function message($ngBootbox) {
 
 function modal($ngBootbox) {
     var that = this;
-    
+    var _itm = null;
     return {
+        campaignList:function(){
+            return _itm;
+        },
         campaignSelector: function(itm) {
-            // _alertMsg = msg;
+            _itm = itm;
             //console.log(_alertMsg);
             setTimeout(function() {
                 $ngBootbox.customDialog({
