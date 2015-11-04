@@ -117,11 +117,11 @@ angular
             //     controller: 'listpayment2Ctrl',
             //     controllerAs: 'listpayment2'
             // })
-            // .when('/pricePlan', {
-            //     templateUrl: 'views/pricePlan.html',
-            //     controller: 'pricePlanCtrl',
-            //     controllerAs: 'pricePlan'
-            // })
+            .when('/pricePlan', {
+                templateUrl: 'views/pricePlan.html',
+                controller: 'pricePlanCtrl',
+                controllerAs: 'pricePlan'
+            })
             // .when('/payment', {
             //     templateUrl: 'views/payment.html',
             //     controller: 'paymentCtrl',

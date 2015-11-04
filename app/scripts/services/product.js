@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('fec3App')
-    .service('productService', function ($http, $filter, $timeout, $localstorage, $linq, dalService, $log) {
-        
+    .service('productService', function($http, $filter, $timeout, $localstorage, $linq, dalService, $log) {
+
         var logger = $log.getInstance('productService');
         var saleinfo = $localstorage.getObject("userProfile");
         //var customerInfo = $localstorage.getObject("customerProfile");
@@ -912,7 +912,7 @@ angular.module('fec3App')
 
         };
 
-        this.getPromotionSet = function(promotionCode,fnCallback) {
+        this.getPromotionSet = function(promotionCode, fnCallback) {
             if (!dalService.demo) {
 
 
@@ -1139,7 +1139,7 @@ angular.module('fec3App')
             }
         };
 
-        this.getProduct = function(productCode,productType,fnCallback) {
+        this.getProduct = function(productCode, productType, fnCallback) {
             if (!dalService.demo) {
 
                 request.target = 'sales-services/rest/master/get_product';
@@ -1260,7 +1260,40 @@ angular.module('fec3App')
             }
         };
 
-        this.verify = function(fnCallback) {
+        this.verify = function(payload, fnCallback) {
+            //
+            request.param.campaign_code = "RS228";
+            request.param.product_code = "3000024133";
+            request.param.qty = 1;
+            request.param.verifyKeys = [];
+            request.target = 'sales-services/rest/privilege/verify';
+
+            if (!dalService.demo) {
+                //
+                dalService.callServicePost(request, null, function(result) {
+                    fnCallback(result);
+                });
+            } else {
+                //
+                var result = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
+                    "response-data": {
+                        "result": "Pass"
+                    },
+                    "display-message": null
+                };
+                $timeout(function() {
+                    fnCallback({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
 
         }
 
@@ -1277,19 +1310,18 @@ angular.module('fec3App')
                     //     "id": id
                     // });
                     var res = $linq.Enumerable().From(source.child)
-                    .Where(function (x) {
-                        return x.id == id
-                    }).ToArray();
+                        .Where(function(x) {
+                            return x.id == id
+                        }).ToArray();
 
                     if (res && res.length >= 1) {
                         return res;
-                        
+
                     } else {
 
                         for (var i = 0; i < source.child.length; i++) {
                             var ret = getAll(source.child[i]);
-                            if(ret && ret.length>=1)
-                            {
+                            if (ret && ret.length >= 1) {
                                 return ret;
                                 break;
                             }
@@ -1312,10 +1344,10 @@ angular.module('fec3App')
 
             };
             var category = result.child;
-            if(id && id != 0){
+            if (id && id != 0) {
                 category = getAll(result)[0].child;
             }
-           
+
 
             //console.log(Devices);
             if (category && category.length > 0) {
