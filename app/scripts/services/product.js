@@ -1146,7 +1146,6 @@ angular.module('fec3App')
                 request.param.product_code = product_code;
                 request.param.product_type = product_type;
 
-
                 dalService.callServicePost(request, null, function(result) {
                     fnCallback(result);
                 });
