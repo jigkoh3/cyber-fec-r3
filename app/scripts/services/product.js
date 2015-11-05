@@ -1415,6 +1415,177 @@ angular.module('fec3App')
             }
         }
 
+        this.getDiscountAndBooking = function (dataType, dataItemSerialNo, orderItemList, fnCallback) {
+
+            /*******************************************
+            **
+            **  dataType - 'D'=Discount, 'V'=Voucher, 'B'=Booking
+            **
+            ********************************************/
+            if (dataType == "D") {
+                
+                request.param.coupon_serial = dataItemSerialNo;
+                request.target = "sales-services/rest/sale/get_discount_by_serial";
+
+            } else if (dataType == "V") {
+
+                request.param.coupon_serial = dataItemSerialNo;
+                request.target = 'sales-services/rest/sale/get_other_payment_by_serial';
+
+            } else {
+
+                var customerInfo = $localstorage.getObject("customerProfile");
+
+                request.param.bookingId = dataItemSerialNo;
+                request.param.citizenId = customerInfo.certificateId;
+
+                request.target = 'sales-services/rest/event/get_booking_by_bid_and_cid';
+            }
+
+            logger.debug("getDiscountAndBooking>>request=", request);
+            if (!dalService.demo) {
+                
+                dalService.callServicePost(request, null, function (result) {
+
+                    var returnData = result;
+                    var resData = returnData["response-data"];
+
+                    if (dataType == "D" || dataType == "V") {
+
+                        var responseData = {
+                            "ORDER_ID": "",
+                            "SEQUENCE": -1,
+                            "CAMPAIGN": "",
+                            "CAMPAIGN_NAME": "",
+                            "PROMOTION_SET": "",
+                            "PROMOTION_TYPE": "",
+                            "CAMPAIGN_PROMO_ITEM_QTY": "",
+                            "GROUP_ID": "",
+                            "PRODUCT_TYPE": dataType,
+                            "PRODUCT_CODE": resData.coupon.code,
+                            "PRODUCT_NAME": (resData.coupon.type == "P" && dataType != "V" ? "ส่วนลด " + resData.coupon.amount + " %" : "ส่วนลด " + resData.coupon.amount + " บาท"),
+                            "PRICEPLAN_CODE": "",
+                            "PRICEPLAN_NAME": "",
+                            "SERVICE_REGISTER_TYPE": "",
+                            "MOBILE_NUMBER": "",
+                            "DISCOUNT_TYPE": (dataType == "V" ? "B" : resData.coupon.type),
+                            "DISCOUNT_4_PROD_ITEMS_LIST": resData.coupon.bundleWithProductCode,
+                            "DISCOUNT_4_PROD_ITEM": "",
+                            "PRICE": 0,
+                            "QTY": 1,
+                            "TOTAL": 0,
+                            "DISCOUNT_AMOUNT": resData.coupon.amount,
+                            "DEPOSIT_AMOUNT": 0,
+                            "NET_AMOUNT": 0,
+                            "OTHER_PAYMENT_AMOUNT": 0
+                        };
+
+                        returnData["response-data"] = responseData;
+
+                        if (resData.coupon.isUsed) {
+
+                            returnData.status = "UNSUCCESSFUL";
+                            returnData["display-message"] = "คูปองส่วนลดถูกใช้ไปแล้ว / Discount was used.";
+                        }
+
+                    } else { // Booking
+
+                        var responseData = {
+                            "ORDER_ID": "",
+                            "SEQUENCE": -1,
+                            "CAMPAIGN": "",
+                            "CAMPAIGN_NAME": "",
+                            "PROMOTION_SET": "",
+                            "PROMOTION_TYPE": "",
+                            "CAMPAIGN_PROMO_ITEM_QTY": "",
+                            "GROUP_ID": "",
+                            "PRODUCT_TYPE": dataType,
+                            "PRODUCT_CODE": resData.booking.productCode,
+                            "PRODUCT_NAME": "ส่วนลด " + resData.booking.amount + " บาท",
+                            "PRICEPLAN_CODE": "",
+                            "PRICEPLAN_NAME": "",
+                            "SERVICE_REGISTER_TYPE": "",
+                            "MOBILE_NUMBER": "",
+                            "DISCOUNT_TYPE": "B",
+                            "DISCOUNT_4_PROD_ITEMS_LIST": resData.booking.productCode,
+                            "DISCOUNT_4_PROD_ITEM": "",
+                            "PRICE": 0,
+                            "QTY": 1,
+                            "TOTAL": 0,
+                            "DISCOUNT_AMOUNT": resData.booking.amount,
+                            "DEPOSIT_AMOUNT": 0,
+                            "NET_AMOUNT": 0,
+                            "OTHER_PAYMENT_AMOUNT": 0
+                        };
+
+                        returnData["response-data"] = responseData;
+                        if (resData.booking.isUse) {
+
+                            returnData.status = "UNSUCCESSFUL";
+                            returnData["display-message"] = "รายการจองถูกใช้ไปแล้ว / Booking was used.";
+                        }
+                        else if (resData.booking.isCancel) {
+
+                            returnData.status = "UNSUCCESSFUL";
+                            returnData["display-message"] = "รายการจองถูกยกเลิก / Discount was cancelled.";
+                        }
+                    }
+
+                    logger.debug("getDiscountAndBooking>>returnData=", returnData);
+
+                    fnCallback(returnData);
+                });
+
+            } else {
+                //
+                var result = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
+                    "response-data": {                        
+                        "ORDER_ID": "",
+                        "SEQUENCE": -1,
+                        "CAMPAIGN": "",
+                        "CAMPAIGN_NAME": "",
+                        "PROMOTION_SET": "",
+                        "PROMOTION_TYPE": "",
+                        "CAMPAIGN_PROMO_ITEM_QTY": "",
+                        "GROUP_ID": "",
+                        "PRODUCT_TYPE": dataType,
+                        "PRODUCT_CODE": "001",
+                        "PRODUCT_NAME": "ส่วนลด Test 550 บาท",
+                        "PRICEPLAN_CODE": "",
+                        "PRICEPLAN_NAME": "",
+                        "SERVICE_REGISTER_TYPE": "",
+                        "MOBILE_NUMBER": "",
+                        "DISCOUNT_TYPE": "B",
+                        "DISCOUNT_4_PROD_ITEMS_LIST": resData.coupon.bundleWithProductCode,
+                        "DISCOUNT_4_PROD_ITEM": "",
+                        "PRICE": -550,
+                        "QTY": 1,
+                        "TOTAL": -550,
+                        "DISCOUNT_AMOUNT": 0,
+                        "DEPOSIT_AMOUNT": 0,
+                        "NET_AMOUNT": -550,
+                        "OTHER_PAYMENT_AMOUNT": 0
+                    },
+                    "display-message": null
+                };
+
+                logger.debug("getDiscountAndBooking>>result=", result);
+
+                $timeout(function () {
+                    fnCallback({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
+        }
+
         this.getMobileServiceCustomerType = function (fnCallback) {
 
             request.param.campaign_code = payload.campaign_code;
