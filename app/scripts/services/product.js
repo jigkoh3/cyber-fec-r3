@@ -1452,6 +1452,76 @@ angular.module('fec3App')
 
                     if (dataType == "D" || dataType == "V") {
 
+                        var prodName = "";
+                        var discount4ItemSeq = -1;
+                        var discountAmt = 0;
+
+                        var bundleWithProdItem = resData.coupon.bundleWithProductCode;
+                        if (bundleWithProdItem != null && bundleWithProdItem.length > 0) {
+
+                            var isFound = false;
+                            for (var idx = 0; idx < bundleWithProdItem.length; idx++) {
+
+                                var prodItemResultList = $linq.Enumerable().From(orderItemList).Where("$.PRODUCT_CODE == '" + bundleWithProdItem[idx] + "'").ToArray();
+
+                                if (prodItemResultList != null && prodItemResultList.length > 0) {
+
+                                    isFound = true;
+                                    discount4ItemSeq = prodItemResultList[0].SEQUENCE;
+                                    discountAmt = resData.coupon.amount;
+                                    if (resData.coupon.type == "P") {
+                                        discountAmt = (prodItemResultList[0].TOTAL * (resData.coupon.amount / 100)) * - 1;
+                                    }
+
+                                    if (dataType == "V" || resData.coupon.type == "B") {
+
+                                        prodName = "ส่วนลดค่าเครื่อง " + prodItemResultList[0].PRODUCT_NAME + " จำนวน " + resData.booking.amount + " บาท";
+
+                                    } else {
+                                        prodName = "ส่วนลดค่าเครื่อง " + prodItemResultList[0].PRODUCT_NAME + " จำนวน " + resData.booking.amount + " %";
+                                    }
+
+
+                                    break;
+                                }
+                            }
+
+                            if (!isFound) {
+
+                                returnData.status = "UNSUCCESSFUL";
+                                if (dataType == "D") {
+                                    returnData["display-message"] = "ไม่พบรายการส่วนลด / Discount Item is not found.";
+                                } else {
+                                    returnData["display-message"] = "ไม่พบรายการ Voucher / Voucher Item is not found.";
+                                }
+                                
+                            }
+
+                        } else { // if (bundleWithProdItem != null && bundleWithProdItem.length > 0) {
+
+                            discount4ItemSeq = -1
+                            discountAmt = resData.coupon.amount;
+                            var totalProdAmt = 0;
+                            var buyProdItemList = $linq.Enumerable().From(orderItemList).Where("$.PRODUCT_TYPE == 'P'").ToArray();
+                            if (buyProdItemList != null && buyProdItemList.length > 0) {
+                                for (var i = 0; i < buyProdItemList.length; i++) {
+                                    totalProdAmt = totalProdAmt + buyProdItemList[i].TOTAL;
+                                }
+                            }
+
+                            if (resData.coupon.type == "P") {
+                                discountAmt = (totalProdAmt * (resData.coupon.amount / 100)) * -1;
+                            }
+
+                            if (dataType == "V" || resData.coupon.type == "B") {
+
+                                prodName = "ส่วนลดท้ายใบเสร็จ จำนวน " + resData.booking.amount + " บาท";
+
+                            } else {
+                                prodName = "ส่วนลดท้ายใบเสร็จ จำนวน " + resData.booking.amount + " %";
+                            }
+                        }
+
                         var responseData = {
                             "ORDER_ID": "",
                             "SEQUENCE": -1,
@@ -1463,18 +1533,18 @@ angular.module('fec3App')
                             "GROUP_ID": "",
                             "PRODUCT_TYPE": dataType,
                             "PRODUCT_CODE": resData.coupon.code,
-                            "PRODUCT_NAME": (resData.coupon.type == "P" && dataType != "V" ? "ส่วนลด " + resData.coupon.amount + " %" : "ส่วนลด " + resData.coupon.amount + " บาท"),
+                            "PRODUCT_NAME": prodName,
                             "PRICEPLAN_CODE": "",
                             "PRICEPLAN_NAME": "",
                             "SERVICE_REGISTER_TYPE": "",
                             "MOBILE_NUMBER": "",
                             "DISCOUNT_TYPE": (dataType == "V" ? "B" : resData.coupon.type),
                             "DISCOUNT_4_PROD_ITEMS_LIST": resData.coupon.bundleWithProductCode,
-                            "DISCOUNT_4_PROD_ITEM": "",
+                            "DISCOUNT_4_PROD_ITEM": discount4ItemSeq,
                             "PRICE": 0,
                             "QTY": 1,
                             "TOTAL": 0,
-                            "DISCOUNT_AMOUNT": resData.coupon.amount,
+                            "DISCOUNT_AMOUNT": discountAmt,
                             "DEPOSIT_AMOUNT": 0,
                             "NET_AMOUNT": 0,
                             "OTHER_PAYMENT_AMOUNT": 0
@@ -1490,6 +1560,21 @@ angular.module('fec3App')
 
                     } else { // Booking
 
+                        var prodItemResultList = $linq.Enumerable().From(orderItemList).Where("$.PRODUCT_CODE == '" + resData.booking.productCode + "'").ToArray();
+                        var prodName = "";
+                        var discount4ItemSeq = -1;
+
+                        if (prodItemResultList == null && prodItemResultList.length == 0) {
+
+                            returnData.status = "UNSUCCESSFUL";
+                            returnData["display-message"] = "ไม่พบข้อมูลรายการจอง / Booking is not found.";
+
+                        } else {
+
+                            prodName = "ส่วนลดค่าเครื่อง " + prodItemResultList[0].PRODUCT_NAME + " จำนวน " + resData.booking.amount + " บาท";
+                            discount4ItemSeq = prodItemResultList[0].SEQUENCE;
+                        }
+
                         var responseData = {
                             "ORDER_ID": "",
                             "SEQUENCE": -1,
@@ -1501,14 +1586,14 @@ angular.module('fec3App')
                             "GROUP_ID": "",
                             "PRODUCT_TYPE": dataType,
                             "PRODUCT_CODE": resData.booking.productCode,
-                            "PRODUCT_NAME": "ส่วนลด " + resData.booking.amount + " บาท",
+                            "PRODUCT_NAME": prodName,
                             "PRICEPLAN_CODE": "",
                             "PRICEPLAN_NAME": "",
                             "SERVICE_REGISTER_TYPE": "",
                             "MOBILE_NUMBER": "",
                             "DISCOUNT_TYPE": "B",
-                            "DISCOUNT_4_PROD_ITEMS_LIST": resData.booking.productCode,
-                            "DISCOUNT_4_PROD_ITEM": "",
+                            "DISCOUNT_4_PROD_ITEMS_LIST": [resData.booking.productCode],
+                            "DISCOUNT_4_PROD_ITEM": discount4ItemSeq,
                             "PRICE": 0,
                             "QTY": 1,
                             "TOTAL": 0,
@@ -1519,16 +1604,21 @@ angular.module('fec3App')
                         };
 
                         returnData["response-data"] = responseData;
-                        if (resData.booking.isUse) {
 
-                            returnData.status = "UNSUCCESSFUL";
-                            returnData["display-message"] = "รายการจองถูกใช้ไปแล้ว / Booking was used.";
-                        }
-                        else if (resData.booking.isCancel) {
+                        if (returnData.status == "SUCCESSFUL") {
 
-                            returnData.status = "UNSUCCESSFUL";
-                            returnData["display-message"] = "รายการจองถูกยกเลิก / Discount was cancelled.";
+                            if (resData.booking.isUse) {
+                                returnData.status = "UNSUCCESSFUL";
+                                returnData["display-message"] = "รายการจองถูกใช้ไปแล้ว / Booking was used.";
+                            }
+                            else if (resData.booking.isCancel) {
+
+                                returnData.status = "UNSUCCESSFUL";
+                                returnData["display-message"] = "รายการจองถูกยกเลิก / Discount was cancelled.";
+                            }
+
                         }
+
                     }
 
                     logger.debug("getDiscountAndBooking>>returnData=", returnData);
@@ -1560,8 +1650,8 @@ angular.module('fec3App')
                         "SERVICE_REGISTER_TYPE": "",
                         "MOBILE_NUMBER": "",
                         "DISCOUNT_TYPE": "B",
-                        "DISCOUNT_4_PROD_ITEMS_LIST": resData.coupon.bundleWithProductCode,
-                        "DISCOUNT_4_PROD_ITEM": "",
+                        "DISCOUNT_4_PROD_ITEMS_LIST": [],
+                        "DISCOUNT_4_PROD_ITEM": "-1",
                         "PRICE": -550,
                         "QTY": 1,
                         "TOTAL": -550,
