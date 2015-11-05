@@ -264,13 +264,13 @@ angular.module('fec3App')
 		$scope.totalCalculate_modal = function(){	
 					$scope.total_modal =0;
 					
-				for(var i = 0 ; i< $scope.order_list.length; i++){
+				for(var i = 0 ; i< $scope.order_insert.length; i++){
 					//console.log($scope.order_add[i]['response-data']['coupon']['amount']);
-					$scope.total_modal =$scope.total_modal+parseInt($scope.order_list[i]['PRICE']);	
+					$scope.total_modal =$scope.total_modal+parseInt($scope.order_insert[i]['PRICE']);	
 				}
 				
 		};
-		$scope.totalCalculate_modal();
+		
 		
 		$scope.delete = function(Group_id , ORDER_ID) {
 			var showName;
@@ -289,32 +289,65 @@ angular.module('fec3App')
 				}		
 
 			$message.confirm(msg,function(result){
-
 				if(result.status){
 					$scope.removeRow(Group_id);
 				}
 			});
 		};
 
-		$scope.PROMOTION_TYPE = 'b';
+		$scope.cleartext = function(){
+				$scope.promotionSearch = null;
+		}
+
+
 		$scope.order_insert=[];
-		$scope.searchlist = function(item){
+		$scope.searchlist = function(event){
 			if($scope.promotionSearch != null && $scope.promotionType != null){
 				var listArr = eval( $scope.order_list );
 				for(var i = 0; i < listArr.length; i++ ) {
 					if(listArr[i].PROMOTION_TYPE == $scope.promotionType && listArr[i].PRODUCT_CODE ==  $scope.promotionSearch){
-						$scope.order_insert.push({ 'PRODUCT_NAME':listArr[i].PRODUCT_NAME, 'PRICE': listArr[i].PRICE, 'ORDER_ID': listArr[i].ORDER_ID });
-						console.log( listArr[i]);
+
+						//$scope.order_insert.push({ 'PRODUCT_NAME':listArr[i].PRODUCT_NAME, 'PRICE': listArr[i].PRICE, 'ORDER_ID': listArr[i].ORDER_ID });
+						$scope.order_insert.push({
+							"ORDER_ID": listArr[i].ORDER_ID,
+							"SEQUENCE": listArr[i].SEQUENCE,
+							"CAMPAIGN": listArr[i].CAMPAIGN,
+							"CAMPAIGN_NAME": listArr[i].CAMPAIGN_NAME,
+							"PROMOTION_SET": listArr[i].PROMOTION_SET,
+							"PROMOTION_TYPE": listArr[i].PROMOTION_TYPE,
+							"CAMPAIGN_PROMO_ITEM_QTY": listArr[i].CAMPAIGN_PROMO_ITEM_QTY,
+							"GROUP_ID": listArr[i].GROUP_ID,
+							"PRODUCT_TYPE": listArr[i].PRODUCT_TYPE,
+							"PRODUCT_CODE": listArr[i].PRODUCT_CODE,
+							"PRODUCT_NAME": listArr[i].PRODUCT_NAME,
+							"PRICEPLAN_CODE": listArr[i].PRICEPLAN_CODE,
+							"PRICEPLAN_NAME": listArr[i].PRICEPLAN_NAME,
+							"SERVICE_REGISTER_TYPE": listArr[i].SERVICE_REGISTER_TYPE,
+							"MOBILE_NUMBER": listArr[i].MOBILE_NUMBER,
+							"PRICE": listArr[i].PRICE ,
+							"QTY": listArr[i].QTY,
+							"TOTAL": listArr[i].TOTAL,
+							"DISCOUNT_AMOUNT":listArr[i].DISCOUNT_AMOUNT,
+							"DEPOSIT_AMOUNT": listArr[i].DEPOSIT_AMOUNT,
+							"NET_AMOUNT": listArr[i].NET_AMOUNT,
+							"OTHER_PAYMENT_AMOUNT": listArr[i].OTHER_PAYMENT_AMOUNT
+						});
+						$scope.totalCalculate_modal();
 					}
 				}
 			}
-			//console.log($scope.promotionSearch );
-			/*if(item.PROMOTION_TYPE == $scope.PROMOTION_TYPE && item.query == $scope.PRODUCT_CODE){
-				return true;
-
-			}else{
-				return false;
-			}*/
+			
 		}
+
+		$scope.addToListCard = function(){
+			for(var i = 0 ; i< $scope.order_insert.length; i++){
+			$scope.order_product_item_list.push($scope.order_insert[i]);
+			}
+			
+			$scope.order_insert = [];
+			$scope.totalCalculate();
+		}
+		
+
     });
 

@@ -164,6 +164,23 @@ function message($ngBootbox) {
         "technical-message": ""
     };
     return {
+        confirm: function(msg, fnCallback) {
+            //$ngBootbox.confirm(msg, fnCallback);
+            $ngBootbox.confirm(msg)
+                .then(function() {
+                        //console.log('Confirm was accept');
+                        fnCallback({
+                            status: true
+                        });
+                    },
+                    function() {
+                        //Confirm was cancelled, don't delete customer
+                        //console.log('Confirm was cancelled');
+                        fnCallback({
+                            status: false
+                        });
+                    });
+        },
         alertMsg: function() {
             return _alertMsg;
         },
@@ -201,14 +218,14 @@ function modal($ngBootbox) {
             return _itm;
         },
 
-        campaignSelected: function(data){
+        campaignSelected: function(data) {
             _proSelected = data;
         },
-        
+
         mathList: function() {
             return _item;
         },
-        campaignSelector: function(itm,fnCallback) {
+        campaignSelector: function(itm, fnCallback) {
             _itm = itm;
             //console.log(_alertMsg);
             setTimeout(function() {
@@ -226,7 +243,7 @@ function modal($ngBootbox) {
                             label: "Ok",
                             className: "btn-success",
                             callback: function() {
-                                
+
                                 fnCallback({
                                     status: true,
                                     data: _proSelected
@@ -241,7 +258,7 @@ function modal($ngBootbox) {
                 $("#btn_ngbOK").focus();
             }, 800);
         },
-        
+
         productSelector: function(item) {
             _item = item;
             setTimeout(function() {

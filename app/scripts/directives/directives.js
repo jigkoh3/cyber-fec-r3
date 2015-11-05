@@ -18,6 +18,8 @@ angular
     .directive('version', version)
     .directive('recommend', recommend)
     .directive('actualSrc', actualSrc)
+    
+
 
 
 /**

@@ -83,49 +83,49 @@ angular.module('fec3App')
     var oldProItem = "";
     $scope.choose = function(itm, id) {
         //console.log("selected itm piece :" + itm.piece)
-        // if (itm.itemCount > 1) {
-    //     $modal.productSelector(itm);
-    // } else {
+        if (itm.itemCount > 1) {
+        $modal.productSelector(itm);
+    } else {
 
-    //     if ($scope.tabselected == "1") {
-    //         if (oldProItem != id) {
-    //             $scope.proItem['piece' + oldProItem] = null;
-    //             oldProItem = id;
-    //         }
-    //         $scope.proItem['piece' + id] = 1;
-    //         console.log($scope.proItem['piece' + id]);
-    //         console.log(id);
-    //     } else {
-    //         if ($scope.proItem['piece' + id] < itm.piece) {
-    //             $scope.proItem['piece' + id] += 1;
-    //         } else {
-    //             $scope.proItem['piece' + id] = itm.piece;
-    //         }
-
-    //     }
-    //     $scope.productCode = itm.code;
-    //     $scope.productType = "P";
-    //     $scope.calculate(itm, 'piece' + id);
-    // }
         if ($scope.tabselected == "1") {
-                if (oldProItem != id) {
-                    $scope.proItem['piece' + oldProItem] = null;
-                    oldProItem = id;
-                }
-                $scope.proItem['piece' + id] = 1;
-                console.log($scope.proItem['piece' + id]);
-                console.log(id);
-            } else {
-                if ($scope.proItem['piece' + id] < itm.piece) {
-                    $scope.proItem['piece' + id] += 1;
-                } else {
-                    $scope.proItem['piece' + id] = itm.piece;
-                }
-
+            if (oldProItem != id) {
+                $scope.proItem['piece' + oldProItem] = null;
+                oldProItem = id;
             }
-            $scope.productCode = itm.code;
-            $scope.productType = "P";
-            $scope.calculate(itm, 'piece' + id);
+            $scope.proItem['piece' + id] = 1;
+            console.log($scope.proItem['piece' + id]);
+            console.log(id);
+        } else {
+            if ($scope.proItem['piece' + id] < itm.piece) {
+                $scope.proItem['piece' + id] += 1;
+            } else {
+                $scope.proItem['piece' + id] = itm.piece;
+            }
+
+        }
+        $scope.productCode = itm.code;
+        $scope.productType = "P";
+        $scope.calculate(itm, 'piece' + id);
+    }
+        // if ($scope.tabselected == "1") {
+        //         if (oldProItem != id) {
+        //             $scope.proItem['piece' + oldProItem] = null;
+        //             oldProItem = id;
+        //         }
+        //         $scope.proItem['piece' + id] = 1;
+        //         console.log($scope.proItem['piece' + id]);
+        //         console.log(id);
+        //     } else {
+        //         if ($scope.proItem['piece' + id] < itm.piece) {
+        //             $scope.proItem['piece' + id] += 1;
+        //         } else {
+        //             $scope.proItem['piece' + id] = itm.piece;
+        //         }
+
+        //     }
+        //     $scope.productCode = itm.code;
+        //     $scope.productType = "P";
+        //     $scope.calculate(itm, 'piece' + id);
 
     };
     //culate order total summary
