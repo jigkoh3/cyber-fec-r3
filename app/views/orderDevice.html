@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="row top10">
                                         <div class="col-xs-12 col-centered text-center" ng-hide="itmMem.itemCount==0">
-                                            <input ng-disabled="tabselected=='1'" type="number" min="0" max="{{itmMem.piece}}" ng-pattern="/^[0-999]{1,7}$/" required ng-disabled="itmMem.stock =='red'" ng-model="proItem['piece'+itm.colorName+$index]" ng-change="calculate(itmMem,'piece'+itm.colorName+$index)" onfocus="" style=" width: 60px;" />
+                                            <input ng-disabled="tabselected=='1' || itmMem.itemCount > 1" type="number" min="0" max="{{itmMem.piece}}" ng-pattern="/^[0-999]{1,7}$/" required ng-disabled="itmMem.stock =='red'" ng-model="proItem['piece'+itm.colorName+$index]" ng-change="calculate(itmMem,'piece'+itm.colorName+$index)" onfocus="" style=" width: 60px;" />
                                         </div>
                                     </div>
                                 </div>
