@@ -193,16 +193,16 @@ angular.module('fec3App')
                         customerProfile.orderObj = {};
                         customerProfile.orderObj.order_product_item_list = [];
 
-                         customerProfile.orderObj.order_product_item_list.push(order);
+                        customerProfile.orderObj.order_product_item_list.push(order);
 
                     }
 
                 }
-               
+
             }
-             $localstorage.setObject("customerProfile", customerProfile);
-                $localstorage.logObject("customerProfile");
-                //$location.path('/ordersummary')
+            $localstorage.setObject("customerProfile", customerProfile);
+            $localstorage.logObject("customerProfile");
+            //$location.path('/ordersummary')
         };
     };
 
