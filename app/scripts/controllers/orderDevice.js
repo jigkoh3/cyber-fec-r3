@@ -10,7 +10,10 @@
 angular.module('fec3App')
 
 
-.controller('orderDeviceCtrl', function($routeParams, $scope, $location, $loading, $message, $modal, productService) {
+.controller('orderDeviceCtrl', function($routeParams, $scope, $localstorage, $location, $loading, $message, $modal, productService) {
+
+
+
 
     //get querystring request
     $scope.id = $routeParams.id;
@@ -84,23 +87,23 @@ angular.module('fec3App')
     $scope.choose = function(itm, id) {
         //console.log("selected itm piece :" + itm.piece)
         if (itm.itemCount > 1) {
-        $modal.productSelector(itm);
-    } else {
 
-        if ($scope.tabselected == "1") {
-            if (oldProItem != id) {
-                $scope.proItem['piece' + oldProItem] = null;
-                oldProItem = id;
-            }
-            $scope.proItem['piece' + id] = 1;
-            console.log($scope.proItem['piece' + id]);
-            console.log(id);
+            $modal.productSelector(itm);
         } else {
-            if ($scope.proItem['piece' + id] < itm.piece) {
-                $scope.proItem['piece' + id] += 1;
+
+            if ($scope.tabselected == "1") {
+                if (oldProItem != id) {
+                    $scope.proItem['piece' + oldProItem] = null;
+                    oldProItem = id;
+                }
+                $scope.proItem['piece' + id] = 1;
+                console.log($scope.proItem['piece' + id]);
+                console.log(id);
+
             } else {
                 $scope.proItem['piece' + id] = itm.piece;
             }
+
 
         }
         $scope.productCode = itm.code;
@@ -126,6 +129,7 @@ angular.module('fec3App')
         //     $scope.productCode = itm.code;
         //     $scope.productType = "P";
         //     $scope.calculate(itm, 'piece' + id);
+
 
     };
     //culate order total summary
@@ -164,9 +168,40 @@ angular.module('fec3App')
             }
 
         } else {
-            $location.path('/listpayment')
-        }
-    };
+            var customerProfile = $localstorage.getObject("customerProfile");
+            var orderList = [];
+            var order = {};
+            var arr = $scope.trueProduct.productColor;
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                var sum_i = 0;
+                for (var ii = 0; ii < arr[i].memSize.length; ii++) {
+                    var sum_ii = 0;
+                    if ($scope.proItem['piece' + arr[i].colorName + ii] && $scope.proItem['piece' + arr[i].colorName + ii] > 0) {
+                        console.log("Tingtang:" + arr[i]);
+                        // var order.PRODUCT_TYPE = arr[i].
+                        var prod = arr[i].memSize[ii];
+                        order.PRODUCT_TYPE = prod.type;
+                        order.PRODUCT_CODE = prod.code;
+                        order.PRODUCT_NAME = prod.name;
+                        order.PRICE = prod.price;
+                        order.QTY = $scope.proItem['piece' + arr[i].colorName + ii];
+                        order.TOTAL = order.QTY * order.PRICE;
 
+                        customerProfile.orderObj = {};
+                        customerProfile.orderObj.order_product_item_list = [];
+
+                        customerProfile.orderObj.order_product_item_list.push(order);
+
+                    }
+
+                }
+
+            }
+            $localstorage.setObject("customerProfile", customerProfile);
+            $localstorage.logObject("customerProfile");
+            //$location.path('/ordersummary')
+        };
+    };
 
 });
