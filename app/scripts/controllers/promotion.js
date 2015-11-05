@@ -8,13 +8,15 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('promotionCtrl', function($scope, $loading, $modal, $message, $routeParams, productService) {
+    .controller('promotionCtrl', function($scope, $loading, $modal, $message, $routeParams, $localstorage, $location, productService) {
 
         var productCode = $routeParams.productCode;
         var productType = $routeParams.productType;
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
-        productService.getProduct(productCode,productType,function(result) {
+
+
+        productService.getProduct(productCode, productType, function(result) {
             // console.log(result);
             $scope.campaigns = result.data['response-data'].product.campaigns;
             $scope.promotions = result.data['response-data'].product.promotions;
@@ -22,27 +24,109 @@ angular.module('fec3App')
         });
 
 
-        productService.getPromotionSet(function(result) {
-            console.log(result);
-            $scope.promotionset = result.data['response-data'].promotion.promotions;
-        });
 
-        $('.ng-menu').click(function() {
-            $('.ng-menu').removeClass('active');
-            $(this).addClass('active');
-        });
-        // this.awesomeThings = [
-        //     'HTML5 Boilerplate',
-        //     'AngularJS',
-        //     'Karma'
-        // ];
+
+
         $scope.tabname = "1";
         $scope.selectTab = function(tab) {
             $scope.tabname = tab;
         };
-        $scope.choose = function(itm){
-            //alert(itm.code);
-            $modal.campaignSelector(itm);
+        $scope.choose = function(itm) {
+
+            $loading.show();
+            productService.getCampaign(itm.code, productCode, function(res) {
+                console.log(res);
+                 $loading.hide();
+                if (res.status) {
+                    $loading.show();
+                    productService.getPromotionSet(res.data['response-data'].campaign.promotionSet, function(result) {
+                        console.log(result);
+                        $loading.hide();
+                        if (result.status) {
+                           
+                            var promotionset = result.data['response-data'].promotion.promotions;
+                            $modal.campaignSelector(promotionset, function(result) {
+                                //alert(result.data.code);
+                                if (res.data['response-data'].campaign.verifyKeys && res.data['response-data'].campaign.verifyKeys.length == 1 && res.data['response-data'].campaign.verifyKeys[0] == "ThaiId") {
+                                    //verlify thai-id
+
+                                    var param = {
+                                        "campaign_code": itm.code,
+                                        "product_code": productCode,
+                                        "qty": 1,
+                                        "verifyKeys": [{
+                                            "key": "ThaiId",
+                                            "value": $localstorage.getObject("customerProfile").certificateId
+                                        }]
+                                    };
+                                    $loading.show();
+                                    productService.verify(param, function(result) {
+                                        //location.href='#priceplanexisting
+                                        $scope.isClick = false;
+                                         $loading.hide();
+                                        if (result.data['response-data']['result'] == 'Pass') {
+                                           
+                                            location.href = '#pricePlan';
+                                            $('#bindDataAgain').click();
+                                        } else {
+                                            if (result.data['response-data']['result'] == "UnknowError") {
+                                                $message.alert({
+                                                    "message": "",
+                                                    "message-code": "",
+                                                    "message-type": "Warning",
+                                                    "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
+                                                    "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
+                                                    "technical-message": ""
+                                                });
+                                            }
+
+                                        }
+
+                                    });
+                                    
+                                    
+                                } else {
+
+                                    $location.path('/privilege').search({
+                                        id: $scope.id,
+                                        name: $scope.name,
+                                        campaignCode: itm.code,
+                                        productCode: productCode,
+                                        qty: 1
+                                    });
+                                    $('#bindDataAgain').click();
+                                }
+
+                            });
+                            //$location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                        } else {
+                            $message.alert(result.data["display-message"]);
+                        }
+
+                    });
+                } else {
+                    $message.alert(res.data["display-message"]);
+                }
+
+            });
+        };
+
+        $scope.choosePro = function(itm) {
+            $loading.show();
+            productService.getPromotionSet(itm.code, function(result) {
+                console.log(result);
+                $loading.hide();
+                if (result.status) {
+                    var promotionset = result.data['response-data'].promotion.promotions;
+                    $modal.campaignSelector(promotionset, function(result) {
+                        $location.path('/pricePlan'); //.search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+                        $('#bindDataAgain').click();
+                    });
+                } else {
+                    $message.alert(result.data["display-message"]);
+                }
+
+            });
         };
 
         $scope.gotoprivilege = function() {
@@ -75,7 +159,7 @@ angular.module('fec3App')
                 } else {
                     return false;
                 }
-            }else{
+            } else {
                 return true;
             }
 
@@ -104,28 +188,6 @@ angular.module('fec3App')
             return false;
         };
 
-
-        // $scope.campaigns = [{
-        //     campaignName: "RS499 TC_iPhone 6 & 6 Plus discount 5000bt",
-        //     details: [{
-        //         name: "เลือก Promotion ismart 499, 699, 899 หรือ Jumbo 599, 799, 999"
-        //     }, {
-        //         name: "ชำระล่วงหน้า 6 เดือน สัญญา 12 เดือน"
-        //     }],
-        //     price: "ราคาเครื่องลด  5000 บาท เหลือ  24,450 บาท"
-        // }];
-
-
-
-
-
-        // $scope.promotions = [{
-        //     promotionName: "PT343 Device with Sim (TUC)",
-        //     details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (TUC)"
-        // }, {
-        //     promotionName: "PT343 Device with Sim (RMV)",
-        //     details: "ซื้อเครื่องพร้อมเปิดบริการหมายเลข True Move H (RMV)"
-        // }];
 
         $scope.campaignTypes = [{
             name: "All",

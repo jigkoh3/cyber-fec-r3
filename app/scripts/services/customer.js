@@ -451,7 +451,8 @@ angular.module('fec3App')
 
         this.getCustomerManual = function(certificateid, certificatetype, fnCallback) {
             $localstorage.destroy("customerProfile");
-            customerProfile = $localstorage.getObject("customerProfile");
+            //customerProfile = $localstorage.getObject("customerProfile");
+            customerProfile = {};
             customerProfile.certificateId = certificateid;
             customerProfile.TMV = "[]";
             customerProfile.TOL = "[]";

@@ -102,7 +102,7 @@
                                         </div>
                                         <br>
                                         <div ng-repeat="itm in filteredPros = (promotions | filter : query)">
-                                            <div class="well" href="#modalCampaign1" onclick="return false;" data-toggle="modal" style="background-color:pink">
+                                            <div class="well" ng-click="choosePro(itm)" style="background-color:pink">
                                                 <div class="col-md-12">
                                                     <b>{{itm.code}} {{itm.name}}</b>
                                                 </div>

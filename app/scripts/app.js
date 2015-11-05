@@ -117,11 +117,11 @@ angular
             //     controller: 'listpayment2Ctrl',
             //     controllerAs: 'listpayment2'
             // })
-            // .when('/pricePlan', {
-            //     templateUrl: 'views/pricePlan.html',
-            //     controller: 'pricePlanCtrl',
-            //     controllerAs: 'pricePlan'
-            // })
+            .when('/pricePlan', {
+                templateUrl: 'views/pricePlan.html',
+                controller: 'pricePlanCtrl',
+                controllerAs: 'pricePlan'
+            })
             // .when('/payment', {
             //     templateUrl: 'views/payment.html',
             //     controller: 'paymentCtrl',
@@ -197,10 +197,11 @@ angular
             //     // controller: 'printpreviewCtrl',
             //     // controllerAs: 'printpreview'
             // })
-            .when('/privilege', {
+            .when('/privilege/:id?/:name?/:campaignCode?/:productCode?/:qty?', {
                 templateUrl: 'views/privilege.html',
                 controller: 'privilegeCtrl',
                 controllerAs: 'privilege'
+                //campaignCode=RS228&productCode=3000024133&qty=1
             })
             // .when('/complete', {
             //     templateUrl: 'views/complete.html',

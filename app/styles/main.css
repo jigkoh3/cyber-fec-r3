@@ -7406,9 +7406,13 @@ button.close {
     filter: alpha(opacity=50);
 }
 
+
+
+
 .modal-header {
-    padding: 15px;
-    min-height: 61px;
+    min-height: 0px;
+    padding: 0px; 
+   
 }
 
 .modal-header .close {

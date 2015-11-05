@@ -1,30 +1,50 @@
 'use strict';
 angular.module('fec3App')
-    .controller('privilegeCtrl', function($scope) {
+    .controller('privilegeCtrl', function($scope, $routeParams, productService, $localstorage, $loading, $message) {
+        $scope.userProfile = $localstorage.getObject("customerProfile");
 
-    // $scope.pricePlans = [{
-    //         pricePlan: "BBSMEP26:Biz_BB BIS 699 3WEG Unlimited",
-    //         rc: "499",
-    //         promotion: "AGE1800000001"
-    //     }, {
-    //         pricePlan: "BUFFTP60:iSmartBuffet399dis100 OnNet24hr net2GB WiFiUNLTD",
-    //         rc: "299",
-    //         promotion: ""
-    //     }, {
-    //         pricePlan: "NPSMAP05:3G iSmart 999, VoiceAllNet600m, Net4GB,WiFiUNLTD",
-    //         rc: "999",
-    //         promotion: ""
-    //     }, {
-    //         pricePlan: "NPSMAP05:4G iSmart 999, VoiceAllNet300m, Net3GB,WiFiUNLTD",
-    //         rc: "699",
-    //         promotion: ""
-    //     }, {
-    //         pricePlan: "NPSMAP05:4G iSmart 699, VoiceAllNet450m, Net5GB,WiFiUNLTD",
-    //         rc: "899",
-    //         promotion: ""
-    //     }];
-      
+        var campaign_code = $routeParams.campaignCode;
+        var product_code = $routeParams.productCode;
+        var qty = $routeParams.qty;
+        $scope.id = $routeParams.id;
+        $scope.name = $routeParams.name;
+        $scope.param = {
+            "campaign_code": campaign_code,
+            "product_code": product_code,
+            "qty": qty,
+            "verifyKeys": [{
+                "key": "msisdn",
+                "value": ""
+            }]
+        };
+        $scope.isClick = false;
 
-  
-    
+        $scope.onVerify = function() {
+            $loading.show();
+            if ($routeParams.campaignCode) {
+                productService.verify($scope.param, function(result) {
+                    //location.href='#priceplanexisting
+                    $scope.isClick = false;
+                    if (result.data['response-data']['result'] == 'Pass') {
+                        $loading.hide();
+                        location.href = '#pricePlan';
+                    } else {
+                        if (result.data['response-data']['result'] == "UnknowError") {
+                            $message.alert({
+                                "message": "",
+                                "message-code": "",
+                                "message-type": "Warning",
+                                "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
+                                "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
+                                "technical-message": ""
+                            });
+                        }
+
+                    }
+
+                    console.log(result);
+                });
+            }
+        };
+
     });

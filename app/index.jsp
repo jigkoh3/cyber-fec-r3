@@ -137,6 +137,10 @@
     <script src="scripts/controllers/welcome.js"></script>
     <script src="scripts/controllers/header.js"></script>
     <script src="scripts/controllers/alert.js"></script>
+    <script src="scripts/controllers/privilege.js"></script>
+    <script src="scripts/controllers/orderService.js"></script>
+    <script src="scripts/controllers/choosecampaign.js"></script>
+    <script src="scripts/controllers/productselector.js"></script>
     <!-- build:js services -->
     <script src="scripts/services/dal.js"></script>
     <script src="scripts/services/user.js"></script>
