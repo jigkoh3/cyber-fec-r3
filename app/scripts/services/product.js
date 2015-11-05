@@ -1415,4 +1415,39 @@ angular.module('fec3App')
             }
         }
 
+        this.getMobileServiceCustomerType = function (fnCallback) {
+
+            request.param.campaign_code = payload.campaign_code;
+            request.param.product_code = payload.product_code;
+            request.param.qty = 1;
+            request.param.verifyKeys = payload.verifyKeys;
+            request.target = 'sales-services/rest/privilege/verify';
+            if (!dalService.demo) {
+                //
+                dalService.callServicePost(request, null, function (result) {
+                    fnCallback(result);
+                });
+            } else {
+                //
+                var result = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
+                    "response-data": {
+                        "result": "Pass"
+                    },
+                    "display-message": null
+                };
+                $timeout(function () {
+                    fnCallback({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
+        }
+
     });
