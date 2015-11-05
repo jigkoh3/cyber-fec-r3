@@ -1415,13 +1415,17 @@ angular.module('fec3App')
             }
         }
 
-        this.getDiscountAndBooking = function (dataType, dataItemSerialNo, orderItemList, fnCallback) {
+        this.getDiscountAndBooking = function (dataType, dataItemSerialNo, fnCallback) {
 
             /*******************************************
             **
             **  dataType - 'D'=Discount, 'V'=Voucher, 'B'=Booking
             **
             ********************************************/
+            var customerInfo = $localstorage.getObject("customerProfile");
+            var orderItemList = []
+            if (customerInfo.orderObj.order_product_item_list) { orderItemList = customerInfo.orderObj.order_product_item_list; }
+
             if (dataType == "D") {
                 
                 request.param.coupon_serial = dataItemSerialNo;
@@ -1432,9 +1436,7 @@ angular.module('fec3App')
                 request.param.coupon_serial = dataItemSerialNo;
                 request.target = 'sales-services/rest/sale/get_other_payment_by_serial';
 
-            } else {
-
-                var customerInfo = $localstorage.getObject("customerProfile");
+            } else {                
 
                 request.param.bookingId = dataItemSerialNo;
                 request.param.citizenId = customerInfo.certificateId;
