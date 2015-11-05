@@ -238,6 +238,11 @@ angular
                 controller: 'orderServiceCtrl',
                 controllerAs: 'orderService'
             })
+            .when('/ordersummary', {
+                templateUrl: 'views/ordersummary.html',
+                controller: 'ordersummaryCtrl',
+                controllerAs: 'ordersummary'
+            })
             .otherwise({
                 redirectTo: '/'
             });
