@@ -8,12 +8,17 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productSelectorCtrl', function($scope, $localstorage, $routeParams, $location, $modal) {
+    .controller('productSelectorCtrl', function($scope, $localstorage, $routeParams, $location, $modal, $log) {
 
+<<<<<<< HEAD
         $scope.id = $routeParams.id;
     $scope.name = $routeParams.name;
     $scope.productCode = null;
     $scope.productType = null;
+=======
+        var logger = $log.getInstance('productSelectorCtrl');
+        $scope.name = $routeParams.name;
+>>>>>>> 11a5989fa2609047380949d676136e0027a02c84
 
         $scope.data = $modal.mathList();
         console.log($scope.data);
@@ -52,23 +57,27 @@ angular.module('fec3App')
                     var sum_i = 0;
 
                     if ($scope.proItem['piece' + arr[i].productInfo.color + i] && $scope.proItem['piece' + arr[i].productInfo.color + i] > 0) {
-                        console.log("Tingtang:" + arr[i]);
+                        //console.log("Tingtang:" + arr[i]);
                         //var order.PRODUCT_TYPE = arr[i].type;
                         var prod = arr[i];
+                        var prodOrderQty = $scope.proItem['piece' + arr[i].productInfo.color + i];
+                        var totalAmt = prod.price * prodOrderQty;
+
+                        logger.debug("...Product[" + prod.code + "] Qty=" + prodOrderQty);
+                        logger.debug("...Product[" + prod.code + "] totalAmt=" + totalAmt);
+
                         order.PRODUCT_TYPE = prod.type;
                         order.PRODUCT_CODE = prod.code;
                         order.PRODUCT_NAME = prod.name;
                         order.PRICE = prod.price;
-                        order.QTY = $scope.proItem['piece' + arr[i].productInfo.color + i];
-                        order.TOTAL = order.QTY * order.PRICE;
+                        order.QTY = prodOrderQty;
+                        order.TOTAL = totalAmt;
                         order.IS_CAMPAIGN_PROMO_ITEM = 'N';
                         order.IS_PRODUCT_REQUESTFORM = 'N';
                         order.APPLECARE_CODE = null;
 
-                        
-                        customerProfile.orderObj = {};
-                        customerProfile.orderObj.order_product_item_list = [];
-
+                        if (!customerProfile.orderObj) { customerProfile.orderObj = {}; }
+                        if (!customerProfile.orderObj.order_product_item_list) { customerProfile.orderObj.order_product_item_list = []; }
                         customerProfile.orderObj.order_product_item_list.push(order);
 
                     }

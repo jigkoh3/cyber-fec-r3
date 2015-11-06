@@ -197,9 +197,10 @@ angular.module('fec3App')
                         order.APPLECARE_CODE = null;
 
 
-                        customerProfile.orderObj = {};
-                        customerProfile.orderObj.order_product_item_list = [];
-
+                        //customerProfile.orderObj = {};
+                        //customerProfile.orderObj.order_product_item_list = [];
+                        if (!customerProfile.orderObj) { customerProfile.orderObj = {}; }
+                        if (!customerProfile.orderObj.order_product_item_list) { customerProfile.orderObj.order_product_item_list = []; }
                         customerProfile.orderObj.order_product_item_list.push(order);
 
                     }
