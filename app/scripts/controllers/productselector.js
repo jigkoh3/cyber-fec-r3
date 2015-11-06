@@ -10,15 +10,15 @@
 angular.module('fec3App')
     .controller('productSelectorCtrl', function($scope, $localstorage, $routeParams, $location, $modal, $log) {
 
-<<<<<<< HEAD
+
         $scope.id = $routeParams.id;
     $scope.name = $routeParams.name;
     $scope.productCode = null;
     $scope.productType = null;
-=======
+
         var logger = $log.getInstance('productSelectorCtrl');
         $scope.name = $routeParams.name;
->>>>>>> 11a5989fa2609047380949d676136e0027a02c84
+
 
         $scope.data = $modal.mathList();
         console.log($scope.data);
