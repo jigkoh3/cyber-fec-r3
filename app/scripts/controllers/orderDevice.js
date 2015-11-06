@@ -84,8 +84,11 @@ angular.module('fec3App')
 
     //
     var oldProItem = "";
+    $scope.color = "";
     $scope.choose = function(itm, id) {
-        //console.log("selected itm piece :" + itm.piece)
+        console.log(itm);
+        $scope.color = itm.stock;
+
         if (itm.itemCount > 1) {
             $modal.productSelector(itm);
         } else {
@@ -180,7 +183,7 @@ angular.module('fec3App')
                 for (var ii = 0; ii < arr[i].memSize.length; ii++) {
                     var sum_ii = 0;
                     if ($scope.proItem['piece' + arr[i].colorName + ii] && $scope.proItem['piece' + arr[i].colorName + ii] > 0) {
-                        console.log("Tingtang:" + arr[i]);
+                        //console.log("Tingtang:" + arr[i]);
                         // var order.PRODUCT_TYPE = arr[i].
                         var prod = arr[i].memSize[ii];
                         order.PRODUCT_TYPE = prod.type;
@@ -202,7 +205,7 @@ angular.module('fec3App')
             }
             $localstorage.setObject("customerProfile", customerProfile);
             $localstorage.logObject("customerProfile");
-            //$location.path('/ordersummary')
+            $location.path('/ordersummary')
         };
     };
 
