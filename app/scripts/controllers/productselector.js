@@ -10,8 +10,15 @@
 angular.module('fec3App')
     .controller('productSelectorCtrl', function($scope, $localstorage, $routeParams, $location, $modal, $log) {
 
+
+        $scope.id = $routeParams.id;
+    $scope.name = $routeParams.name;
+    $scope.productCode = null;
+    $scope.productType = null;
+
         var logger = $log.getInstance('productSelectorCtrl');
         $scope.name = $routeParams.name;
+
 
         $scope.data = $modal.mathList();
         console.log($scope.data);
@@ -30,15 +37,15 @@ angular.module('fec3App')
 
         $scope.nextModal = function() {
             if ($scope.tabselected == "1") {
-                //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
-                // if ($scope.productCode && $scope.productType) {
-                //     $location.path('/promotion').search({
-                //         id: $scope.id,
-                //         name: $scope.name,
-                //         productCode: $scope.productCode,
-                //         productType: $scope.productType
-                //     });
-                // }
+                $location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
+                if ($scope.productCode && $scope.productType) {
+                    $location.path('/promotion').search({
+                        id: $scope.id,
+                        name: $scope.name,
+                        productCode: $scope.productCode,
+                        productType: $scope.productType
+                    });
+                }
 
             } else {
                 var customerProfile = $localstorage.getObject("customerProfile");
