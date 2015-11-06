@@ -335,6 +335,7 @@ angular.module('fec3App')
 						
 						$scope.totalCalculate_modal();
 						$scope.promotionSearch = null;
+
 					}
 				}
 			}
