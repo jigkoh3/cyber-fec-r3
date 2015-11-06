@@ -30,7 +30,7 @@
             <tr ng-repeat="itm in order_product_item_list">
             	<td><img src="images/icon/icon_no.png" ng-click="delete(itm.GROUP_ID, itm.ORDER_ID)"></td>
             	<td>{{$index + 1}}. {{itm.PRODUCT_NAME}}  </td>
-                <td class="text-right">{{itm.PRICE | number:2}}</td>
+                <td class="text-right">{{itm.NET_AMOUNT | number:2}}</td>
                 <td>บาท</td>
             </tr>
             <tr>
@@ -56,7 +56,6 @@
             </div>
          </div>   
     </div>
-    
     <div id="modalAdd" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -73,13 +72,13 @@
                         <div class="col-md-7">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <input type="radio" name="typeDiscount" value="d" ng-model="promotionType" ng-click="cleartext()" > ส่วนลด
+                                    <input type="radio" name="typeDiscount" value="D" ng-model="promotionType" ng-click="cleartext()" > ส่วนลด
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="radio" name="typeDiscount" value="v" ng-model="promotionType" ng-click="cleartext()"  > คูปองเงินสด/ บัตรของขวัญ/ Voucher
+                                    <input type="radio" name="typeDiscount" value="V" ng-model="promotionType" ng-click="cleartext()"  > คูปองเงินสด/ บัตรของขวัญ/ Voucher
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="radio" name="typeDiscount" value="b " ng-model="promotionType" ng-click="cleartext()" > รหัสการจอง
+                                    <input type="radio" name="typeDiscount" value="B" ng-model="promotionType" ng-click="cleartext()" > รหัสการจอง
                                 </div>
                             </div>
                         </div>
@@ -97,8 +96,9 @@
                                 <th></th>
                             </tr>
                             <tr  ng-repeat="data in order_insert">
+                               
                                 <td class="col-md-7">{{ $index + 1 }}. {{data.PRODUCT_NAME}}</td>
-                                <td class="col-md-2 text-right">{{data.PRICE | number:2}}</td>
+                                <td class="col-md-2 text-right">{{data.NET_AMOUNT | number:2}}</td>
                                 <td>บาท</td>
                             </tr>
                         </table>
