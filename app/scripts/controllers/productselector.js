@@ -8,7 +8,9 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productSelectorCtrl', function($scope, $modal) {
+    .controller('productSelectorCtrl', function($scope, $routeParams, $modal) {
+
+        $scope.name = $routeParams.name;
         
         $scope.data = $modal.mathList();
         //console.log($scope.ngDialogData);
