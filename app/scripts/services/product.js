@@ -1630,6 +1630,12 @@ angular.module('fec3App')
 
             } else {
                 //
+
+                var disCountItemIdx = -1;
+                if (dataItemSerialNo = '11111') {
+                    disCountItemIdx = 2;
+                }
+
                 var result = {
                     "status": "SUCCESSFUL",
                     "fault": null,
@@ -1653,7 +1659,7 @@ angular.module('fec3App')
                         "MOBILE_NUMBER": "",
                         "DISCOUNT_TYPE": "B",
                         "DISCOUNT_4_PROD_ITEMS_LIST": [],
-                        "DISCOUNT_4_PROD_ITEM": "-1",
+                        "DISCOUNT_4_PROD_ITEM": disCountItemIdx,
                         "PRICE": -550,
                         "QTY": 1,
                         "TOTAL": -550,
@@ -1702,6 +1708,7 @@ angular.module('fec3App')
                     },
                     "display-message": null
                 };
+
                 $timeout(function () {
                     fnCallback({
                         status: true,
