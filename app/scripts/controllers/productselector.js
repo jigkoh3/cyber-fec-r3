@@ -8,10 +8,10 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productSelectorCtrl', function($scope, $routeParams, $modal) {
+    .controller('productSelectorCtrl', function($scope, $localstorage, $routeParams, $location, $modal) {
 
         $scope.name = $routeParams.name;
-        
+
         $scope.data = $modal.mathList();
         console.log($scope.data);
         //console.log($scope.ngDialogData);
@@ -23,39 +23,46 @@ angular.module('fec3App')
             // } catch (e) {}
         };
 
-            $scope.next = function() {
-        if ($scope.tabselected == "1") {
-            //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
-            if ($scope.productCode && $scope.productType) {
-                $location.path('/promotion').search({
-                    id: $scope.id,
-                    name: $scope.name,
-                    productCode: $scope.productCode,
-                    productType: $scope.productType
-                });
-            }
+        $scope.proItem = {
+            "pieceGold0": null
+        };
 
-        } else {
-            var customerProfile = $localstorage.getObject("customerProfile");
-            var orderList = [];
-            var order = {};
-            var arr = $scope.trueProduct.productColor;
-            var sum = 0;
-            for (var i = 0; i < arr.length; i++) {
-                var sum_i = 0;
-                for (var ii = 0; ii < arr[i].memSize.length; ii++) {
-                    var sum_ii = 0;
-                    if ($scope.proItem['piece' + arr[i].colorName + ii] && $scope.proItem['piece' + arr[i].colorName + ii] > 0) {
-                        //console.log("Tingtang:" + arr[i]);
-                        // var order.PRODUCT_TYPE = arr[i].
-                        var prod = arr[i].memSize[ii];
+        $scope.nextModal = function() {
+            if ($scope.tabselected == "1") {
+                //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
+                // if ($scope.productCode && $scope.productType) {
+                //     $location.path('/promotion').search({
+                //         id: $scope.id,
+                //         name: $scope.name,
+                //         productCode: $scope.productCode,
+                //         productType: $scope.productType
+                //     });
+                // }
+
+            } else {
+                var customerProfile = $localstorage.getObject("customerProfile");
+                var orderList = [];
+                var order = {};
+                var arr = $scope.data.childs;
+                var sum = 0;
+                for (var i = 0; i < arr.length; i++) {
+                    var sum_i = 0;
+
+                    if ($scope.proItem['piece' + arr[i].productInfo.color + i] && $scope.proItem['piece' + arr[i].productInfo.color + i] > 0) {
+                        console.log("Tingtang:" + arr[i]);
+                        //var order.PRODUCT_TYPE = arr[i].type;
+                        var prod = arr[i];
                         order.PRODUCT_TYPE = prod.type;
                         order.PRODUCT_CODE = prod.code;
                         order.PRODUCT_NAME = prod.name;
                         order.PRICE = prod.price;
-                        order.QTY = $scope.proItem['piece' + arr[i].colorName + ii];
+                        order.QTY = $scope.proItem['piece' + arr[i].productInfo.color + i];
                         order.TOTAL = order.QTY * order.PRICE;
+                        order.IS_CAMPAIGN_PROMO_ITEM = 'N';
+                        order.IS_PRODUCT_REQUESTFORM = 'N';
+                        order.APPLECARE_CODE = null;
 
+                        
                         customerProfile.orderObj = {};
                         customerProfile.orderObj.order_product_item_list = [];
 
@@ -63,12 +70,11 @@ angular.module('fec3App')
 
                     }
 
-                }
 
-            }
-            $localstorage.setObject("customerProfile", customerProfile);
-            $localstorage.logObject("customerProfile");
-            $location.path('/ordersummary')
+                }
+                $localstorage.setObject("customerProfile", customerProfile);
+                $localstorage.logObject("customerProfile");
+                $location.path('/ordersummary');
+            };
         };
-    };
     });

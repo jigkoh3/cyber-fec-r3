@@ -13,23 +13,23 @@
                 </th>
             </tr> -->
                 <tr>
-                    <th colspan="3"></th>
-                    <th>ราคา</th>
-                    <th>จำนวน</th>
+                    <th colspan="3" style="background-color: #c8bbbb;"></th>
+                    <th style="background-color: #c8bbbb; text-align:center">ราคา</th>
+                    <th style="background-color: #c8bbbb;">จำนวน</th>
                 </tr>
                 <tr ng-repeat="item in data.childs">
                     <td>{{item.code}}</td>
                     <td>{{item.name}}</td>
-                    <td class="{{item.stock}}">{{item.stock=="red" ? "สินค้าหมด" : "พร้อมขาย"}}({{item.qty}}) </td>
+                    <td> <label class="{{item.stock}}">{{item.stock=="red" ? "สินค้าหมด" : "พร้อมขาย"}}({{item.qty}}) </label></td>
                     <td>{{item.price | number:2}}</td>
                     <td>
-                        <input type="text">
+                        <input style="width:50px;" type="number" min="0" max="{{item.qty}}" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem['piece'+item.productInfo.color+$index]" onfocus="">
                     </td>
                 </tr>
             </table>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" data-dismiss="modal" ng-click="next()">ตกลง</button>
+        <button class="btn btn-success" data-dismiss="modal" ng-click="nextModal()">ตกลง</button>
     </div>
 </div>

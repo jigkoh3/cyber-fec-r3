@@ -192,6 +192,10 @@ angular.module('fec3App')
                         order.PRICE = prod.price;
                         order.QTY = $scope.proItem['piece' + arr[i].colorName + ii];
                         order.TOTAL = order.QTY * order.PRICE;
+                        order.IS_CAMPAIGN_PROMO_ITEM = 'N';
+                        order.IS_PRODUCT_REQUESTFORM = 'N';
+                        order.APPLECARE_CODE = null;
+
 
                         customerProfile.orderObj = {};
                         customerProfile.orderObj.order_product_item_list = [];
@@ -205,8 +209,9 @@ angular.module('fec3App')
             }
             $localstorage.setObject("customerProfile", customerProfile);
             $localstorage.logObject("customerProfile");
-            $location.path('/ordersummary')
+            $location.path('/ordersummary');
         };
     };
 
+   
 });
