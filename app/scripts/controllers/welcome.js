@@ -39,7 +39,7 @@ angular.module('fec3App')
             logger.debug('=======================================');
 
             var url = "/aj01_Test.aspx?i_DATA_1=AAA&i_DATA_2=BBB";
-            var retData = testGetHttp2(url);
+            var retData = ''; //testGetHttp2(url);
             logger.debug('retData2=', retData);
             logger.debug('=======================================');
 

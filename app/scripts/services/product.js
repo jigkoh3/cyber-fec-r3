@@ -1434,7 +1434,7 @@ angular.module('fec3App')
         }
 
         this.getDiscountAndBooking = function (dataType, dataItemSerialNo, fnCallback) {
-
+            logger.debug("getDiscountAndBooking>>Begin");
             /*******************************************
             **
             **  dataType - 'D'=Discount, 'V'=Voucher, 'B'=Booking
@@ -1442,7 +1442,12 @@ angular.module('fec3App')
             ********************************************/
             var customerInfo = $localstorage.getObject("customerProfile");
             var orderItemList = []
-            if (customerInfo.orderObj.order_product_item_list) { orderItemList = customerInfo.orderObj.order_product_item_list; }
+            try{
+                if (customerInfo.orderObj.order_product_item_list) { orderItemList = customerInfo.orderObj.order_product_item_list; }
+            } catch (err) {
+                logger.error("getDiscountAndBooking>>Error::" + err.message);
+            }
+            
 
             if (dataType == "D") {
                 
