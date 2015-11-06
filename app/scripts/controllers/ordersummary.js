@@ -332,7 +332,9 @@ angular.module('fec3App')
 							"NET_AMOUNT": listArr[i].NET_AMOUNT,
 							"OTHER_PAYMENT_AMOUNT": listArr[i].OTHER_PAYMENT_AMOUNT
 						});
+						
 						$scope.totalCalculate_modal();
+						$scope.promotionSearch = null;
 					}
 				}
 			}
@@ -341,10 +343,12 @@ angular.module('fec3App')
 
 		$scope.addToListCard = function(){
 			for(var i = 0 ; i< $scope.order_insert.length; i++){
-			$scope.order_product_item_list.push($scope.order_insert[i]);
+				$scope.order_product_item_list.push($scope.order_insert[i]);
+				$scope.btnDisabled = true;
 			}
-			
+			$scope.promotionSearch = null;
 			$scope.order_insert = [];
+			$scope.totalCalculate_modal();
 			$scope.totalCalculate();
 		}
 		
