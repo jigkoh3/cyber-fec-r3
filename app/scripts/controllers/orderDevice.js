@@ -105,7 +105,8 @@ angular.module('fec3App')
                 if ($scope.proItem['piece' + id] < itm.piece) {
                     $scope.proItem['piece' + id] += 1;
                 } else {
-                $scope.proItem['piece' + id] = itm.piece;
+                    $scope.proItem['piece' + id] = itm.piece;
+                }
             }
 
         }
