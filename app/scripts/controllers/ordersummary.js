@@ -1,14 +1,7 @@
-'use strict';
 
-/**
- * @ngdoc function
- * @name fec3App.controller:AboutCtrl
- * @description
- * # AboutCtrl
- * Controller of the fec3App
- */
 angular.module('fec3App')
-    .controller('ordersummaryCtrl', function($scope, $loading, $localstorage,  $routeParams, $linq, orderSummary, $message) {
+
+    .controller('ordersummaryCtrl', function($scope, $loading, $localstorage,  $routeParams, $linq, productService, $message) {
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -17,15 +10,9 @@ angular.module('fec3App')
 		
 		 $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
-		 orderSummary.getDiscount($scope.name,function(result) {
-            
-            if(result.status){
-                //console.log(result.data);
-               $scope.order_add = result.data;
-            }else{
-                $message.alert(result.data["display-message"]);
-            }
-        });
+        $scope.dataType = 'D';
+
+		
 		 
 		$scope.order_product_item_list = [{
          	"ORDER_ID": "1",
@@ -48,7 +35,7 @@ angular.module('fec3App')
 			"TOTAL": 1,
 			"DISCOUNT_AMOUNT": 1.5,
 			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
+			"NET_AMOUNT": 29450,
 			"OTHER_PAYMENT_AMOUNT": 1.5
 		},{
 			"ORDER_ID": "2",
@@ -71,7 +58,7 @@ angular.module('fec3App')
 			"TOTAL": 1,
 			"DISCOUNT_AMOUNT": 1.5,
 			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
+			"NET_AMOUNT": 69,
 			"OTHER_PAYMENT_AMOUNT": 1.5
 		},{
 			"ORDER_ID": "3",
@@ -94,7 +81,7 @@ angular.module('fec3App')
 			"TOTAL": 1,
 			"DISCOUNT_AMOUNT": 1.5,
 			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
+			"NET_AMOUNT": 169,
 			"OTHER_PAYMENT_AMOUNT": 1.5
 		},{
 			"ORDER_ID": "4",
@@ -117,7 +104,7 @@ angular.module('fec3App')
 			"TOTAL": 1,
 			"DISCOUNT_AMOUNT": 1.5,
 			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
+			"NET_AMOUNT": 569,
 			"OTHER_PAYMENT_AMOUNT": 1.5
 		},{
 			"ORDER_ID": "5",
@@ -140,80 +127,11 @@ angular.module('fec3App')
 			"TOTAL": 1,
 			"DISCOUNT_AMOUNT": 1.5,
 			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
+			"NET_AMOUNT": -5000,
 			"OTHER_PAYMENT_AMOUNT": 1.5
 		}];
 
-		$scope.order_list= [{
-         	"ORDER_ID": "1",
-			"SEQUENCE": 1,
-			"CAMPAIGN": "string",
-			"CAMPAIGN_NAME": "CAMPAIGN 1",
-			"PROMOTION_SET": "string",
-			"PROMOTION_TYPE": "v",
-			"CAMPAIGN_PROMO_ITEM_QTY": 2,
-			"GROUP_ID": "222",
-			"PRODUCT_TYPE": "string",
-			"PRODUCT_CODE": "aaa",
-			"PRODUCT_NAME": "3000036063 iPhone 6 Plus, 16GB, Gold",
-			"PRICEPLAN_CODE": "string",
-			"PRICEPLAN_NAME": "string",
-			"SERVICE_REGISTER_TYPE": "string",
-			"MOBILE_NUMBER": "string",
-			"PRICE": 500.00 ,
-			"QTY": 1,
-			"TOTAL": 1,
-			"DISCOUNT_AMOUNT": 1.5,
-			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
-			"OTHER_PAYMENT_AMOUNT": 1.5
-		},{
-         	"ORDER_ID": "2",
-			"SEQUENCE": 2,
-			"CAMPAIGN": "string",
-			"CAMPAIGN_NAME": "CAMPAIGN 2",
-			"PROMOTION_SET": "string",
-			"PROMOTION_TYPE": "b",
-			"CAMPAIGN_PROMO_ITEM_QTY": 2,
-			"GROUP_ID": "111",
-			"PRODUCT_TYPE": "string",
-			"PRODUCT_CODE": "bbb",
-			"PRODUCT_NAME": "3000036063 iPhone 5",
-			"PRICEPLAN_CODE": "string",
-			"PRICEPLAN_NAME": "string",
-			"SERVICE_REGISTER_TYPE": "string",
-			"MOBILE_NUMBER": "string",
-			"PRICE": 1000.00 ,
-			"QTY": 1,
-			"TOTAL": 1,
-			"DISCOUNT_AMOUNT": 1.5,
-			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
-			"OTHER_PAYMENT_AMOUNT": 1.5
-		},{
-         	"ORDER_ID": "3",
-			"SEQUENCE": 3,
-			"CAMPAIGN": "string",
-			"CAMPAIGN_NAME": "CAMPAIGN 3",
-			"PROMOTION_SET": "string",
-			"PROMOTION_TYPE": "d",
-			"CAMPAIGN_PROMO_ITEM_QTY": 2,
-			"GROUP_ID": "333",
-			"PRODUCT_TYPE": "string",
-			"PRODUCT_CODE": "ccc",
-			"PRODUCT_NAME": "3000036063 iPhone 4",
-			"PRICEPLAN_CODE": "string",
-			"PRICEPLAN_NAME": "string",
-			"SERVICE_REGISTER_TYPE": "string",
-			"MOBILE_NUMBER": "string",
-			"PRICE": 2000.00 ,
-			"QTY": 1,
-			"TOTAL": 1,
-			"DISCOUNT_AMOUNT": 1.5,
-			"DEPOSIT_AMOUNT": 1.5,
-			"NET_AMOUNT": 1.5,
-			"OTHER_PAYMENT_AMOUNT": 1.5
-		}];
+		
 		
 		$scope.order_add = [];
 		$scope.removeRow = function(GROUP_ID){	
@@ -237,7 +155,7 @@ angular.module('fec3App')
 		$scope.totalCalculate = function(){	
 					$scope.total =0;
 				for(var i = 0 ; i< $scope.order_product_item_list.length; i++){
-					$scope.total =$scope.total+parseInt($scope.order_product_item_list[i]['PRICE']);	
+					$scope.total =$scope.total+parseInt($scope.order_product_item_list[i]['NET_AMOUNT']);	
 				}		
 		};
 		
@@ -262,13 +180,10 @@ angular.module('fec3App')
 		};
 		
 		$scope.totalCalculate_modal = function(){	
-					$scope.total_modal =0;
-					
-				for(var i = 0 ; i< $scope.order_insert.length; i++){
-					//console.log($scope.order_add[i]['response-data']['coupon']['amount']);
-					$scope.total_modal =$scope.total_modal+parseInt($scope.order_insert[i]['PRICE']);	
-				}
-				
+			$scope.total_modal =0;
+			for(var i = 0 ; i< $scope.order_insert.length; i++){
+				$scope.total_modal =$scope.total_modal+parseInt($scope.order_insert[i]['PRICE']);	
+			}	
 		};
 		
 		
@@ -302,44 +217,21 @@ angular.module('fec3App')
 
 		$scope.order_insert=[];
 		$scope.searchlist = function(event){
+			var discountList;
 			if($scope.promotionSearch != null && $scope.promotionType != null){
-				var listArr = eval( $scope.order_list );
-				for(var i = 0; i < listArr.length; i++ ) {
-					if(listArr[i].PROMOTION_TYPE == $scope.promotionType && listArr[i].PRODUCT_CODE ==  $scope.promotionSearch){
-
-						//$scope.order_insert.push({ 'PRODUCT_NAME':listArr[i].PRODUCT_NAME, 'PRICE': listArr[i].PRICE, 'ORDER_ID': listArr[i].ORDER_ID });
-						$scope.order_insert.push({
-							"ORDER_ID": listArr[i].ORDER_ID,
-							"SEQUENCE": listArr[i].SEQUENCE,
-							"CAMPAIGN": listArr[i].CAMPAIGN,
-							"CAMPAIGN_NAME": listArr[i].CAMPAIGN_NAME,
-							"PROMOTION_SET": listArr[i].PROMOTION_SET,
-							"PROMOTION_TYPE": listArr[i].PROMOTION_TYPE,
-							"CAMPAIGN_PROMO_ITEM_QTY": listArr[i].CAMPAIGN_PROMO_ITEM_QTY,
-							"GROUP_ID": listArr[i].GROUP_ID,
-							"PRODUCT_TYPE": listArr[i].PRODUCT_TYPE,
-							"PRODUCT_CODE": listArr[i].PRODUCT_CODE,
-							"PRODUCT_NAME": listArr[i].PRODUCT_NAME,
-							"PRICEPLAN_CODE": listArr[i].PRICEPLAN_CODE,
-							"PRICEPLAN_NAME": listArr[i].PRICEPLAN_NAME,
-							"SERVICE_REGISTER_TYPE": listArr[i].SERVICE_REGISTER_TYPE,
-							"MOBILE_NUMBER": listArr[i].MOBILE_NUMBER,
-							"PRICE": listArr[i].PRICE ,
-							"QTY": listArr[i].QTY,
-							"TOTAL": listArr[i].TOTAL,
-							"DISCOUNT_AMOUNT":listArr[i].DISCOUNT_AMOUNT,
-							"DEPOSIT_AMOUNT": listArr[i].DEPOSIT_AMOUNT,
-							"NET_AMOUNT": listArr[i].NET_AMOUNT,
-							"OTHER_PAYMENT_AMOUNT": listArr[i].OTHER_PAYMENT_AMOUNT
-						});
-						
-						$scope.totalCalculate_modal();
-						$scope.promotionSearch = null;
-
+				productService.getDiscountAndBooking($scope.promotionType,$scope.promotionSearch,function(result) {
+					discountList = result.data["response-data"];
+					console.log(discountList.DISCOUNT_4_PROD_ITEM);
+					if(discountList.DISCOUNT_4_PROD_ITEM <0){
+						$scope.order_insert.push(discountList);
+					}else{
+						$scope.order_insert.splice(discountList.DISCOUNT_4_PROD_ITEM, 0,discountList);
 					}
-				}
+	           		
+	           		$scope.totalCalculate_modal();
+					$scope.promotionSearch = null;
+	        	});	
 			}
-			
 		}
 
 		$scope.addToListCard = function(){
