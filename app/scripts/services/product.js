@@ -752,6 +752,17 @@ angular.module('fec3App')
                                 "color": "Black"
                             }
                         }, {
+                            "code": "9300005922",
+                            "name": "9300005922-H/S,IPHONE 4,32GB,RED",
+                            "desc": "H/S,IPHONE 4,32GB,BLACK",
+                            "type": "P",
+                            "qty": 8,
+                            "price": 23775,
+                            "productInfo": {
+                                "capacity": "32GB",
+                                "color": "Red"
+                            }
+                        }, {
                             "code": "3000005923",
                             "name": "3000005922-H/S,IPHONE 4,32GB,BLACK",
                             "desc": "H/S,IPHONE 4,32GB,BLACK",
