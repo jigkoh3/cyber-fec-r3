@@ -190,15 +190,19 @@ angular.module('fec3App')
 		$scope.delete = function(Group_id , ORDER_ID) {
 			var showName;
 			var msg;
+			var countItem;
 			var listArr = eval( $scope.order_product_item_list );
 				for(var i = 0; i < listArr.length; i++ ) {
 					if( listArr[i].ORDER_ID === ORDER_ID ) {
 						if(listArr[i].CAMPAIGN_PROMO_ITEM_QTY > 1){
 							showName = listArr[i].CAMPAIGN_NAME;
-							msg = 'TH: The item that you want to delete is '+showName+' selling type. Please confirm if you want to delete all set.<br/> EN: รายการที่ท่านต้องการลบเป็นการขายแบบ '+showName+' กรุณายืนยันการลบทั้งกลุ่ม';
+							countItem = listArr[i].CAMPAIGN_PROMO_ITEM_QTY;
+							msg = 'TH: The item that you want to delete is '+showName+' ('+countItem+' item)  selling type. \
+							Please confirm if you want to delete all set.<br/>\
+							 EN: รายการที่ท่านต้องการลบเป็นการขายแบบ '+showName+' ('+countItem+' รายการ) กรุณายืนยันการลบทั้งกลุ่ม';
 						}else{
 							showName = listArr[i].PRODUCT_NAME;
-							msg = 'EN: Please confirm to delete this item ('+showName+').<br/>TH: ท่านต้องการลบ '+showName+' หรือไม่';
+							msg = 'EN: Please confirm to delete this item '+showName+'.<br/>TH: ท่านต้องการลบ '+showName+' หรือไม่';
 						}
 					}
 				}		
@@ -217,17 +221,10 @@ angular.module('fec3App')
 
 		$scope.order_insert=[];
 		$scope.searchlist = function(event){
-			var discountList;
+			
 			if($scope.promotionSearch != null && $scope.promotionType != null){
 				productService.getDiscountAndBooking($scope.promotionType,$scope.promotionSearch,function(result) {
-					discountList = result.data["response-data"];
-					console.log(discountList.DISCOUNT_4_PROD_ITEM);
-					if(discountList.DISCOUNT_4_PROD_ITEM <0){
-						$scope.order_insert.push(discountList);
-					}else{
-						$scope.order_insert.splice(discountList.DISCOUNT_4_PROD_ITEM, 0,discountList);
-					}
-	           		
+					$scope.order_insert.push(result.data["response-data"]);
 	           		$scope.totalCalculate_modal();
 					$scope.promotionSearch = null;
 	        	});	
@@ -235,8 +232,14 @@ angular.module('fec3App')
 		}
 
 		$scope.addToListCard = function(){
+			var discountList;
 			for(var i = 0 ; i< $scope.order_insert.length; i++){
-				$scope.order_product_item_list.push($scope.order_insert[i]);
+				discountList = $scope.order_insert[i]
+				if(discountList.DISCOUNT_4_PROD_ITEM <0){
+					$scope.order_product_item_list.push(discountList);
+				}else{
+					$scope.order_product_item_list.splice(discountList.DISCOUNT_4_PROD_ITEM,0,discountList);
+				}
 				$scope.btnDisabled = true;
 			}
 			$scope.promotionSearch = null;
