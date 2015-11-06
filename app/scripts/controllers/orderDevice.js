@@ -105,14 +105,14 @@ angular.module('fec3App')
                 if ($scope.proItem['piece' + id] < itm.piece) {
                     $scope.proItem['piece' + id] += 1;
                 } else {
-                    $scope.proItem['piece' + id] = itm.piece;
-                }
-
+                $scope.proItem['piece' + id] = itm.piece;
             }
-            $scope.productCode = itm.code;
-            $scope.productType = "P";
-            $scope.calculate(itm, 'piece' + id);
+
         }
+        $scope.productCode = itm.code;
+        $scope.productType = "P";
+        $scope.calculate(itm, 'piece' + id);
+    }
 
 
 
@@ -130,13 +130,11 @@ angular.module('fec3App')
         //     } else {
         //         $scope.proItem['piece' + id] = itm.piece;
         //     }
+        //     $scope.productCode = itm.code;
+        //     $scope.productType = "P";
+        //     $scope.calculate(itm, 'piece' + id);
 
-        // }
-        // $scope.productCode = itm.code;
-        // $scope.productType = "P";
-        // $scope.calculate(itm, 'piece' + id);
 
-    };
     //culate order total summary
     $scope.total = 0;
     $scope.calculate = function(item, proItem) {
