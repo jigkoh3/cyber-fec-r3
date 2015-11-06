@@ -270,7 +270,8 @@ function modal($ngBootbox) {
                     show: true,
                     backdrop: true,
                     closeButton: false,
-                    animate: true
+                    animate: true,
+                    size: "large"
                 });
             }, 1001);
 
