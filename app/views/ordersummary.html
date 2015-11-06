@@ -30,7 +30,7 @@
             <tr ng-repeat="itm in order_product_item_list">
             	<td><img src="images/icon/icon_no.png" ng-click="delete(itm.GROUP_ID, itm.ORDER_ID)"></td>
             	<td>{{$index + 1}}. {{itm.PRODUCT_NAME}}  </td>
-                <td class="text-right">{{itm.NET_AMOUNT | number:2}}</td>
+                <td class="text-right">{{itm.TOTAL | number:2}}</td>
                 <td>บาท</td>
             </tr>
             <tr>
@@ -72,18 +72,20 @@
                         <div class="col-md-7">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <input type="radio" name="typeDiscount" value="D" ng-model="promotionType" ng-click="cleartext()" > ส่วนลด
+                                    <label ><input type="radio" name="typeDiscount" value="D" ng-model="promotionType" ng-change="cleartext()" > ส่วนลด</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="radio" name="typeDiscount" value="V" ng-model="promotionType" ng-click="cleartext()"  > คูปองเงินสด/ บัตรของขวัญ/ Voucher
+                                  <label >  <input type="radio" name="typeDiscount" value="V" ng-model="promotionType" ng-change="cleartext()"  > คูปองเงินสด/ บัตรของขวัญ/ Voucher</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="radio" name="typeDiscount" value="B" ng-model="promotionType" ng-click="cleartext()" > รหัสการจอง
+                                   <label > <input type="radio" name="typeDiscount" value="B" ng-model="promotionType" ng-change="cleartext()" > รหัสการจอง</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-5">
-                <input class="form-control" type="text" ng-model="promotionSearch" value=""  ng-keypress="$event.keyCode == 13 ? searchlist() : null">
+                <input class="form-control" type="text" id="textcode" ng-model="promotionSearch" value="" 
+                 ng-keypress="$event.keyCode == 13 ? searchlist() : null"
+                 >
                         </div>
                     </div>
                     <br>
@@ -98,7 +100,7 @@
                             <tr  ng-repeat="data in order_insert">
                                
                                 <td class="col-md-7">{{ $index + 1 }}. {{data.PRODUCT_NAME}}</td>
-                                <td class="col-md-2 text-right">{{data.NET_AMOUNT | number:2}}</td>
+                                <td class="col-md-2 text-right">{{data.TOTAL | number:2}}</td>
                                 <td>บาท</td>
                             </tr>
                         </table>
