@@ -156,7 +156,7 @@ angular.module('fec3App')
 		$scope.totalCalculate = function(){	
 					$scope.total =0;
 				for(var i = 0 ; i< $scope.order_product_item_list.length; i++){
-					$scope.total =$scope.total+parseInt($scope.order_product_item_list[i]['TOTAL']);	
+				    $scope.total = $scope.total + parseInt($scope.order_product_item_list[i]['TOTAL']);
 				}		
 		};
 		
@@ -183,7 +183,7 @@ angular.module('fec3App')
 		$scope.totalCalculate_modal = function(){	
 			$scope.total_modal =0;
 			for(var i = 0 ; i< $scope.order_insert.length; i++){
-				$scope.total_modal =$scope.total_modal+parseInt($scope.order_insert[i]['TOTAL']);	
+			    $scope.total_modal = $scope.total_modal + parseInt($scope.order_insert[i]['TOTAL']);
 			}	
 		};
 		
