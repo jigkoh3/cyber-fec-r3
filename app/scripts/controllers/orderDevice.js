@@ -174,8 +174,7 @@ angular.module('fec3App')
 
         } else {
             var customerProfile = $localstorage.getObject("customerProfile");
-            var orderList = [];
-            var order = {};
+            var orderList = [];            
             var arr = $scope.trueProduct.productColor;
             var sum = 0;
             for (var i = 0; i < arr.length; i++) {
@@ -186,7 +185,7 @@ angular.module('fec3App')
                         //console.log("Tingtang:" + arr[i]);
                         // var order.PRODUCT_TYPE = arr[i].
                         var prod = arr[i].memSize[ii];
-
+                        var order = {};
                         var prodOrderQty = $scope.proItem['piece' + arr[i].colorName + ii];
                         var totalAmt = prod.price * prodOrderQty;
                         logger.debug("...Product[" + prod.code + "] Qty=" + prodOrderQty);
