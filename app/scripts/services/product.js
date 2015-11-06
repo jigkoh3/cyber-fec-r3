@@ -644,9 +644,26 @@ angular.module('fec3App')
                                     productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty >= 5 ? "green" : "yellow"));
                                     productItemDetail.itemCount = prodItemResultList.length;
 
+                                    var priceMin = prodItemResultList[0].price;
+                                    var priceMax = prodItemResultList[0].price;
+
                                     for (var prodIdx = 0; prodIdx < prodItemResultList.length; prodIdx++) {
-                                        productItemDetail.childs.push(prodItemResultList[prodIdx]);
+
+                                        var childItems = prodItemResultList[prodIdx];
+                                        childItems.stock = (childItems.qty <= 0 ? "red" : (childItems.qty >= 5 ? "green" : "yellow"));
+                                        productItemDetail.childs.push(childItems);
+
+                                        if (prodItemResultList[prodIdx].price < priceMin) { priceMin = prodItemResultList[prodIdx].price; }
+                                        if (prodItemResultList[prodIdx].price > priceMax) { priceMax = prodItemResultList[prodIdx].price; }
                                     }
+
+                                    var priceDisp = $filter('number')(priceMin, 2);
+                                    if (priceMin != priceMax) {
+
+                                        priceDisp = $filter('number')(priceMin, 2) + ' - ' + $filter('number')(priceMax, 2);
+                                    }
+
+                                    productItemDetail.price_display = priceDisp;
 
                                 } else {
 
@@ -654,6 +671,7 @@ angular.module('fec3App')
                                     productItemDetail.name = "";
                                     productItemDetail.piece = "";
                                     productItemDetail.price = "";
+                                    productItemDetail.price_display = "";
                                     productItemDetail.stock = "";
                                     productItemDetail.type = "";
                                     productItemDetail.itemCount = 0;
