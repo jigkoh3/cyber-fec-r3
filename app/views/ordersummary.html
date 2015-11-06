@@ -72,18 +72,18 @@
                         <div class="col-md-7">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <input type="radio" name="typeDiscount" value="d" ng-model="promotionType"  ng-checked="searchlist()"> ส่วนลด
+                                    <input type="radio" name="typeDiscount" value="d" ng-model="promotionType" ng-click="cleartext()" > ส่วนลด
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="radio" name="typeDiscount" value="v" ng-model="promotionType" ng-checked="searchlist()"> คูปองเงินสด/ บัตรของขวัญ/ Voucher
+                                    <input type="radio" name="typeDiscount" value="v" ng-model="promotionType" ng-click="cleartext()"  > คูปองเงินสด/ บัตรของขวัญ/ Voucher
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="radio" name="typeDiscount" value="b " ng-model="promotionType" ng-checked="searchlist()" > รหัสการจอง
+                                    <input type="radio" name="typeDiscount" value="b " ng-model="promotionType" ng-click="cleartext()" > รหัสการจอง
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <input class="form-control" type="text" ng-model="promotionSearch" value=""  ng-keyup="searchlist()"   >
+                <input class="form-control" type="text" ng-model="promotionSearch" value=""  ng-keyup="$event.keyCode == 13 ? searchlist() : null">
                         </div>
                     </div>
                     <br>
@@ -97,7 +97,7 @@
                             </tr>
                             <tr  ng-repeat="data in order_insert">
                                 <td class="col-md-1">
-                                    <i class="fa fa-minus-circle fa-lg fa-2x red" ng-click="removeRow_modal(data.PRODUCT_NAME);"  />
+                                   
                                 </td>
                                 <td class="col-md-7">{{ $index + 1 }}. {{data.PRODUCT_NAME}}</td>
                                 <td class="col-md-2 text-right">{{data.PRICE | number:2}}</td>
@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success" data-dismiss="modal">เลือก</button>
+                    <button class="btn btn-success" data-dismiss="modal" ng-click="addToListCard()">เลือก</button>
                     <button class="btn btn-cancel" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
