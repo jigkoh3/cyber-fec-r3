@@ -644,9 +644,26 @@ angular.module('fec3App')
                                     productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty >= 5 ? "green" : "yellow"));
                                     productItemDetail.itemCount = prodItemResultList.length;
 
+                                    var priceMin = prodItemResultList[0].price;
+                                    var priceMax = prodItemResultList[0].price;
+
                                     for (var prodIdx = 0; prodIdx < prodItemResultList.length; prodIdx++) {
-                                        productItemDetail.childs.push(prodItemResultList[prodIdx]);
+
+                                        var childItems = prodItemResultList[prodIdx];
+                                        childItems.stock = (childItems.qty <= 0 ? "red" : (childItems.qty >= 5 ? "green" : "yellow"));
+                                        productItemDetail.childs.push(childItems);
+
+                                        if (prodItemResultList[prodIdx].price < priceMin) { priceMin = prodItemResultList[prodIdx].price; }
+                                        if (prodItemResultList[prodIdx].price > priceMax) { priceMax = prodItemResultList[prodIdx].price; }
                                     }
+
+                                    var priceDisp = $filter('number')(priceMin, 2);
+                                    if (priceMin != priceMax) {
+
+                                        priceDisp = $filter('number')(priceMin, 2) + ' - ' + $filter('number')(priceMax, 2);
+                                    }
+
+                                    productItemDetail.price_display = priceDisp;
 
                                 } else {
 
@@ -654,6 +671,7 @@ angular.module('fec3App')
                                     productItemDetail.name = "";
                                     productItemDetail.piece = "";
                                     productItemDetail.price = "";
+                                    productItemDetail.price_display = "";
                                     productItemDetail.stock = "";
                                     productItemDetail.type = "";
                                     productItemDetail.itemCount = 0;
@@ -1630,6 +1648,12 @@ angular.module('fec3App')
 
             } else {
                 //
+
+                var disCountItemIdx = -1;
+                if (dataItemSerialNo = '11111') {
+                    disCountItemIdx = 2;
+                }
+
                 var result = {
                     "status": "SUCCESSFUL",
                     "fault": null,
@@ -1653,7 +1677,7 @@ angular.module('fec3App')
                         "MOBILE_NUMBER": "",
                         "DISCOUNT_TYPE": "B",
                         "DISCOUNT_4_PROD_ITEMS_LIST": [],
-                        "DISCOUNT_4_PROD_ITEM": "-1",
+                        "DISCOUNT_4_PROD_ITEM": disCountItemIdx,
                         "PRICE": -550,
                         "QTY": 1,
                         "TOTAL": -550,
@@ -1702,6 +1726,7 @@ angular.module('fec3App')
                     },
                     "display-message": null
                 };
+
                 $timeout(function () {
                     fnCallback({
                         status: true,

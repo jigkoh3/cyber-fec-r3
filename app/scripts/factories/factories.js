@@ -230,7 +230,7 @@ function modal($ngBootbox) {
             //console.log(_alertMsg);
             setTimeout(function() {
                 $ngBootbox.customDialog({
-                    templateUrl: 'views/templates/choosecampaign.html',
+                    templateUrl: 'views/templates/choosecampaign.html',                    
                     onEscape: function() {
                         return false;
                     },
@@ -263,7 +263,7 @@ function modal($ngBootbox) {
             _item = item;
             setTimeout(function() {
                 $ngBootbox.customDialog({
-                    templateUrl: 'views/templates/productselector.html',
+                    templateUrl: 'views/templates/productselector.html',                    
                     onEscape: function() {
                         return false;
                     },
@@ -272,6 +272,7 @@ function modal($ngBootbox) {
                     closeButton: false,
                     animate: true,
                     size: "large"
+
                 });
             }, 1001);
 
