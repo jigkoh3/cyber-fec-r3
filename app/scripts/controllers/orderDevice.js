@@ -129,9 +129,8 @@ angular.module('fec3App')
         //     $scope.productCode = itm.code;
         //     $scope.productType = "P";
         //     $scope.calculate(itm, 'piece' + id);
+    //};
 
-
-    };
     //culate order total summary
     $scope.total = 0;
     $scope.calculate = function(item, proItem) {
