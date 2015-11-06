@@ -84,10 +84,12 @@ angular.module('fec3App')
 
     //
     var oldProItem = "";
+    $scope.color = "";
     $scope.choose = function(itm, id) {
-        //console.log("selected itm piece :" + itm.piece)
-        if (itm.itemCount > 1) {
+        console.log(itm);
+        $scope.color = itm.stock;
 
+        if (itm.itemCount > 1) {
             $modal.productSelector(itm);
         } else {
 
@@ -99,38 +101,42 @@ angular.module('fec3App')
                 $scope.proItem['piece' + id] = 1;
                 console.log($scope.proItem['piece' + id]);
                 console.log(id);
-
             } else {
-                $scope.proItem['piece' + id] = itm.piece;
+                if ($scope.proItem['piece' + id] < itm.piece) {
+                    $scope.proItem['piece' + id] += 1;
+                } else {
+                    $scope.proItem['piece' + id] = itm.piece;
+                }
+
             }
-
-
+            $scope.productCode = itm.code;
+            $scope.productType = "P";
+            $scope.calculate(itm, 'piece' + id);
         }
-        $scope.productCode = itm.code;
-        $scope.productType = "P";
-        $scope.calculate(itm, 'piece' + id);
-    }
+
+
+
         // if ($scope.tabselected == "1") {
-        //         if (oldProItem != id) {
-        //             $scope.proItem['piece' + oldProItem] = null;
-        //             oldProItem = id;
-        //         }
-        //         $scope.proItem['piece' + id] = 1;
-        //         console.log($scope.proItem['piece' + id]);
-        //         console.log(id);
-        //     } else {
-        //         if ($scope.proItem['piece' + id] < itm.piece) {
-        //             $scope.proItem['piece' + id] += 1;
-        //         } else {
-        //             $scope.proItem['piece' + id] = itm.piece;
-        //         }
-
+        //     if (oldProItem != id) {
+        //         $scope.proItem['piece' + oldProItem] = null;
+        //         oldProItem = id;
         //     }
-        //     $scope.productCode = itm.code;
-        //     $scope.productType = "P";
-        //     $scope.calculate(itm, 'piece' + id);
-    //};
+        //     $scope.proItem['piece' + id] = 1;
+        //     console.log($scope.proItem['piece' + id]);
+        //     console.log(id);
+        // } else {
+        //     if ($scope.proItem['piece' + id] < itm.piece) {
+        //         $scope.proItem['piece' + id] += 1;
+        //     } else {
+        //         $scope.proItem['piece' + id] = itm.piece;
+        //     }
 
+        // }
+        // $scope.productCode = itm.code;
+        // $scope.productType = "P";
+        // $scope.calculate(itm, 'piece' + id);
+
+    };
     //culate order total summary
     $scope.total = 0;
     $scope.calculate = function(item, proItem) {
@@ -177,7 +183,7 @@ angular.module('fec3App')
                 for (var ii = 0; ii < arr[i].memSize.length; ii++) {
                     var sum_ii = 0;
                     if ($scope.proItem['piece' + arr[i].colorName + ii] && $scope.proItem['piece' + arr[i].colorName + ii] > 0) {
-                        console.log("Tingtang:" + arr[i]);
+                        //console.log("Tingtang:" + arr[i]);
                         // var order.PRODUCT_TYPE = arr[i].
                         var prod = arr[i].memSize[ii];
                         order.PRODUCT_TYPE = prod.type;
@@ -199,7 +205,7 @@ angular.module('fec3App')
             }
             $localstorage.setObject("customerProfile", customerProfile);
             $localstorage.logObject("customerProfile");
-            //$location.path('/ordersummary')
+            $location.path('/ordersummary')
         };
     };
 
