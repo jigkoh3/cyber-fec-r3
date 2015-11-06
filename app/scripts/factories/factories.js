@@ -271,7 +271,8 @@ function modal($ngBootbox) {
                     backdrop: true,
                     closeButton: false,
                     animate: true,
-                    className: "modal-test"
+                    size: "large"
+
                 });
             }, 1001);
 
