@@ -10,10 +10,10 @@
 angular.module('fec3App')
 
 
-.controller('orderDeviceCtrl', function($routeParams, $scope, $localstorage, $location, $loading, $message, $modal, productService) {
+.controller('orderDeviceCtrl', function ($routeParams, $scope, $localstorage, $location, $loading, $message, $modal, productService, $log) {
 
 
-
+    var logger = $log.getInstance('productSelectorCtrl');
 
     //get querystring request
     $scope.id = $routeParams.id;
@@ -186,12 +186,18 @@ angular.module('fec3App')
                         //console.log("Tingtang:" + arr[i]);
                         // var order.PRODUCT_TYPE = arr[i].
                         var prod = arr[i].memSize[ii];
+
+                        var prodOrderQty = $scope.proItem['piece' + arr[i].colorName + ii];
+                        var totalAmt = prod.price * prodOrderQty;
+                        logger.debug("...Product[" + prod.code + "] Qty=" + prodOrderQty);
+                        logger.debug("...Product[" + prod.code + "] totalAmt=" + totalAmt);
+
                         order.PRODUCT_TYPE = prod.type;
                         order.PRODUCT_CODE = prod.code;
                         order.PRODUCT_NAME = prod.name;
                         order.PRICE = prod.price;
-                        order.QTY = $scope.proItem['piece' + arr[i].colorName + ii];
-                        order.TOTAL = order.QTY * order.PRICE;
+                        order.QTY = prodOrderQty;
+                        order.TOTAL = totalAmt;
                         order.IS_CAMPAIGN_PROMO_ITEM = 'N';
                         order.IS_PRODUCT_REQUESTFORM = 'N';
                         order.APPLECARE_CODE = null;
