@@ -10,8 +10,12 @@ angular
     .factory('$loading', loading)
     .factory('$message', message)
     .factory('$modal', modal)
-    .factory('smartUIHttpInterceptor', function($q, $rootScope) {
-        return {
+    .factory('smartUIHttpInterceptor', smartUIHttpInterceptor)
+    .service('anchorSmoothScroll', anchorSmoothScroll)
+
+
+function smartUIHttpInterceptor($q, $rootScope){
+    return {
             request: function(config) {
                 return config || $q.when(config);
             },
@@ -41,9 +45,7 @@ angular
                 return $q.reject(response);
             }
         };
-    })
-    .service('anchorSmoothScroll', anchorSmoothScroll)
-
+};
 function anchorSmoothScroll() {
     this.scrollTo = function(eID) {
 

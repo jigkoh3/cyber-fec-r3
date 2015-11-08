@@ -2,12 +2,7 @@
 angular.module('fec3App')
 
     .controller('ordersummaryCtrl', function($scope, $loading, $localstorage,  $routeParams, $linq, productService, $message) {
-        this.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
-		
+        
 		$scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
         $scope.dataType = 'D';
@@ -154,10 +149,10 @@ angular.module('fec3App')
 		};
 		
 		$scope.totalCalculate = function(){	
-					$scope.total =0;
-				for(var i = 0 ; i< $scope.order_product_item_list.length; i++){
-				    $scope.total = $scope.total + parseInt($scope.order_product_item_list[i]['TOTAL']);
-				}		
+			$scope.total =0;
+			for(var i = 0 ; i< $scope.order_product_item_list.length; i++){
+				$scope.total = $scope.total + parseInt($scope.order_product_item_list[i]['TOTAL']);
+			}		
 		};
 		
 		$scope.totalCalculate();
