@@ -767,9 +767,10 @@ angular.module('fec3App')
                         customerProfile.existData = result.data["response-data"];
                         delete customerProfile.existData['installed-products'];
 
-                        customerProfile.title = customerProfile.existData.title;
-                        customerProfile.firstName = customerProfile.existData.firstname;
-                        customerProfile.lastName = customerProfile.existData.lastname;
+                        // jigkoh fix defect G1 - readcard issue
+                        // customerProfile.title = customerProfile.existData.title;
+                        // customerProfile.firstName = customerProfile.existData.firstname;
+                        // customerProfile.lastName = customerProfile.existData.lastname;
                         customerProfile.customerType = customerProfile.existData["customer-type"];
                         customerProfile.customerTypeSelected = true;
                         that.getTrueMove(certificateid, certificatetype, function(result) {
