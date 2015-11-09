@@ -206,8 +206,8 @@ angular.module('fec3App')
                         order.IS_SIM = 'N';
                         order.APPLECARE_CODE = null;
                         order.GROUP_ID = prod.code + TrxID;
-                        logger.debug("...orderItemList.push(order[" + i + "])=", order);
-                        orderItemList.push(order);
+
+
                         //customerProfile.orderObj = {};
                         //customerProfile.orderObj.order_product_item_list = [];
                         //if (!customerProfile.orderObj) { customerProfile.orderObj = {}; }
@@ -265,7 +265,7 @@ angular.module('fec3App')
                         for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
                             customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
                         }
-                        
+
                         logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
 
                         $localstorage.setObject("customerProfile", customerProfile);
