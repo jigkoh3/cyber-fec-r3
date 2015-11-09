@@ -90,7 +90,8 @@ angular.module('fec3App')
         $scope.color = itm.stock;
 
         if (itm.itemCount > 1) {
-            $modal.productSelector(itm,$scope.tabselected);
+            $modal.productSelector(itm, $scope.tabselected, { "pieceGold0": null });
+
         } else {
 
             if ($scope.tabselected == "1") {
@@ -207,7 +208,7 @@ angular.module('fec3App')
                         order.APPLECARE_CODE = null;
                         order.GROUP_ID = prod.code + TrxID;
 
-
+                        orderItemList.push(order);
                         //customerProfile.orderObj = {};
                         //customerProfile.orderObj.order_product_item_list = [];
                         //if (!customerProfile.orderObj) { customerProfile.orderObj = {}; }
