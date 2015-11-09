@@ -1,22 +1,33 @@
 'use strict';
 angular.module('fec3App')
     .controller('privilegeCtrl', function($scope, $routeParams, productService, $localstorage, $loading, $message) {
-        $scope.userProfile = $localstorage.getObject("customerProfile");
+        var customerProfile = $localstorage.getObject("customerProfile");
 
         var campaign_code = $routeParams.campaignCode;
         var product_code = $routeParams.productCode;
         var qty = $routeParams.qty;
-        var verifyKeys = $routeParams.verifyKeys;
+        
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
+
+        var _verifyKeys = $routeParams.verifyKeys;
+        $scope.verifyKeys = [];
+        for (var i = 0; i <= _verifyKeys.length-1; i++) {
+            var _vlf = {};
+
+            _vlf.key = _verifyKeys[i];
+            _vlf.value=null;
+            if(_verifyKeys[i] == "ThaiId"){
+                _vlf.value = customerProfile.certificateId;
+            }
+            $scope.verifyKeys.push(_vlf);
+        };
+        
         $scope.param = {
             "campaign_code": campaign_code,
             "product_code": product_code,
             "qty": qty,
-            "verifyKeys": [{
-                "key": "msisdn",
-                "value": ""
-            }]
+            "verifyKeys": $scope.verifyKeys
         };
         $scope.isClick = false;
 
@@ -28,7 +39,7 @@ angular.module('fec3App')
                     $scope.isClick = false;
                     if (result.data['response-data']['result'] == 'Pass') {
                         $loading.hide();
-                        location.href = '#pricePlan';
+                        location.href = '#ordersummary';
                     } else {
                         if (result.data['response-data']['result'] == "SegmentCodeIsNotDefine") {
                             $message.alert({

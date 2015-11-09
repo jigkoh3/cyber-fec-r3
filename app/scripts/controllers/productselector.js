@@ -13,6 +13,9 @@ angular.module('fec3App')
 
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
+
+        
+
         $scope.productCode = null;
         $scope.productType = null;
 

@@ -8,12 +8,13 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('choosecampaignCtrl', function($scope, $modal, $log) {
+    .controller('choosecampaignCtrl', function($scope, $modal, $log, $routeParams) {
         //var customerProfile = $localstorage.getObject("customerProfile");
         var logger = $log.getInstance('choosecampaignCtrl');
         var order_product_item_list = [];
         var d = new Date();
         var TrxID = d.getTime() + '';
+        var _productCode = $routeParams.productCode;
         $scope.proItem = {
             "pieceGold0": null
         };
@@ -39,7 +40,7 @@ angular.module('fec3App')
             order.IS_CAMPAIGN_PROMO_ITEM = 'Y';
             order.IS_PRODUCT_REQUESTFORM = 'N';
             order.APPLECARE_CODE = null;
-            order.GROUP_ID = prod.code + TrxID;
+            order.GROUP_ID = _productCode + TrxID;
 
             // if (!customerProfile.orderObj) {
             //     customerProfile.orderObj = {};

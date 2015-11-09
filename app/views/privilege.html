@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group ">
                                         <label>หมายเลขบัตรประชาชน/พาสปอร์ต</label>
@@ -51,6 +51,14 @@
                                     <div class="form-group ">
                                         <label>หมายเลขโทรศัพท์</label>
                                         <input type="text" ng-model="param.verifyKeys[0].value" placeholder="" class="form-control numberic" maxlength="10">
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row" ng-repeat="itm in verifyKeys">
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <label>{{itm.key == "ThaiId" ? "หมายเลขบัตรประชาชน/พาสปอร์ต" : itm.key}}</label>
+                                        <input type="text" ng-disabled="itm.key == 'ThaiId'" ng-model="itm.value" placeholder="" class="form-control numberic" maxlength="10">
                                     </div>
                                 </div>
                             </div>
