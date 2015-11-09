@@ -1221,7 +1221,8 @@ angular.module('fec3App')
             }
         };
 
-        this.getProduct = function(productCode, productType, fnCallback) {
+        this.getProduct = function (productCode, productType, fnCallback) {
+
             if (!dalService.demo) {
 
                 request.target = 'sales-services/rest/master/get_product';
@@ -1245,7 +1246,9 @@ angular.module('fec3App')
                             "desc": "H/S,IPHONE 5,32GB,GSM-THA,BK,MD299TH/A",
                             "price": 28250,
                             "productInfo": {
-                                "appleCareCode": "APC"
+                                "appleCareCode": "APC",
+                                "isSim": true,
+                                "requireForm": true
                             },
                             "serviceInfo": null,
                             "campaigns": [{
@@ -1332,6 +1335,129 @@ angular.module('fec3App')
                 };
                 $timeout(function() {
                     fnCallback({
+                        status: true,
+                        data: result,
+                        error: "",
+                        msgErr: ""
+                    });
+                }, 1000);
+            }
+        };
+
+        this.getProduct = function (idx, productCode, productType, fnCallback) {
+
+            if (!dalService.demo) {
+
+                request.target = 'sales-services/rest/master/get_product';
+
+                request.param.product_code = productCode;
+                request.param.product_type = productType;
+                request.param.customer_type = '*';
+
+                dalService.callServicePost(request, null, function (result) {
+                    fnCallback(idx, result);
+                });
+            } else {
+                var result = {
+                    "status": "SUCCESSFUL",
+                    "fault": null,
+                    "trx-id": "S00000000000001",
+                    "process-instance": "SFF_node1",
+                    "response-data": {
+                        "product": {
+                            "name": "3000013633-H/S,IPHONE 5,32GB,GSM-THA,BK,MD299TH/A",
+                            "desc": "H/S,IPHONE 5,32GB,GSM-THA,BK,MD299TH/A",
+                            "price": 28250,
+                            "productInfo": {
+                                "appleCareCode": "APC",
+                                "isSim": true,
+                                "requireForm": true
+                            },
+                            "serviceInfo": null,
+                            "campaigns": [{
+                                "code": "TX228",
+                                "name": "C15 With PP ",
+                                "desc": "test1234"
+                            }, {
+                                "code": "TR080",
+                                "name": "RS080 : iPhone5_Free You",
+                                "desc": "test4234"
+                            }, {
+                                "code": "TP       081",
+                                "name": "iPhone 5_MNP (Contract 10 mths)",
+                                "desc": null
+                            }, {
+                                "code": "TN084",
+                                "name": "Biz & Ent iPhone 5_H/S+SIM (Contract 10 mths)",
+                                "desc": null
+                            }, {
+                                "code": "TM085",
+                                "name": "Biz & Ent iPhone 5_H/S+SIM (No contract)",
+                                "desc": null
+                            }, {
+                                "code": "TD091",
+                                "name": "Biz & Ent iPhone 5_MNP (Contract 10 mths)",
+                                "desc": null
+                            }, {
+                                "code": "RS095",
+                                "name": "MNP Handset Discount 1,000Bt  ",
+                                "desc": null
+                            }, {
+                                "code": "RS098",
+                                "name": "MNP Handset Discount 1,000bt (Contract 6 mths)",
+                                "desc": null
+                            }, {
+                                "code": "RS109",
+                                "name": "TrueCard discount 1,000 Baht",
+                                "desc": null
+                            }, {
+                                "code": "TX112",
+                                "name": "GOV_Free You_Premium Tier",
+                                "desc": null
+                            }, {
+                                "code": "TD114",
+                                "name": "Apple Employee for True Group",
+                                "desc": null
+                            }, {
+                                "code": "TP115",
+                                "name": "Apple Employee for CP Group",
+                                "desc": null
+                            }, {
+                                "code": "TN128",
+                                "name": "RS128 : Handset+New Sim for Apple",
+                                "desc": null
+                            }, {
+                                "code": "TM238",
+                                "name": "RS238 : TC discount 1,000 Baht",
+                                "desc": null
+                            }, {
+                                "code": "TR396",
+                                "name": "RS396 : Pre2Post_True Super One 299 Baht",
+                                "desc": null
+                            }, {
+                                "code": "TX001",
+                                "name": "Test001_Test Reserve",
+                                "desc": null
+                            }, {
+                                "code": "TR001",
+                                "name": "TRN001 : Training Campaign No Advance",
+                                "desc": null
+                            }, {
+                                "code": "TM084",
+                                "name": "Biz & Ent iPhone 5_H/S+SIM (Contract 10 mths)",
+                                "desc": null
+                            }],
+                            "promotions": [{
+                                "code": "PN462",
+                                "name": "iPhone4 8GB  Contact 18 Month.",
+                                "desc": "โปรโมชั่นพิเศษสุดๆ"
+                            }]
+                        }
+                    },
+                    "display-message": null
+                };
+                $timeout(function () {
+                    fnCallback(idx, {
                         status: true,
                         data: result,
                         error: "",
