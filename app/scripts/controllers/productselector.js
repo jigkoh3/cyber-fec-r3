@@ -52,8 +52,11 @@ angular.module('fec3App')
                     //console.log("more than max piece :" + item.piece);
                     $scope.proItem[proItem] = null;
                 } else {
-                    if ($scope.proItem[proItem] > 1) {
+                    if ($scope.proItem[proItem] != 1) {
                         $scope.proItem[proItem] = null;
+                    }else{
+                        $scope.productCode = item.code;
+                        $scope.productType = item.type;
                     }
                 }
             } else {
@@ -81,8 +84,8 @@ angular.module('fec3App')
             //$scope.total = sum;
         };
         $scope.nextModal = function() {
-            if ($scope.tabselected == "1") {
-                $location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
+            if ($scope.tabSelected == 1) {
+                //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
                 if ($scope.productCode && $scope.productType) {
                     $location.path('/promotion').search({
                         id: $scope.id,
