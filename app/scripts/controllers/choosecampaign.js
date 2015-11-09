@@ -19,6 +19,27 @@ angular.module('fec3App')
             "pieceGold0": null
         };
         $scope.data = $modal.campaignList();
+        for (var i = 0; i < $scope.data.length; i++) {
+            //console.log($scope.data[i].type);
+            switch ($scope.data[i].type) {
+                case '1':
+                    $scope.data[i].type = "แถม";
+                    break;
+                case '2':
+                    $scope.data[i].type = "แลกซื้อ";
+                    break;
+                case '3':
+                    $scope.data[i].type = "ลดบาท";
+                    break;
+                case '4':
+                    $scope.data[i].type = "ลดเปอร์เซนต์";
+                    break;
+                case '5':
+                    $scope.data[i].type = "subsidy";
+                    break;
+            }
+        }
+        // $scope.data =$scope.listdata ;   
         $scope.txtChanged = function(item) {
             // var arr = $scope.data;
             // for (var i = 0; i < arr.length; i++) {
@@ -53,5 +74,37 @@ angular.module('fec3App')
             $modal.campaignSelected(order_product_item_list);
         };
 
+
+        // $scope.promotionType = function() {
+        //     var promoType = item.type;
+        //     switch {
+        //         case 1:
+        //             promoType = "Monday";
+        //             break;
+        //         case 2:
+        //             promoType = "Tuesday";
+        //             break;
+        //         case 3:
+        //             promoType = "Wednesday";
+        //             break;
+        //         case 4:
+        //             promoType = "Thursday";
+        //             break;
+        //         case 5:
+        //             promoType = "Friday";
+        //             break;
+        //     }
+        // };
+        //console.log($scope.datatype);
+
+        // $scope.promotionType = function() {
+
+        //  var promoType = $scope.data;
+        // console.log(promoType);
+        //  console.log($scope.data[i].type);
+
+        //  }
+
+        // $scope.promotionType();
 
     });
