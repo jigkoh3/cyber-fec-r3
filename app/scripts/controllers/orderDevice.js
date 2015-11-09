@@ -177,7 +177,9 @@ angular.module('fec3App')
             var orderList = [];            
             var arr = $scope.trueProduct.productColor;
             var sum = 0;
-            
+            var d = new Date();
+            var TrxID = d.getTime() + '';
+
             for (var i = 0; i < arr.length; i++) {
                 var sum_i = 0;
                 for (var ii = 0; ii < arr[i].memSize.length; ii++) {
@@ -201,7 +203,7 @@ angular.module('fec3App')
                         order.IS_CAMPAIGN_PROMO_ITEM = 'N';
                         order.IS_PRODUCT_REQUESTFORM = 'N';
                         order.APPLECARE_CODE = null;
-                        order.GROUP_ID = prod.code;
+                        order.GROUP_ID = prod.code + TrxID;
 
 
                         //customerProfile.orderObj = {};
