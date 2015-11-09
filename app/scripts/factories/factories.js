@@ -212,6 +212,7 @@ function message($ngBootbox) {
 function modal($ngBootbox) {
     var that = this;
     var _itm = null;
+    var _tabIdx = null;
 
     var _proSelected = null;
 
@@ -226,6 +227,9 @@ function modal($ngBootbox) {
 
         mathList: function() {
             return _item;
+        },
+        tabSelected: function() {
+            return _tabIdx;
         },
         campaignSelector: function(itm, fnCallback) {
             _itm = itm;
@@ -261,8 +265,9 @@ function modal($ngBootbox) {
             }, 800);
         },
 
-        productSelector: function(item) {
+        productSelector: function(item, tabSelected) {
             _item = item;
+            _tabIdx = tabSelected;
             setTimeout(function() {
                 $ngBootbox.customDialog({
                     templateUrl: 'views/templates/productselector.html',                    

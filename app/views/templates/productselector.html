@@ -23,7 +23,7 @@
                     <td> <label class="{{item.stock}}">{{item.stock=="red" ? "สินค้าหมด" : "พร้อมขาย"}}({{item.qty}}) </label></td>
                     <td>{{item.price | number:2}}</td>
                     <td>
-                        <input style="width:50px;" type="number" min="0" max="{{item.qty}}" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem['piece'+item.productInfo.color+$index]" onfocus="">
+                        <input style="width:50px;" type="number" min="0" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem['piece'+item.productInfo.color+$index]" ng-change="validateInput(item,'piece'+item.productInfo.color+$index)">
                     </td>
                 </tr>
             </table>

@@ -12,17 +12,18 @@ angular.module('fec3App')
 
 
         $scope.id = $routeParams.id;
-    $scope.name = $routeParams.name;
-    $scope.productCode = null;
-    $scope.productType = null;
+        $scope.name = $routeParams.name;
+        $scope.productCode = null;
+        $scope.productType = null;
 
         var logger = $log.getInstance('productSelectorCtrl');
         $scope.name = $routeParams.name;
 
 
         $scope.data = $modal.mathList();
+        $scope.tabSelected = $modal.tabSelected();
         console.log($scope.data);
-        //console.log($scope.ngDialogData);
+        console.log("tabSelected" + $scope.tabSelected);
         $scope.ngBootBoxClose = function() {
 
             bootbox.hideAll();
@@ -35,6 +36,50 @@ angular.module('fec3App')
             "pieceGold0": null
         };
 
+        //culate order total summary
+        $scope.total = 0;
+        $scope.validateInput = function(item, proItem) {
+            console.log("calculate :" + $scope.proItem[proItem]);
+            if ($scope.tabSelected == 1) {
+                var arr = $scope.data.childs;
+                for (var i = 0; i < arr.length; i++) {
+                    var sum_i = 0;
+                    if ('piece' + arr[i].productInfo.color + i != proItem) {
+                        $scope.proItem['piece' + arr[i].productInfo.color + i] = null;
+                    }
+                }
+                if (!$scope.proItem[proItem]) { // if more than max piece
+                    //console.log("more than max piece :" + item.piece);
+                    $scope.proItem[proItem] = null;
+                } else {
+                    if ($scope.proItem[proItem] > 1) {
+                        $scope.proItem[proItem] = null;
+                    }
+                }
+            } else {
+                if (!$scope.proItem[proItem]) { // if more than max piece
+                    //console.log("more than max piece :" + item.piece);
+                    $scope.proItem[proItem] = null;
+                } else {
+                    if ($scope.proItem[proItem] > item.qty) {
+                        $scope.proItem[proItem] = null;
+                    }
+                }
+            }
+            if (!$scope.proItem[proItem]) { // if more than max piece
+                //console.log("more than max piece :" + item.piece);
+                $scope.proItem[proItem] = null;
+            }
+            var arr = $scope.data.childs;
+            var sum = 0;
+            for (var i = 0; i < arr.length; i++) {
+                var sum_i = 0;
+                if ($scope.proItem['piece' + arr[i].productInfo.color + i]) {
+                    sum = sum + $scope.proItem['piece' + arr[i].productInfo.color + i] * item.price;
+                }
+            }
+            //$scope.total = sum;
+        };
         $scope.nextModal = function() {
             if ($scope.tabselected == "1") {
                 $location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
@@ -49,7 +94,7 @@ angular.module('fec3App')
 
             } else {
                 var customerProfile = $localstorage.getObject("customerProfile");
-                var orderList = [];                
+                var orderList = [];
                 var arr = $scope.data.childs;
                 var sum = 0;
                 for (var i = 0; i < arr.length; i++) {
@@ -76,9 +121,13 @@ angular.module('fec3App')
                         order.IS_PRODUCT_REQUESTFORM = 'N';
                         order.APPLECARE_CODE = null;
 
-                        if (!customerProfile.orderObj) { customerProfile.orderObj = {}; }
-                        if (!customerProfile.orderObj.order_product_item_list) { customerProfile.orderObj.order_product_item_list = []; }
-                        
+                        if (!customerProfile.orderObj) {
+                            customerProfile.orderObj = {};
+                        }
+                        if (!customerProfile.orderObj.order_product_item_list) {
+                            customerProfile.orderObj.order_product_item_list = [];
+                        }
+
                         customerProfile.orderObj.order_product_item_list.push(order);
                         logger.debug("...After order_product_item_list.push", customerProfile.orderObj.order_product_item_list);
 

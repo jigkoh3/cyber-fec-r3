@@ -90,7 +90,7 @@ angular.module('fec3App')
         $scope.color = itm.stock;
 
         if (itm.itemCount > 1) {
-            $modal.productSelector(itm);
+            $modal.productSelector(itm,$scope.tabselected);
         } else {
 
             if ($scope.tabselected == "1") {
