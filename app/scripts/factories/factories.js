@@ -14,38 +14,39 @@ angular
     .service('anchorSmoothScroll', anchorSmoothScroll)
 
 
-function smartUIHttpInterceptor($q, $rootScope){
+function smartUIHttpInterceptor($q, $rootScope) {
     return {
-            request: function(config) {
-                return config || $q.when(config);
-            },
-            requestError: function(response) {
-                console.log("requestError");
-                console.log(response);
-                return $q.reject(response);
-            },
-            response: function(response) {
-                return response || $q.when(response);
-            },
+        request: function(config) {
+            return config || $q.when(config);
+        },
+        requestError: function(response) {
+            console.log("requestError");
+            console.log(response);
+            return $q.reject(response);
+        },
+        response: function(response) {
+            return response || $q.when(response);
+        },
 
-            // responseError : function(response) {
-            // console.log("responseError");
-            // var msg = response.status + ' ' + response.statusText;
-            // if (msg == '0 error' || msg == '200 OK') {
-            // location.reload();
-            // }
-            //
-            // return $q.reject(response);
-            // }
-            responseError: function(response) {
-                console.log("responseError");
-                if (response.status === 0) {
-                    location.reload();
-                }
-                return $q.reject(response);
+        // responseError : function(response) {
+        // console.log("responseError");
+        // var msg = response.status + ' ' + response.statusText;
+        // if (msg == '0 error' || msg == '200 OK') {
+        // location.reload();
+        // }
+        //
+        // return $q.reject(response);
+        // }
+        responseError: function(response) {
+            console.log("responseError");
+            if (response.status === 0) {
+                location.reload();
             }
-        };
+            return $q.reject(response);
+        }
+    };
 };
+
 function anchorSmoothScroll() {
     this.scrollTo = function(eID) {
 
@@ -209,7 +210,7 @@ function message($ngBootbox) {
     }
 };
 
-function modal($ngBootbox) {
+function modal($ngBootbox,$localstorage) {
     var that = this;
     var _itm = null;
     var _tabIdx = null;
@@ -236,7 +237,7 @@ function modal($ngBootbox) {
             //console.log(_alertMsg);
             setTimeout(function() {
                 $ngBootbox.customDialog({
-                    templateUrl: 'views/templates/choosecampaign.html',                    
+                    templateUrl: 'views/templates/choosecampaign.html',
                     onEscape: function() {
                         return false;
                     },
@@ -244,12 +245,22 @@ function modal($ngBootbox) {
                     backdrop: true,
                     closeButton: false,
                     animate: true,
+                    size: "large",
                     buttons: {
                         success: {
                             label: "Ok",
                             className: "btn-success",
                             callback: function() {
-
+                                var customerProfile = $localstorage.getObject("customerProfile");
+                                if (!customerProfile.orderObj) {
+                                    customerProfile.orderObj = {};
+                                }
+                                if (!customerProfile.orderObj.order_product_item_list) {
+                                    customerProfile.orderObj.order_product_item_list = [];
+                                }
+                                customerProfile.orderObj.order_product_item_list = _proSelected;
+                                $localstorage.setObject("customerProfile", customerProfile);
+                                $localstorage.logObject("customerProfile");
                                 fnCallback({
                                     status: true,
                                     data: _proSelected
@@ -270,7 +281,7 @@ function modal($ngBootbox) {
             _tabIdx = tabSelected;
             setTimeout(function() {
                 $ngBootbox.customDialog({
-                    templateUrl: 'views/templates/productselector.html',                    
+                    templateUrl: 'views/templates/productselector.html',
                     onEscape: function() {
                         return false;
                     },

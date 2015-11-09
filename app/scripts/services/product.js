@@ -976,7 +976,8 @@ angular.module('fec3App')
                                 "name": "Device Discount"
                             }],
                             "verifyKeys": [
-                                "ThaiId"
+                                "ThaiId",
+                                "MSISDN"
                             ]
                         }
                     },

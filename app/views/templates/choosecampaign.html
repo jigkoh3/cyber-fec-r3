@@ -21,16 +21,18 @@
                     </th>
                     <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.group}}</span></th>
                     <th class="col-md-6" style="background-color: #c8bbbb; "><span>(ไม่เกิน {{item.maxGet}} ชิ้น)</span></th>
-                    <th class="col-md-1" style="background-color: #c8bbbb; "><span>{{item.type}}</span></th>
+                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.type}}</span></th>
                     <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
                 </tr>
                 <tr class="row" ng-repeat="itm in item.products">
                     <td class="col-md-1"></td>
                     <td class="col-md-2">{{itm.code}}</td>
                     <td class="col-md-6">{{itm.name}}</td>
-                    <td class="col-md-1">{{itm.price}}</td>
+                    <td class="col-md-2">{{itm.price}}</td>
                     <td class="col-md-1">
-                        <input style="width:50px;" type="text" ng-model="proItem[itm.code]" ng-change="txtChanged()">
+                        
+                        <input style="width:50px;" type="number" min="0" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem[itm.code]" ng-change="txtChanged(itm)">
+
                     </td>
                 </tr>
             </table>
