@@ -244,6 +244,7 @@ function modal($ngBootbox) {
                     backdrop: true,
                     closeButton: false,
                     animate: true,
+                    size: "large",
                     buttons: {
                         success: {
                             label: "Ok",
