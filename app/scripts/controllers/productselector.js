@@ -22,6 +22,8 @@ angular.module('fec3App')
 
         $scope.data = $modal.mathList();
         $scope.tabSelected = $modal.tabSelected();
+        $scope.isValidated = false;
+
         console.log($scope.data);
         console.log("tabSelected" + $scope.tabSelected);
         $scope.ngBootBoxClose = function() {
@@ -39,6 +41,7 @@ angular.module('fec3App')
         //culate order total summary
         $scope.total = 0;
         $scope.validateInput = function(item, proItem) {
+            $scope.isValidated = false;
             console.log("calculate :" + $scope.proItem[proItem]);
             if ($scope.tabSelected == 1) {
                 var arr = $scope.data.childs;
@@ -57,6 +60,7 @@ angular.module('fec3App')
                     }else{
                         $scope.productCode = item.code;
                         $scope.productType = item.type;
+                        $scope.isValidated = true;
                     }
                 }
             } else {
@@ -67,21 +71,12 @@ angular.module('fec3App')
                     if ($scope.proItem[proItem] > item.qty) {
                         $scope.proItem[proItem] = null;
                     }
+                    else{
+                        $scope.isValidated = true;
+                    }
                 }
             }
-            if (!$scope.proItem[proItem]) { // if more than max piece
-                //console.log("more than max piece :" + item.piece);
-                $scope.proItem[proItem] = null;
-            }
-            var arr = $scope.data.childs;
-            var sum = 0;
-            for (var i = 0; i < arr.length; i++) {
-                var sum_i = 0;
-                if ($scope.proItem['piece' + arr[i].productInfo.color + i]) {
-                    sum = sum + $scope.proItem['piece' + arr[i].productInfo.color + i] * item.price;
-                }
-            }
-            //$scope.total = sum;
+            
         };
         $scope.nextModal = function() {
             if ($scope.tabSelected == 1) {
