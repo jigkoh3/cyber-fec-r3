@@ -50,25 +50,22 @@ angular.module('fec3App')
     }
 
 
-    $scope.deleted = function(Group_id, ORDER_ID) {
+    $scope.deleted = function(Group_id, num_index) {
         var showName;
         var msg;
         var countItem;
         var listArr = $scope.order_product_item_list;
-        for (var i = 0; i < listArr.length; i++) {
-            if (listArr[i].ORDER_ID === ORDER_ID) {
-                if (listArr[i].CAMPAIGN_PROMO_ITEM_QTY > 1) {
-                    showName = listArr[i].CAMPAIGN_NAME;
-                    countItem = listArr[i].CAMPAIGN_PROMO_ITEM_QTY;
+                if (listArr[num_index].CAMPAIGN_PROMO_ITEM_QTY > 1) {
+                    showName = listArr[num_index].CAMPAIGN_NAME;
+                    countItem = listArr[num_index].CAMPAIGN_PROMO_ITEM_QTY;
                     msg = 'TH: The item that you want to delete is ' + showName + ' (' + countItem + ' item)  selling type. \
 							Please confirm if you want to delete all set.<br/>\
 							 EN: รายการที่ท่านต้องการลบเป็นการขายแบบ ' + showName + ' (' + countItem + ' รายการ) กรุณายืนยันการลบทั้งกลุ่ม';
                 } else {
-                    showName = listArr[i].PRODUCT_NAME;
+                    showName = listArr[num_index].PRODUCT_NAME;
                     msg = 'EN: Please confirm to delete this item ' + showName + '.<br/>TH: ท่านต้องการลบ ' + showName + ' หรือไม่';
                 }
-            }
-        }
+        
 
         $message.confirm(msg, function(result) {
             if (result.status) {
