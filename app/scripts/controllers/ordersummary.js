@@ -30,44 +30,27 @@ angular.module('fec3App')
         customerInfo.orderObj.order_product_item_list = $scope.order_product_item_list;
         $localstorage.setObject("customerProfile", customerInfo);
         //$localstorage.logObject("customerProfile");
-    };
+    }
 
     $scope.totalCalculate = function() {
         $scope.total = 0;
         for (var i = 0; i < $scope.order_product_item_list.length; i++) {
             $scope.total = $scope.total + parseInt($scope.order_product_item_list[i]['TOTAL']);
         }
-    };
+    }
 
     $scope.totalCalculate();
 
-    $scope.removeRow_modal = function(PRODUCT_NAME) {
-        var count = 0;
-        //var indexlist = [];	
-        var indexlist = -1;
-        var oldgroup;
-        var listArr = eval($scope.order_list);
-
-        for (var i = 0; i < listArr.length; i++) {
-            if (listArr[i].PRODUCT_NAME === PRODUCT_NAME) {
-                $scope.order_list.splice(i, 1);
-                i--;
-                indexlist = i;
-                count = count + 1;
-                $scope.totalCalculate_modal();
-            }
-        }
-    };
-
+    
     $scope.totalCalculate_modal = function() {
         $scope.total_modal = 0;
         for (var i = 0; i < $scope.order_insert.length; i++) {
             $scope.total_modal = $scope.total_modal + parseInt($scope.order_insert[i]['TOTAL']);
         }
-    };
+    }
 
 
-    $scope.delete = function(Group_id, ORDER_ID) {
+    $scope.deleted = function(Group_id, ORDER_ID) {
         var showName;
         var msg;
         var countItem;

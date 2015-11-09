@@ -29,7 +29,7 @@
                 <th></th>
             </tr>
             <tr ng-repeat="itm in order_product_item_list">
-            	<td><img src="images/icon/icon_no.png" ng-click="delete(itm.GROUP_ID, itm.ORDER_ID)"></td>
+            	<td><img src="images/icon/icon_no.png" ng-click="deleted(itm.GROUP_ID, itm.ORDER_ID)"></td>
             	<td>{{$index + 1}}. {{itm.PRODUCT_NAME}}  </td>
                 <td>{{itm.QTY}} </td>
                 <td class="text-right">{{itm.TOTAL | number:2}}</td>
