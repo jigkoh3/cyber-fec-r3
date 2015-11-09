@@ -47,55 +47,69 @@ angular.module('fec3App')
                             var promotionset = result.data['response-data'].promotion.promotions;
                             $modal.campaignSelector(promotionset, function(result) {
                                 //alert(result.data.code);
-                                if (res.data['response-data'].campaign.verifyKeys && res.data['response-data'].campaign.verifyKeys.length == 1 && res.data['response-data'].campaign.verifyKeys[0] == "ThaiId") {
-                                    //verlify thai-id
+                                // if (res.data['response-data'].campaign.verifyKeys && res.data['response-data'].campaign.verifyKeys.length == 1 && res.data['response-data'].campaign.verifyKeys[0] == "ThaiId") {
+                                //     //verlify thai-id
 
-                                    var param = {
-                                        "campaign_code": itm.code,
-                                        "product_code": productCode,
-                                        "qty": 1,
-                                        "verifyKeys": [{
-                                            "key": "ThaiId",
-                                            "value": $localstorage.getObject("customerProfile").certificateId
-                                        }]
-                                    };
-                                    $loading.show();
-                                    productService.verify(param, function(result) {
-                                        //location.href='#priceplanexisting
-                                        $scope.isClick = false;
-                                         $loading.hide();
-                                        if (result.data['response-data']['result'] == 'Pass') {
+                                //     var param = {
+                                //         "campaign_code": itm.code,
+                                //         "product_code": productCode,
+                                //         "qty": 1,
+                                //         "verifyKeys": [{
+                                //             "key": "ThaiId",
+                                //             "value": $localstorage.getObject("customerProfile").certificateId
+                                //         }]
+                                //     };
+                                //     $loading.show();
+                                //     productService.verify(param, function(result) {
+                                //         //location.href='#priceplanexisting
+                                //         $scope.isClick = false;
+                                //          $loading.hide();
+                                //         if (result.data['response-data']['result'] == 'Pass') {
                                            
-                                            location.href = '#pricePlan';
-                                            $('#bindDataAgain').click();
-                                        } else {
-                                            if (result.data['response-data']['result'] == "UnknowError") {
-                                                $message.alert({
-                                                    "message": "",
-                                                    "message-code": "",
-                                                    "message-type": "Warning",
-                                                    "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
-                                                    "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
-                                                    "technical-message": ""
-                                                });
-                                            }
+                                //             location.href = '#pricePlan';
+                                //             $('#bindDataAgain').click();
+                                //         } else {
+                                //             if (result.data['response-data']['result'] == "UnknowError") {
+                                //                 $message.alert({
+                                //                     "message": "",
+                                //                     "message-code": "",
+                                //                     "message-type": "Warning",
+                                //                     "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
+                                //                     "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
+                                //                     "technical-message": ""
+                                //                 });
+                                //             }
 
-                                        }
+                                //         }
 
-                                    });
+                                //     });
                                     
                                     
-                                } else {
+                                // } else {
 
-                                    $location.path('/privilege').search({
+                                //     $location.path('/privilege').search({
+                                //         id: $scope.id,
+                                //         name: $scope.name,
+                                //         campaignCode: itm.code,
+                                //         productCode: productCode,
+                                //         qty: 1
+                                //     });
+                                //     $('#bindDataAgain').click();
+                                // }
+                                var verifyKeys = null;
+                                if (res.data['response-data'].campaign.verifyKeys)
+                                {
+                                    verifyKeys = res.data['response-data'].campaign.verifyKeys;
+                                }
+                                $location.path('/privilege').search({
                                         id: $scope.id,
                                         name: $scope.name,
                                         campaignCode: itm.code,
                                         productCode: productCode,
-                                        qty: 1
+                                        qty: 1,
+                                        verifyKeys: verifyKeys
                                     });
                                     $('#bindDataAgain').click();
-                                }
 
                             });
                             //$location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});

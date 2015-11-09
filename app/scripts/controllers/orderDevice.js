@@ -203,7 +203,7 @@ angular.module('fec3App')
                         order.IS_CAMPAIGN_PROMO_ITEM = 'N';
                         order.IS_PRODUCT_REQUESTFORM = 'N';
                         order.APPLECARE_CODE = null;
-                        order.GROUP_ID = prod.code + TrxID;
+                        order.GROUP_ID = prod.group + TrxID;
 
 
                         //customerProfile.orderObj = {};

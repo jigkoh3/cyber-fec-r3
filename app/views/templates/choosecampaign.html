@@ -30,7 +30,8 @@
                     <td class="col-md-6">{{itm.name}}</td>
                     <td class="col-md-1">{{itm.price}}</td>
                     <td class="col-md-1">
-                        <input style="width:50px;" type="text" ng-model="proItem[itm.code]" ng-change="txtChanged()">
+                        
+                        <input style="width:50px;" type="number" min="0" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem[itm.code]" ng-change="txtChanged(itm)">
                     </td>
                 </tr>
             </table>
