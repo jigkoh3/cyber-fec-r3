@@ -126,12 +126,12 @@ function customerToggleGet($rootScope, $route) {
                 //$scope.onReading = false;
                 $loading.hide();
                 $message.alert({
-                    "message": msg,
+                    "message": "ไม่สามารถอ่านค่าจากบัตรประชาชนได้ กรุณาค้นหาข้อมูลลูกค้าจากการ Key In ด้วยข้อมูลต่อไปนี้ (1) หมายเลขบัตรปนะชาชน 13 หลัก หรือ (2) หมายเลขโทรศัพท์ Truemove H หรือ (3) True Vision No หรือ (4) True Online No",
                     "message-code": "",
                     "message-type": "WARNING",
-                    "en-message": msg,
-                    "th-message": msg,
-                    "technical-message": "Readcard event error"
+                    "en-message": "Unable to reach customer’s information from this Thai smart card. Please find customer’s information with input via keyboard from the following information (1) Thai ID, or (2) Cell phone no, or (3) True Vision No, or (4) True Online No.",
+                    "th-message": "ไม่สามารถอ่านค่าจากบัตรประชาชนได้ กรุณาค้นหาข้อมูลลูกค้าจากการ Key In ด้วยข้อมูลต่อไปนี้ (1) หมายเลขบัตรปนะชาชน 13 หลัก หรือ (2) หมายเลขโทรศัพท์ Truemove H หรือ (3) True Vision No หรือ (4) True Online No",
+                    "technical-message": "Readcard error"
                 });
             };
             $scope.onCardNoKeydown = function(inputCardNo) {
