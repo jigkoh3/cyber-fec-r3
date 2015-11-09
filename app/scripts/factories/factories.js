@@ -214,6 +214,7 @@ function modal($ngBootbox,$localstorage) {
     var that = this;
     var _itm = null;
     var _tabIdx = null;
+    var _valueData = null;
 
     var _proSelected = null;
 
@@ -231,6 +232,9 @@ function modal($ngBootbox,$localstorage) {
         },
         tabSelected: function() {
             return _tabIdx;
+        },
+        values: function() {
+            return _valueData;
         },
         campaignSelector: function(itm, fnCallback) {
             _itm = itm;
@@ -276,9 +280,10 @@ function modal($ngBootbox,$localstorage) {
             }, 800);
         },
 
-        productSelector: function(item, tabSelected) {
+        productSelector: function(item, tabSelected, values) {
             _item = item;
             _tabIdx = tabSelected;
+            _valueData = values;
             setTimeout(function() {
                 $ngBootbox.customDialog({
                     templateUrl: 'views/templates/productselector.html',
