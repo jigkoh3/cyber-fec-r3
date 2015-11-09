@@ -14,33 +14,33 @@ angular
         'ngBootbox',
         'angular-linq'
     ])
-    .config(['$logProvider', function ($logProvider) {
+    .config(['$logProvider', function($logProvider) {
         $logProvider.debugEnabled(true);
     }])
-    .provider('logEnhancer', function () {
+    .provider('logEnhancer', function() {
         this.loggingPattern = '%s - %s: ';
 
-        this.$get = function () {
+        this.$get = function() {
             var loggingPattern = this.loggingPattern;
             return {
-                enhanceAngularLog: function ($log) {
+                enhanceAngularLog: function($log) {
                     $log.enabledContexts = [];
 
-                    $log.getInstance = function (context) {
+                    $log.getInstance = function(context) {
                         return {
                             log: enhanceLogging($log.log, context, loggingPattern),
                             info: enhanceLogging($log.info, context, loggingPattern),
                             warn: enhanceLogging($log.warn, context, loggingPattern),
                             debug: enhanceLogging($log.debug, context, loggingPattern),
                             error: enhanceLogging($log.error, context, loggingPattern),
-                            enableLogging: function (enable) {
+                            enableLogging: function(enable) {
                                 $log.enabledContexts[context] = enable;
                             }
                         };
                     };
 
                     function enhanceLogging(loggingFunc, context, loggingPattern) {
-                        return function () {
+                        return function() {
                             var contextEnabled = $log.enabledContexts[context];
                             if (contextEnabled === undefined || contextEnabled) {
                                 var modifiedArguments = [].slice.call(arguments);
@@ -53,15 +53,20 @@ angular
             };
         };
     })
-    .config(['logEnhancerProvider', function (logEnhancerProvider) {
+    .config(['logEnhancerProvider', function(logEnhancerProvider) {
         logEnhancerProvider.loggingPattern = '%s::[%s]> ';
     }])
-    .run(['$log', 'logEnhancer', function ($log, logEnhancer) {
+    .run(['$log', 'logEnhancer', function($log, logEnhancer) {
         logEnhancer.enhanceAngularLog($log);
     }])
     .run(['$anchorScroll', function($anchorScroll) {
         $anchorScroll.yOffset = 100; // always scroll by 50 extra pixels
     }])
+    .run(function($rootScope, $templateCache) {
+        $rootScope.$on('$viewContentLoaded', function() {
+            $templateCache.removeAll();
+        });
+    })
     .config(function($routeProvider, $httpProvider) {
         //$httpProvider.interceptors.push('smartUIHttpInterceptor');
         $routeProvider
@@ -201,7 +206,7 @@ angular
                 templateUrl: 'views/privilege.html',
                 controller: 'privilegeCtrl',
                 controllerAs: 'privilege'
-                //campaignCode=RS228&productCode=3000024133&qty=1
+                    //campaignCode=RS228&productCode=3000024133&qty=1
             })
             // .when('/complete', {
             //     templateUrl: 'views/complete.html',
