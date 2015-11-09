@@ -79,6 +79,8 @@ angular.module('fec3App')
             
         };
         $scope.nextModal = function() {
+            var d = new Date();
+            var TrxID = d.getTime() + '';
             if ($scope.tabSelected == 1) {
                 //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
                 if ($scope.productCode && $scope.productType) {
@@ -118,7 +120,7 @@ angular.module('fec3App')
                         order.IS_CAMPAIGN_PROMO_ITEM = 'N';
                         order.IS_PRODUCT_REQUESTFORM = 'N';
                         order.APPLECARE_CODE = null;
-                        order.GROUP_ID = prod.code;
+                        order.GROUP_ID = prod.code + TrxID;
 
                         if (!customerProfile.orderObj) {
                             customerProfile.orderObj = {};

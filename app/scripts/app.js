@@ -202,7 +202,7 @@ angular
             //     // controller: 'printpreviewCtrl',
             //     // controllerAs: 'printpreview'
             // })
-            .when('/privilege/:id?/:name?/:campaignCode?/:productCode?/:qty?', {
+            .when('/privilege/:id?/:name?/:campaignCode?/:productCode?/:qty?/:verifyKeys?', {
                 templateUrl: 'views/privilege.html',
                 controller: 'privilegeCtrl',
                 controllerAs: 'privilege'

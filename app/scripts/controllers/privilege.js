@@ -6,6 +6,7 @@ angular.module('fec3App')
         var campaign_code = $routeParams.campaignCode;
         var product_code = $routeParams.productCode;
         var qty = $routeParams.qty;
+        var verifyKeys = $routeParams.verifyKeys;
         $scope.id = $routeParams.id;
         $scope.name = $routeParams.name;
         $scope.param = {
