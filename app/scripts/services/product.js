@@ -1026,7 +1026,7 @@ angular.module('fec3App')
                                 "group": "Promotion_1",
                                 "type": "1",
                                 "amount": 0,
-                                "maxGet": 1,
+                                "maxGet": 4,
                                 "force": true,
                                 "otherPayments": [],
                                 "products": [{
@@ -1056,7 +1056,7 @@ angular.module('fec3App')
                                 "group": "Promotion_2",
                                 "type": "2",
                                 "amount": 0,
-                                "maxGet": 1,
+                                "maxGet": 2,
                                 "force": false,
                                 "otherPayments": [],
                                 "products": [{

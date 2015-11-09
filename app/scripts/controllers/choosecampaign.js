@@ -39,11 +39,38 @@ angular.module('fec3App')
                     break;
             }
         }
+
+
         // $scope.data =$scope.listdata ;   
-        $scope.txtChanged = function(item) {
-            // var arr = $scope.data;
+        $scope.txtChanged = function(item, gitem) {
+            console.log(item, gitem);
+            console.log($scope.proItem[item.code]);
+            var arr = gitem.products;
+            var sumMax = 0;
+            for (var i = 0; i < arr.length; i++) {
+                console.log($scope.proItem[arr[i].code]);
+                if ($scope.proItem[arr[i].code]) {
+                    sumMax = sumMax + $scope.proItem[arr[i].code];
+                    console.log(sumMax);
+                    if (sumMax > gitem.maxGet) {
+
+                        $scope.proItem[arr[i].code] = null;
+                    }
+                }
+            }
+
+            if ($scope.proItem[item.code] > gitem.maxGet) {
+                $scope.proItem[item.code] = null;
+            }
+
+            var arr = gitem.products;
+
             // for (var i = 0; i < arr.length; i++) {
-            //     $scope.proItem['' + arr.products[i].code] = 0;
+            //     //$scope.proItem['' + arr[i].code] = null;
+            //     var sum_i = 0;
+            //         if ('' + arr[i].code != gitem) {
+            //             $scope.proItem['' + arr[i].code] = null;
+            //         }
             // }
             var prod = item;
             var order = {};
@@ -75,36 +102,5 @@ angular.module('fec3App')
         };
 
 
-        // $scope.promotionType = function() {
-        //     var promoType = item.type;
-        //     switch {
-        //         case 1:
-        //             promoType = "Monday";
-        //             break;
-        //         case 2:
-        //             promoType = "Tuesday";
-        //             break;
-        //         case 3:
-        //             promoType = "Wednesday";
-        //             break;
-        //         case 4:
-        //             promoType = "Thursday";
-        //             break;
-        //         case 5:
-        //             promoType = "Friday";
-        //             break;
-        //     }
-        // };
-        //console.log($scope.datatype);
-
-        // $scope.promotionType = function() {
-
-        //  var promoType = $scope.data;
-        // console.log(promoType);
-        //  console.log($scope.data[i].type);
-
-        //  }
-
-        // $scope.promotionType();
 
     });
