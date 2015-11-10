@@ -64,7 +64,9 @@ angular
     }])
     .run(function($rootScope, $templateCache) {
         $rootScope.$on('$viewContentLoaded', function() {
+            console.log("before $templateCache : " + $templateCache.info().size);
             $templateCache.removeAll();
+            console.log("after $templateCache : " + $templateCache.info().size);
         });
     })
     .config(function($routeProvider, $httpProvider) {
