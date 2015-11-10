@@ -1,6 +1,6 @@
 angular.module('fec3App')
 
-.controller('ordersummaryCtrl', function($scope, $loading, $localstorage, $routeParams, $linq, productService, $message) {
+.controller('ordersummaryCtrl', function($scope, $loading, $localstorage, $routeParams, $linq, productService, $message, $modal) {
 
     $scope.id = $routeParams.id;
     $scope.name = $routeParams.name;
@@ -75,45 +75,8 @@ angular.module('fec3App')
         });
     };
 
-    $scope.cleartext = function() {
-        $scope.promotionSearch = null;
-        if ($scope.promotionType == null) {
-            document.getElementById('textcode').disabled = true;
-        } else {
-            document.getElementById('textcode').disabled = false;
-        }
-        document.getElementById("textcode").focus();
+    $scope.getDiscount = function() {
+        $modal.ordersummarymodal();
     }
-
-    $scope.cleartext();
-    $scope.order_insert = [];
-    $scope.searchlist = function(event) {
-
-        if ($scope.promotionSearch != null && $scope.promotionType != null) {
-            productService.getDiscountAndBooking($scope.promotionType, $scope.promotionSearch, function(result) {
-                $scope.order_insert.push(result.data["response-data"]);
-                $scope.totalCalculate_modal();
-                $scope.promotionSearch = null;
-            });
-        }
-    }
-
-    $scope.addToListCard = function() {
-        var discountList;
-        for (var i = 0; i < $scope.order_insert.length; i++) {
-            discountList = $scope.order_insert[i]
-            if (discountList.DISCOUNT_4_PROD_ITEM < 0) {
-                $scope.order_product_item_list.push(discountList);
-            } else {
-                $scope.order_product_item_list.splice(discountList.DISCOUNT_4_PROD_ITEM, 0, discountList);
-            }
-            $scope.btnDisabled = true;
-        }
-        $scope.promotionSearch = null;
-        $scope.order_insert = [];
-        $scope.totalCalculate_modal();
-        $scope.totalCalculate();
-    }
-
 
 });
