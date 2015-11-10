@@ -10,7 +10,7 @@
 angular.module('fec3App')
 
 
-.controller('orderDeviceCtrl', function ($routeParams, $scope, $localstorage, $location, $loading, $message, $modal, productService, $log, $linq) {
+.controller('orderDeviceCtrl', function($routeParams, $scope, $localstorage, $location, $loading, $message, $modal, productService, $log, $linq) {
 
 
     var logger = $log.getInstance('productSelectorCtrl');
@@ -86,11 +86,13 @@ angular.module('fec3App')
     var oldProItem = "";
     $scope.color = "";
     $scope.choose = function(itm, id) {
-        console.log(itm);
+        //console.log(itm);
         $scope.color = itm.stock;
 
         if (itm.itemCount > 1) {
-            $modal.productSelector(itm, $scope.tabselected, { "pieceGold0": null });
+            $modal.productSelector(itm, $scope.tabselected, {
+                "pieceGold0": null
+            });
 
         } else {
 
@@ -100,8 +102,8 @@ angular.module('fec3App')
                     oldProItem = id;
                 }
                 $scope.proItem['piece' + id] = 1;
-                console.log($scope.proItem['piece' + id]);
-                console.log(id);
+                // console.log($scope.proItem['piece' + id]);
+                // console.log(id);
             } else {
                 if ($scope.proItem['piece' + id] < itm.piece) {
                     $scope.proItem['piece' + id] += 1;
@@ -114,28 +116,6 @@ angular.module('fec3App')
             $scope.productType = "P";
             $scope.calculate(itm, 'piece' + id);
         }
-
-
-
-        // if ($scope.tabselected == "1") {
-        //     if (oldProItem != id) {
-        //         $scope.proItem['piece' + oldProItem] = null;
-        //         oldProItem = id;
-        //     }
-        //     $scope.proItem['piece' + id] = 1;
-        //     console.log($scope.proItem['piece' + id]);
-        //     console.log(id);
-        // } else {
-        //     if ($scope.proItem['piece' + id] < itm.piece) {
-        //         $scope.proItem['piece' + id] += 1;
-        //     } else {
-        //         $scope.proItem['piece' + id] = itm.piece;
-        //     }
-
-        // }
-        // $scope.productCode = itm.code;
-        // $scope.productType = "P";
-        // $scope.calculate(itm, 'piece' + id);
 
     };
     //culate order total summary
@@ -162,25 +142,186 @@ angular.module('fec3App')
     };
 
     $scope.next = function() {
+        var customerProfile = $localstorage.getObject("customerProfile");
+        var orderItemList = [];
+        var d = new Date();
+        var TrxID = d.getTime() + '';
         if ($scope.tabselected == "1") {
             //$location.path('/promotion?productCode=' + $scope.productCode + '&productType=' + $scope.productType)
             if ($scope.productCode && $scope.productType) {
-                $location.path('/promotion').search({
-                    id: $scope.id,
-                    name: $scope.name,
-                    productCode: $scope.productCode,
-                    productType: $scope.productType
-                });
+
+                var arr = $scope.trueProduct.productColor;
+                var sum = 0;
+
+
+                for (var i = 0; i < arr.length; i++) {
+                    var sum_i = 0;
+                    for (var ii = 0; ii < arr[i].memSize.length; ii++) {
+                        var sum_ii = 0;
+                        if ($scope.proItem['piece' + arr[i].colorName + ii] && $scope.proItem['piece' + arr[i].colorName + ii] > 0) {
+                            //console.log("Tingtang:" + arr[i]);
+                            // var order.PRODUCT_TYPE = arr[i].
+                            var prod = arr[i].memSize[ii];
+                            var order = {};
+                            var prodOrderQty = $scope.proItem['piece' + arr[i].colorName + ii];
+                            var totalAmt = prod.price * prodOrderQty;
+                            logger.debug("...Product[" + prod.code + "] Qty=" + prodOrderQty);
+                            logger.debug("...Product[" + prod.code + "] totalAmt=" + totalAmt);
+
+                            order.PRODUCT_TYPE = prod.type;
+                            order.PRODUCT_CODE = prod.code;
+                            order.PRODUCT_NAME = prod.name;
+                            order.PRICE = prod.price;
+                            order.QTY = prodOrderQty;
+                            order.TOTAL = totalAmt;
+                            order.IS_CAMPAIGN_PROMO_ITEM = 'N';
+                            order.IS_PRODUCT_REQUESTFORM = 'N';
+                            order.IS_SIM = 'N';
+                            order.APPLECARE_CODE = null;
+                            order.GROUP_ID = prod.code + TrxID;
+
+                            orderItemList.push(order);
+                            //customerProfile.orderObj = {};
+                            //customerProfile.orderObj.order_product_item_list = [];
+                            //if (!customerProfile.orderObj) { customerProfile.orderObj = {}; }
+                            //if (!customerProfile.orderObj.order_product_item_list) { customerProfile.orderObj.order_product_item_list = []; }
+                            //customerProfile.orderObj.order_product_item_list.push(order);
+
+                        }
+
+                    }
+
+                }
+
+                /// Varidate Here !!!
+                logger.debug("...Before call updateSelectedOrderItem=", orderItemList);
+
+                var finishUpdateSelectedOrderItem = function(selectedOrderItemList) {
+
+                    logger.debug("...### FINISH finishUpdateSelectedOrderItem=", selectedOrderItemList);
+                    logger.debug("...BEGIN Validate Data");
+
+                    //var customerProfile = $localstorage.getObject("customerProfile");
+                    if (!customerProfile.orderObj) {
+                        customerProfile.orderObj = {};
+                    }
+                    if (!customerProfile.orderObj.order_product_item_list) {
+                        customerProfile.orderObj.order_product_item_list = [];
+                    }
+
+                    var maxReqForm = 3;
+                    var isReqAppCare = false;
+
+                    var existingReqFormList = $linq.Enumerable().From(customerProfile.orderObj.order_product_item_list).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
+                    var itemReqFormList = $linq.Enumerable().From(selectedOrderItemList).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
+                    var itemReqFormQty = 0;
+                    if (itemReqFormList && itemReqFormList.length > 0) {
+                        for (var itemIdx = 0; itemIdx < itemReqFormList.length; itemIdx++) {
+                            itemReqFormQty = itemReqFormQty + itemReqFormList[itemIdx].QTY;
+                        }
+                    }
+
+                    var existReqFormQty = 0;
+                    if (existingReqFormList && existingReqFormList.length > 0) {
+                        for (var itemIdx = 0; itemIdx < existingReqFormList.length; itemIdx++) {
+                            existReqFormQty = existReqFormQty + existingReqFormList[itemIdx].QTY;
+                        }
+                    }
+
+                    if ((existReqFormQty + itemReqFormQty) > maxReqForm) {
+
+                        alert("Cannot Process. Request From Item > 3 ");
+
+                    } else {
+
+                        var itemAppCareList = $linq.Enumerable().From(selectedOrderItemList).Where("$.APPLECARE_CODE != null && $.APPLECARE_CODE != '' ").ToArray();
+                        if (itemAppCareList && itemAppCareList.length > 0) {
+
+                            alert("Need to confirm about Apple Care");
+
+                            for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+                                customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                            }
+
+                            logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
+
+                            $localstorage.setObject("customerProfile", customerProfile);
+                            $localstorage.logObject("customerProfile");
+
+                            //$location.path('/ordersummary');
+                            $location.path('/promotion').search({
+                                id: $scope.id,
+                                name: $scope.name,
+                                productCode: $scope.productCode,
+                                productType: $scope.productType,
+                                trxId: TrxID
+                            });
+
+                        } else {
+
+                            logger.debug("...Complete Validate");
+
+                            for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+                                customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                            }
+
+                            logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
+
+                            $localstorage.setObject("customerProfile", customerProfile);
+                            $localstorage.logObject("customerProfile");
+
+                            //$location.path('/ordersummary');
+                            $location.path('/promotion').search({
+                                id: $scope.id,
+                                name: $scope.name,
+                                productCode: $scope.productCode,
+                                productType: $scope.productType,
+                                trxId: TrxID
+                            });
+                        }
+                    }
+
+                }
+
+                var updateSelectedOrderItem = function(selectedOrderItemList) {
+
+                    logger.debug("...### BEGIN selectedOrderItemList=", selectedOrderItemList);
+
+                    var totalItem = selectedOrderItemList.length;
+
+                    logger.debug("...### BEGIN totalItem=", totalItem);
+
+                    for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+
+                        var updateOrderItemData = function(itemIdx, response_data) {
+
+                            totalItem--;
+                            var resData = response_data.data["response-data"]
+                            logger.debug("...Update Order Info form response_data=", resData);
+                            logger.debug("...selectedOrderItemList[idx]=", selectedOrderItemList[0]);
+
+                            selectedOrderItemList[itemIdx].IS_PRODUCT_REQUESTFORM = (resData.product.productInfo.requireForm ? "Y" : "N");
+                            selectedOrderItemList[itemIdx].IS_SIM = (resData.product.productInfo.isSim ? "Y" : "N");
+                            selectedOrderItemList[itemIdx].APPLECARE_CODE = resData.product.productInfo.appleCareCode;
+
+                            if (totalItem == 0) {
+                                finishUpdateSelectedOrderItem(selectedOrderItemList);
+                            };
+                        };
+
+                        productService.getProduct(idx, selectedOrderItemList[idx].PRODUCT_CODE, selectedOrderItemList[idx].PRODUCT_TYPE, updateOrderItemData);
+                    }
+
+                };
+
+                updateSelectedOrderItem(orderItemList);
+                logger.debug("...After call updateSelectedOrderItem");
             }
 
         } else {
-
-            var customerProfile = $localstorage.getObject("customerProfile");
-            var orderItemList = [];            
             var arr = $scope.trueProduct.productColor;
             var sum = 0;
-            var d = new Date();
-            var TrxID = d.getTime() + '';
+
 
             for (var i = 0; i < arr.length; i++) {
                 var sum_i = 0;
@@ -223,15 +364,19 @@ angular.module('fec3App')
 
             /// Varidate Here !!!
             logger.debug("...Before call updateSelectedOrderItem=", orderItemList);
-            
-            var finishUpdateSelectedOrderItem = function (selectedOrderItemList) {
+
+            var finishUpdateSelectedOrderItem = function(selectedOrderItemList) {
 
                 logger.debug("...### FINISH finishUpdateSelectedOrderItem=", selectedOrderItemList);
                 logger.debug("...BEGIN Validate Data");
 
                 //var customerProfile = $localstorage.getObject("customerProfile");
-                if (!customerProfile.orderObj) { customerProfile.orderObj = {}; }
-                if (!customerProfile.orderObj.order_product_item_list) { customerProfile.orderObj.order_product_item_list = []; }
+                if (!customerProfile.orderObj) {
+                    customerProfile.orderObj = {};
+                }
+                if (!customerProfile.orderObj.order_product_item_list) {
+                    customerProfile.orderObj.order_product_item_list = [];
+                }
 
                 var maxReqForm = 3;
                 var isReqAppCare = false;
@@ -239,16 +384,16 @@ angular.module('fec3App')
                 var existingReqFormList = $linq.Enumerable().From(customerProfile.orderObj.order_product_item_list).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
                 var itemReqFormList = $linq.Enumerable().From(selectedOrderItemList).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
                 var itemReqFormQty = 0;
-                if (itemReqFormList && itemReqFormList.length > 0) {                    
+                if (itemReqFormList && itemReqFormList.length > 0) {
                     for (var itemIdx = 0; itemIdx < itemReqFormList.length; itemIdx++) {
                         itemReqFormQty = itemReqFormQty + itemReqFormList[itemIdx].QTY;
                     }
                 }
 
                 var existReqFormQty = 0;
-                if (existingReqFormList && existingReqFormList.length > 0) {                     
-                     for (var itemIdx = 0; itemIdx < existingReqFormList.length; itemIdx++) {
-                         existReqFormQty = existReqFormQty + existingReqFormList[itemIdx].QTY;
+                if (existingReqFormList && existingReqFormList.length > 0) {
+                    for (var itemIdx = 0; itemIdx < existingReqFormList.length; itemIdx++) {
+                        existReqFormQty = existReqFormQty + existingReqFormList[itemIdx].QTY;
                     }
                 }
 
@@ -262,7 +407,7 @@ angular.module('fec3App')
                     if (itemAppCareList && itemAppCareList.length > 0) {
 
                         alert("Need to confirm about Apple Care");
-                        
+
                         for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
                             customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
                         }
@@ -293,7 +438,7 @@ angular.module('fec3App')
 
             }
 
-            var updateSelectedOrderItem = function (selectedOrderItemList) {
+            var updateSelectedOrderItem = function(selectedOrderItemList) {
 
                 logger.debug("...### BEGIN selectedOrderItemList=", selectedOrderItemList);
 
@@ -303,7 +448,7 @@ angular.module('fec3App')
 
                 for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
 
-                    var updateOrderItemData = function (itemIdx, response_data) {
+                    var updateOrderItemData = function(itemIdx, response_data) {
 
                         totalItem--;
                         var resData = response_data.data["response-data"]
@@ -314,7 +459,9 @@ angular.module('fec3App')
                         selectedOrderItemList[itemIdx].IS_SIM = (resData.product.productInfo.isSim ? "Y" : "N");
                         selectedOrderItemList[itemIdx].APPLECARE_CODE = resData.product.productInfo.appleCareCode;
 
-                        if (totalItem == 0) { finishUpdateSelectedOrderItem(selectedOrderItemList); };
+                        if (totalItem == 0) {
+                            finishUpdateSelectedOrderItem(selectedOrderItemList);
+                        };
                     };
 
                     productService.getProduct(idx, selectedOrderItemList[idx].PRODUCT_CODE, selectedOrderItemList[idx].PRODUCT_TYPE, updateOrderItemData);
@@ -328,5 +475,5 @@ angular.module('fec3App')
         };
     };
 
-   
+
 });

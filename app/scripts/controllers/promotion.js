@@ -36,82 +36,89 @@ angular.module('fec3App')
             $loading.show();
             productService.getCampaign(itm.code, productCode, function(res) {
                 console.log(res);
-                 $loading.hide();
+                $loading.hide();
                 if (res.status) {
                     $loading.show();
                     productService.getPromotionSet(res.data['response-data'].campaign.promotionSet, function(result) {
                         console.log(result);
                         $loading.hide();
                         if (result.status) {
-                           
+
                             var promotionset = result.data['response-data'].promotion.promotions;
-                            $modal.campaignSelector(promotionset, function(result) {
-                                //alert(result.data.code);
-                                // if (res.data['response-data'].campaign.verifyKeys && res.data['response-data'].campaign.verifyKeys.length == 1 && res.data['response-data'].campaign.verifyKeys[0] == "ThaiId") {
-                                //     //verlify thai-id
+                            // $modal.campaignSelector(promotionset, function(result) {
+                            //     //alert(result.data.code);
+                            //     // if (res.data['response-data'].campaign.verifyKeys && res.data['response-data'].campaign.verifyKeys.length == 1 && res.data['response-data'].campaign.verifyKeys[0] == "ThaiId") {
+                            //     //     //verlify thai-id
 
-                                //     var param = {
-                                //         "campaign_code": itm.code,
-                                //         "product_code": productCode,
-                                //         "qty": 1,
-                                //         "verifyKeys": [{
-                                //             "key": "ThaiId",
-                                //             "value": $localstorage.getObject("customerProfile").certificateId
-                                //         }]
-                                //     };
-                                //     $loading.show();
-                                //     productService.verify(param, function(result) {
-                                //         //location.href='#priceplanexisting
-                                //         $scope.isClick = false;
-                                //          $loading.hide();
-                                //         if (result.data['response-data']['result'] == 'Pass') {
-                                           
-                                //             location.href = '#pricePlan';
-                                //             $('#bindDataAgain').click();
-                                //         } else {
-                                //             if (result.data['response-data']['result'] == "UnknowError") {
-                                //                 $message.alert({
-                                //                     "message": "",
-                                //                     "message-code": "",
-                                //                     "message-type": "Warning",
-                                //                     "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
-                                //                     "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
-                                //                     "technical-message": ""
-                                //                 });
-                                //             }
+                            //     //     var param = {
+                            //     //         "campaign_code": itm.code,
+                            //     //         "product_code": productCode,
+                            //     //         "qty": 1,
+                            //     //         "verifyKeys": [{
+                            //     //             "key": "ThaiId",
+                            //     //             "value": $localstorage.getObject("customerProfile").certificateId
+                            //     //         }]
+                            //     //     };
+                            //     //     $loading.show();
+                            //     //     productService.verify(param, function(result) {
+                            //     //         //location.href='#priceplanexisting
+                            //     //         $scope.isClick = false;
+                            //     //          $loading.hide();
+                            //     //         if (result.data['response-data']['result'] == 'Pass') {
 
-                                //         }
+                            //     //             location.href = '#pricePlan';
+                            //     //             $('#bindDataAgain').click();
+                            //     //         } else {
+                            //     //             if (result.data['response-data']['result'] == "UnknowError") {
+                            //     //                 $message.alert({
+                            //     //                     "message": "",
+                            //     //                     "message-code": "",
+                            //     //                     "message-type": "Warning",
+                            //     //                     "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
+                            //     //                     "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
+                            //     //                     "technical-message": ""
+                            //     //                 });
+                            //     //             }
 
-                                //     });
-                                    
-                                    
-                                // } else {
+                            //     //         }
 
-                                //     $location.path('/privilege').search({
-                                //         id: $scope.id,
-                                //         name: $scope.name,
-                                //         campaignCode: itm.code,
-                                //         productCode: productCode,
-                                //         qty: 1
-                                //     });
-                                //     $('#bindDataAgain').click();
-                                // }
-                                var verifyKeys = null;
-                                if (res.data['response-data'].campaign.verifyKeys)
-                                {
-                                    verifyKeys = res.data['response-data'].campaign.verifyKeys;
-                                }
-                                $location.path('/privilege').search({
-                                        id: $scope.id,
-                                        name: $scope.name,
-                                        campaignCode: itm.code,
-                                        productCode: productCode,
-                                        qty: 1,
-                                        verifyKeys: verifyKeys
-                                    });
-                                    $('#bindDataAgain').click();
+                            //     //     });
 
-                            });
+
+                            //     // } else {
+
+                            //     //     $location.path('/privilege').search({
+                            //     //         id: $scope.id,
+                            //     //         name: $scope.name,
+                            //     //         campaignCode: itm.code,
+                            //     //         productCode: productCode,
+                            //     //         qty: 1
+                            //     //     });
+                            //     //     $('#bindDataAgain').click();
+                            //     // }
+                            //     var verifyKeys = null;
+                            //     if (res.data['response-data'].campaign.verifyKeys)
+                            //     {
+                            //         verifyKeys = res.data['response-data'].campaign.verifyKeys;
+                            //     }
+                            //     $location.path('/privilege').search({
+                            //             id: $scope.id,
+                            //             name: $scope.name,
+                            //             campaignCode: itm.code,
+                            //             productCode: productCode,
+                            //             qty: 1,
+                            //             verifyKeys: verifyKeys
+                            //         });
+                            //         $('#bindDataAgain').click();
+
+                            // });
+
+
+                            var verifyKeys = null;
+                            if (res.data['response-data'].campaign.verifyKeys) {
+                                verifyKeys = res.data['response-data'].campaign.verifyKeys;
+                            }
+                            $modal.campaignSelector(promotionset,verifyKeys,itm.code);
                             //$location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
                         } else {
                             $message.alert(result.data["display-message"]);
@@ -132,10 +139,7 @@ angular.module('fec3App')
                 $loading.hide();
                 if (result.status) {
                     var promotionset = result.data['response-data'].promotion.promotions;
-                    $modal.campaignSelector(promotionset, function(result) {
-                        $location.path('/pricePlan'); //.search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
-                        $('#bindDataAgain').click();
-                    });
+                    $modal.campaignSelector(promotionset,null,null);
                 } else {
                     $message.alert(result.data["display-message"]);
                 }

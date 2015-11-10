@@ -641,7 +641,7 @@ angular.module('fec3App')
                                     productItemDetail.piece = prodItemResultList[0].qty;
                                     productItemDetail.price = prodItemResultList[0].price;
                                     productItemDetail.type = prodItemResultList[0].type;
-                                    productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty >= 5 ? "green" : "yellow"));
+                                    productItemDetail.stock = (prodItemResultList[0].qty <= 0 ? "red" : (prodItemResultList[0].qty >= 11 ? "green" : "yellow"));
                                     productItemDetail.itemCount = prodItemResultList.length;
 
                                     var priceMin = prodItemResultList[0].price;
@@ -650,7 +650,7 @@ angular.module('fec3App')
                                     for (var prodIdx = 0; prodIdx < prodItemResultList.length; prodIdx++) {
 
                                         var childItems = prodItemResultList[prodIdx];
-                                        childItems.stock = (childItems.qty <= 0 ? "red" : (childItems.qty >= 5 ? "green" : "yellow"));
+                                        childItems.stock = (childItems.qty <= 0 ? "red" : (childItems.qty >= 11 ? "green" : "yellow"));
                                         productItemDetail.childs.push(childItems);
 
                                         if (prodItemResultList[prodIdx].price < priceMin) { priceMin = prodItemResultList[prodIdx].price; }

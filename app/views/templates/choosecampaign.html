@@ -1,44 +1,44 @@
 <div ng-controller="choosecampaignCtrl">
     <div class="ngdialog-message">
         <div class="modal-header" style="background-color:red;color:white">
-            
-            <table >
-                <tr class="row" >
-                    <th class="col-md-12" colspan="5" >
-                        <h5>Promotion Detail</h5></th>
-                        <th><button type="button" class="close" data-dismiss="modal">&times;</button></th>
-                </tr>
-            </table>
-        </div>
-
-        <div class="modal-body">
-           <div class="table-responsive">
-            
-            <table class="table" ng-repeat="item in data">
+            <table>
                 <tr class="row">
-                    <th class="col-md-1" style="background-color: #c8bbbb">
-                        <input type="checkbox" ng-model="item.force">
+                    <th class="col-md-12" colspan="5">
+                        <h5>Promotion Detail</h5></th>
+                    <th>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </th>
-                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.group}}</span></th>
-                    <th class="col-md-6" style="background-color: #c8bbbb; "><span>(ไม่เกิน {{item.maxGet}} ชิ้น)</span></th>
-                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.type}}</span></th>
-                    <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
-                </tr>
-                <tr class="row" ng-repeat="itm in item.products">
-                    <td class="col-md-1"></td>
-                    <td class="col-md-2">{{itm.code}}</td>
-                    <td class="col-md-6">{{itm.name}}</td>
-                    <td class="col-md-2">{{itm.price}}</td>
-                    <td class="col-md-1">
-                        
-                        <input style="width:50px;" type="number" min="0" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem[itm.code]" ng-change="txtChanged(itm,item)" ng-disabled="item.force!=true">
-
-                    </td>
                 </tr>
             </table>
-        </div> 
         </div>
-        
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table" ng-repeat="item in data">
+                    <tr class="row">
+                        <th class="col-md-1" style="background-color: #c8bbbb">
+                            <input type="checkbox" ng-model="item.force">
+                        </th>
+                        <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.group}}</span></th>
+                        <th class="col-md-6" style="background-color: #c8bbbb; "><span>(ไม่เกิน {{item.maxGet}} ชิ้น)</span></th>
+                        <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.type}}</span></th>
+                        <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
+                    </tr>
+                    <tr class="row" ng-repeat="itm in item.products">
+                        <td class="col-md-1"></td>
+                        <td class="col-md-2">{{itm.code}}</td>
+                        <td class="col-md-6">{{itm.name}}</td>
+                        <td class="col-md-2">{{itm.price}}</td>
+                        <td class="col-md-1">
+                            <input style="width:50px;" type="number" min="0" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem[itm.code]" ng-change="validateInput(itm,item)" ng-disabled="item.force!=true">
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-disabled ="!isValidated" data-dismiss="modal" ng-click="nextModal()">ตกลง</button>
     </div>
     <!--     <div style="text-align:right;">
         &nbsp;&nbsp;

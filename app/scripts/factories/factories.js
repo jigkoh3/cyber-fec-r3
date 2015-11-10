@@ -215,6 +215,8 @@ function modal($ngBootbox,$localstorage) {
     var _itm = null;
     var _tabIdx = null;
     var _valueData = null;
+    var _verifyKeys = null;
+    var _campaignCode = null;
 
     var _proSelected = null;
 
@@ -236,8 +238,16 @@ function modal($ngBootbox,$localstorage) {
         values: function() {
             return _valueData;
         },
-        campaignSelector: function(itm, fnCallback) {
+        verifyKeys: function(){
+            return _verifyKeys;
+        },
+        campaignCode: function(){
+            return _campaignCode;
+        },
+        campaignSelector: function(itm,verifyKeys,campaignCode) {
             _itm = itm;
+            _verifyKeys = verifyKeys;
+            _campaignCode = campaignCode;
             //console.log(_alertMsg);
             setTimeout(function() {
                 $ngBootbox.customDialog({
@@ -249,29 +259,29 @@ function modal($ngBootbox,$localstorage) {
                     backdrop: true,
                     closeButton: false,
                     animate: true,
-                    size: "large",
-                    buttons: {
-                        success: {
-                            label: "Ok",
-                            className: "btn-success",
-                            callback: function() {
-                                var customerProfile = $localstorage.getObject("customerProfile");
-                                if (!customerProfile.orderObj) {
-                                    customerProfile.orderObj = {};
-                                }
-                                if (!customerProfile.orderObj.order_product_item_list) {
-                                    customerProfile.orderObj.order_product_item_list = [];
-                                }
-                                customerProfile.orderObj.order_product_item_list = _proSelected;
-                                $localstorage.setObject("customerProfile", customerProfile);
-                                $localstorage.logObject("customerProfile");
-                                fnCallback({
-                                    status: true,
-                                    data: _proSelected
-                                });
-                            }
-                        }
-                    }
+                    size: "large"
+                    // ,buttons: {
+                    //     success: {
+                    //         label: "Ok",
+                    //         className: "btn-success",
+                    //         callback: function() {
+                    //             var customerProfile = $localstorage.getObject("customerProfile");
+                    //             if (!customerProfile.orderObj) {
+                    //                 customerProfile.orderObj = {};
+                    //             }
+                    //             if (!customerProfile.orderObj.order_product_item_list) {
+                    //                 customerProfile.orderObj.order_product_item_list = [];
+                    //             }
+                    //             customerProfile.orderObj.order_product_item_list = _proSelected;
+                    //             $localstorage.setObject("customerProfile", customerProfile);
+                    //             $localstorage.logObject("customerProfile");
+                    //             fnCallback({
+                    //                 status: true,
+                    //                 data: _proSelected
+                    //             });
+                    //         }
+                    //     }
+                    // }
                 });
             }, 1001);
 
