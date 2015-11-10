@@ -1,0 +1,48 @@
+<div ng-controller="ordersummaryModalCtrl">
+    <div class="row">
+            <div class="col-md-7"><b>ประเภท</b></div>
+            <div class="col-md-4 col-off-set-1"><b>ค้นหา</b></div>
+        </div><br />
+        <div class="row">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label ><input type="radio" name="typeDiscount" value="D" ng-model="promotionType" ng-change="cleartext()" > ส่วนลด</label>
+                    </div>
+                    <div class="col-md-6">
+                      <label >  <input type="radio" name="typeDiscount" value="V" ng-model="promotionType" ng-change="cleartext()"  > คูปองเงินสด/ บัตรของขวัญ/ Voucher</label>
+                    </div>
+                    <div class="col-md-3">
+                       <label > <input type="radio" name="typeDiscount" value="B" ng-model="promotionType" ng-change="cleartext()" > รหัสการจอง</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <input class="form-control" type="text" id="textcode" ng-model="promotionSearch" value="" ng-keypress="$event.keyCode == 13 ? searchlist() : null">
+            </div>
+        </div>
+        <br>
+        <div >
+            <table class="table table-hover">
+                <tr class=" active">
+                    
+                    <th class="col-md-7" ><span> รหัสคูปอง</span></th>
+                    <th class="col-md-2 text-right" ><span>จำนวนเงิน</span></th>
+                    <th></th>
+                </tr>
+                <tr  ng-repeat="data in order_insert">
+                   
+                    <td class="col-md-7">{{ $index + 1 }}. {{data.PRODUCT_NAME}}</td>
+                    <td class="col-md-2 text-right">{{data.TOTAL | number:2}}</td>
+                    <td>บาท</td>
+                </tr>
+            </table>
+           <hr />
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-2">รวม</div>
+                <div class="col-md-2"><b>{{total_modal | number:2}}</b></div>
+                <div class="col-md-2">บาท</div>
+            </div>
+        </div>
+</div>                    
