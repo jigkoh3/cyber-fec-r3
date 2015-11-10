@@ -123,145 +123,31 @@ angular.module('fec3App')
             }
             logger.debug("...Before call updateSelectedOrderItem=", orderItemList);
 
+            //jigkoh3 bypass validate Requestform & Applecare
+            logger.debug("...Complete Validate");
 
-            var finishUpdateSelectedOrderItem = function(selectedOrderItemList) {
-
-                logger.debug("...### FINISH finishUpdateSelectedOrderItem=", selectedOrderItemList);
-                logger.debug("...BEGIN Validate Data");
-
-                //var customerProfile = $localstorage.getObject("customerProfile");
-                if (!customerProfile.orderObj) {
-                    customerProfile.orderObj = {};
-                }
-                if (!customerProfile.orderObj.order_product_item_list) {
-                    customerProfile.orderObj.order_product_item_list = [];
-                }
-
-                var maxReqForm = 3;
-                var isReqAppCare = false;
-
-                var existingReqFormList = $linq.Enumerable().From(customerProfile.orderObj.order_product_item_list).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
-                var itemReqFormList = $linq.Enumerable().From(selectedOrderItemList).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
-                var itemReqFormQty = 0;
-                if (itemReqFormList && itemReqFormList.length > 0) {
-                    for (var itemIdx = 0; itemIdx < itemReqFormList.length; itemIdx++) {
-                        itemReqFormQty = itemReqFormQty + itemReqFormList[itemIdx].QTY;
-                    }
-                }
-
-                var existReqFormQty = 0;
-                if (existingReqFormList && existingReqFormList.length > 0) {
-                    for (var itemIdx = 0; itemIdx < existingReqFormList.length; itemIdx++) {
-                        existReqFormQty = existReqFormQty + existingReqFormList[itemIdx].QTY;
-                    }
-                }
-
-                // if ((existReqFormQty + itemReqFormQty) > maxReqForm) {
-
-                //     alert("Cannot Process. Request From Item > 3 ");
-                //     //$modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
-                //     //$modal.campaignSelector($scope.data);
-
-                // } else {
-
-                //     var itemAppCareList = $linq.Enumerable().From(selectedOrderItemList).Where("$.APPLECARE_CODE != null && $.APPLECARE_CODE != '' ").ToArray();
-                //     if (itemAppCareList && itemAppCareList.length > 0) {
-
-                //         alert("Need to confirm about Apple Care");
-
-                //         //if confirm == no call >> $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
-                //         //else >> process code below
-                //         for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
-                //             customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
-                //         }
-
-                //         logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
-
-                //         $localstorage.setObject("customerProfile", customerProfile);
-                //         $localstorage.logObject("customerProfile");
-
-                //         $location.path('/ordersummary');
-
-                //     } else {
-
-                //         logger.debug("...Complete Validate");
-
-                //         for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
-                //             customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
-                //         }
-
-                //         logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
-
-                //         $localstorage.setObject("customerProfile", customerProfile);
-                //         $localstorage.logObject("customerProfile");
-
-                //         $location.path('/ordersummary');
-                //     }
-                // }
-
-                //jigkoh3 bypass validate Requestform & Applecare
-                logger.debug("...Complete Validate");
-
-                for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
-                    customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
-                }
-
-                logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
-
-                $localstorage.setObject("customerProfile", customerProfile);
-                $localstorage.logObject("customerProfile");
-
-                if (verifyKeys) {
-                    $location.path('/privilege').search({
-                        id: id,
-                        name: name,
-                        campaignCode: campaignCode,
-                        productCode: productCode,
-                        qty: 1,
-                        verifyKeys: verifyKeys
-                    });
-                } else {
-                    $location.path('/ordersummary');
-                }
-
-
+            for (var idx = 0; idx < orderItemList.length; idx++) {
+                customerProfile.orderObj.order_product_item_list.push(orderItemList[idx]);
             }
 
-            var updateSelectedOrderItem = function(selectedOrderItemList) {
+            logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
 
-                logger.debug("...### BEGIN selectedOrderItemList=", selectedOrderItemList);
+            $localstorage.setObject("customerProfile", customerProfile);
+            $localstorage.logObject("customerProfile");
 
-                var totalItem = selectedOrderItemList.length;
-
-                logger.debug("...### BEGIN totalItem=", totalItem);
-
-                for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
-
-                    var updateOrderItemData = function(itemIdx, response_data) {
-
-                        totalItem--;
-                        var resData = response_data.data["response-data"]
-                        logger.debug("...Update Order Info form response_data=", resData);
-                        logger.debug("...selectedOrderItemList[idx]=", selectedOrderItemList[0]);
-
-                        selectedOrderItemList[itemIdx].IS_PRODUCT_REQUESTFORM = (resData.product.productInfo.requireForm ? "Y" : "N");
-                        selectedOrderItemList[itemIdx].IS_SIM = (resData.product.productInfo.isSim ? "Y" : "N");
-                        selectedOrderItemList[itemIdx].APPLECARE_CODE = resData.product.productInfo.appleCareCode;
-
-                        if (totalItem == 0) {
-                            finishUpdateSelectedOrderItem(selectedOrderItemList);
-                        };
-                    };
-
-                    productService.getProduct(idx, selectedOrderItemList[idx].PRODUCT_CODE, selectedOrderItemList[idx].PRODUCT_TYPE, updateOrderItemData);
-                }
-
-            };
-
-
-
-
-            updateSelectedOrderItem(orderItemList);
+            if (verifyKeys) {
+                $location.path('/privilege').search({
+                    id: id,
+                    name: name,
+                    campaignCode: campaignCode,
+                    productCode: productCode,
+                    qty: 1,
+                    verifyKeys: verifyKeys
+                });
+            } else {
+                $location.path('/ordersummary');
+            }
+            
             logger.debug("...After call updateSelectedOrderItem");
         };
 
