@@ -256,8 +256,9 @@ function modal($ngBootbox,$localstorage) {
                         return false;
                     },
                     show: true,
+                    title: "Promotion Detail",
                     backdrop: true,
-                    closeButton: false,
+                    closeButton: true,
                     animate: true,
                     size: "large"
                     // ,buttons: {
@@ -290,10 +291,11 @@ function modal($ngBootbox,$localstorage) {
             }, 800);
         },
 
-        productSelector: function(item, tabSelected, values) {
+        productSelector: function(item, tabSelected, values, texttitle) {
             _item = item;
             _tabIdx = tabSelected;
             _valueData = values;
+            
             setTimeout(function() {
                 $ngBootbox.customDialog({
                     templateUrl: 'views/templates/productselector.html',
@@ -301,8 +303,9 @@ function modal($ngBootbox,$localstorage) {
                         return false;
                     },
                     show: true,
+                    title: texttitle,
                     backdrop: true,
-                    closeButton: false,
+                    closeButton: true,
                     animate: true,
                     size: "large"
 

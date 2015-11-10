@@ -7406,28 +7406,37 @@ button.close {
     filter: alpha(opacity=50);
 }
 
-
-
-
 .modal-header {
     min-height: 0px;
-    padding: 0px; 
-   
+    padding: 0px;
 }
 
 .modal-header .close {
     margin-top: -2px;
+    padding: 10px;
 }
 
 .modal-title {
     margin: 0;
     line-height: 1.42857;
+    padding: 10px;
+    background: #ed1c24;
+    color: #ffffff;
 }
 
 .modal-body {
     height: 100%;
     position: relative;
     padding: 15px;
+    
+}
+
+.modal-promotion {
+    height: 400px;
+    position: relative;
+    padding: 15px;
+    overflow-y: scroll;
+    
 }
 
 .modal-footer {
@@ -14651,8 +14660,6 @@ h1 {
     background: #FFCC00;
 }
 
-
-
 .box-pre1 li.listitem3 {
     margin-right: 0px !important;
 }
@@ -14669,24 +14676,28 @@ h1 {
     text-align: center;
     background-color: #CCCCCC;
 }
+
 .button-align {
-        text-align: right;
+    text-align: right;
 }
+
 @media (max-width: 768px) {
     .button-align {
         text-align: center;
     }
 }
+
 @media (max-width: 768px) {
     .xs-center {
         text-align: center;
     }
 }
 
-.booking-inactive{
+.booking-inactive {
     color: #fff;
     background: silver;
 }
+
 .booking-active {
     color: #777777;
     background: #00DD00;
