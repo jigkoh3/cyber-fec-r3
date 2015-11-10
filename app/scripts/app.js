@@ -64,7 +64,11 @@ angular
     }])
     .run(function($rootScope, $templateCache) {
         $rootScope.$on('$viewContentLoaded', function() {
+            console.log("before $templateCache : ");
+            console.log($templateCache.info())
             $templateCache.removeAll();
+            console.log("after $templateCache : ");
+            console.log($templateCache.info())
         });
     })
     .config(function($routeProvider, $httpProvider) {
