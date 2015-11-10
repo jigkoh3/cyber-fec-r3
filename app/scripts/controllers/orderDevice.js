@@ -238,6 +238,7 @@ angular.module('fec3App')
                         if (itemAppCareList && itemAppCareList.length > 0) {
 
                             var msg = "Need to confirm about Apple Care";
+                            
                             $message.confirm(msg, function(result) {
                                 if (result.status) {
                                     for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
