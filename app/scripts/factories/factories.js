@@ -315,6 +315,30 @@ function modal($ngBootbox,$localstorage) {
             setTimeout(function() {
                 $("#btn_ngbOK").focus();
             }, 800);
+        },
+        ordersummarymodal: function(item, tabSelected, values) {
+            _item = item;
+            _tabIdx = tabSelected;
+            _valueData = values;
+            setTimeout(function() {
+                $ngBootbox.customDialog({
+                    templateUrl: 'views/templates/ordersummary.html',
+                    onEscape: function() {
+                        return false;
+                    },
+                    show: true,
+                    title: 'ส่วนลด / รหัสการจอง',
+                    backdrop: true,
+                    closeButton: true,
+                    animate: true,
+                    size: "large"
+
+                });
+            }, 1001);
+
+            setTimeout(function() {
+                $("#btn_ngbOK").focus();
+            }, 800);
         }
     }
 };

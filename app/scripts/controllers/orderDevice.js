@@ -412,18 +412,24 @@ angular.module('fec3App')
                     var itemAppCareList = $linq.Enumerable().From(selectedOrderItemList).Where("$.APPLECARE_CODE != null && $.APPLECARE_CODE != '' ").ToArray();
                     if (itemAppCareList && itemAppCareList.length > 0) {
 
-                        alert("Need to confirm about Apple Care");
+                       // alert("Need to confirm about Apple Care");
+                        var msg = "Need to confirm about Apple Care";
+                            
+                        $message.confirm(msg, function(result) {
+                            if (result.status) {
 
-                        for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
-                            customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
-                        }
+                                for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+                                    customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                                }
 
-                        logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
+                                logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
 
-                        $localstorage.setObject("customerProfile", customerProfile);
-                        $localstorage.logObject("customerProfile");
+                                $localstorage.setObject("customerProfile", customerProfile);
+                                $localstorage.logObject("customerProfile");
 
-                        $location.path('/ordersummary');
+                                $location.path('/ordersummary');
+                            }
+                        });
 
                     } else {
 
