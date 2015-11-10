@@ -56,6 +56,7 @@ angular.module('fec3App')
         var countItem;
         var listArr = $scope.order_product_item_list;
                 if (listArr[num_index].CAMPAIGN_PROMO_ITEM_QTY > 1) {
+                    console.log(listArr[num_index]);
                     showName = listArr[num_index].CAMPAIGN_NAME;
                     countItem = listArr[num_index].CAMPAIGN_PROMO_ITEM_QTY;
                     msg = 'TH: The item that you want to delete is ' + showName + ' (' + countItem + ' item)  selling type. \
