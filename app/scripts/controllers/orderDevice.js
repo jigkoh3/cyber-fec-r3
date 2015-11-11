@@ -14,6 +14,19 @@ angular.module('fec3App')
 
 
     var logger = $log.getInstance('productSelectorCtrl');
+    var customerProfile = $localstorage.getObject("customerProfile");
+
+    if (customerProfile) {
+        if (!customerProfile.orderObj) {
+            customerProfile.orderObj = {};
+        }
+        customerProfile.orderObj.order_product_item_list = [];
+        $localstorage.setObject("customerProfile",customerProfile);
+        customerProfile = $localstorage.getObject("customerProfile");
+    }
+    $localstorage.logObject("customerProfile");
+
+
 
     //get querystring request
     $scope.id = $routeParams.id;
@@ -93,7 +106,7 @@ angular.module('fec3App')
 
             $modal.productSelector(itm, $scope.tabselected, {
                 "pieceGold0": null
-            },$scope.name);
+            }, $scope.name);
 
         } else {
 
@@ -143,7 +156,7 @@ angular.module('fec3App')
     };
 
     $scope.next = function() {
-        var customerProfile = $localstorage.getObject("customerProfile");
+
         var orderItemList = [];
         var d = new Date();
         var TrxID = d.getTime() + '';
@@ -239,7 +252,7 @@ angular.module('fec3App')
                         if (itemAppCareList && itemAppCareList.length > 0) {
 
                             var msg = "Need to confirm about Apple Care";
-                            
+
                             $message.confirm(msg, function(result) {
                                 if (result.status) {
                                     for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
@@ -259,7 +272,7 @@ angular.module('fec3App')
                                         productType: $scope.productType,
                                         trxId: TrxID
                                     });
-                                }else{
+                                } else {
                                     for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
                                         selectedOrderItemList[idx].APPLECARE_CODE = null;
                                         customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
@@ -429,9 +442,9 @@ angular.module('fec3App')
                     var itemAppCareList = $linq.Enumerable().From(selectedOrderItemList).Where("$.APPLECARE_CODE != null && $.APPLECARE_CODE != '' ").ToArray();
                     if (itemAppCareList && itemAppCareList.length > 0) {
 
-                       // alert("Need to confirm about Apple Care");
+                        // alert("Need to confirm about Apple Care");
                         var msg = "Need to confirm about Apple Care";
-                            
+
                         $message.confirm(msg, function(result) {
                             if (result.status) {
 
@@ -446,7 +459,7 @@ angular.module('fec3App')
 
                                 $location.path('/ordersummary');
                             } else {
-                                
+
                                 for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
                                     selectedOrderItemList[idx].APPLECARE_CODE = null;
                                     customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
