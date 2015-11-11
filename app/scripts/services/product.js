@@ -1032,84 +1032,7 @@ angular.module('fec3App')
                                 "products": [{
                                     "code": "3000010338",
                                     "name": "3000010338-ซิม,POS,MICRO REAL MOVE",
-                                    "price": 49,
-                                    "type": "P",
-                                    "productInfo": {
-                                        "appleCareCode": null,
-                                        "isSim": true,
-                                        "requireForm": false
-                                    },
-                                    "serviceInfo": null
-                                }, {
-                                    "code": "3000014923",
-                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
-                                    "type": "P",
-                                    "productInfo": {
-                                        "appleCareCode": null,
-                                        "isSim": true,
-                                        "requireForm": false
-                                    },
-                                    "serviceInfo": null
-                                }, {
-                                    "code": "3000014925",
-                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
-                                    "type": "P",
-                                    "productInfo": {
-                                        "appleCareCode": null,
-                                        "isSim": true,
-                                        "requireForm": false
-                                    },
-                                    "serviceInfo": null
-                                }, {
-                                    "code": "3000014926",
-                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
-                                    "type": "P",
-                                    "productInfo": {
-                                        "appleCareCode": null,
-                                        "isSim": true,
-                                        "requireForm": false
-                                    },
-                                    "serviceInfo": null
-                                }, {
-                                    "code": "3000014927",
-                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
-                                    "type": "P",
-                                    "productInfo": {
-                                        "appleCareCode": null,
-                                        "isSim": true,
-                                        "requireForm": false
-                                    },
-                                    "serviceInfo": null
-                                }, {
-                                    "code": "3000014928",
-                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
-                                    "type": "P",
-                                    "productInfo": {
-                                        "appleCareCode": null,
-                                        "isSim": true,
-                                        "requireForm": false
-                                    },
-                                    "serviceInfo": null
-                                }, {
-                                    "code": "3000014929",
-                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
-                                    "type": "P",
-                                    "productInfo": {
-                                        "appleCareCode": null,
-                                        "isSim": true,
-                                        "requireForm": false
-                                    },
-                                    "serviceInfo": null
-                                }, {
-                                    "code": "3000014930",
-                                    "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
+                                    "price": 0,
                                     "type": "P",
                                     "productInfo": {
                                         "appleCareCode": null,
@@ -1120,7 +1043,7 @@ angular.module('fec3App')
                                 }, {
                                     "code": "3000014931",
                                     "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
+                                    "price": 0,
                                     "type": "P",
                                     "productInfo": {
                                         "appleCareCode": null,
@@ -1131,7 +1054,7 @@ angular.module('fec3App')
                                 }, {
                                     "code": "3000014932",
                                     "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
+                                    "price": 0,
                                     "type": "P",
                                     "productInfo": {
                                         "appleCareCode": null,
@@ -1142,7 +1065,7 @@ angular.module('fec3App')
                                 }, {
                                     "code": "3000014933",
                                     "name": "3000014923-ซิม,POS,TMH USIM COMBI",
-                                    "price": 49,
+                                    "price": 0,
                                     "type": "P",
                                     "productInfo": {
                                         "appleCareCode": null,
@@ -1154,7 +1077,7 @@ angular.module('fec3App')
                             }, {
                                 "group": "Promotion_2",
                                 "type": "2",
-                                "amount": 0,
+                                "amount": 1.5,
                                 "maxGet": 2,
                                 "force": false,
                                 "otherPayments": [],
