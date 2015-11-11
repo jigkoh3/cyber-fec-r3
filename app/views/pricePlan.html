@@ -14,151 +14,128 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
 
 <div id="wrapper">
     <div class="container">
-        <!-- <div class="col-md-1"></div> -->
+        <br/><br/>
          <h4>เปิดบริการใหม่</h4>
+         <br/>
         <div class="well">
-            <!--  <div class="well"> -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="col-md-6" style=" text-align: right; top: 5px;">
-                            <p></p>
-                            <input type="radio" checked>
-                            <label> &nbspเปิดบริการหมายเลขใหม่</label>&nbsp
-                            <input type="radio" disabled>
-                            <label> &nbspใช้บริการหมายเลขเดิม</label>
-                        </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-3" >
+                        <input type="radio" checked>
+                        <label>เปิดบริการหมายเลขใหม่</label>
+                    </div>    
+                     <div class="col-md-2" >
+                        <input type="radio" disabled>
+                        <label> ใช้บริการหมายเลขเดิม</label>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <h3>ประเภทลูกค้าย่อย</h3></div>
-            <div class="col-md-6">
-                <h3>รายการส่งเสริมการขาย</h3></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <select id="selectReasonId" ng-options="option.dec for option in reasons" ng-change="onReasonChange()" ng-model="reason" class=" form-control">
-                                <option value="">RPI : บุคคลธรรมดา</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <select id="selectReasonId" ng-options="option.dec for option in reasons" ng-change="onReasonChange()" ng-model="reason" class=" form-control">
-                                <option value="">100932 : New Post Privilge Free HS</option>
-                            </select>
-                        </div>
+                <div class="row">
+                    <div class="col-md-6 " >
+                        <label> ประเภทลูกค้าย่อย</label>
+                        <select id="selectCustomer" ng-model="customer_subtype" class=" form-control" >
+                            <option ng-repeat="itemcustomer in openservice_obj.customer_subtype" value="{{itemcustomer.textvalue}}">{{itemcustomer.textname}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 " >
+                        <label> รายการส่งเสริมการขาย</label>
+                        <select id="selectPromotion"  ng-model="promotion" class=" form-control">
+                            <option ng-repeat="itemcustomer in openservice_obj.postPromotion" value="{{itemcustomer.textvalue}}">{{itemcustomer.textname}}</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group" border="1px">
-                        <div class="col-md-12" border="">
-                            <h3>หมายเลขโทรศัพท์ที่จองไว้</h3>
-                        </div>
-                        <div class="col-md-4">
-                            <textarea class="form-control" name="message" style="width:100%;height:90px;">086-563-0240
-                            </textarea>
-                        </div>
+                <div class="row">
+                    <div class="col-md-6" >
+                         <label> หมายเลขโทรศัพท์ที่จองไว้</label>
+                         <select multiple="multiple" ng-model="phonenumber" class="form-control">
+                            <option ng-repeat="itemcustomer in openservice_obj.phonenumberReservations" value="{{itemcustomer.phone}}" >{{itemcustomer.phone}}</option>
+                           
+                         </select>
                     </div>
-                    <div class="col-md-12">
-                        <h3>ข้อมูลหมายเลขโทรศัพท์</h3>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>หมายเลขโทรศัพท์</h3></div>
-                    <div class="col-md-4">
-                        <h3>ซิมการ์ด</h3></div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" value="0891112222">
+                <div  ng-repeat="data in detailPhonenumber">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">ข้อมูลหมายเลขโทรศัพท์
+                            <a href="javascript:;" ng-click='removeGroup($index)' class="remove">
+                                <span class="glyphicon glyphicon-remove align_right" ng-hide="$index =='0'"></span>
+                            </a>    
                         </div>
-                        <div class="col-md-4">
-                            <select id="selectReasonId" ng-options="option.dec for option in reasons" ng-change="onReasonChange()" ng-model="reason" class=" form-control">
-                                <option value="">3000014920 SIM Card</option>
-                            </select>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6" >
+                                    <label> หมายเลขโทรศัพท์</label>
+                                    <input type="text" class="form-control" ng-model="textphonenumber" value="{{data.phonenumber}}">
+                                </div>
+                                <div class="col-md-6" >
+                                    <label> ซิมการ์ด</label>
+                                    <select id="selectReasonId" ng-options="option.dec for option in reasons" ng-change="onReasonChange()" ng-model="simcard" class=" form-control">
+                                        <option value="">3000014920 SIM Card</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" >
+                                    <label> Price Plan</label>
+                                    <input type="text" class="form-control" ng-model="priceplan" value="{{data.priceplan}}">
+                                </div>
+                                
+                                <div class="col-md-3" >
+                                    <label> ค้นหา</label>
+                                    <input type="text" placeholder="--ค้นหา--" ng-model="textsearch" class="form-control" required>
+                                </div> 
+                                <div class="col-md-1" >
+                                    <label> </label>
+                                    <button ng-click="selectedPricePlan()" href="#modalPriceplanOwnership" id="modalnewpriceplan" class="btn" onclick="return false;" data-toggle="modal" style="background-color: #5cb85c; border-color: #4cae4c; margin-top:28px; ">
+                                        <span style="color:white;">...</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h3>Price Plan</h3></div>
+                    </div>    
+                </div>
+                <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" value="RMABCDO1:Real Move Very Good Price Plan">
-                    </div>
-                    <div class="col-md-3">
-                        <input type="text" placeholder="--ค้นหา--" ng-model="data.customerAddress['district']" class="form-control" required>
-                    </div>
-                    <div class="col-md-3">
-                        <button ng-click="selectedPricePlan()" href="#modalPriceplanOwnership" id="modalnewpriceplan" class="btn" onclick="return false;" data-toggle="modal" style="background-color: #5cb85c; border-color: #4cae4c; ">
-                            <span style="color:white;">...</span>
-                        </button>
-                    </div>
-                    <p></p>
-                    <div class="col-md-4">
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-3">
-                    </div>
-                    <div class="col-md-1">
-                        
+                        <a href="javascript:;" ng-click="addGroup();">
+                            <span class="glyphicon glyphicon-plus-sign text-success"  style="font-size:2em"></span>
+                        </a>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-10" >
+                        <button class="btn btn-success" id="modallistpayment" onclick="javascript:;" onclick="gotoNext()" data-dismiss="modal" align="right">ถัดไป</button>
+                    </div>
+                </div>  
+
+            </div>    
         </div>
-        <div class="row">
-            <div class="col-md-8"></div>
-            <div class="col-md-2"></div>
-            <div class="col-md-2">
-                <button class="btn btn-success" id="modallistpayment" onclick="location.href='#ordersummary'"  data-dismiss="modal" align="right">ถัดไป</button>
-            </div>
-            
-        </div>
-    </div>
-</div> 
+    </div> 
+</div>    
 
 <div id="modalPriceplanOwnership" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5>เลือก Price Plan</h5><br>
-               <!--  <button type="button" id="btnReadCardClose" class="close" data-dismiss="modal">&times;</button> -->
+            <div class="modal-header header">
+                <h5 class="navbar-text">เลือก Price Plan</h5><br>
+              
                 <div class="col-md-12">
                     <input type="text" placeholder="--ค้นหา--" ng-model="pricePlanFilter" class="form-control">
                 </div>
             </div>
             <div class="modal-body">
-                &nbsp;
-                <div class="table-responsive">
                     <table class="table">
-                        <tr class="row" >
-                            <th class="col-md-1"></th>
-                            <th class="col-md-7"><span style="color:green;"><h4> Price Plan</h4></span></th>
-                            <th class="col-md-1"><span style="color:green;"><h4> RC</h4></span></th>
-                            <th class="col-md-3" style="text-align: center;"><span style="color:green;"> <h4>รายการส่งเสริมการขาย</h4></span></th>
+                        <tr class="active" >
+                            <th ></th>
+                            <th > Price Plan</th>
+                            <th > RC</th>
+                            <th  >รายการส่งเสริมการขาย</th>
                         </tr>
-                        <tr class="row" ng-repeat="pp in pricePlans | filter:pricePlanFilter" pagination-id="PPList" current-page="currentPage">
-                            <th class="col-md-1"><input name="pricels" type="radio" ng-change="selectedPricePlan(pp)" ng-model="pricePlan.name" ng-value="pp.pricePlan" /></th>
-                            <th class="col-md-7">{{pp.pricePlan}}</th>
-                            <th class="col-md-1">{{pp.rc}}</th>
-                            <th class="col-md-3" style="text-align:center;">{{pp.promotion}}</th>
+                        <tr  ng-repeat="pp in pricePlans | filter:pricePlanFilter" pagination-id="PPList" current-page="currentPage">
+                            <td ><input name="pricels" type="radio" ng-change="selectedPricePlan(pp)" ng-model="pricePlan.name" ng-value="pp.pricePlan" /></td>
+                            <td >{{pp.pricePlan}}</td>
+                            <td >{{pp.rc}}</td>
+                            <td>{{pp.promotion}}</td>
                         </tr>
-                        <!-- <tr>
-                            <td id="divPage" colspan="5" class="text-center" style="margin-bottom: 0px;">
-                                <style>
-                                    .pagination {
-                                        margin: 0;
-                                    }
-                                </style>
-                                <div dir-pagination-controls pagination-id="PPList" boundary-links="true" template-url="lib/paging/dirPagination.tpl.html?v={{runTime}}"></div>
-                            </td>
-                        </tr> -->
+                       
                     </table>
-                </div>
-
-
-
                 <div id="div_event"></div>
             </div>
             <div class="modal-footer">
@@ -171,10 +148,5 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
 </div>
 
 
-
-<!-- end authorize -->
-<!--  <div ng-include="template.currentpriceplan" scope="" onload=""></div>
- -->
-<!-- Footer -->
 <footer class="footer" ng-include="'views/common/footer.html'"></footer>
 </div>
