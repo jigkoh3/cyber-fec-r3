@@ -34,8 +34,7 @@ angular.module('fec3App')
 
         for (var i = 0; i < $scope.data.length; i++) {
             //console.log($scope.data[i].type);
-            $scope.data[i].promoType = $scope.data[i].type;
-            if ($scope.data[i].force) { $scope.data[i].chk = true; }
+            $scope.data[i].promoType = $scope.data[i].type;            
 
             switch ($scope.data[i].type) {
                 case '1':
@@ -54,6 +53,36 @@ angular.module('fec3App')
                     $scope.data[i].type = "subsidy";
                     break;
             }
+
+            for (var idx = 0; idx < $scope.data[i].products.length; idx++) {
+
+                if ($scope.data[i].promoType == '1') {
+
+                    $scope.data[i].products[idx].discountAmt = $scope.data[i].products[idx].price;
+                    $scope.data[i].products[idx].price = "0";
+
+                } else if ($scope.data[i].promoType == '2') {
+
+                    var discountAmt = $scope.data[i].products[idx].price - $scope.data[i].amount;
+                    $scope.data[i].products[idx].discountAmt = discountAmt;
+                    $scope.data[i].products[idx].price = $scope.data[i].amount;
+
+                } else if ($scope.data[i].promoType == '5') {
+
+                    var discountAmt = $scope.data[i].products[idx].price;
+                    $scope.data[i].products[idx].price = 0;
+                    if ($scope.data[i].products[idx].otherPayments && $scope.data[i].products[idx].otherPayments.length > 0) {
+                        discountAmt = discountAmt - $scope.data[i].products[idx].otherPayments[0].amount;
+                        $scope.data[i].products[idx].price = $scope.data[i].products[idx].otherPayments[0].amount;
+                    }
+
+                    $scope.data[i].products[idx].discountAmt = discountAmt;                    
+
+                } else {
+                    $scope.data[i].products[idx].discountAmt = 0;
+                }
+            }
+            
         }
         $scope.clearInputGroup = function(item, check) {
             if (check) {
@@ -149,8 +178,9 @@ angular.module('fec3App')
                         order.QTY = prodOrderQty;
                         order.TOTAL = totalAmt;
                         order.IS_CAMPAIGN_PROMO_ITEM = 'Y';
-                        order.IS_PRODUCT_REQUESTFORM = 'N';
-                        order.APPLECARE_CODE = null;
+                        order.IS_PRODUCT_REQUESTFORM = (prod.productInfo.requireForm ? "Y" : "N");
+                        order.IS_SIM = (prod.productInfo.isSim ? "Y" : "N");
+                        order.APPLECARE_CODE = prod.productInfo.appleCareCode;
                         order.GROUP_ID = _productCode + TrxID;
 
                         //if (!customerProfile.orderObj) {
@@ -161,15 +191,150 @@ angular.module('fec3App')
                         //}
 
                         orderItemList.push(order);
+                        var prevIdx = orderItemList.length - 1;
+
+                        if (arr[i].promoType == '3') {
+
+                            var order2 = {};
+                            var discountAmt = (arr[i].amount) * -1;
+
+                            order2.CAMPAIGN = campaignCode;
+                            order2.CAMPAIGN_NAME = "";
+                            order2.PROMOTION_SET = campaign.promotionSet;
+                            order2.PROMOTION_TYPE = arr[i].promoType;
+
+                            order2.PRODUCT_TYPE = 'D';
+                            order2.PRODUCT_CODE = prod.code;
+                            order2.PRODUCT_NAME = 'ส่วนลด (Discount: ' + prod.name + ' ' + discountAmt + ' บาท)';
+                            order2.PRICE = discountAmt;
+                            order2.QTY = 1;
+                            order2.TOTAL = discountAmt;
+                            order2.NET_AMOUNT = discountAmt;
+
+                            order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
+                            order2.IS_PRODUCT_REQUESTFORM = 'N';
+                            order2.IS_SIM = 'N';
+                            order2.APPLECARE_CODE = '';
+
+                            order2.DISCOUNT_TYPE = 'B'
+                            order2.DISCOUNT_4_PROD_ITEMS_LIST = [prod.code]
+                            order2.DISCOUNT_4_PROD_ITEM = prevIdx;
+
+                            order2.GROUP_ID = _productCode + TrxID;
+
+                            orderItemList.push(order2);
+                        } else if (arr[i].promoType == '4') {
+
+                            var order2 = {};
+                            var discountAmt = (prod.price * ((arr[i].amount) / 100)) * -1;
+
+                            order2.CAMPAIGN = campaignCode;
+                            order2.CAMPAIGN_NAME = "";
+                            order2.PROMOTION_SET = campaign.promotionSet;
+                            order2.PROMOTION_TYPE = arr[i].promoType;
+
+                            order2.PRODUCT_TYPE = 'D';
+                            order2.PRODUCT_CODE = prod.code;
+                            order2.PRODUCT_NAME = 'ส่วนลด (Discount: ' + prod.name + ' ' + arr[i].amount + ' %)';
+                            order2.PRICE = discountAmt;
+                            order2.QTY = 1;
+                            order2.TOTAL = discountAmt;
+                            order2.NET_AMOUNT = discountAmt;
+
+                            order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
+                            order2.IS_PRODUCT_REQUESTFORM = 'N';
+                            order2.IS_SIM = 'N';
+                            order2.APPLECARE_CODE = '';
+
+                            order2.DISCOUNT_TYPE = 'B'
+                            order2.DISCOUNT_4_PROD_ITEMS_LIST = [prod.code]
+                            order2.DISCOUNT_4_PROD_ITEM = prevIdx;
+
+                            order2.GROUP_ID = _productCode + TrxID;
+
+                            orderItemList.push(order2);
+                        
+                        }
                         //logger.debug("...After order_product_item_list.push", customerProfile.orderObj.order_product_item_list);
 
                     }
                 }
                 // var sum_i = 0;
+            }
 
+            logger.debug("...Before call updateSelectedOrderItem=", orderItemList);
+
+            if (campaign.otherPayments && campaign.otherPayments.length > 0) {
+
+                var order2 = {};
+                var discountAmt = campaign.otherPayments[0].amount * -1;
+
+                order2.CAMPAIGN = campaignCode;
+                order2.CAMPAIGN_NAME = "";
+                order2.PROMOTION_SET = campaign.promotionSet;
+                order2.PROMOTION_TYPE = '';
+
+                order2.PRODUCT_TYPE = 'D';
+                order2.PRODUCT_CODE = campaign.otherPayments[0].code;
+                order2.PRODUCT_NAME = 'อื่นๆ (Other payment: ' + campaign.otherPayments[0].code + ' ' + campaign.otherPayments[0].name + ') ';
+                order2.PRICE = discountAmt;
+                order2.QTY = 1;
+                order2.TOTAL = discountAmt;
+                order2.NET_AMOUNT = discountAmt;
+
+                order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
+                order2.IS_PRODUCT_REQUESTFORM = 'N';
+                order2.IS_SIM = 'N';
+                order2.APPLECARE_CODE = '';
+
+                order2.DISCOUNT_TYPE = 'B'
+                order2.DISCOUNT_4_PROD_ITEMS_LIST = []
+                order2.DISCOUNT_4_PROD_ITEM = -1;
+
+                order2.GROUP_ID = _productCode + TrxID;
+
+                orderItemList.push(order2);
 
             }
-            logger.debug("...Before call updateSelectedOrderItem=", orderItemList);
+
+            if (campaign.discounts && campaign.discounts.length > 0) {
+
+                var order2 = {};
+                var discountAmt = campaign.discounts[0].amount;
+                if (campaign.discounts[0].type = 'P') {
+
+                    /////////// Need to get Product for calculating discountAmt
+                    /////////
+                }
+
+                discountAmt = discountAmt * -1;
+                order2.CAMPAIGN = campaignCode;
+                order2.CAMPAIGN_NAME = "";
+                order2.PROMOTION_SET = campaign.promotionSet;
+                order2.PROMOTION_TYPE = '';
+
+                order2.PRODUCT_TYPE = 'D';
+                order2.PRODUCT_CODE = campaign.discounts[0].code;
+                order2.PRODUCT_NAME = 'ส่วนลด (Discount: ' + campaign.discounts[0].code + ' ' + campaign.discounts[0].name + ')';
+                order2.PRICE = discountAmt;
+                order2.QTY = 1;
+                order2.TOTAL = discountAmt;
+                order2.NET_AMOUNT = discountAmt;
+
+                order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
+                order2.IS_PRODUCT_REQUESTFORM = 'N';
+                order2.IS_SIM = 'N';
+                order2.APPLECARE_CODE = '';
+
+                order2.DISCOUNT_TYPE = campaign.discounts[0].type;
+                order2.DISCOUNT_4_PROD_ITEMS_LIST = []
+                order2.DISCOUNT_4_PROD_ITEM = -1;
+
+                order2.GROUP_ID = _productCode + TrxID;
+
+                orderItemList.push(order2);
+
+            }
 
             //jigkoh3 bypass validate Requestform & Applecare
             logger.debug("...Complete Validate");
@@ -210,7 +375,7 @@ angular.module('fec3App')
             } else {
                 // from promotion set
                 // if products type "S" goto open service
-                // else goto order summary
+                // else goto order summary  
                 if (products && products.length >= 1) {
                     $location.path('/pricePlan');
                 } else {
