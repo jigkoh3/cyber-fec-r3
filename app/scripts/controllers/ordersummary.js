@@ -6,9 +6,27 @@ angular.module('fec3App')
     $scope.name = $routeParams.name;
     $scope.dataType = 'D';
 
-    var customerInfo = $localstorage.getObject("customerProfile");
-    $scope.order_product_item_list = customerInfo.orderObj.order_product_item_list;
+    var customerInfo = $localstorage.getObject("customerProfile");    
+    var actual_order_list = [];
 
+    if (!customerInfo.orderObj) { customerInfo.orderObj = {}; }
+    if (customerInfo.orderObj.actual_order_product_item_list) { actual_order_list = customerInfo.orderObj.actual_order_product_item_list; }
+
+    if (customerInfo.orderObj.order_product_item_list) {
+
+        var tmp_order_list = customerInfo.orderObj.order_product_item_list;
+        for (var idx = 0; idx < tmp_order_list.length; idx++) {
+
+            actual_order_list.push(tmp_order_list[idx]);
+        }
+    }
+
+    customerInfo.orderObj.actual_order_product_item_list = actual_order_list;
+    customerInfo.orderObj.order_product_item_list = [];
+
+    $localstorage.setObject("customerProfile", customerInfo);
+
+    $scope.order_product_item_list = customerInfo.orderObj.actual_order_product_item_list;
     
     $scope.order_add = [];
     $scope.removeRow = function(GROUP_ID) {
@@ -27,7 +45,7 @@ angular.module('fec3App')
                 $scope.totalCalculate();
             }
         }
-        customerInfo.orderObj.order_product_item_list = $scope.order_product_item_list;
+        customerInfo.orderObj.actual_order_product_item_list = $scope.order_product_item_list;
         $localstorage.setObject("customerProfile", customerInfo);
         //$localstorage.logObject("customerProfile");
     }

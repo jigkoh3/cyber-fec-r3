@@ -115,6 +115,7 @@ angular.module('fec3App')
                             order.TOTAL = totalAmt;
                             order.IS_CAMPAIGN_PROMO_ITEM = 'N';
                             order.IS_PRODUCT_REQUESTFORM = 'N';
+                            order.CAMPAIGN_PROMO_ITEM_QTY = 1;
                             order.APPLECARE_CODE = null;
                             order.GROUP_ID = prod.code + TrxID;
 
@@ -144,14 +145,14 @@ angular.module('fec3App')
                         if (!customerProfile.orderObj) {
                             customerProfile.orderObj = {};
                         }
-                        if (!customerProfile.orderObj.order_product_item_list) {
-                            customerProfile.orderObj.order_product_item_list = [];
+                        if (!customerProfile.orderObj.actual_order_product_item_list) {
+                            customerProfile.orderObj.actual_order_product_item_list = [];
                         }
 
                         var maxReqForm = 3;
                         var isReqAppCare = false;
 
-                        var existingReqFormList = $linq.Enumerable().From(customerProfile.orderObj.order_product_item_list).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
+                        var existingReqFormList = $linq.Enumerable().From(customerProfile.orderObj.actual_order_product_item_list).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
                         var itemReqFormList = $linq.Enumerable().From(selectedOrderItemList).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
                         var itemReqFormQty = 0;
                         if (itemReqFormList && itemReqFormList.length > 0) {
@@ -312,6 +313,7 @@ angular.module('fec3App')
                         order.TOTAL = totalAmt;
                         order.IS_CAMPAIGN_PROMO_ITEM = 'N';
                         order.IS_PRODUCT_REQUESTFORM = 'N';
+                        order.CAMPAIGN_PROMO_ITEM_QTY = 1;
                         order.APPLECARE_CODE = null;
                         order.GROUP_ID = prod.code + TrxID;
 
@@ -341,14 +343,14 @@ angular.module('fec3App')
                     if (!customerProfile.orderObj) {
                         customerProfile.orderObj = {};
                     }
-                    if (!customerProfile.orderObj.order_product_item_list) {
-                        customerProfile.orderObj.order_product_item_list = [];
+                    if (!customerProfile.orderObj.actual_order_product_item_list) {
+                        customerProfile.orderObj.actual_order_product_item_list = [];
                     }
 
                     var maxReqForm = 3;
                     var isReqAppCare = false;
 
-                    var existingReqFormList = $linq.Enumerable().From(customerProfile.orderObj.order_product_item_list).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
+                    var existingReqFormList = $linq.Enumerable().From(customerProfile.orderObj.actual_order_product_item_list).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
                     var itemReqFormList = $linq.Enumerable().From(selectedOrderItemList).Where("$.IS_PRODUCT_REQUESTFORM == 'Y'").ToArray();
                     var itemReqFormQty = 0;
                     if (itemReqFormList && itemReqFormList.length > 0) {
