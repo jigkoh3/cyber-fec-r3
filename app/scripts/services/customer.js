@@ -457,7 +457,7 @@ angular.module('fec3App')
             customerProfile.TMV = "[]";
             customerProfile.TOL = "[]";
             customerProfile.TVS = "[]";
-            
+
             that.getBookingByCiti(function(result) {
                 if (result.status && result.data["response-data"]) {
                     customerProfile.bookings = result.data["response-data"].bookings;
@@ -511,6 +511,29 @@ angular.module('fec3App')
                                     });
                                 });
                             });
+                        });
+
+                    } else {
+                        var data2 = {
+                            "status": "UNSUCCESSFUL",
+                            "display-messages": [{
+                                "message": "request sim prefix  is wrong format for company(RM)",
+                                "message-code": "",
+                                "message-type": "ERROR",
+                                "en-message": "Irregular Return Data Format.",
+                                "th-message": "รูปแบบข้อมูลไม่ถูกต้อง",
+                                "technical-message": "customerService.getCustomerManual"
+                            }],
+                            "trx-id": "4Q15KDZCTBQYP",
+                            "process-instance": "tmsapnpr1 (instance: SFF_node4)",
+                            "response-data": {}
+
+                        };
+                        fnCallback({
+                            status: false,
+                            data: data2,
+                            error: "",
+                            msgErr: ""
                         });
 
                     }
@@ -723,14 +746,32 @@ angular.module('fec3App')
 
                 };
 
-                $timeout(function() {
-                    onSuccess({
-                        status: true,
-                        data: result,
-                        error: "",
-                        msgErr: ""
-                    });
-                }, 1000);
+                var data3 = {
+                    "status": "SUCCESSFUL",
+                    "trx-id": "2K1F63ACCFJT6",
+                    "process-instance": "psaapdv1 (instance: SFF_node1)"
+                };
+                if (certificateid == "1111111111111") {
+                    $timeout(function() {
+                        onSuccess({
+                            status: true,
+                            data: result,
+                            error: "",
+                            msgErr: ""
+                        });
+                    }, 1000);
+                } else {
+                    $timeout(function() {
+                        onSuccess({
+                            status: true,
+                            data: data3,
+                            error: "",
+                            msgErr: ""
+                        });
+                    }, 1000);
+                }
+
+
             }
         };
 
