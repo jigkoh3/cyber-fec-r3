@@ -309,7 +309,8 @@ function customerToggleInfo($rootScope, $localstorage, $loading) {
         controller: function($scope, $element, $location) {
             $scope.customerProfile = $localstorage.getObject("customerProfile");
             if(!$scope.customerProfile.fullName){
-                $scope.customerProfile.fullName = "";
+                //{{customerProfile.title}} {{customerProfile.firstName}} {{customerProfile.lastName}}
+                $scope.customerProfile.fullName = $scope.customerProfile.title + " " + $scope.customerProfile.firstName + " " + $scope.customerProfile.lastName;
             }
             
             $scope.isNewCust = true;

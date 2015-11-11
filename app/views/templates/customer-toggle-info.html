@@ -2,8 +2,8 @@
     <div class="menu-content-user-info ">
         <h4>ข้อมูลลูกค้า</h4>
         <h3><small>หมายเลขบัตรประชาชน/พาสปอร์ต</small> {{customerProfile.certificateId}}</h3>
-        <h3 ng-hide="!isNewCust"><small>ชื่อ - นามสกุล</small>{{customerProfile.title}} {{customerProfile.firstName}} {{customerProfile.lastName}}</h3>
-        <h3 ng-show="!isNewCust"><small>ชื่อ - นามสกุล</small><input class="form-control" type="text" ng-model="customerProfile.fullName" ng-keypress="$event.keyCode == 13 ? onInputFullName() : null"></h3>
+        <h3 ng-hide="isNewCust"><small>ชื่อ - นามสกุล</small>{{customerProfile.title}} {{customerProfile.firstName}} {{customerProfile.lastName}}</h3>
+        <h3 ng-show="isNewCust"><small>ชื่อ - นามสกุล</small><input class="form-control" type="text" ng-model="customerProfile.fullName" ng-keypress="$event.keyCode == 13 ? onInputFullName() : null"></h3>
         
         <h3><small>ประเภทลูกค้า</small></h3>
         <!-- <div class="form-group"> -->
