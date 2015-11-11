@@ -445,6 +445,19 @@ angular.module('fec3App')
                                 $localstorage.logObject("customerProfile");
 
                                 $location.path('/ordersummary');
+                            } else {
+                                
+                                for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+                                    selectedOrderItemList[idx].APPLECARE_CODE = null;
+                                    customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                                }
+
+                                logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
+
+                                $localstorage.setObject("customerProfile", customerProfile);
+                                $localstorage.logObject("customerProfile");
+
+                                $location.path('/ordersummary');
                             }
                         });
 
