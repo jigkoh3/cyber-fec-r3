@@ -339,23 +339,8 @@ function modal($ngBootbox,$localstorage) {
                     backdrop: true,
                     closeButton: true,
                     animate: true,
-                    size: "large",
-                    buttons: {
-                        success: {
-                          label: "เลือก",
-                          className: "btn-success",
-                          callback: function() {
-                            $scope.addToListCard();
-                          }
-                        },
-                        danger: {
-                          label: "ยกเลิก",
-                          className: "btn-cancel",
-                          callback: function() {
-                            
-                          }
-                        }
-                    }        
+                    size: "large"
+                      
                 });
             }, 1001);
 
