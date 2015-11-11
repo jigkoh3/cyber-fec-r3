@@ -264,78 +264,80 @@ angular.module('fec3App')
 
             logger.debug("...Before call updateSelectedOrderItem=", orderItemList);
 
-            if (campaign.otherPayments && campaign.otherPayments.length > 0) {
+            if (campaign && campaign.otherPayments) {
+                if (campaign.otherPayments && campaign.otherPayments.length > 0) {
 
-                var order2 = {};
-                var discountAmt = campaign.otherPayments[0].amount * -1;
+                    var order2 = {};
+                    var discountAmt = campaign.otherPayments[0].amount * -1;
 
-                order2.CAMPAIGN = campaignCode;
-                order2.CAMPAIGN_NAME = "";
-                order2.PROMOTION_SET = campaign.promotionSet;
-                order2.PROMOTION_TYPE = '';
+                    order2.CAMPAIGN = campaignCode;
+                    order2.CAMPAIGN_NAME = "";
+                    order2.PROMOTION_SET = campaign.promotionSet;
+                    order2.PROMOTION_TYPE = '';
 
-                order2.PRODUCT_TYPE = 'D';
-                order2.PRODUCT_CODE = campaign.otherPayments[0].code;
-                order2.PRODUCT_NAME = 'อื่นๆ (Other payment: ' + campaign.otherPayments[0].code + ' ' + campaign.otherPayments[0].name + ') ';
-                order2.PRICE = discountAmt;
-                order2.QTY = 1;
-                order2.TOTAL = discountAmt;
-                order2.NET_AMOUNT = discountAmt;
+                    order2.PRODUCT_TYPE = 'D';
+                    order2.PRODUCT_CODE = campaign.otherPayments[0].code;
+                    order2.PRODUCT_NAME = 'อื่นๆ (Other payment: ' + campaign.otherPayments[0].code + ' ' + campaign.otherPayments[0].name + ') ';
+                    order2.PRICE = discountAmt;
+                    order2.QTY = 1;
+                    order2.TOTAL = discountAmt;
+                    order2.NET_AMOUNT = discountAmt;
 
-                order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
-                order2.IS_PRODUCT_REQUESTFORM = 'N';
-                order2.IS_SIM = 'N';
-                order2.APPLECARE_CODE = '';
+                    order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
+                    order2.IS_PRODUCT_REQUESTFORM = 'N';
+                    order2.IS_SIM = 'N';
+                    order2.APPLECARE_CODE = '';
 
-                order2.DISCOUNT_TYPE = 'B'
-                order2.DISCOUNT_4_PROD_ITEMS_LIST = []
-                order2.DISCOUNT_4_PROD_ITEM = -1;
+                    order2.DISCOUNT_TYPE = 'B'
+                    order2.DISCOUNT_4_PROD_ITEMS_LIST = []
+                    order2.DISCOUNT_4_PROD_ITEM = -1;
 
-                order2.GROUP_ID = _productCode + TrxID;
+                    order2.GROUP_ID = _productCode + TrxID;
 
-                orderItemList.push(order2);
+                    orderItemList.push(order2);
 
-            }
-
-            if (campaign.discounts && campaign.discounts.length > 0) {
-
-                var order2 = {};
-                var discountAmt = campaign.discounts[0].amount;
-                if (campaign.discounts[0].type = 'P') {
-
-                    /////////// Need to get Product for calculating discountAmt
-                    /////////
                 }
-
-                discountAmt = discountAmt * -1;
-                order2.CAMPAIGN = campaignCode;
-                order2.CAMPAIGN_NAME = "";
-                order2.PROMOTION_SET = campaign.promotionSet;
-                order2.PROMOTION_TYPE = '';
-
-                order2.PRODUCT_TYPE = 'D';
-                order2.PRODUCT_CODE = campaign.discounts[0].code;
-                order2.PRODUCT_NAME = 'ส่วนลด (Discount: ' + campaign.discounts[0].code + ' ' + campaign.discounts[0].name + ')';
-                order2.PRICE = discountAmt;
-                order2.QTY = 1;
-                order2.TOTAL = discountAmt;
-                order2.NET_AMOUNT = discountAmt;
-
-                order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
-                order2.IS_PRODUCT_REQUESTFORM = 'N';
-                order2.IS_SIM = 'N';
-                order2.APPLECARE_CODE = '';
-
-                order2.DISCOUNT_TYPE = campaign.discounts[0].type;
-                order2.DISCOUNT_4_PROD_ITEMS_LIST = []
-                order2.DISCOUNT_4_PROD_ITEM = -1;
-
-                order2.GROUP_ID = _productCode + TrxID;
-
-                orderItemList.push(order2);
-
             }
+            if (campaign && campaign.discounts) {
+                if (campaign.discounts && campaign.discounts.length > 0) {
 
+                    var order2 = {};
+                    var discountAmt = campaign.discounts[0].amount;
+                    if (campaign.discounts[0].type = 'P') {
+
+                        /////////// Need to get Product for calculating discountAmt
+                        /////////
+                    }
+
+                    discountAmt = discountAmt * -1;
+                    order2.CAMPAIGN = campaignCode;
+                    order2.CAMPAIGN_NAME = "";
+                    order2.PROMOTION_SET = campaign.promotionSet;
+                    order2.PROMOTION_TYPE = '';
+
+                    order2.PRODUCT_TYPE = 'D';
+                    order2.PRODUCT_CODE = campaign.discounts[0].code;
+                    order2.PRODUCT_NAME = 'ส่วนลด (Discount: ' + campaign.discounts[0].code + ' ' + campaign.discounts[0].name + ')';
+                    order2.PRICE = discountAmt;
+                    order2.QTY = 1;
+                    order2.TOTAL = discountAmt;
+                    order2.NET_AMOUNT = discountAmt;
+
+                    order2.IS_CAMPAIGN_PROMO_ITEM = 'Y';
+                    order2.IS_PRODUCT_REQUESTFORM = 'N';
+                    order2.IS_SIM = 'N';
+                    order2.APPLECARE_CODE = '';
+
+                    order2.DISCOUNT_TYPE = campaign.discounts[0].type;
+                    order2.DISCOUNT_4_PROD_ITEMS_LIST = []
+                    order2.DISCOUNT_4_PROD_ITEM = -1;
+
+                    order2.GROUP_ID = _productCode + TrxID;
+
+                    orderItemList.push(order2);
+
+                }
+            }
             //jigkoh3 bypass validate Requestform & Applecare
             logger.debug("...Complete Validate");
 
