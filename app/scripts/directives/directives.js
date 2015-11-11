@@ -155,6 +155,7 @@ function customerToggleGet($rootScope, $route) {
                                     }
 
                                 } else {
+                                    $location.path('/existingcustomer')
                                     $message.alert(result.data["display-messages"][0]);
                                 }
                             })
