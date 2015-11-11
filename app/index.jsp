@@ -27,6 +27,7 @@
 <!-- build:css(.tmp) styles/main.css -->
 <link rel="stylesheet" href="styles/main.css">
 <!-- endbuild -->
+<link rel="stylesheet" href="styles/style.css">
 
 <script language="javascript">
 	function quitBox(cmd) {
