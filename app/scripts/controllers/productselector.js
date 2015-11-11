@@ -8,7 +8,7 @@
  * Controller of the fec3App
  */
 angular.module('fec3App')
-    .controller('productSelectorCtrl', function($scope, $localstorage, $routeParams, $location, $modal, $log, productService, $linq, $message) {
+    .controller('productSelectorCtrl', function($scope, $localstorage, $routeParams, $location, $modal, $log, productService, $linq,  $message) {
 
 
         $scope.id = $routeParams.id;
@@ -179,6 +179,9 @@ angular.module('fec3App')
 
                                 //alert("Need to confirm about Apple Care");
                                 var msg = "Need to confirm about Apple Care";
+
+                                //if confirm == no call >> $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
+                                //else >> process code below
                                 $message.confirm(msg, function(result) {
                                     if (result.status) {
                                         for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
@@ -198,14 +201,10 @@ angular.module('fec3App')
                                             productType: $scope.productType,
                                             trxId: TrxID
                                         });
-                                    } else {
+                                    }else{
                                         $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
                                     }
-                                });
-
-                                //if confirm == no call >> $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
-                                //else >> process code below
-
+                                });    
 
                             } else {
 
@@ -355,7 +354,7 @@ angular.module('fec3App')
                         var itemAppCareList = $linq.Enumerable().From(selectedOrderItemList).Where("$.APPLECARE_CODE != null && $.APPLECARE_CODE != '' ").ToArray();
                         if (itemAppCareList && itemAppCareList.length > 0) {
                             //alert("Need to confirm about Apple Care");
-                            //if confirm == no call >> $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
+                             //if confirm == no call >> $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
                             //else >> process code below
                             var msg = "Need to confirm about Apple Care";
                             $message.confirm(msg, function(result) {
@@ -367,7 +366,7 @@ angular.module('fec3App')
                                     $localstorage.setObject("customerProfile", customerProfile);
                                     $localstorage.logObject("customerProfile");
                                     $location.path('/ordersummary');
-                                } else {
+                                }else{
                                     $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
                                 }
                             });
