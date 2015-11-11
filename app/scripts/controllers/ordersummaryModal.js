@@ -40,21 +40,24 @@ angular.module('fec3App')
 
     $scope.addToListCard = function() {
         var customerInfo = $localstorage.getObject("customerProfile");
-    $scope.order_product_item_list = customerInfo.orderObj.order_product_item_list;
+        $scope.order_product_item_list = customerInfo.orderObj.actual_order_product_item_list;
+
         var discountList;
         for (var i = 0; i < $scope.order_insert.length; i++) {
             discountList = $scope.order_insert[i]
-            if (discountList.DISCOUNT_4_PROD_ITEM < 0) {
+            //if (discountList.DISCOUNT_4_PROD_ITEM < 0) {
                 $scope.order_product_item_list.push(discountList);
-            } else {
-                $scope.order_product_item_list.splice(discountList.DISCOUNT_4_PROD_ITEM, 0, discountList);
-            }
+            //} else {
+            //    $scope.order_product_item_list.splice(discountList.DISCOUNT_4_PROD_ITEM, 0, discountList);
+            //}
             $scope.btnDisabled = true;
         }
+
         console.log($scope.order_product_item_list);
-         customerInfo.orderObj.order_product_item_list = $scope.order_product_item_list;
+        customerInfo.orderObj.actual_order_product_item_list = $scope.order_product_item_list;
+
         $localstorage.setObject("customerProfile", customerInfo);
-         $localstorage.logObject("customerProfile", customerInfo);
+        $localstorage.logObject("customerProfile", customerInfo);
         $scope.promotionSearch = null;
         $scope.order_insert = [];
         $scope.totalCalculate_modal();
