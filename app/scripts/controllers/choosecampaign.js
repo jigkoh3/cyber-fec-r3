@@ -34,6 +34,9 @@ angular.module('fec3App')
 
         for (var i = 0; i < $scope.data.length; i++) {
             //console.log($scope.data[i].type);
+            $scope.data[i].promoType = $scope.data[i].type;
+            if ($scope.data[i].force) { $scope.data[i].chk = true; }
+
             switch ($scope.data[i].type) {
                 case '1':
                     $scope.data[i].type = "แถม";
@@ -175,5 +178,22 @@ angular.module('fec3App')
             logger.debug("...After call updateSelectedOrderItem");
         };
 
+        $scope.promoChk = function (item) {
+            
+            if (item.force) {
+                item.chk = true;
+            } else {
+
+                if (!item.chk) {
+
+                    for (var idx = 0; idx < item.products.length; idx++) {
+                        $scope.proItem[item.products[idx].code] = "";
+                    }
+                }
+
+            }
+
+        };
+        
 
     });
