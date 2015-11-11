@@ -6,7 +6,7 @@
  * @description
  * # AboutCtrl
  * Controller of the fec3App
- */  
+ */
 angular.module('fec3App')
     .controller('choosecampaignCtrl', function($scope, $modal, $log, $routeParams, $localstorage, $linq, $location, productService) {
         //var customerProfile = $localstorage.getObject("customerProfile");
@@ -34,6 +34,9 @@ angular.module('fec3App')
 
         for (var i = 0; i < $scope.data.length; i++) {
             //console.log($scope.data[i].type);
+            $scope.data[i].promoType = $scope.data[i].type;
+            if ($scope.data[i].force) { $scope.data[i].chk = true; }
+
             switch ($scope.data[i].type) {
                 case '1':
                     $scope.data[i].type = "แถม";
@@ -219,5 +222,7 @@ angular.module('fec3App')
             logger.debug("...After call updateSelectedOrderItem");
         };
 
+
+        
 
     });
