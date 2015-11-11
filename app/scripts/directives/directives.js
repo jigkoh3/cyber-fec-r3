@@ -302,12 +302,25 @@ function userToggleInfo($rootScope, $localstorage) {
 /**
  * minimalizaSidebar - Directive for minimalize sidebar
  */
-function customerToggleInfo($rootScope, $localstorage) {
+function customerToggleInfo($rootScope, $localstorage, $loading) {
     return {
         restrict: 'EA',
         templateUrl: 'views/templates/customer-toggle-info.html',
         controller: function($scope, $element, $location) {
             $scope.customerProfile = $localstorage.getObject("customerProfile");
+            if(!$scope.customerProfile.fullName){
+                $scope.customerProfile.fullName = "";
+            }
+            
+            $scope.isNewCust = true;
+            if($scope.customerProfile.firstName){
+                $scope.isNewCust = false;
+            }
+            $scope.onInputFullName = function(){
+                $loading.show();
+                $localstorage.setObject("customerProfile",$scope.customerProfile);
+                $loading.hide();
+            }
             $scope.onClickEndServe = function() {
 
                 var customer = $localstorage.getObject("customerProfile");
@@ -401,7 +414,7 @@ function ngMenu($rootScope, $localstorage) {
 function version() {
     return {
         restrict: 'EA',
-        template: 'Version : 0.0.1'
+        template: 'Version : 0.0.2'
     };
 };
 
