@@ -31,8 +31,15 @@ angular.module('fec3App')
         $scope.selectTab = function(tab) {
             $scope.tabname = tab;
         };
-        $scope.choose = function(itm) {
 
+        /**
+         * campaign selected - if (have promotionSet) 
+         *                     then {modal promotionSet selector and goto verify page} 
+         *                     else {go to verify page}
+         *                   - if (verify success) then (check have services data goto open service page)
+         */
+        $scope.choose = function(itm) {
+            //case campaign selecter
             $loading.show();
             productService.getCampaign(itm.code, productCode, function(res) {
                 console.log(res);
@@ -45,81 +52,47 @@ angular.module('fec3App')
                         if (result.status) {
 
                             var promotionset = result.data['response-data'].promotion.promotions;
-                            // $modal.campaignSelector(promotionset, function(result) {
-                            //     //alert(result.data.code);
-                            //     // if (res.data['response-data'].campaign.verifyKeys && res.data['response-data'].campaign.verifyKeys.length == 1 && res.data['response-data'].campaign.verifyKeys[0] == "ThaiId") {
-                            //     //     //verlify thai-id
-
-                            //     //     var param = {
-                            //     //         "campaign_code": itm.code,
-                            //     //         "product_code": productCode,
-                            //     //         "qty": 1,
-                            //     //         "verifyKeys": [{
-                            //     //             "key": "ThaiId",
-                            //     //             "value": $localstorage.getObject("customerProfile").certificateId
-                            //     //         }]
-                            //     //     };
-                            //     //     $loading.show();
-                            //     //     productService.verify(param, function(result) {
-                            //     //         //location.href='#priceplanexisting
-                            //     //         $scope.isClick = false;
-                            //     //          $loading.hide();
-                            //     //         if (result.data['response-data']['result'] == 'Pass') {
-
-                            //     //             location.href = '#pricePlan';
-                            //     //             $('#bindDataAgain').click();
-                            //     //         } else {
-                            //     //             if (result.data['response-data']['result'] == "UnknowError") {
-                            //     //                 $message.alert({
-                            //     //                     "message": "",
-                            //     //                     "message-code": "",
-                            //     //                     "message-type": "Warning",
-                            //     //                     "en-message": "Cannot check privilege, Please contact IT Helpdesk.",
-                            //     //                     "th-message": "ไม่สามารถตรวจสอบสิทธิ์ได้ กรุณาติดต่อ IT Helpdesk",
-                            //     //                     "technical-message": ""
-                            //     //                 });
-                            //     //             }
-
-                            //     //         }
-
-                            //     //     });
-
-
-                            //     // } else {
-
-                            //     //     $location.path('/privilege').search({
-                            //     //         id: $scope.id,
-                            //     //         name: $scope.name,
-                            //     //         campaignCode: itm.code,
-                            //     //         productCode: productCode,
-                            //     //         qty: 1
-                            //     //     });
-                            //     //     $('#bindDataAgain').click();
-                            //     // }
-                            //     var verifyKeys = null;
-                            //     if (res.data['response-data'].campaign.verifyKeys)
-                            //     {
-                            //         verifyKeys = res.data['response-data'].campaign.verifyKeys;
-                            //     }
-                            //     $location.path('/privilege').search({
-                            //             id: $scope.id,
-                            //             name: $scope.name,
-                            //             campaignCode: itm.code,
-                            //             productCode: productCode,
-                            //             qty: 1,
-                            //             verifyKeys: verifyKeys
-                            //         });
-                            //         $('#bindDataAgain').click();
-
-                            // });
-
-
-                            var verifyKeys = null;
-                            if (res.data['response-data'].campaign.verifyKeys) {
-                                verifyKeys = res.data['response-data'].campaign.verifyKeys;
+                            var products = result.data['response-data'].promotion.products;
+                            var campaign = null;
+                            if (res.data['response-data'].campaign) {
+                                campaign = res.data['response-data'].campaign;
                             }
-                            $modal.campaignSelector(promotionset,verifyKeys,itm.code);
-                            //$location.path('/privilege').search({id: $scope.id,name: $scope.name,campaignCode: itm.code,productCode: productCode,qty: 1});
+
+                            if (promotionset && promotionset.length >= 1) {
+                                //case have promotionSet then modal promotionset selecter
+                                $modal.campaignSelector(promotionset, campaign, itm.code,products);
+                            } else {
+                                //case not have promotionSet navigate to next step
+                                if (campaign) {
+                                    var arrServiceCode = [];
+                                    if (campaign.services && campaign.services.length >= 1) {
+                                        for (var i = 0; i <= campaign.services.length - 1; i++) {
+                                            arrServiceCode.push(campaign.services[i].code);
+                                        };
+                                    }
+                                    if (campaign.verifyKeys) {
+                                        //case have verify key
+                                        $location.path('/privilege').search({
+                                            id: $scope.id,
+                                            name: $scope.name,
+                                            campaignCode: itm.code,
+                                            productCode: productCode,
+                                            qty: 1,
+                                            verifyKeys: campaign.verifyKeys,
+                                            services: arrServiceCode
+                                        });
+                                    } else {
+                                        // not have verify ???
+                                    }
+
+
+                                } else {
+                                    //case other exception
+
+                                }
+                            }
+
+
                         } else {
                             $message.alert(result.data["display-message"]);
                         }
@@ -132,14 +105,28 @@ angular.module('fec3App')
             });
         };
 
+        /**
+         * promotionSet selected - if (have promotionSet) 
+         *                          then {modal promotionSet selector} 
+         *                          else {go to order summary}
+         *                       - if (have products type 'S') then (goto open service page)
+         */
         $scope.choosePro = function(itm) {
+            //case promotion selecter
             $loading.show();
             productService.getPromotionSet(itm.code, function(result) {
                 console.log(result);
                 $loading.hide();
                 if (result.status) {
                     var promotionset = result.data['response-data'].promotion.promotions;
-                    $modal.campaignSelector(promotionset,null,null);
+                    var products = result.data['response-data'].promotion.products;
+                    if (promotionset && promotionset.length >= 1) {
+                        //case have promotionSet then modal promotionset selecter
+                        $modal.campaignSelector(promotionset, null, null,products);
+                    } else {
+                        //case not have promotionSet navigate to next step
+                        $location.path('/ordersummary');
+                    }
                 } else {
                     $message.alert(result.data["display-message"]);
                 }

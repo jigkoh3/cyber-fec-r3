@@ -142,6 +142,7 @@
     <script src="scripts/controllers/choosecampaign.js"></script>
     <script src="scripts/controllers/productselector.js"></script>
     <script src="scripts/controllers/ordersummary.js"></script>
+    <script src="scripts/controllers/ordersummaryModal.js"></script>
     <!-- build:js services -->
     <script src="scripts/services/dal.js"></script>
     <script src="scripts/services/user.js"></script>

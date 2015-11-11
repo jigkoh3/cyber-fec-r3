@@ -11,6 +11,7 @@ angular.module('fec3App')
         $scope.name = $routeParams.name;
 
         var _verifyKeys = $routeParams.verifyKeys;
+        var _services = $routeParams.services;
         $scope.verifyKeys = [];
         for (var i = 0; i <= _verifyKeys.length-1; i++) {
             var _vlf = {};
@@ -39,7 +40,14 @@ angular.module('fec3App')
                     $scope.isClick = false;
                     if (result.data['response-data']['result'] == 'Pass') {
                         $loading.hide();
-                        location.href = '#ordersummary';
+                        // if open service
+                        // if not open service
+                        if(_services && _services.length >= 1){
+                            location.href = '#pricePlan';
+                        }else{
+                            location.href = '#ordersummary';
+                        }
+                        
                     } else {
                         if (result.data['response-data']['result'] == "SegmentCodeIsNotDefine") {
                             $message.alert({

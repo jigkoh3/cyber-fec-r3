@@ -215,8 +215,9 @@ function modal($ngBootbox,$localstorage) {
     var _itm = null;
     var _tabIdx = null;
     var _valueData = null;
-    var _verifyKeys = null;
+    var _campaign = null;
     var _campaignCode = null;
+    var _products = null;
 
     var _proSelected = null;
 
@@ -238,16 +239,20 @@ function modal($ngBootbox,$localstorage) {
         values: function() {
             return _valueData;
         },
-        verifyKeys: function(){
-            return _verifyKeys;
+        campaign: function(){
+            return _campaign;
         },
         campaignCode: function(){
             return _campaignCode;
         },
-        campaignSelector: function(itm,verifyKeys,campaignCode) {
+        products: function(){
+            return _products;
+        },
+        campaignSelector: function(itm,campaign,campaignCode,products) {
             _itm = itm;
-            _verifyKeys = verifyKeys;
+            _campaign = campaign;
             _campaignCode = campaignCode;
+            _products = products;
             //console.log(_alertMsg);
             setTimeout(function() {
                 $ngBootbox.customDialog({

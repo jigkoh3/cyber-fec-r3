@@ -100,7 +100,6 @@ angular
                 controllerAs: 'orderDevice'
             })
             .when('/promotion/:id?/:name?/:productCode?/:productType?/:trxId?', {
-                // templateUrl: 'views/underconstruction.html'
                 templateUrl: 'views/promotion.html',
                 controller: 'promotionCtrl',
                 controllerAs: 'promotion'
@@ -206,7 +205,7 @@ angular
             //     // controller: 'printpreviewCtrl',
             //     // controllerAs: 'printpreview'
             // })
-            .when('/privilege/:id?/:name?/:campaignCode?/:productCode?/:qty?/:verifyKeys?', {
+            .when('/privilege/:id?/:name?/:campaignCode?/:productCode?/:qty?/:verifyKeys?/:services?', {
                 templateUrl: 'views/privilege.html',
                 controller: 'privilegeCtrl',
                 controllerAs: 'privilege'

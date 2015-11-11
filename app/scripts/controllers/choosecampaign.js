@@ -28,8 +28,9 @@ angular.module('fec3App')
 
         //get modal varibles
         $scope.data = $modal.campaignList();
-        var verifyKeys = $modal.verifyKeys();
+        var campaign = $modal.campaign();
         var campaignCode = $modal.campaignCode();
+        var products = $modal.products();
 
         for (var i = 0; i < $scope.data.length; i++) {
             //console.log($scope.data[i].type);
@@ -135,19 +136,42 @@ angular.module('fec3App')
             $localstorage.setObject("customerProfile", customerProfile);
             $localstorage.logObject("customerProfile");
 
-            if (verifyKeys) {
-                $location.path('/privilege').search({
-                    id: id,
-                    name: name,
-                    campaignCode: campaignCode,
-                    productCode: productCode,
-                    qty: 1,
-                    verifyKeys: verifyKeys
-                });
+            if (campaign) {
+                //from campaign
+                var arrServiceCode = [];
+                if(campaign.services && campaign.services.length >=1){
+                    for (var i = 0; i <= campaign.services.length-1; i++) {
+                        arrServiceCode.push(campaign.services[i].code);
+                    };
+                }
+                if (campaign.verifyKeys) {
+                    // have verify
+                    $location.path('/privilege').search({
+                        id: id,
+                        name: name,
+                        campaignCode: campaignCode,
+                        productCode: productCode,
+                        qty: 1,
+                        verifyKeys: campaign.verifyKeys,
+                        services: arrServiceCode
+                    });
+                } else {
+                    // not have verify ???
+
+                }
+
             } else {
-                $location.path('/ordersummary');
+                // from promotion set
+                // if products type "S" goto open service
+                // else goto order summary
+                if(products && products.length >= 1){
+                    $location.path('/pricePlan');
+                }else{
+                    $location.path('/ordersummary');
+                }
+                //$location.path('/ordersummary');
             }
-            
+
             logger.debug("...After call updateSelectedOrderItem");
         };
 
