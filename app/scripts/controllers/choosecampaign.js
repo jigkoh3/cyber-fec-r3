@@ -6,7 +6,7 @@
  * @description
  * # AboutCtrl
  * Controller of the fec3App
- */
+ */  
 angular.module('fec3App')
     .controller('choosecampaignCtrl', function($scope, $modal, $log, $routeParams, $localstorage, $linq, $location, productService) {
         //var customerProfile = $localstorage.getObject("customerProfile");
@@ -34,9 +34,6 @@ angular.module('fec3App')
 
         for (var i = 0; i < $scope.data.length; i++) {
             //console.log($scope.data[i].type);
-            $scope.data[i].promoType = $scope.data[i].type;
-            if ($scope.data[i].force) { $scope.data[i].chk = true; }
-
             switch ($scope.data[i].type) {
                 case '1':
                     $scope.data[i].type = "แถม";
@@ -55,11 +52,41 @@ angular.module('fec3App')
                     break;
             }
         }
+        $scope.clearInputGroup = function(item, check) {
+            if (check) {
+                var arr = item.products;
+                var sumMax = 0;
+                for (var i = 0; i < arr.length; i++) {
+                    $scope.proItem[arr[i].code] = null;
+                }
+            }
 
+        };
+        $scope.initModal = function() {
+            for (var i = 0; i < $scope.data.length; i++) {
+                if ($scope.data[i].force) {
+                    $scope.isValidated = true;
+                    break;
+                } else {
+                    for (var ii = 0; ii < $scope.data[i].products.length; ii++) {
+                        var arr = $scope.data[i].products;
+                        var sumMax = 0;
+                        for (var iii = 0; iii < arr.length; iii++) {
+                            //logger.debug($scope.proItem[arr[i].code]);
+                            if ($scope.proItem[arr[iii].code]) {
+                                $scope.isValidated = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
+        $scope.initModal();
         // $scope.data =$scope.listdata ;   
         $scope.validateInput = function(item, gitem) {
             $scope.isValidated = false;
+
             //logger.debug(item, gitem);
             //logger.debug($scope.proItem[item.code]);
             var arr = gitem.products;
@@ -73,9 +100,23 @@ angular.module('fec3App')
 
                         $scope.proItem[arr[i].code] = null;
                     } else {
-                        $scope.isValidated = true;
+                        //$scope.isValidated = true;
                     }
                 }
+            }
+            for (var i = 0; i < $scope.data.length; i++) {
+
+                for (var ii = 0; ii < $scope.data[i].products.length; ii++) {
+                    var arr = $scope.data[i].products;
+                    var sumMax = 0;
+                    for (var iii = 0; iii < arr.length; iii++) {
+                        //logger.debug($scope.proItem[arr[i].code]);
+                        if ($scope.proItem[arr[iii].code]) {
+                            $scope.isValidated = true;
+                        }
+                    }
+                }
+
             }
 
         };
@@ -142,8 +183,8 @@ angular.module('fec3App')
             if (campaign) {
                 //from campaign
                 var arrServiceCode = [];
-                if(campaign.services && campaign.services.length >=1){
-                    for (var i = 0; i <= campaign.services.length-1; i++) {
+                if (campaign.services && campaign.services.length >= 1) {
+                    for (var i = 0; i <= campaign.services.length - 1; i++) {
                         arrServiceCode.push(campaign.services[i].code);
                     };
                 }
@@ -167,9 +208,9 @@ angular.module('fec3App')
                 // from promotion set
                 // if products type "S" goto open service
                 // else goto order summary
-                if(products && products.length >= 1){
+                if (products && products.length >= 1) {
                     $location.path('/pricePlan');
-                }else{
+                } else {
                     $location.path('/ordersummary');
                 }
                 //$location.path('/ordersummary');
@@ -178,22 +219,5 @@ angular.module('fec3App')
             logger.debug("...After call updateSelectedOrderItem");
         };
 
-        $scope.promoChk = function (item) {
-            
-            if (item.force) {
-                item.chk = true;
-            } else {
-
-                if (!item.chk) {
-
-                    for (var idx = 0; idx < item.products.length; idx++) {
-                        $scope.proItem[item.products[idx].code] = "";
-                    }
-                }
-
-            }
-
-        };
-        
 
     });

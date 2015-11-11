@@ -1,27 +1,37 @@
 <div class="modol-dialog modol-lg" ng-controller="choosecampaignCtrl">
     <div class="modol-content">
-        <div class="modal-promotion">
-        <table class="table" ng-repeat="item in data">
-            <tr class="row">
-                <th class="col-md-1" style="background-color: #c8bbbb">
-                    <input type="checkbox" ng-model="item.chk" ng-change="promoChk(item)">
-                </th>
-                <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.group}}</span></th>
-                <th class="col-md-6" style="background-color: #c8bbbb; "><span>(ไม่เกิน {{item.maxGet}} ชิ้น)</span></th>
-                <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.type}}</span></th>
-                <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
-            </tr>
-            <tr class="row" ng-repeat="itm in item.products">
-                <td class="col-md-1"></td>
-                <td class="col-md-2">{{itm.code}}</td>
-                <td class="col-md-6">{{itm.name}}</td>
-                <td class="col-md-2">{{itm.price}}</td>
-                <td class="col-md-1">
-                    <input style="width:50px;" type="number" min="0" ng-pattern="/^[0-999]{1,7}$/" required ng-model="proItem[itm.code]" ng-change="validateInput(itm,item)" ng-disabled="item.chk!=true">
-                </td>
-            </tr>
-        </table>
-        
+        <div class="modal-promotion">  
+            <table class="table" ng-repeat="item in data">
+                <tr class="row">
+                    <th class="col-md-1" style="background-color: #c8bbbb">
+                        <input type="checkbox" 
+                        ng-model="chkForce[''+item.group]" 
+                        ng-init="chkForce[''+item.group]=item.force; isValidated=false;" 
+                        ng-click="clearInputGroup(item, chkForce[''+item.group])"
+                        ng-disabled="item.force" >
+                    </th>
+                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.group}}</span></th>
+                    <th class="col-md-6" style="background-color: #c8bbbb; "><span>(ไม่เกิน {{item.maxGet}} ชิ้น)</span></th>
+                    <th class="col-md-2" style="background-color: #c8bbbb; "><span>{{item.type}}</span></th>
+                    <th class="col-md-1" style="background-color: #c8bbbb; "><span></span></th>
+                </tr>
+                <tr class="row" ng-repeat="itm in item.products">
+                    <td class="col-md-1"></td>
+                    <td class="col-md-2">{{itm.code}}</td>
+                    <td class="col-md-6">{{itm.name}}</td>
+                    <td class="col-md-2">{{itm.price}}</td>
+                    <td class="col-md-1">
+                        <input style="width:50px;" 
+                        type="number" min="0" 
+                        ng-pattern="/^[0-999]{1,7}$/" 
+                        required 
+                        ng-model="proItem[itm.code]" 
+                        ng-change="validateInput(itm,item)"
+                        ng-init="$index==0 && item.force ? proItem[itm.code]=1: proItem[itm.code]=null" 
+                        ng-disabled="chkForce[''+item.group]!=true">
+                    </td>
+                </tr>
+            </table>
         </div>
         <div class="modal-footer">
             <button class="btn btn-success" ng-disabled="!isValidated" data-dismiss="modal" ng-click="nextModal()">ตกลง</button>
