@@ -259,6 +259,23 @@ angular.module('fec3App')
                                         productType: $scope.productType,
                                         trxId: TrxID
                                     });
+                                }else{
+                                    for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+                                        selectedOrderItemList[idx].APPLECARE_CODE = null;
+                                        customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                                    }
+
+                                    $localstorage.setObject("customerProfile", customerProfile);
+                                    $localstorage.logObject("customerProfile");
+
+                                    //$location.path('/ordersummary');
+                                    $location.path('/promotion').search({
+                                        id: $scope.id,
+                                        name: $scope.name,
+                                        productCode: $scope.productCode,
+                                        productType: $scope.productType,
+                                        trxId: TrxID
+                                    });
                                 }
                             });
 
