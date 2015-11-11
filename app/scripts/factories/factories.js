@@ -169,13 +169,16 @@ function message($ngBootbox) {
     return {
         confirm: function(msg, fnCallback) {
             //$ngBootbox.confirm(msg, fnCallback);
+
             $ngBootbox.confirm(msg)
+
                 .then(function() {
                         //console.log('Confirm was accept');
                         fnCallback({
                             status: true
                         });
                     },
+
                     function() {
                         //Confirm was cancelled, don't delete customer
                         //console.log('Confirm was cancelled');
@@ -336,8 +339,23 @@ function modal($ngBootbox,$localstorage) {
                     backdrop: true,
                     closeButton: true,
                     animate: true,
-                    size: "large"
-
+                    size: "large",
+                    buttons: {
+                        success: {
+                          label: "เลือก",
+                          className: "btn-success",
+                          callback: function() {
+                            $scope.addToListCard();
+                          }
+                        },
+                        danger: {
+                          label: "ยกเลิก",
+                          className: "btn-cancel",
+                          callback: function() {
+                            
+                          }
+                        }
+                    }        
                 });
             }, 1001);
 

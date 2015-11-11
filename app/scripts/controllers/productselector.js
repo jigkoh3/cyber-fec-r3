@@ -183,9 +183,11 @@ angular.module('fec3App')
                                 //if confirm == no call >> $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
                                 //else >> process code below
                                 $message.confirm(msg, function(result) {
+
                                     if (result.status) {
                                         for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
                                             customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                                            
                                         }
 
                                         logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
@@ -202,7 +204,25 @@ angular.module('fec3App')
                                             trxId: TrxID
                                         });
                                     }else{
-                                        $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
+                                       // $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
+                                        for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+                                            selectedOrderItemList[idx].APPLECARE_CODE = null;
+                                            customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                                        }
+
+                                        logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
+
+                                        $localstorage.setObject("customerProfile", customerProfile);
+                                        $localstorage.logObject("customerProfile");
+
+
+                                        $location.path('/promotion').search({
+                                            id: $scope.id,
+                                            name: $scope.name,
+                                            productCode: $scope.productCode,
+                                            productType: $scope.productType,
+                                            trxId: TrxID
+                                        });
                                     }
                                 });    
 
@@ -361,14 +381,27 @@ angular.module('fec3App')
                                 if (result.status) {
                                     for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
                                         customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                                       // console.log(selectedOrderItemList[idx]);
                                     }
                                     logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
                                     $localstorage.setObject("customerProfile", customerProfile);
                                     $localstorage.logObject("customerProfile");
                                     $location.path('/ordersummary');
                                 }else{
-                                    $modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
-                                }
+                                    //$modal.productSelector($scope.data, $scope.tabselected, $scope.proItem);
+                                      for (var idx = 0; idx < selectedOrderItemList.length; idx++) {
+                                         selectedOrderItemList[idx].APPLECARE_CODE = null;
+                                        customerProfile.orderObj.order_product_item_list.push(selectedOrderItemList[idx]);
+                                       // console.log(selectedOrderItemList[idx]);
+                                    }
+
+                                     logger.debug("...Complete Validate. order_product_item_list=", customerProfile.orderObj.order_product_item_list);
+                                    $localstorage.setObject("customerProfile", customerProfile);
+                                    $localstorage.logObject("customerProfile");
+                                    $location.path('/ordersummary');
+                                }  
+
+                                
                             });
                         } else {
 
