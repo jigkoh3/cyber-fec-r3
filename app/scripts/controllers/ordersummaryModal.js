@@ -1,6 +1,12 @@
 angular.module('fec3App')
 
-.controller('ordersummaryModalCtrl', function($scope, $loading, $localstorage, $routeParams, $linq, productService, $message) {
+.controller('ordersummaryModalCtrl', function($scope, $loading, $localstorage, $routeParams, $linq, productService, $message, $route) {
+    $scope.totalCalculate = function() {
+        $scope.total = 0;
+        for (var i = 0; i < $scope.order_product_item_list.length; i++) {
+            $scope.total = $scope.total + parseInt($scope.order_product_item_list[i]['TOTAL']);
+        }
+    }
 
 	$scope.totalCalculate_modal = function() {
         $scope.total_modal = 0;
@@ -33,6 +39,8 @@ angular.module('fec3App')
     }
 
     $scope.addToListCard = function() {
+        var customerInfo = $localstorage.getObject("customerProfile");
+    $scope.order_product_item_list = customerInfo.orderObj.order_product_item_list;
         var discountList;
         for (var i = 0; i < $scope.order_insert.length; i++) {
             discountList = $scope.order_insert[i]
@@ -43,10 +51,15 @@ angular.module('fec3App')
             }
             $scope.btnDisabled = true;
         }
+        console.log($scope.order_product_item_list);
+         customerInfo.orderObj.order_product_item_list = $scope.order_product_item_list;
+        $localstorage.setObject("customerProfile", customerInfo);
+         $localstorage.logObject("customerProfile", customerInfo);
         $scope.promotionSearch = null;
         $scope.order_insert = [];
         $scope.totalCalculate_modal();
         $scope.totalCalculate();
+        $route.reload();
     }
 
 });
