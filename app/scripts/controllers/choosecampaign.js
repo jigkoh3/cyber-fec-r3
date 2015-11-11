@@ -307,6 +307,9 @@ angular.module('fec3App')
 
                         /////////// Need to get Product for calculating discountAmt
                         /////////
+                        var customerInfo = $localstorage.getObject("customerProfile");
+                        var prodItem = customerInfo.orderObj.order_product_item_list[0];
+                        discountAmt = (prodItem.TOTAL * (campaign.discounts[0].amount / 100) * -1);
                     }
 
                     discountAmt = discountAmt * -1;
