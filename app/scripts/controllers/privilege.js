@@ -188,6 +188,16 @@ angular.module('fec3App')
                                 "th-message": "ลูกค้าใชสิ้ทธิ์ไปแล้ว",
                                 "technical-message": ""
                             });
+                        } else {
+                            $message.alert({
+                                "message": "",
+                                "message-code": "",
+                                "message-type": "Warning",
+                                "en-message": result.data['response-data']['result'],
+                                "th-message": result.data['response-data']['result'],
+                                "technical-message": ""
+                            });
+
                         }
 
                     }
