@@ -1,6 +1,8 @@
 angular.module('fec3App')
 
 .controller('ordersummaryModalCtrl', function($scope, $loading, $localstorage, $routeParams, $linq, productService, $message, $route) {
+   var ck =true;
+
     $scope.totalCalculate = function() {
         $scope.total = 0;
         for (var i = 0; i < $scope.order_product_item_list.length; i++) {
@@ -28,7 +30,10 @@ angular.module('fec3App')
     //$scope.cleartext();
     $scope.order_insert = [];
     $scope.searchlist = function(event) {
-
+        
+        if($scope.promotionSearch == '999'){
+            ck = false;
+        }
         if ($scope.promotionSearch != null && $scope.promotionType != null) {
             productService.getDiscountAndBooking($scope.promotionType, $scope.promotionSearch, function(result) {
                 $scope.order_insert.push(result.data["response-data"]);
@@ -41,21 +46,22 @@ angular.module('fec3App')
     $scope.addToListCard = function() {
         var customerInfo = $localstorage.getObject("customerProfile");
         $scope.order_product_item_list = customerInfo.orderObj.actual_order_product_item_list;
-
+       
         var discountList;
         for (var i = 0; i < $scope.order_insert.length; i++) {
             discountList = $scope.order_insert[i]
+
             //if (discountList.DISCOUNT_4_PROD_ITEM < 0) {
                 $scope.order_product_item_list.push(discountList);
             //} else {
             //    $scope.order_product_item_list.splice(discountList.DISCOUNT_4_PROD_ITEM, 0, discountList);
             //}
             $scope.btnDisabled = true;
+
+            $('#addproduct').prop('disabled', true);
+           
         }
-
-        console.log($scope.order_product_item_list);
         customerInfo.orderObj.actual_order_product_item_list = $scope.order_product_item_list;
-
         $localstorage.setObject("customerProfile", customerInfo);
         $localstorage.logObject("customerProfile", customerInfo);
         $scope.promotionSearch = null;
@@ -63,6 +69,22 @@ angular.module('fec3App')
         $scope.totalCalculate_modal();
         $scope.totalCalculate();
         $route.reload();
-    }
+        }
+
+        /*$scope.testmodal = function() {
+            if(ck){
+                bootbox.hideAll();
+            }else{
+                var msg = "Need to confirm about Apple Care";
+                $message.confirm(msg, function(result) {
+                    if (result.status) {
+                        console.log('confirm');
+                    }else{
+                        console.log('Not confirm');
+                    }
+                });                        
+            }
+        }*/
+    
 
 });

@@ -5,7 +5,7 @@ angular.module('fec3App')
     $scope.id = $routeParams.id;
     $scope.name = $routeParams.name;
     $scope.dataType = 'D';
-
+    
     var customerInfo = $localstorage.getObject("customerProfile");    
     var actual_order_list = [];
 
@@ -67,7 +67,7 @@ angular.module('fec3App')
         }
     }
 
-
+    
     $scope.deleted = function(Group_id, num_index) {
         var showName;
         var msg;

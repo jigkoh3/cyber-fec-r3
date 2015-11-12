@@ -1,6 +1,6 @@
 'use strict';
 angular.module('fec3App')
-    .controller('pricePlanCtrl', function($scope, $location, productService) {
+    .controller('pricePlanCtrl', function($scope, $location, pricePlanService) {
         
         $scope.pricePlans = [{
             pricePlan: "BBSMEP26:Biz_BB BIS 699 3WEG Unlimited",
@@ -25,58 +25,78 @@ angular.module('fec3App')
         }];
 
         $scope.detailPhonenumber = [{
-            phonenumber: "0891112222",
-            simcard: "1",
-            priceplan: "RMABCDO1:Real Move Very Good Price Plan",
+            phonenumber: "",
+            simcard: "",
+            priceplan: "",
             search: "",
         }];
 
-        $scope.openservice_obj = {
-            status: 'new_number',
-            customer_subtype: [{
-                textname: 'RPI: บุคคลธรรมดา',
-                textvalue: 'RPI'
-            }, {
-                textname: 'RPO: บริษัท',
-                textvalue: 'RPO'
-            }],
-            postPromotion: [{
-                textname: '100932 : New Post Privilge Free HS',
-                textvalue: 'promotion_1'
-            }, {
-                textname: '100933 : New Post Privilge Free HS 2',
-                textvalue: 'promotion_2'
-            }, {
-                textname: '100934 : New Post Privilge Free HS 3',
-                textvalue: 'promotion_3'
-            }],
-            phonenumberReservations: [{
-                phone: '0865630240'
-            }, {
-                phone: '0891112222'
-            }, {
-                phone: '0863334444'
-            }]
-        };
 
-        $scope.getPrivilegeSaleType = [{
-            "status": "SUCCESSFUL",
-            "display-messages": [],
-            "trx-id": "461HQMYTGV3HF",
-            "process-instance": "psaapdv1 (instance: SFF_node1)",
-            "response-data": {
-                "sale-type": [
-                    "NEW"
-                ],
-                "is-change-priceplan": "true"
-            }
+        pricePlanService.getPrivilegeSaleType(function(result) {
+            $scope.getPrivilegeSaleType = result.data["response-data"]['sale-type'];
+        });
+
+        pricePlanService.getAccountType(function(result) {
+            $scope.grade = result.data["response-data"]['company-grade']['grade-id'];
+            $scope.companyId = result.data["response-data"]['company-grade']['company-id'];
+        });
+
+        var custType ='';
+        var company ='RM';
+        var serviceType ='RM';
+        var roles ='I';
+        pricePlanService.getAccountSubType(custType, company, serviceType, roles, $scope.grade ,function(result) {
+            $scope.dataSubType = result.data["response-data"];
+        });
+ 
+
+         $scope.getPromotion = [{
+                    "status" : "SUCCESSFUL",
+                    "trx-id" : "0439PKB10EDP",
+                    "process-instance" : "tpx61.true.th (instance: sale)",
+                    "response-data" : [ {
+                    "name" : "P00000000000211",
+                    "description" : "SIM Koo Kan",
+                    "soc" : null,
+                    "rc" : 0.0,
+                    "service-level" : null,
+                    "proposition-code" : "0019087"
+                  }, {
+                    "name" : "RMV000000000001",
+                    "description" : "New Sim Only",
+                    "soc" : null,
+                    "rc" : 0.0,
+                    "service-level" : null,
+                    "proposition-code" : "0019123"
+                  } ]
+
         }];
 
+        $scope.dataPromotion = $scope.getPromotion[0]['response-data'];
 
-        //var customersubtype_val = 'RPI';
-        //$scope.customer_subtype.val() = customersubtype_val;
-        $scope.customer_subtype = $scope.openservice_obj.customer_subtype[1].textvalue;
-        $scope.promotion = $scope.openservice_obj.postPromotion[1].textvalue;
+
+        $scope.getNasProposition = [{
+                            "status": "SUCCESSFUL",
+                            "display-messages": [],
+                            "trx-id": "461HQMYTGV3HF",
+                            "process-instance": "psaapdv1 (instance: SFF_node1)",
+                            "response-data": {
+                              "nas-subscriber-reserve" : [ {
+                                "subscriber" : "0890000001",
+                                "proposition-code" : "0019123"
+                              }, {
+                                "subscriber" : "0890000002",
+                                "proposition-code" : "0019124"
+                              } ]
+                            }
+
+        }];
+
+        $scope.dataNasProposition = $scope.getNasProposition[0]['response-data']['nas-subscriber-reserve'];
+        
+        
+
+
 
         $scope.addGroup = function() {
             $scope.detailPhonenumber.push([{

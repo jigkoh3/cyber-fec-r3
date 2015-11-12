@@ -33,13 +33,13 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
                     <div class="col-md-6 " >
                         <label> ประเภทลูกค้าย่อย</label>
                         <select id="selectCustomer" ng-model="customer_subtype" class=" form-control" >
-                            <option ng-repeat="itemcustomer in openservice_obj.customer_subtype" value="{{itemcustomer.textvalue}}">{{itemcustomer.textname}}</option>
+                            <option ng-repeat="itemcustomer in dataSubType" value="{{itemcustomer.name}}">{{itemcustomer.name}} : {{itemcustomer.description}}</option>
                         </select>
                     </div>
                     <div class="col-md-6 " >
                         <label> รายการส่งเสริมการขาย</label>
                         <select id="selectPromotion"  ng-model="promotion" class=" form-control">
-                            <option ng-repeat="itemcustomer in openservice_obj.postPromotion" value="{{itemcustomer.textvalue}}">{{itemcustomer.textname}}</option>
+                            <option ng-repeat="itemcustomer in dataPromotion" value="{{itemcustomer.name}}">{{itemcustomer.name}} : {{itemcustomer.description}}</option>
                         </select>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
                     <div class="col-md-6" >
                          <label> หมายเลขโทรศัพท์ที่จองไว้</label>
                          <select multiple="multiple" ng-model="phonenumber" class="form-control">
-                            <option ng-repeat="itemcustomer in openservice_obj.phonenumberReservations" value="{{itemcustomer.phone}}" >{{itemcustomer.phone}}</option>
+                            <option ng-repeat="itemcustomer in dataNasProposition" value="{{itemcustomer.subscriber}}" >{{itemcustomer.subscriber}}</option>
                            
                          </select>
                     </div>
