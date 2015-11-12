@@ -46,8 +46,8 @@ angular.module('fec3App')
             $loading.hide();
             //console.log(result.data);
             if (result.status) {
-                
-                if (result.data.shops.length == 1) {
+                                
+                if (result.data.shops.length == 1 || (!result.data.isSelectedShop)) {
                     
                     $location.path('/main')
                 }

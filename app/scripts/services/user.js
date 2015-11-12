@@ -23,6 +23,13 @@ angular.module('fec3App')
                         "shopNameEn": "True Distribution & Sales Co., Ltd. (Seacon Square Branch)",
                         "shopIntName": null,
                         "shopStatus": "A"
+                    },
+                    {
+                        "shopCode": "80000002",
+                        "shopNameTh": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์22 )",
+                        "shopNameEn": "True Distribution & Sales Co., Ltd. (Seacon Square Branch 22)",
+                        "shopIntName": null,
+                        "shopStatus": "A"
                     }]
                 };
                 $timeout(function() {
@@ -674,15 +681,17 @@ angular.module('fec3App')
                 "shopType": "1",
                 "isSecondAuthen": true,
                 "isCorporate": false,
-                "channel": "XX",
+                "channel": "TRN",
+                "channelAlias": "TLR",
                 "partnerCodes": ["12345678", "11111111"],
                 "partnerName": "xxxx",
                 "partnerType": "XX",
                 "saleCode": "00",
                 "thaiName": "THAINAME",
                 "engName": "ENGNAME",
-                "shopcodes": ["12345678", "11111111"],
-                "logInName": "DEMO"
+                "shopcodes": [],
+                "logInName": "DEMO",
+                "isSelectedShop": true
             };
 
             var onSuccess = function(result) {
