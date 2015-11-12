@@ -324,22 +324,20 @@ function modal($ngBootbox,$localstorage) {
                 $("#btn_ngbOK").focus();
             }, 800);
         },
-        ordersummarymodal: function(item, tabSelected, values) {
-            _item = item;
-            _tabIdx = tabSelected;
-            _valueData = values;
+        dialogmodal: function( url, texttitle) {
+           
             setTimeout(function() {
                 $ngBootbox.customDialog({
-                    templateUrl: 'views/templates/ordersummary.html',
+                    templateUrl: 'views/templates/'+url,
                     onEscape: function() {
                         return false;
                     },
                     show: true,
-                    title: 'ส่วนลด / รหัสการจอง',
+                    title: texttitle,
                     backdrop: true,
                     closeButton: true,
                     animate: true,
-                    size: "large"
+                    size: "large",
                       
                 });
             }, 1001);

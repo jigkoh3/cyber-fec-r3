@@ -1,6 +1,6 @@
 'use strict';
 angular.module('fec3App')
-    .controller('pricePlanCtrl', function($scope, $location, pricePlanService) {
+    .controller('pricePlanCtrl', function($scope, $location, pricePlanService,$modal) {
         
         $scope.pricePlans = [{
             pricePlan: "BBSMEP26:Biz_BB BIS 699 3WEG Unlimited",
@@ -114,6 +114,10 @@ angular.module('fec3App')
         $scope.gotoNext = function() {
             $location.path('/ordersummary');
         }
+
+        $scope.showModal = function() {
+        $modal.dialogmodal('priceplan.html', 'Price Plan');
+    }
 
 
     });

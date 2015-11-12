@@ -1,0 +1,24 @@
+<div ng-controller="ordersummaryModalCtrl">
+     <table class="table">
+        <tr class="active" >
+                            <th ></th>
+                            <th > Price Plan</th>
+                            <th > RC</th>
+                            <th  >รายการส่งเสริมการขาย</th>
+                        </tr>
+                        <tr  ng-repeat="pp in pricePlans | filter:pricePlanFilter" pagination-id="PPList" current-page="currentPage">
+                            <td ><input name="pricels" type="radio" ng-change="selectedPricePlan(pp)" ng-model="pricePlan.name" ng-value="pp.pricePlan" /></td>
+                            <td >{{pp.pricePlan}}</td>
+                            <td >{{pp.rc}}</td>
+                            <td>{{pp.promotion}}</td>
+                        </tr>
+                       
+                    </table>
+                <div id="div_event"></div>
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-success" data-dismiss="modal">เลือก</button>
+                <button class="btn btn-cancel" data-dismiss="modal">ยกเลิก</button>
+            </div>               
+</div>            

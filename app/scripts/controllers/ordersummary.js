@@ -94,7 +94,7 @@ angular.module('fec3App')
     };
 
     $scope.getDiscount = function() {
-        $modal.ordersummarymodal();
+        $modal.dialogmodal('ordersummary.html', 'ส่วนลด / รหัสการจอง');
     }
 
 });
