@@ -21,7 +21,7 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-3 col-md-offset-3" >
-                        <input type="radio" checked>
+                        <input type="radio" checked ng-model="">
                         <label>เปิดบริการหมายเลขใหม่</label>
                     </div>    
                      <div class="col-md-2" >
@@ -46,18 +46,20 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
                 <div class="row">
                     <div class="col-md-6" >
                          <label> หมายเลขโทรศัพท์ที่จองไว้</label>
-                         <select multiple="multiple" ng-model="phonenumber" class="form-control">
-                            <option ng-repeat="itemcustomer in dataNasProposition" value="{{itemcustomer.subscriber}}" >{{itemcustomer.subscriber}}</option>
-                           
-                         </select>
+                         <ul>
+                            <li ng-repeat="itemcustomer in dataNasProposition" >
+                                <a href="javascript:;" ng-change="checkSubscriber()">
+                                    {{itemcustomer.subscriber}}
+                                </a>
+                            </li>
+                         </ul>
                     </div>
                 </div>
                 <div  ng-repeat="data in detailPhonenumber">
                     <div class="panel panel-danger">
                         <div class="panel-heading">ข้อมูลหมายเลขโทรศัพท์
-                            <a href="javascript:;" ng-click='removeGroup($index)' class="remove">
-                                <span class="glyphicon glyphicon-remove align_right" ng-hide="$index =='0'"></span>
-                            </a>    
+                            
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click='removeGroup($index)'><span aria-hidden="true">&times;</span></button>   
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -95,7 +97,7 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
                 <div class="row">
                     <div class="col-md-6">
                         <a href="javascript:;" ng-click="addGroup();">
-                            <span class="glyphicon glyphicon-plus-sign text-success"  style="font-size:2em"></span>
+                            <span class="glyphicon glyphicon-plus-sign text-success"  style="font-size:2em; margin-top:10px;"></span>
                         </a>
                     </div>
                 </div>
@@ -109,44 +111,6 @@ Home > Products > Devices > iPhone > Promotion > Priceplan</p>
         </div>
     </div> 
 </div>    
-
-<!-- <div id="modalPriceplanOwnership" tabindex="-1" class="modal fade" data-backdrop="static" data-keyboard="false" >
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header header">
-                <h5 class="navbar-text">เลือก Price Plan</h5><br>
-              
-                <div class="col-md-12">
-                    <input type="text" placeholder="--ค้นหา--" ng-model="pricePlanFilter" class="form-control">
-                </div>
-            </div>
-            <div class="modal-body">
-                    <table class="table">
-                        <tr class="active" >
-                            <th ></th>
-                            <th > Price Plan</th>
-                            <th > RC</th>
-                            <th  >รายการส่งเสริมการขาย</th>
-                        </tr>
-                        <tr  ng-repeat="pp in pricePlans | filter:pricePlanFilter" pagination-id="PPList" current-page="currentPage">
-                            <td ><input name="pricels" type="radio" ng-change="selectedPricePlan(pp)" ng-model="pricePlan.name" ng-value="pp.pricePlan" /></td>
-                            <td >{{pp.pricePlan}}</td>
-                            <td >{{pp.rc}}</td>
-                            <td>{{pp.promotion}}</td>
-                        </tr>
-                       
-                    </table>
-                <div id="div_event"></div>
-            </div>
-            <div class="modal-footer">
-
-                <button class="btn btn-success" data-dismiss="modal">เลือก</button>
-                <button class="btn btn-cancel" data-dismiss="modal">ยกเลิก</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 
 <footer class="footer" ng-include="'views/common/footer.html'"></footer>
 </div>

@@ -24,14 +24,9 @@ angular.module('fec3App')
             promotion: ""
         }];
 
-        $scope.detailPhonenumber = [{
-            phonenumber: "",
-            simcard: "",
-            priceplan: "",
-            search: "",
-        }];
+       
 
-
+       
         pricePlanService.getPrivilegeSaleType(function(result) {
             $scope.getPrivilegeSaleType = result.data["response-data"]['sale-type'];
         });
@@ -48,56 +43,42 @@ angular.module('fec3App')
         pricePlanService.getAccountSubType(custType, company, serviceType, roles, $scope.grade ,function(result) {
             $scope.dataSubType = result.data["response-data"];
         });
- 
 
-         $scope.getPromotion = [{
-                    "status" : "SUCCESSFUL",
-                    "trx-id" : "0439PKB10EDP",
-                    "process-instance" : "tpx61.true.th (instance: sale)",
-                    "response-data" : [ {
-                    "name" : "P00000000000211",
-                    "description" : "SIM Koo Kan",
-                    "soc" : null,
-                    "rc" : 0.0,
-                    "service-level" : null,
-                    "proposition-code" : "0019087"
-                  }, {
-                    "name" : "RMV000000000001",
-                    "description" : "New Sim Only",
-                    "soc" : null,
-                    "rc" : 0.0,
-                    "service-level" : null,
-                    "proposition-code" : "0019123"
-                  } ]
+        var propoType ='NEW';
+        var mobileServicetype ='';
+        var partnerCode ='';
+        var privilege =false;
+        var proposition ='';
+        pricePlanService.getPromotion(company, custType, propoType, mobileServicetype, partnerCode, privilege, proposition, function(result) {
+            $scope.dataPromotion = result.data["response-data"];
+        });
 
-        }];
+        pricePlanService.getNasProposition(company, mobileServicetype, partnerCode, function(result) {
+            $scope.dataNasProposition = result.data["response-data"]['nas-subscriber-reserve'];
+        });
 
-        $scope.dataPromotion = $scope.getPromotion[0]['response-data'];
-
-
-        $scope.getNasProposition = [{
-                            "status": "SUCCESSFUL",
-                            "display-messages": [],
-                            "trx-id": "461HQMYTGV3HF",
-                            "process-instance": "psaapdv1 (instance: SFF_node1)",
-                            "response-data": {
-                              "nas-subscriber-reserve" : [ {
-                                "subscriber" : "0890000001",
-                                "proposition-code" : "0019123"
-                              }, {
-                                "subscriber" : "0890000002",
-                                "proposition-code" : "0019124"
-                              } ]
-                            }
-
-        }];
-
-        $scope.dataNasProposition = $scope.getNasProposition[0]['response-data']['nas-subscriber-reserve'];
-        
-        
-
-
-
+        $scope.checkSubscriber= function() {
+            var project;
+            var pairSim;
+            if($scope.phonenumber != null && $scope.promotion != null){
+                pricePlanService.validatesubscriber($scope.phonenumber,company, project, pairSim, proposition, function(result) {
+                
+                if(result.data.status == 'SUCCESSFUL'){
+                    var lastPhonenumber = $scope.phonenumber.length-1;
+                   
+                        /*$scope.detailPhonenumber.push([{
+                            phonenumber: $scope.phonenumber,
+                            simcard: "",
+                            priceplan: "",
+                            search: "",
+                        }]);*/
+                   
+                   // console.log($scope.detailPhonenumber);
+                }   
+            });
+            }
+        }
+        $scope.detailPhonenumber = [];
         $scope.addGroup = function() {
             $scope.detailPhonenumber.push([{
                 phonenumber: "",
