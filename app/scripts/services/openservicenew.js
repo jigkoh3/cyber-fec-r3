@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fec3App')
-    .service('pricePlanService', function($http, $filter, $timeout, $localstorage, $linq, dalService, $log) {
+    .service('openServiceNewService', function($http, $filter, $timeout, $localstorage, $linq, dalService, $log) {
         var logger = $log.getInstance('productService');
         var saleinfo = $localstorage.getObject("userProfile");
         var customerInfo = $localstorage.getObject("customerProfile");

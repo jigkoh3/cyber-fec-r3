@@ -125,10 +125,10 @@ angular
             //     controller: 'listpayment2Ctrl',
             //     controllerAs: 'listpayment2'
             // })
-            .when('/pricePlan', {
-                templateUrl: 'views/pricePlan.html',
-                controller: 'pricePlanCtrl',
-                controllerAs: 'pricePlan'
+            .when('/openservicenew', {
+                templateUrl: 'views/openservicenew.html',
+                controller: 'openServiceNewCtrl',
+                controllerAs: 'openServiceNew'
             })
             // .when('/payment', {
             //     templateUrl: 'views/payment.html',
@@ -250,6 +250,11 @@ angular
                 templateUrl: 'views/ordersummary.html',
                 controller: 'ordersummaryCtrl',
                 controllerAs: 'ordersummary'
+            })
+            .when('/openservicetype', {
+                templateUrl: 'views/openservicetype.html',
+                controller: 'openServiceTypeCtrl',
+                controllerAs: 'openServiceType'
             })
             .otherwise({
                 redirectTo: '/'
