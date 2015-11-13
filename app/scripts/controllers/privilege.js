@@ -43,7 +43,7 @@ angular.module('fec3App')
                         // if open service
                         // if not open service
                         if(_services && _services.length >= 1){
-                            location.href = '#pricePlan';
+                            location.href = '#ordersummary';
                         }else{
                             location.href = '#ordersummary';
                         }
