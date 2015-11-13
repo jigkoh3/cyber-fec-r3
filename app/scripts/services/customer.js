@@ -30,7 +30,7 @@ angular.module('fec3App')
                     "process-instance": "SFF_node1",
                     "response-data": {
                         "bookings": [{
-                            "bookingId": "201483743178",
+                            "bookingId": "201483743175",
                             "campaignCode": null,
                             "productCode": "3000013631",
                             "productName": "3000013631-H/S,IPHONE 5,16GB,GSM-THA,BK,MD297TH/A",
@@ -43,12 +43,12 @@ angular.module('fec3App')
                             "campaignCode": null,
                             "productCode": "3000013630",
                             "productName": "3000013631-H/S,IPHONE 5,16GB,GSM-THA,BK,MD297TH/A",
-                            "receiveShop": "80000001",
-                            "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
+                            "receiveShop": "80000003",
+                            "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา xxx )",
                             "expectReceiveDate": "2016-11-02T16:01:00",
                             "receiveDate": null
                         }, {
-                            "bookingId": "201483743176",
+                            "bookingId": "201483743177",
                             "campaignCode": null,
                             "productCode": "3000013630",
                             "productName": "3000013631-H/S,IPHONE 5,16GB,GSM-THA,BK,MD297TH/A",
@@ -57,14 +57,14 @@ angular.module('fec3App')
                             "expectReceiveDate": "2015-11-02T16:01:00",
                             "receiveDate": null
                         }, {
-                            "bookingId": "201483743176",
+                            "bookingId": "201483743178",
                             "campaignCode": null,
                             "productCode": "3000013630",
                             "productName": "3000013631-H/S,IPHONE 5,16GB,GSM-THA,BK,MD297TH/A",
                             "receiveShop": "80000001",
                             "receiveShopName": "บริษัท ทรู ดิสทริบิวชั่น แอนด์ เซลส์ จำกัด (สาขา ซีคอนสแควร์ )",
                             "expectReceiveDate": "2016-11-02T16:01:00",
-                            "receiveDate": "2015-11-12T16:01:00"
+                            "receiveDate": null
                         }]
                     },
                     "display-message": null

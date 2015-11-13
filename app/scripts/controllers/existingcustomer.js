@@ -21,9 +21,10 @@ angular.module('fec3App')
         console.log(userinfo);
         if (customerProfile) {
 
-            $scope.dataPro1 = $filter("filter")(customerProfile.bookings, {
-                receiveShop: userinfo.shopSelected
-            });
+            // $scope.dataPro1 = $filter("filter")(customerProfile.bookings, {
+            //     receiveShop: userinfo.shopSelected
+            // });
+            $scope.dataPro1 = customerProfile.bookings;
             $scope.trueMoveHProdeucts = customerProfile.TMV;
             $scope.trueVisionProdeucts = customerProfile.TVS;
             $scope.trueOnlineProdeucts = customerProfile.TOL;
@@ -33,7 +34,7 @@ angular.module('fec3App')
         }
         $loading.hide();
 
-        $scope.bookingsClass = function(expectRecpDate, receiveDate) {
+        $scope.bookingsClass = function(expectRecpDate, receiveDate, receiveShop) {
             //console.log("api resp: " + expectRecpDate);
             //console.log("api receive: " + receiveDate);
             var dateData = new Date(expectRecpDate);
@@ -42,7 +43,7 @@ angular.module('fec3App')
             var bclass = "";
             //&& (receiveDate == null || receiveDate == '' )
             //console.log( dateData + "<" + curDate + " is " + (dateData < curDate));
-            if ((dateData > curDate) || (receiveDate == null || receiveDate == '')) {
+            if ((dateData < curDate) && (receiveDate == null || receiveDate == '') && (receiveShop == userinfo.shopSelected)) {
                 // ยังไม่ถึงกำหนดรับสินค้า
                 // ยังไม่รับสินค้า
                 bclass = "booking-active";

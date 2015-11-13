@@ -59,7 +59,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "DuplicateReceiptNo") {
+                        else if (result.data['response-data']['result'] == "DuplicateReceiptNo") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -69,7 +69,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "UnknowError") {
+                        else if (result.data['response-data']['result'] == "UnknowError") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -79,7 +79,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "LogInFail") {
+                        else if (result.data['response-data']['result'] == "LogInFail") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -89,7 +89,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "VerifyAgingFail") {
+                        else if (result.data['response-data']['result'] == "VerifyAgingFail") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -99,7 +99,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "FullSuspendMSISDN") {
+                        else if (result.data['response-data']['result'] == "FullSuspendMSISDN") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -109,7 +109,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "NotMNP1Oct") {
+                        else if (result.data['response-data']['result'] == "NotMNP1Oct") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -119,7 +119,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "InvalidParameter") {
+                        else if (result.data['response-data']['result'] == "InvalidParameter") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -129,7 +129,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "PrivilegeIsAlreadyReserved") {
+                        else if (result.data['response-data']['result'] == "PrivilegeIsAlreadyReserved") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -139,7 +139,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "InvalidProduct") {
+                        else if (result.data['response-data']['result'] == "InvalidProduct") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -149,7 +149,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "CannotFindPrivilege") {
+                        else if (result.data['response-data']['result'] == "CannotFindPrivilege") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -159,7 +159,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "PrivilegeIsAlreadyUsed") {
+                        else if (result.data['response-data']['result'] == "PrivilegeIsAlreadyUsed") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -169,7 +169,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "CustomerMustUsedCampaignRS003") {
+                        else if (result.data['response-data']['result'] == "CustomerMustUsedCampaignRS003") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",
@@ -179,7 +179,7 @@ angular.module('fec3App')
                                 "technical-message": ""
                             });
                         }
-                        if (result.data['response-data']['result'] == "AlreadyUsedPrivilegeCampaignRS003") {
+                        else if (result.data['response-data']['result'] == "AlreadyUsedPrivilegeCampaignRS003") {
                             $message.alert({
                                 "message": "",
                                 "message-code": "",

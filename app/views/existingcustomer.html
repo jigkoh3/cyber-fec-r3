@@ -41,7 +41,7 @@
                             <div class="col-md-10">
                                 <div class="box-pre" ng-repeat="itm in dataPro1">
                                     <ul>
-                                        <li class="box_active {{bookingsClass(itm.expectReceiveDate,itm.receiveDate)}}" ng-hover-display>
+                                        <li class="box_active {{bookingsClass(itm.expectReceiveDate,itm.receiveDate,itm.receiveShop)}}" ng-hover-display>
                                             <div class="box-pre-dt01">
                                                 <p>รหัสการจอง: {{itm.bookingId}}</p>
                                                 <h3>{{itm.campaignCode}}</h3>

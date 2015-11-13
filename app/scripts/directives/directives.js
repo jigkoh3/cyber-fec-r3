@@ -138,7 +138,7 @@ function customerToggleGet($rootScope, $route) {
                 //console.log(inputCardNo);
                 switch ($scope.cardTypeSelected) {
                     case "01":
-                        if (inputCardNo && inputCardNo.length == 13) {
+                        if (inputCardNo && inputCardNo.length <= 13) {
                             // console.log(inputCardNo);
                             $loading.show();
                             customerService.getCustomerManual(inputCardNo, "I", function(result) {
