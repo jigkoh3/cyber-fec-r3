@@ -72,7 +72,7 @@ angular
         });
     })
     .config(function($routeProvider, $httpProvider) {
-        //$httpProvider.interceptors.push('smartUIHttpInterceptor');
+        $httpProvider.interceptors.push('smartUIHttpInterceptor');
         $routeProvider
             .when('/', {
                 templateUrl: 'views/welcome.html',
@@ -255,3 +255,40 @@ angular
                 redirectTo: '/'
             });
     });
+
+//TODO Start_smartUIHttpInterceptor
+
+smartApp.factory('smartUIHttpInterceptor', function($q, $rootScope) {
+    return {
+        request: function(config) {
+            return config || $q.when(config);
+        },
+        requestError: function(response) {
+            console.log("requestError");
+            console.log(response);
+            return $q.reject(response);
+        },
+        response: function(response) {
+            return response || $q.when(response);
+        },
+
+        // responseError : function(response) {
+        // console.log("responseError");
+        // var msg = response.status + ' ' + response.statusText;
+        // if (msg == '0 error' || msg == '200 OK') {
+        // location.reload();
+        // }
+        //
+        // return $q.reject(response);
+        // }
+        responseError: function(response) {
+            console.log("responseError");
+            if (response.status === 0) {
+                location.reload();
+            }
+            return $q.reject(response);
+        }
+    };
+});
+
+// TODO End_smartUIHttpInterceptor
